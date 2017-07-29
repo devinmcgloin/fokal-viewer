@@ -5,11 +5,14 @@
   "dependencies": {
     "ajax": "0.0.4",
     "history": "^4.6.3",
+    "leaflet": "^1.1.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-loading": "^0.1.4",
-    "react-router-dom": "^4.1.1"
+    "react-router-dom": "^4.1.1",
+    "tangram": "^0.13.0",
+    "webfontloader": "^1.6.28"
   },
   "devDependencies": {
     "eslint": "^4.3.0",

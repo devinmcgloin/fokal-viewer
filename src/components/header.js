@@ -1,19 +1,23 @@
 import React  from 'react';
 import { Link } from 'react-router-dom';
-import { Search } from './search';
+import logo from '../assets/logo.svg'
 
 function Header(props) {
+    const logoStyle = {
+        padding: '1rem',
+        width: '100%'
+    };
+
+    const linkStyle = {
+        width: '35px',
+        margin: 'auto',
+        display: 'block'
+    };
+
     return (
         <div>
         <header>
-            <h1>Sprioc</h1>
-            <Search/>
-            <ul>
-                <li><Link to='/tags'>Tags</Link></li>
-                <li><Link to='/featured'>Featured</Link></li>
-                <li><Link to='/new'>New</Link></li>
-                <li><Link to='/user'>User</Link></li>
-            </ul>
+            <Link to="/" style={linkStyle}><img src={logo} style={logoStyle}/></Link>
         </header>
         </div>
 
