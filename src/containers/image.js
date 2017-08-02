@@ -7,7 +7,7 @@ import {
 } from '../components/image';
 import ReactLoading from 'react-loading';
 import PropTypes from 'prop-types';
-
+import {LoadImage} from '../api'
 
 class ImageContainer extends Component {
     constructor(props) {
@@ -28,6 +28,7 @@ class ImageContainer extends Component {
                     image: data
                 })
             });
+        LoadImage(this.state.imageShortcode)
 
     }
 

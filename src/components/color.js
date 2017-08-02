@@ -35,7 +35,7 @@ const Colors = (props) => {
         flexDirection: 'row',
         justifyContent: 'center',
         width: '90%',
-        padding: '1rem',
+        padding: '0 1rem 0 1rem',
         paddingTop: '3px',
         margin: 'auto'
     };

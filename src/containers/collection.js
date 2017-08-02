@@ -54,19 +54,19 @@ ImageCollection.propTypes = {
     title: PropTypes.string.isRequired
 };
 
-const RecentImages = (props) => {
+const RecentImages = () => {
     return (
         <ImageCollection url="http://localhost:8000/v0/i/recent?limit=3" title="Recent Images"/>
     )
 };
 
-const FeaturedImages = (props) => {
+const FeaturedImages = () => {
     return (
         <ImageCollection url="http://localhost:8000/v0/i/featured?limit=4" title="Featured Images"/>
     )
 };
 
-const TrendingImages = (props) => {
+const TrendingImages = () => {
     return (
         <ImageCollection url="http://localhost:8000/v0/i/hot?limit=4" title="Trending Images"/>
     )

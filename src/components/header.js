@@ -4,7 +4,6 @@ import logo from '../assets/logo.svg'
 
 function Header(props) {
     const logoStyle = {
-        padding: '1rem',
         width: '100%'
     };
 
