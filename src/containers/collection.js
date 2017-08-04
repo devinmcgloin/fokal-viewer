@@ -68,7 +68,7 @@ const TrendingImages = () => {
 };
 
 const UserImages = (props) => {
-    const url = '/v0/u/' + props.match.params.id + '/images?limit=4';
+    const url = '/u/' + props.match.params.id + '/images?limit=4';
     return (
         <ImageCollection url={url} title={props.match.params.id}/>
     )

@@ -1,5 +1,4 @@
-
-console.log(process.env.NODE_ENV)
+console.log(process.env.NODE_ENV);
 const endpoint = process.env.NODE_ENV === "production" ? "https://api.sprioc.xyz/v0" : "http://localhost:8000/v0";
 
 const FetchImage = (shortcode) => {
@@ -15,13 +14,12 @@ const FetchImage = (shortcode) => {
 const FetchImages = (relurl) => {
     return fetch(endpoint + relurl)
         .then((resp) => resp.json())
-        .then((data) => {
-            data.map((img) => {
-                data.permalink = FormatPermalink(data.permalink);
-                data.user.permalink = FormatPermalink(data.user.permalink);
-                return data
-            })
-        })
+        .then((resp) =>
+            resp.map((img) => {
+                img.permalink = FormatPermalink(img.permalink);
+                img.user.permalink = FormatPermalink(img.user.permalink);
+                return img;
+            }))
 };
 
 
