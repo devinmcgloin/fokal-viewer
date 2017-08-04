@@ -34,8 +34,6 @@ const Colors = (props) => {
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
-        width: '90%',
-        padding: '0 1rem 0 1rem',
         paddingTop: '3px',
         margin: 'auto'
     };

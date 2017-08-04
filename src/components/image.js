@@ -5,21 +5,14 @@ import PropTypes from 'prop-types';
 import {MetadataViewer} from './metadata'
 
 const Image = (props) => {
-    const imgStyle = {
-        margin: 'auto',
-        display: 'block',
-        padding: '1rem',
-        width: '90%',
-        paddingBottom: '3px'
-    };
 
     const userLink = {
         textAlign: 'center',
         fontFamily: ['Montserrat', 'sans-serif'],
         display: 'block',
         padding: '0 1rem 1rem 1rem',
-        color: '#5f5f5f'
-
+        color: '#5f5f5f',
+        textDecoration: "underline"
     };
 
     let url = props.image.permalink.split("/");
@@ -28,11 +21,16 @@ const Image = (props) => {
     return (
         <div>
             <Link to={"/i/" + shortcode}>
-                <img style={imgStyle} src={props.image.src_url.small}/>
+                <img className="image"
+                     src={props.image.src_url.small}
+                     alt=""
+                     style={{marginTop: '1rem'}}/>
             </Link>
             <Colors colors={props.image.colors}/>
             <MetadataViewer {...props.image.metadata}/>
-            <Link to={props.image.user.permalink} style={userLink}>{props.image.user.name}</Link>
+            <Link
+                to={props.image.user.permalink}
+                style={userLink}>{props.image.user.name}</Link>
         </div>
     );
 };

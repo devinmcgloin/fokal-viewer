@@ -3,6 +3,7 @@ import React, {
 } from 'react'
 import {Image} from '../components/image'
 import PropTypes from 'prop-types';
+import {FetchImages} from '../api'
 
 class ImageCollection extends Component {
     constructor(props) {
@@ -16,8 +17,7 @@ class ImageCollection extends Component {
 
     loadImageFromServer() {
         let t = this;
-        fetch(this.state.url)
-            .then((resp) => resp.json())
+        FetchImages(this.state.url)
             .then(function (data) {
                 console.log(data);
                 t.setState({
@@ -35,14 +35,9 @@ class ImageCollection extends Component {
             <Image key={img.permalink} image={img}/>
         );
 
-        const hStyle = {
-            fontFamily: ['Montserrat'],
-            textAlign: 'center'
-        };
-
         return (
             <div>
-                <h1 style={hStyle}>{this.state.title}</h1>
+                <h1 className="title" style={{textAlign: 'center', padding: '1rem'}}>{this.state.title}</h1>
                 {images}
             </div>
         )
@@ -56,24 +51,24 @@ ImageCollection.propTypes = {
 
 const RecentImages = () => {
     return (
-        <ImageCollection url="http://localhost:8000/v0/i/recent?limit=3" title="Recent Images"/>
+        <ImageCollection url="/i/recent?limit=3" title="Recent Images"/>
     )
 };
 
 const FeaturedImages = () => {
     return (
-        <ImageCollection url="http://localhost:8000/v0/i/featured?limit=4" title="Featured Images"/>
+        <ImageCollection url="/i/featured?limit=4" title="Featured Images"/>
     )
 };
 
 const TrendingImages = () => {
     return (
-        <ImageCollection url="http://localhost:8000/v0/i/hot?limit=4" title="Trending Images"/>
+        <ImageCollection url="/i/hot?limit=4" title="Trending Images"/>
     )
 };
 
 const UserImages = (props) => {
-    const url = 'http://localhost:8000/v0/u/' + props.match.params.id + '/images?limit=4';
+    const url = '/v0/u/' + props.match.params.id + '/images?limit=4';
     return (
         <ImageCollection url={url} title={props.match.params.id}/>
     )

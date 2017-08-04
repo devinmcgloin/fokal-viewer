@@ -1,16 +1,27 @@
+
+console.log(process.env.NODE_ENV)
 const endpoint = process.env.NODE_ENV === "production" ? "https://api.sprioc.xyz/v0" : "http://localhost:8000/v0";
 
-const LoadImage = (shortcode) => {
-    let t = this;
-    fetch(endpoint + "/i/" + shortcode)
+const FetchImage = (shortcode) => {
+    return fetch(endpoint + "/i/" + shortcode)
         .then((resp) => resp.json())
-        .then(function (data) {
-            t.resp = data;
-            t.resp.permalink = FormatPermalink(t.resp.permalink);
-            t.resp.user.permalink = FormatPermalink(t.resp.user.permalink);
-            console.log(t.resp)
-        }).catch((err) => console.log(err));
-    return t.resp
+        .then((data) => {
+            data.permalink = FormatPermalink(data.permalink);
+            data.user.permalink = FormatPermalink(data.user.permalink);
+            return data
+        });
+};
+
+const FetchImages = (relurl) => {
+    return fetch(endpoint + relurl)
+        .then((resp) => resp.json())
+        .then((data) => {
+            data.map((img) => {
+                data.permalink = FormatPermalink(data.permalink);
+                data.user.permalink = FormatPermalink(data.user.permalink);
+                return data
+            })
+        })
 };
 
 
@@ -20,4 +31,4 @@ const FormatPermalink = (url) => {
     return process.env.NODE_ENV === "production" ? "https://dev.sprioc.xyz/" + rel : "http://localhost:3000/" + rel;
 };
 
-export {LoadImage};
+export {FetchImage, FetchImages};

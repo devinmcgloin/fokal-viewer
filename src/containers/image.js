@@ -8,6 +8,7 @@ import {
 import ReactLoading from 'react-loading';
 import PropTypes from 'prop-types';
 import {LoadImage} from '../api'
+import {FetchImage} from '../api'
 
 class ImageContainer extends Component {
     constructor(props) {
@@ -19,16 +20,13 @@ class ImageContainer extends Component {
     }
 
     loadImageFromServer() {
-        const url = 'http://localhost:8000/v0/i/' + this.state.imageShortcode;
         let t = this;
-        fetch(url)
-            .then((resp) => resp.json())
+        FetchImage(this.state.imageShortcode)
             .then(function (data) {
                 t.setState({
                     image: data
                 })
             });
-        LoadImage(this.state.imageShortcode)
 
     }
 

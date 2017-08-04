@@ -1,6 +1,7 @@
 import React from 'react';
-import {SwatchesPicker} from 'react-color';
+import CirclePicker from '../components/colorPicker';
 import {Image} from '../components/image'
+import {FetchImages} from '../api'
 
 class ColorSearch extends React.Component {
     constructor(props) {
@@ -21,9 +22,7 @@ class ColorSearch extends React.Component {
 
     loadImages(hex) {
         let t = this;
-        console.log("http://localhost:8000/v0/i/color?hex=" + hex);
-        fetch("http://localhost:8000/v0/i/color?hex=" + hex)
-            .then((resp) => resp.json())
+        FetchImages("/i/color?hex=" + hex)
             .then(function (data) {
                 console.log(data);
                 t.setState({
@@ -45,9 +44,9 @@ class ColorSearch extends React.Component {
         return (
             <div>
                 <div>
-                    <SwatchesPicker width={500} onChangeComplete={this.handleChange} color={this.state.color}/>
+                    <CirclePicker width={500} onChangeComplete={this.handleChange} color={this.state.color}/>
                 </div>
-                <h1 style={hStyle}>#{this.state.color}</h1>
+                <h1 className="title" style={{textAlign: 'center'}}>#{this.state.color}</h1>
                 {images}
             </div>
         )
