@@ -14,6 +14,7 @@ import './main.css'
 import 'bulma/css/bulma.css'
 import 'font-awesome/css/font-awesome.css'
 import {UploadContainer} from "./containers/upload";
+import {TextSearch} from "./containers/search";
 
 class App extends React.Component {
     constructor(props) {
@@ -54,6 +55,7 @@ class App extends React.Component {
                         <Route path="/u/:id/images" component={UserImages}/>
 
                         <Route path="/search/color" component={ColorSearch}/>
+                        <Route path="/search/text" component={TextSearch}/>
 
                         <Route path="/login" render={()=><Login onSuccess={this.onLogin}/>}/>
                         <Route path="/join" component={Join}/>
