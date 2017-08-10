@@ -81,3 +81,4 @@ tags
 # End of https://www.gitignore.io/api/npm,node,vim
 #
 .idea/
+build/

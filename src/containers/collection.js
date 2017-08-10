@@ -11,7 +11,8 @@ class ImageCollection extends Component {
         this.state = {
             images: [],
             url: props.url,
-            title: props.title
+            title: props.title,
+            isGrid: false
         };
     }
 
@@ -32,13 +33,15 @@ class ImageCollection extends Component {
     }
     render() {
         const images = this.state.images.map((img) =>
-            <Image key={img.permalink} image={img}/>
+            this.state.isGrid ? <div key={img.permalink} className="column is-half"><Image   image={img}/></div>: <Image key={img.permalink} image={img}/>
         );
 
         return (
             <div>
                 <h1 className="title" style={{textAlign: 'center', padding: '1rem'}}>{this.state.title}</h1>
+                <div className={this.state.isGrid ? "columns is-desktop is-multiline" : ""}>
                 {images}
+            </div>
             </div>
         )
     }
@@ -83,4 +86,4 @@ UserImages.PropTypes = {
 };
 
 
-export {FeaturedImages, RecentImages, TrendingImages, UserImages};
+export {FeaturedImages, RecentImages, TrendingImages, UserImages,ImageCollection};

@@ -4,28 +4,68 @@ import {RecentImages, FeaturedImages, TrendingImages, UserImages} from './contai
 import {ColorSearch} from './containers/color'
 import {NotFound} from './containers/not-found';
 import {ImageContainer} from './containers/image';
-import {Header} from "./components/header"
+import {HeaderContainer} from "./components/header"
+import {Login} from './containers/login'
+import {Join} from './containers/join'
+import {UserContainer} from './containers/user'
+import {removeHeadersAuth, setHeadersAuth} from "./api"
+
 import './main.css'
 import 'bulma/css/bulma.css'
+import 'font-awesome/css/font-awesome.css'
+import {UploadContainer} from "./containers/upload";
 
-function App() {
-    return (
-        <div>
-            <Header/>
-            <div className="container is-fluid">
-                <Switch>
-                    <Route exact path="/" component={FeaturedImages}/>
-                    <Route path="/i/recent" component={RecentImages}/>
-                    <Route path="/i/trending" component={TrendingImages}/>
-                    <Route path="/i/:id" component={ImageContainer}/>
-                    <Route path="/u/:id/images" component={UserImages}/>
-                    <Route path="/search/color" component={ColorSearch}/>
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isLoggedIn: false,
+            appToken: ""
+        };
 
-                    <Route path="/*" component={NotFound}/>
-                </Switch>
+        this.onLogin = this.onLogin.bind(this);
+        this.onLogout = this.onLogout.bind(this);
+    }
+
+    onLogin(googleUser) {
+        const jwtToken = googleUser.getAuthResponse().id_token;
+        console.log(jwtToken);
+        setHeadersAuth(jwtToken);
+        this.setState({isLoggedIn: true, appToken: jwtToken})
+    }
+
+    onLogout() {
+        this.setState({isLoggedIn: false, appToken: ""})
+    }
+
+    render() {
+        return (
+            <div className="full-bg">
+                <HeaderContainer isLoggedIn={this.state.isLoggedIn}/>
+                <div className="container is-fluid">
+                    <Switch>
+                        <Route exact path="/" component={FeaturedImages}/>
+                        <Route path="/recent" component={RecentImages}/>
+                        <Route path="/trending" component={TrendingImages}/>
+                        <Route path="/featured" component={FeaturedImages}/>
+
+                        <Route path="/i/:id" component={ImageContainer}/>
+                        <Route path="/u/:id" component={UserContainer}/>
+                        <Route path="/u/:id/images" component={UserImages}/>
+
+                        <Route path="/search/color" component={ColorSearch}/>
+
+                        <Route path="/login" render={()=><Login onSuccess={this.onLogin}/>}/>
+                        <Route path="/join" component={Join}/>
+                        <Route path="/upload" component={UploadContainer}/>
+
+
+                        <Route path="/*" component={NotFound}/>
+                    </Switch>
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default App;

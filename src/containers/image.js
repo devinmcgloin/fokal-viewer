@@ -7,7 +7,6 @@ import {
 } from '../components/image';
 import ReactLoading from 'react-loading';
 import PropTypes from 'prop-types';
-import {LoadImage} from '../api'
 import {FetchImage} from '../api'
 
 class ImageContainer extends Component {

@@ -29,7 +29,7 @@ class ColorSearch extends React.Component {
                     images: data
                 })
             })
-            .catch((err) => console.log(err));
+            .catch((err) => console.log(err, hex));
     }
 
     render() {
@@ -37,10 +37,6 @@ class ColorSearch extends React.Component {
             <Image key={img.permalink} image={img}/>
         );
 
-        const hStyle = {
-            fontFamily: ['Montserrat'],
-            textAlign: 'center'
-        };
         return (
             <div>
                 <div>
