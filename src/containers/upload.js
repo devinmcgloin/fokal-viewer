@@ -51,7 +51,7 @@ class UploadContainer extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-                    <input type="file" onChange={this.handleFile}/>
+                    <input type="file" onChange={this.handleFile} accept="image/*"/>
                     <input disabled={this.state.processing} className='btn btn-primary' type="submit" value="Upload"/>
                 </form>
 

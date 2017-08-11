@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 import {RecentImages, FeaturedImages, TrendingImages, UserImages} from './containers/collection';
-import {ColorSearch} from './containers/color'
+import {ColorSearch} from './containers/search'
 import {NotFound} from './containers/not-found';
 import {ImageContainer} from './containers/image';
 import {HeaderContainer} from "./components/header"

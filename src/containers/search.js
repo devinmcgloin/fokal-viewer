@@ -1,6 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {Image} from '../components/image'
 import {FetchImages} from '../api'
+import {Collection} from "../components/collection"
+import CirclePicker from '../components/colorPicker'
+import {bindAll} from 'lodash'
 
 class TextSearch extends Component {
     constructor(props) {
@@ -9,16 +12,17 @@ class TextSearch extends Component {
             text: '',
             images: []
         };
+        bindAll(this, 'handleChange', 'loadImages');
     }
 
-    handleChange = (e) => {
+    handleChange(e) {
         this.setState({
             text: e.target.value,
             images: []
         });
     };
 
-    loadImages = (e) => {
+    loadImages(e) {
         e.preventDefault();
         const t = this;
         FetchImages("/i/text?q=" + t.state.text)
@@ -45,13 +49,58 @@ class TextSearch extends Component {
                         </form>
                     </div>
                 </div>
-                <div>
-                    <h1 className="title" style={{textAlign: 'center'}}>{this.state.text}</h1>
-                    {images}
-                </div>
+                <Collection images={this.state.images} isGrid={false}/>
             </div>
         )
     }
 }
 
-export {TextSearch}
+
+class ColorSearch extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            color: 'adadad',
+            images: []
+        };
+        bindAll(this, 'handleChange', 'loadImages');
+    }
+
+    handleChange(color, event) {
+        this.setState({
+            color: color.hex.slice(1),
+            images: []
+        });
+        this.loadImages(color.hex.slice(1))
+    }
+
+    loadImages(hex) {
+        let t = this;
+        FetchImages("/i/color?hex=" + hex)
+            .then(function (data) {
+                console.log(data);
+                t.setState({
+                    images: data
+                })
+            })
+            .catch((err) => console.log(err, hex));
+    }
+
+    render() {
+        const images = this.state.images.map((img) =>
+            <Image key={img.permalink} image={img}/>
+        );
+
+        return (
+            <div>
+                <div>
+                    <CirclePicker width={500} onChangeComplete={this.handleChange} color={this.state.color}/>
+                </div>
+                <h1 className="title" style={{textAlign: 'center'}}>#{this.state.color}</h1>
+                {images}
+            </div>
+        )
+    }
+}
+
+export {TextSearch, ColorSearch};
