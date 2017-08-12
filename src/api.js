@@ -48,6 +48,11 @@ const FetchUser = (username) => {
         // });
 };
 
+const FetchUserImages = (username) => {
+    return FetchImages( "/u/" + username + "/images")
+};
+
+
 const UploadImage = (body) => {
     return fetch(endpoint+"/i", {
         headers: headers,
@@ -63,4 +68,4 @@ const FormatPermalink = (url) => {
     return rel;
 };
 
-export {setHeadersAuth, removeHeadersAuth, FetchImage, FetchImages, FetchMe, FetchUser, UploadImage};
+export {setHeadersAuth, removeHeadersAuth, FetchImage, FetchImages, FetchMe, FetchUser, UploadImage, FetchUserImages};

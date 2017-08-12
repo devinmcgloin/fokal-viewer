@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import {Collection} from "./collection";
 import ReactLoading from 'react-loading'
 
-const User = ({user, isGrid, isLoading, isSummary}) => {
+const User = ({user, images, isGrid, isLoading, isSummary}) => {
     if (isLoading){
         return <ReactLoading/>
     }
@@ -16,7 +16,7 @@ const User = ({user, isGrid, isLoading, isSummary}) => {
                 <FontAwesome name="external-link">
                     <a href={user.url}/>
                 </FontAwesome>
-                <Collection isGrid={isGrid} isLoading={isLoading} summary={isSummary} images={user.images}/>
+                <Collection isGrid={isGrid} isLoading={isLoading} summary={isSummary} images={images}/>
             </div>
         )
     }
@@ -28,12 +28,12 @@ User.propTypes = {
             name: PropTypes.string.isRequired,
             bio: PropTypes.string,
             url: PropTypes.string,
-            images: PropTypes.array.isRequired,
         }
     ),
     isGrid: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     isSummary: PropTypes.bool.isRequired,
+    images: PropTypes.array,
 
 };
 

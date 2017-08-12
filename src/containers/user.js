@@ -1,10 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import {FetchUser} from '../api'
+import {FetchUser, FetchUserImages} from '../api'
 import {User} from '../components/user'
-import {Image} from "../components/image";
-import {ImageContainer} from "./image";
-import {ImageCollection, UserImages} from "./collection";
+
 
 class UserContainer extends React.Component {
     constructor(props) {
@@ -12,6 +10,7 @@ class UserContainer extends React.Component {
         this.state = {
             username: props.match.params.id,
             user: null,
+            images: null
         }
     }
 
@@ -24,6 +23,13 @@ class UserContainer extends React.Component {
                 })
             });
 
+        FetchUserImages(this.state.username)
+            .then((data) => {
+            t.setState({
+                images: data
+            })
+            })
+
     }
 
     componentDidMount() {
@@ -32,7 +38,7 @@ class UserContainer extends React.Component {
 
     render() {
         return (
-            <User user={this.state.user} isLoading={this.state.user === null} isSummary={false} isGrid={false}/>
+            <User user={this.state.user} images={this.state.images} isLoading={this.state.user === null || this.state.images === null} isSummary={false} isGrid={false}/>
 
         )
     }
