@@ -7,8 +7,7 @@ const LoggedOutHeader = (props) => {
 
 
     return (
-
-        <nav className="pa3 pa4-ns">
+        <nav className="pa3 pa4-ns bb b--black-10 black-70">
             <Link className="sans-serif link dim black b f6 f5-ns dib mr3" to="/" title="Home">Fokal</Link>
 
                 <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/featured"
@@ -35,8 +34,7 @@ const LoggedOutHeader = (props) => {
 
 const LoggedInHeader = (props) => {
     return (
-
-        <nav className="pa3 pa4-ns">
+        <nav className="pa3 pa4-ns bb b--black-10 black-70">
             <Link className="sans-serif link dim black b f6 f5-ns dib mr3" to="/" title="Home">Fokal</Link>
 
             <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/featured"

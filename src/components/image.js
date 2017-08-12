@@ -9,14 +9,7 @@ const Image = ({image, isSummary, isLoading}) => {
     if (isLoading) {
         return (<ReactLoading type='cubes' color='#000000' height={100} width={100}/>)
     }
-    const userLink = {
-        textAlign: 'center',
-        fontFamily: ['Montserrat', 'sans-serif'],
-        display: 'block',
-        padding: '0 1rem 1rem 1rem',
-        color: '#5f5f5f',
-        textDecoration: "underline"
-    };
+
 
     let url = image.permalink.split("/");
     let shortcode = url[url.length - 1];
@@ -30,12 +23,7 @@ const Image = ({image, isSummary, isLoading}) => {
                      style={{marginTop: '1rem'}}/>
             </Link>
             {!isSummary ? <Colors colors={image.colors}/> : null}
-            <div>
-                <MetadataViewer {...image.metadata}/>
-                <Link
-                    to={image.user.permalink}
-                    style={userLink}>{image.user.name}</Link>
-            </div>
+            <MetadataViewer user={image.user} metadata={image.metadata} stats={image.stats}/>
         </div>
     );
 };

@@ -6,7 +6,7 @@ class NotFound extends Component {
     render() {
         return ( 
             <div>
-            <h1>Not Found</h1>
+                <h1 className="f-headline lh-solid tc">404</h1>
             </div>
         )
     }

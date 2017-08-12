@@ -2,23 +2,25 @@ import React, {
     Component
 } from 'react'
 
-import './login.css'
 import PropTypes from 'prop-types'
+import Script from 'react-load-script'
+import {bindAll} from 'lodash'
 
 /* global gapi */
 
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.onSuccess = props.onSuccess
+        this.onSuccess = props.onSuccess;
 
+        bindAll(this, 'onFailure', 'renderButton', 'onSuccess')
     }
 
     onFailure(err) {
         console.log(err)
     }
 
-    componentDidMount() {
+    renderButton() {
 
         gapi.signin2.render('my-signin2', {
             'scope': 'profile email',
@@ -35,21 +37,19 @@ class Login extends Component {
 
     render() {
         return (
-            <div style={{
-                display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-                <div style={{marginTop: '5rem'}}>
+            <div>
+                <Script url="https://apis.google.com/js/platform.js"
+                        onLoad={this.renderButton}
+                        onError={this.onFailure}/>
+                <div className="ma7">
                     <div id="my-signin2"/>
                 </div>
             </div>
         )
     }
 }
+
 Login.propTypes = {
-    onSuccess: PropTypes.function
+    onSuccess: PropTypes.func.isRequired
 };
 export {Login};

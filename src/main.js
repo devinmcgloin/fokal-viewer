@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-import {RecentImages, FeaturedImages, TrendingImages, UserImages} from './containers/collection';
+import {RecentImages, FeaturedImages, TrendingImages} from './containers/collection';
 import {ColorSearch} from './containers/search'
 import {NotFound} from './containers/not-found';
 import {ImageContainer} from './containers/image';
@@ -9,8 +9,7 @@ import {Login} from './containers/login'
 import {Join} from './containers/join'
 import {UserContainer} from './containers/user'
 import {removeHeadersAuth, setHeadersAuth} from "./api"
-
-import './main.css'
+import {Footer} from './components/footer'
 import 'tachyons/css/tachyons.css'
 import 'font-awesome/css/font-awesome.css'
 import {UploadContainer} from "./containers/upload";
@@ -41,9 +40,9 @@ class App extends React.Component {
 
     render() {
         return (
-            <div className="full-bg">
+            <div>
                 <HeaderContainer isLoggedIn={this.state.isLoggedIn}/>
-                <div className="container is-fluid">
+                <div>
                     <Switch>
                         <Route exact path="/" component={FeaturedImages}/>
                         <Route path="/recent" component={RecentImages}/>
@@ -64,6 +63,7 @@ class App extends React.Component {
                         <Route path="/*" component={NotFound}/>
                     </Switch>
                 </div>
+                <Footer/>
             </div>
         );
     }

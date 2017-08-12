@@ -5253,6 +5253,10 @@ react-google-recaptcha@^0.9.6:
   dependencies:
     prop-types ">=15.5.0"
 
+react-load-script@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/react-load-script/-/react-load-script-0.0.6.tgz#db6851236aaa25bb622677a2eb51dad4f8d2c258"
+
 react-loading@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/react-loading/-/react-loading-0.1.4.tgz#b329ff2b870f1dc26c7068e91a1574f7dda27e67"
