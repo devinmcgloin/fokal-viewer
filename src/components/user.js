@@ -2,32 +2,38 @@ import React from 'react'
 import FontAwesome from 'react-fontawesome'
 import PropTypes from 'prop-types'
 import {Collection} from "./collection";
+import ReactLoading from 'react-loading'
 
-const User = ({user, images, isGrid, isLoading, isSummary}) => {
-    return (
-        <div className="container is-full-hd">
-            <h1 className="title">{user.name}</h1>
-            <h2 className="subtitle">{user.bio}</h2>
-            <FontAwesome name="external-link">
-                <a href={user.url}/>
-            </FontAwesome>
-            <Collection isGrid={isGrid} isLoading={isLoading} summary={isSummary} images={images}/>
-        </div>
-    )
+const User = ({user, isGrid, isLoading, isSummary}) => {
+    if (isLoading){
+        return <ReactLoading/>
+    }
+    else {
+        return (
+            <div>
+                <h1>{user.name}</h1>
+                <h2>{user.bio}</h2>
+                <FontAwesome name="external-link">
+                    <a href={user.url}/>
+                </FontAwesome>
+                <Collection isGrid={isGrid} isLoading={isLoading} summary={isSummary} images={user.images}/>
+            </div>
+        )
+    }
 };
 
 User.propTypes = {
     user: PropTypes.shape(
         {
-            name: PropTypes.string,
+            name: PropTypes.string.isRequired,
             bio: PropTypes.string,
             url: PropTypes.string,
+            images: PropTypes.array.isRequired,
         }
     ),
-    images: PropTypes.object,
-    isGrid: PropTypes.bool,
-    isLoading: PropTypes.bool,
-    isSummary: PropTypes.bool,
+    isGrid: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    isSummary: PropTypes.bool.isRequired,
 
 };
 

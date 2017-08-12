@@ -52,7 +52,6 @@ class App extends React.Component {
 
                         <Route path="/i/:id" component={ImageContainer}/>
                         <Route path="/u/:id" component={UserContainer}/>
-                        <Route path="/u/:id/images" component={UserImages}/>
 
                         <Route path="/search/color" component={ColorSearch}/>
                         <Route path="/search/text" component={TextSearch}/>

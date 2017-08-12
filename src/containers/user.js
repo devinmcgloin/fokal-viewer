@@ -32,10 +32,8 @@ class UserContainer extends React.Component {
 
     render() {
         return (
-            <div>
-                <User {...this.state.user}/>
-                <ImageCollection title="" url={'/u/' + this.state.username + '/images?limit=4'}/>
-            </div>
+            <User user={this.state.user} isLoading={this.state.user === null} isSummary={false} isGrid={false}/>
+
         )
     }
 }

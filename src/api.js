@@ -59,7 +59,7 @@ const UploadImage = (body) => {
 
 const FormatPermalink = (url) => {
     let split = url.split("/");
-    const rel = split[4] + "/" + split[5];
+    const rel = "/" + split[4] + "/" + split[5];
     return rel;
 };
 
