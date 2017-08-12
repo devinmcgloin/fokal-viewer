@@ -36,20 +36,17 @@ class TextSearch extends Component {
     };
 
     render() {
-        const images = this.state.images.map((img) =>
-            <Image key={img.permalink} image={img}/>
-        );
 
         return (
             <div>
-                <div className="columns">
-                    <div className="column is-three-quarters">
-                        <form onSubmit={this.loadImages}>
-                        <input className="input" type="text" onChange={this.handleChange} />
-                        </form>
-                    </div>
+                <div className="measure-wide center">
+
+                <form onSubmit={this.loadImages}>
+                    <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" onChange={this.handleChange}/>
+                </form>
                 </div>
-                <Collection images={this.state.images} isGrid={false}/>
+                <Collection title={this.state.text} images={this.state.images} isGrid={false} isLoading={this.state.images === null}
+                            summary={true}/>
             </div>
         )
     }
@@ -87,17 +84,12 @@ class ColorSearch extends React.Component {
     }
 
     render() {
-        const images = this.state.images.map((img) =>
-            <Image key={img.permalink} image={img}/>
-        );
-
         return (
             <div>
                 <div>
                     <CirclePicker width={500} onChangeComplete={this.handleChange} color={this.state.color}/>
                 </div>
-                <h1 className="title" style={{textAlign: 'center'}}>#{this.state.color}</h1>
-                {images}
+                <Collection title={'#'+this.state.color} images={this.state.images} isGrid={false} isLoading={false} summary={true}/>
             </div>
         )
     }

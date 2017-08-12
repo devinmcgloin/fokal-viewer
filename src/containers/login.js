@@ -3,6 +3,7 @@ import React, {
 } from 'react'
 
 import './login.css'
+import PropTypes from 'prop-types'
 
 /* global gapi */
 
@@ -48,5 +49,7 @@ class Login extends Component {
         )
     }
 }
-
+Login.propTypes = {
+    onSuccess: PropTypes.function
+};
 export {Login};

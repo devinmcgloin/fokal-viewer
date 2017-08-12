@@ -11,7 +11,7 @@ import {UserContainer} from './containers/user'
 import {removeHeadersAuth, setHeadersAuth} from "./api"
 
 import './main.css'
-import 'bulma/css/bulma.css'
+import 'tachyons/css/tachyons.css'
 import 'font-awesome/css/font-awesome.css'
 import {UploadContainer} from "./containers/upload";
 import {TextSearch} from "./containers/search";

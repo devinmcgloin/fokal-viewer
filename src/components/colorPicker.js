@@ -23,7 +23,7 @@ export const Circle = ({width, onChange, onSwatchHover, colors, hex, circleSize,
         },
     });
 
-    const handleChange = (hexCode, e) => onChange({hex: hexCode, source: 'hex'}, e)
+    const handleChange = (hexCode, e) => onChange({hex: hexCode, source: 'hex'}, e);
 
     return (
         <div style={styles.card} className="circle-picker">

@@ -3,9 +3,12 @@ import {Link} from 'react-router-dom';
 import {Colors} from './color';
 import PropTypes from 'prop-types';
 import {MetadataViewer} from './metadata'
+import ReactLoading from 'react-loading'
 
-const Image = (props) => {
-
+const Image = ({image, isSummary, isLoading}) => {
+    if (isLoading) {
+        return (<ReactLoading type='cubes' color='#000000' height={100} width={100}/>)
+    }
     const userLink = {
         textAlign: 'center',
         fontFamily: ['Montserrat', 'sans-serif'],
@@ -15,22 +18,24 @@ const Image = (props) => {
         textDecoration: "underline"
     };
 
-    let url = props.image.permalink.split("/");
+    let url = image.permalink.split("/");
     let shortcode = url[url.length - 1];
 
     return (
         <div>
             <Link to={"/i/" + shortcode}>
                 <img className="image"
-                     src={props.image.src_url.small}
+                     src={image.src_url.small}
                      alt=""
                      style={{marginTop: '1rem'}}/>
             </Link>
-            <Colors colors={props.image.colors}/>
-            <MetadataViewer {...props.image.metadata}/>
-            <Link
-                to={props.image.user.permalink}
-                style={userLink}>{props.image.user.name}</Link>
+            {!isSummary ? <Colors colors={image.colors}/> : null}
+            <div>
+                <MetadataViewer {...image.metadata}/>
+                <Link
+                    to={image.user.permalink}
+                    style={userLink}>{image.user.name}</Link>
+            </div>
         </div>
     );
 };
@@ -44,14 +49,16 @@ Image.propTypes = {
             location: PropTypes.shape({
                 X: PropTypes.number,
                 Y: PropTypes.number,
-            })
+            }),
+            capture_time: PropTypes.string,
         }),
         user: PropTypes.shape({
             permalink: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired
         })
-    })
-
+    }),
+    isSummary: PropTypes.bool,
+    isLoading: PropTypes.bool
 };
 
 

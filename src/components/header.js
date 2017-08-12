@@ -1,171 +1,75 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import logo from '../assets/logo.svg'
+import PropTypes from 'prop-types'
 
 const LoggedOutHeader = (props) => {
 
-    const toggle = () => {
-        document.getElementById("menu").classList.toggle("is-active");
-        document.getElementById("hamburger").classList.toggle("is-active");
-    };
 
     return (
-        <nav className="navbar">
-            <div className="navbar-brand">
-                <Link to="/" className="navbar-item">
-                    <img src={logo} width={30} height={30}
-                         alt="Fokal: A photography site focused on getting your best images seen."/>
-                </Link>
 
-                <div id="hamburger" className="navbar-burger burger" data-target="menu" onClick={toggle}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
+        <nav className="db dt-l w-100 border-box pa3 ph5-l">
+            <Link className="sans-serif link black b" to="/" title="Home">Fokal</Link>
 
-            <div id="menu" className="navbar-menu">
-                <div className="navbar-end">
 
-                    <div className="navbar-item has-dropdown is-hoverable">
-                        <span className="navbar-link">
-                            Images
-                        </span>
-                        <div className="navbar-dropdown ">
-                            <Link className="navbar-item " to="/featured" onClick={toggle}>
-                                Featured
-                            </Link>
-                            <Link className="navbar-item " to="/recent" onClick={toggle}>
-                                Recent
-                            </Link>
-                            <Link className="navbar-item " to="/trending" onClick={toggle}>
-                                Trending
-                            </Link>
-                        </div>
-                    </div>
+            <div className="db dtc-l v-mid w-100 w-75-l tc tr-l">
 
-                    <div className="navbar-item has-dropdown is-hoverable">
-                        <span className="navbar-link">
-                            Search
-                        </span>
-                        <div className="navbar-dropdown ">
-                            <Link className="navbar-item " to="/search/text" onClick={toggle}>
-                                Text
-                            </Link>
-                            <Link className="navbar-item " to="/search/geo" onClick={toggle}>
-                                Geo
-                            </Link>
-                            <Link className="navbar-item " to="/search/color" onClick={toggle}>
-                                Color
-                            </Link>
-                        </div>
-                    </div>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/featured"
+                      title="Home">Featured</Link>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/recent" title="About">Recent</Link>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/trending"
+                      title="Store">Trending</Link>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/color" title="Store">Color
+                    Search</Link>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/text" title="Store">Text
+                    Search</Link>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/geo" title="Store">Geo
+                    Search</Link>
 
-                    <div className="navbar-item">
-                        <div className="field is-grouped">
-                            <p className="control">
-                                <Link className="button" to="/login">
-                                    {/*<span className="icon">*/}
-                                    {/*</span>*/}
-                                    <span>Login</span>
-                                </Link>
-                            </p>
-                            <p className="control">
-                                <Link className="button is-primary" to="/join">
-                                    {/*<span className="icon">*/}
-                                    {/*</span>*/}
-                                    <span>Join</span>
-                                </Link>
-                            </p>
-                        </div>
-                    </div>
 
-                </div>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib" to="/login" title="Contact">Login</Link>
             </div>
         </nav>
+
+
     );
 }
 
 
 const LoggedInHeader = (props) => {
-
-    const toggle = () => {
-        document.getElementById("menu").classList.toggle("is-active");
-        document.getElementById("hamburger").classList.toggle("is-active");
-    };
-
     return (
-        <nav className="navbar">
-            <div className="navbar-brand">
-                <Link to="/" className="navbar-item">
-                    <img src={logo} width={30} height={30}
-                         alt="Fokal: A photography site focused on getting your best images seen."/>
-                </Link>
+        <nav className="db dt-l w-100 border-box pa3 ph5-l">
+            <Link className="sans-serif link black b" to="/" title="Home">Fokal</Link>
 
-                <div id="hamburger" className="navbar-burger burger" data-target="menu" onClick={toggle}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
 
-            <div id="menu" className="navbar-menu">
-                <div className="navbar-end">
+            <div className="db dtc-l v-mid w-100 w-75-l tc tr-l">
 
-                    <div className="navbar-item has-dropdown is-hoverable">
-                        <span className="navbar-link">
-                            Images
-                        </span>
-                        <div className="navbar-dropdown ">
-                            <Link className="navbar-item " to="/featured" onClick={toggle}>
-                                Featured
-                            </Link>
-                            <Link className="navbar-item " to="/recent" onClick={toggle}>
-                                Recent
-                            </Link>
-                            <Link className="navbar-item " to="/trending" onClick={toggle}>
-                                Trending
-                            </Link>
-                        </div>
-                    </div>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/featured"
+                      title="Home">Featured</Link>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/recent" title="About">Recent</Link>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/trending"
+                      title="Store">Trending</Link>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/color" title="Store">Color
+                    Search</Link>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/text" title="Store">Text
+                    Search</Link>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/geo" title="Store">Geo
+                    Search</Link>
 
-                    <div className="navbar-item has-dropdown is-hoverable">
-                        <span className="navbar-link">
-                            Search
-                        </span>
-                        <div className="navbar-dropdown ">
-                            <Link className="navbar-item " to="/search/text" onClick={toggle}>
-                                Text
-                            </Link>
-                            <Link className="navbar-item " to="/search/geo" onClick={toggle}>
-                                Geo
-                            </Link>
-                            <Link className="navbar-item " to="/search/color" onClick={toggle}>
-                                Color
-                            </Link>
-                        </div>
-                    </div>
 
-                    <div className="navbar-item">
-                        <div className="field is-grouped">
-                            <p className="control">
-                                <Link className="button is-primary" to="/upload">
-                                    {/*<span className="icon">*/}
-                                    {/*</span>*/}
-                                    <span>Upload</span>
-                                </Link>
-                            </p>
-                        </div>
-                    </div>
-
-                </div>
+                <Link className="sans-serif link dim gray    f6 f5-ns dib" to="/upload" title="Contact">Upload</Link>
             </div>
         </nav>
     );
-}
-const HeaderContainer = (props) => {
-    return props.isLoggedIn ? <LoggedInHeader user={props.currentUser}/> : <LoggedOutHeader/>
+};
 
+const HeaderContainer = ({isLoggedIn, currentUser}) => {
+    return isLoggedIn ? <LoggedInHeader user={currentUser}/> : <LoggedOutHeader/>
+};
+
+HeaderContainer.propTypes = {
+    isLoggedIn: PropTypes.bool.isRequired,
+    currentUser: PropTypes.object,
 };
 
 

@@ -4,6 +4,7 @@ import React, {
 import {Image} from '../components/image'
 import PropTypes from 'prop-types';
 import {FetchImages} from '../api'
+import {Collection} from "../components/collection";
 
 class ImageCollection extends Component {
     constructor(props) {
@@ -32,17 +33,8 @@ class ImageCollection extends Component {
         this.loadImageFromServer()
     }
     render() {
-        const images = this.state.images.map((img) =>
-            this.state.isGrid ? <div key={img.permalink} className="column is-half"><Image   image={img}/></div>: <Image key={img.permalink} image={img}/>
-        );
-
         return (
-            <div>
-                <h1 className="title" style={{textAlign: 'center', padding: '1rem'}}>{this.state.title}</h1>
-                <div className={this.state.isGrid ? "columns is-desktop is-multiline" : ""}>
-                {images}
-            </div>
-            </div>
+            <Collection title={this.state.title} images={this.state.images} isGrid={this.state.isGrid} isLoading={false} summary={false}/>
         )
     }
 }
@@ -77,7 +69,7 @@ const UserImages = (props) => {
     )
 };
 
-UserImages.PropTypes = {
+UserImages.propTypes = {
     match : PropTypes.shape({
         params: PropTypes.shape({
             id: PropTypes.string.isRequired

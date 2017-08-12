@@ -31,7 +31,7 @@ class MapView extends React.Component {
 
 MapView.propTypes = {
     lng: PropTypes.number.isRequired,
-    lat: PropTypes.number.isRequired
+    lat: PropTypes.number.isRequired,
 };
 
 

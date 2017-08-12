@@ -34,10 +34,7 @@ class ImageContainer extends Component {
     }
 
     render() {
-        if (this.state.image === null)
-            return (<ReactLoading type='cubes' color='#000000' height={100} width={100}/>);
-        else
-            return (<Image image={this.state.image}/>);
+        return (<Image image={this.state.image} isLoading={this.state.image === null} isSummary={false}/>);
     }
 }
 
