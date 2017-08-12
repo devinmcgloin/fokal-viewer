@@ -38,7 +38,7 @@ class UserContainer extends React.Component {
 
     render() {
         return (
-            <User user={this.state.user} images={this.state.images} isLoading={this.state.user === null || this.state.images === null} isSummary={false} isGrid={false}/>
+            <User user={this.state.user} images={this.state.images} isLoading={this.state.user === null || this.state.images === null} isSummary={false} isGrid={true}/>
 
         )
     }

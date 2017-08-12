@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import {Collection} from "./collection";
 import ReactLoading from 'react-loading'
 import {Link} from 'react-router-dom'
+import moment from 'moment';
 
 const User = ({user, images, isGrid, isLoading, isSummary}) => {
     if (isLoading){
@@ -23,9 +24,9 @@ const User = ({user, images, isGrid, isLoading, isSummary}) => {
                 <div className="f6 lh-copy fl w-100 mb4">
                     <div className="fl-ns w-100 w-20-l pr3-m pr5-l">
                         <p>
-                            <Link className="sans-serif link dim gray" to={user.url}>
+                            <a className="sans-serif link dim gray" href={user.url}>
                             <FontAwesome name="link"/> Personal Site
-                            </Link>
+                            </a>
                         </p>
                     </div>
                     <div className="fl-ns w-50-m w-20-l pr3-m pr5-l">
@@ -43,8 +44,8 @@ const User = ({user, images, isGrid, isLoading, isSummary}) => {
                         </p>
                     </div>
                     <div className="fl-ns w-50-m w-20-l pr3-m pr5-l">
-                        <p className="sans-serif link dim gray">
-                            Member since {user.created_at}
+                        <p className="sans-serif">
+                            Joined {moment(user.created_at).fromNow()}
                         </p>
                     </div>
                     <div className="fl-ns w-50-m w-20-l pr3-m pr5-l">

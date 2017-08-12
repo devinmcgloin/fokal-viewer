@@ -25,7 +25,7 @@ const Image = ({image, isSummary, isLoading}) => {
         <div>
             <Link to={"/i/" + shortcode}>
                 <img className="image"
-                     src={image.src_url.small}
+                     src={image.src_url.large}
                      alt=""
                      style={{marginTop: '1rem'}}/>
             </Link>
