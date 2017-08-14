@@ -5,6 +5,21 @@ import PropTypes from 'prop-types';
 import {MetadataViewer} from './metadata'
 import ReactLoading from 'react-loading'
 
+const Tags = ({tags}) => {
+    const rend = tags.map((t) =>
+        <li className="dib mr2" key={t}><a href="#" className="f6 f5-ns b db pa2 link dim mid-gray">{t}</a></li>
+    );
+    return (
+        <ul className="list ph3 ph5-ns pv4">
+            {rend}
+        </ul>
+    );
+    };
+
+Tags.propTypes = {
+    tags: PropTypes.array
+};
+
 const Image = ({image, isSummary, isLoading}) => {
     if (isLoading) {
         return (<ReactLoading type='cubes' color='#000000' height={100} width={100}/>)
