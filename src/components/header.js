@@ -15,12 +15,9 @@ const LoggedOutHeader = (props) => {
                 <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/recent" title="About">Recent</Link>
                 <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/trending"
                       title="Store">Trending</Link>
-                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/color" title="Store">Color
+                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search" title="Store">
                     Search</Link>
-                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/text" title="Store">Text
-                    Search</Link>
-                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/geo" title="Store">Geo
-                    Search</Link>
+
 
 
                 <Link className="sans-serif link dim gray    f6 f5-ns dib" to="/login" title="Contact">Login</Link>

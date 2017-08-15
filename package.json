@@ -20,6 +20,7 @@
     "react-loading": "^0.1.4",
     "react-router-dom": "^4.1.1",
     "tangram": "^0.13.0",
+    "urijs": "^1.18.12",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {

@@ -33,6 +33,19 @@ const FetchImages = (relurl) => {
             }))
 };
 
+const SearchImages = (relurl) => {
+    return fetch(endpoint + relurl, {
+        headers: headers})
+        .then((resp) => resp.json())
+        .then((data) => data.map((img) => img.Image))
+        .then((resp) =>
+            resp.map((img) => {
+                img.permalink = FormatPermalink(img.permalink);
+                img.user.permalink = FormatPermalink(img.user.permalink);
+                return img;
+            }))
+};
+
 const FetchMe = () => {
     return fetch(endpoint+"/me", {headers: headers})
         .then((resp) => resp.json())
@@ -62,10 +75,18 @@ const UploadImage = (body) => {
         .then((resp) => resp.json());
 };
 
+const Patch = (id, type, changes) => {
+    return fetch(endpoint + "/"+type+"/" + id, {
+        headers: headers,
+        method: 'PATCH',
+        body: JSON.Stringify(changes)
+    })
+};
+
 const FormatPermalink = (url) => {
     let split = url.split("/");
     const rel = "/" + split[4] + "/" + split[5];
     return rel;
 };
 
-export {setHeadersAuth, removeHeadersAuth, FetchImage, FetchImages, FetchMe, FetchUser, UploadImage, FetchUserImages};
+export {setHeadersAuth, removeHeadersAuth, FetchImage, FetchImages, FetchMe, FetchUser, UploadImage, FetchUserImages, Patch, SearchImages};

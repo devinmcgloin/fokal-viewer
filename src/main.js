@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Switch, Link} from 'react-router-dom';
 import {RecentImages, FeaturedImages, TrendingImages} from './containers/collection';
-import {ColorSearch} from './containers/search'
+import {Search} from './containers/search'
 import {NotFound} from './containers/not-found';
 import {ImageContainer} from './containers/image';
 import {HeaderContainer} from "./components/header"
@@ -14,6 +14,7 @@ import 'tachyons/css/tachyons.css'
 import 'font-awesome/css/font-awesome.css'
 import {UploadContainer} from "./containers/upload";
 import {TextSearch} from "./containers/search";
+import PropTypes from 'prop-types'
 
 class App extends React.Component {
     constructor(props) {
@@ -42,7 +43,7 @@ class App extends React.Component {
         return (
             <div>
                 <HeaderContainer isLoggedIn={this.state.isLoggedIn}/>
-                <Cta title="Join Fokal" message="Sprioc helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for." call="Join for Free"/>
+                <CallToAction title="Join Fokal" message="Sprioc helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for." call="Join for Free"/>
                 <div>
                     <Switch>
                         <Route exact path="/" component={FeaturedImages}/>
@@ -53,8 +54,7 @@ class App extends React.Component {
                         <Route path="/i/:id" component={ImageContainer}/>
                         <Route path="/u/:id" component={UserContainer}/>
 
-                        <Route path="/search/color" component={ColorSearch}/>
-                        <Route path="/search/text" component={TextSearch}/>
+                        <Route path="/search" component={Search}/>
 
                         <Route path="/login" render={()=><Login onSuccess={this.onLogin} isLoggedIn={this.state.isLoggedIn}/>}/>
                         <Route path="/join" component={Join}/>
@@ -70,7 +70,7 @@ class App extends React.Component {
     }
 }
 
-const Cta = ({title, message, call}) =>
+const CallToAction = ({title, message, call}) =>
         <section className="sans-serif ph3 ph5-ns pv5">
             <article className="mw8 center br2 ba b--light-blue bg-lightest-blue">
                 <div className="dt-ns dt--fixed-ns w-100">
@@ -83,10 +83,16 @@ const Cta = ({title, message, call}) =>
                         </div>
                     </div>
                     <div className="pa3 pa4-ns dtc-ns v-mid">
-                        <a href="/login" className="no-underline f6 tc db w-100 pv3 bg-animate bg-blue hover-bg-dark-blue white br2">{call}</a>
+                        <Link to="/login" className="no-underline f6 tc db w-100 pv3 bg-animate bg-blue hover-bg-dark-blue white br2">{call}</Link>
                     </div>
                 </div>
             </article>
-        </section>
+        </section>;
+
+CallToAction.propTypes = {
+    title: PropTypes.string.isRequired,
+    call: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+};
 
 export default App;

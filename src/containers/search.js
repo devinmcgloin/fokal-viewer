@@ -1,31 +1,46 @@
 import React, {Component} from 'react'
 import {Image} from '../components/image'
-import {FetchImages} from '../api'
+import {SearchImages} from '../api'
 import {Collection} from "../components/collection"
 import CirclePicker from '../components/colorPicker'
 import {bindAll} from 'lodash'
+import URI from 'urijs'
 
-class TextSearch extends Component {
+class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            text: '',
-            images: []
+            hex: undefined,
+            images: [],
+            q: undefined
         };
-        bindAll(this, 'handleChange', 'loadImages');
+        bindAll(this, 'handleColorChange', 'handleTextChange', 'loadImages');
     }
 
-    handleChange(e) {
+    handleColorChange(color, event) {
         this.setState({
-            text: e.target.value,
+            hex: color.hex.slice(1),
             images: []
         });
-    };
+    }
 
-    loadImages(e) {
-        e.preventDefault();
-        const t = this;
-        FetchImages("/i/text?q=" + t.state.text)
+    handleTextChange(e) {
+        this.setState({
+            q: e.target.value,
+            images: []
+        });
+    }
+
+    loadImages() {
+        let url = URI('/i/search');
+        if (this.state.hex !== undefined)
+            url.addSearch("hex", this.state.hex);
+        if (this.state.q !== undefined)
+            url.addSearch("q", this.state.q);
+
+        let t = this;
+        console.log(url.toString(), this.state);
+        SearchImages(url.toString())
             .then(function (data) {
                 console.log(data);
                 t.setState({
@@ -33,66 +48,26 @@ class TextSearch extends Component {
                 })
             })
             .catch((err) => console.log(err));
-    };
-
-    render() {
-
-        return (
-            <div>
-                <div className="measure-wide center">
-
-                <form onSubmit={this.loadImages}>
-                    <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text" onChange={this.handleChange}/>
-                </form>
-                </div>
-                <Collection title={this.state.text} images={this.state.images} isGrid={false} isLoading={this.state.images === null}
-                            summary={true}/>
-            </div>
-        )
-    }
-}
-
-
-class ColorSearch extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            color: 'adadad',
-            images: []
-        };
-        bindAll(this, 'handleChange', 'loadImages');
-    }
-
-    handleChange(color, event) {
-        this.setState({
-            color: color.hex.slice(1),
-            images: []
-        });
-        this.loadImages(color.hex.slice(1))
-    }
-
-    loadImages(hex) {
-        let t = this;
-        FetchImages("/i/color?hex=" + hex)
-            .then(function (data) {
-                console.log(data);
-                t.setState({
-                    images: data
-                })
-            })
-            .catch((err) => console.log(err, hex));
     }
 
     render() {
         return (
             <div>
-                <div>
-                    <CirclePicker width={500} onChangeComplete={this.handleChange} color={this.state.color}/>
+                <div className="mw7 pa5 ma2 tc center">
+                    <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text"
+                           onChange={this.handleTextChange}/>
+
+                    <CirclePicker width={500} onChange={this.handleColorChange}
+                                  color={this.state.color}/>
+                    <span onClick={this.loadImages}
+                          className="sans-serif f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer">
+                                Search
+                    </span>
                 </div>
-                <Collection title={'#'+this.state.color} images={this.state.images} isGrid={false} isLoading={false} summary={true}/>
+                <Collection images={this.state.images} isGrid={false} isLoading={false} summary={true}/>
             </div>
         )
     }
 }
 
-export {TextSearch, ColorSearch};
+export {Search};
