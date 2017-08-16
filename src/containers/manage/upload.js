@@ -73,10 +73,11 @@ class UploadContainer extends Component {
 
                 <div className="mw6 pa5 ma4 tc center">
                     <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-                        <input type="file" name="file" id="file" style={hiddenInput}/>
+                        <input type="file" name="file" id="file" style={hiddenInput} onChange={this.handleFile}/>
                         <label htmlFor="file"
                                className="f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center">Choose
                             a file</label>
+                        <input className="f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white" type="Submit" value="Upload"/>
                     </form>
                 </div>
 
