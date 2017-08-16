@@ -46,36 +46,22 @@ ImageCollection.propTypes = {
 
 const RecentImages = () => {
     return (
-        <ImageCollection url="/i/recent?limit=3" title="Recent Images"/>
+        <ImageCollection url="/i/recent" title="Recent Images"/>
     )
 };
 
 const FeaturedImages = () => {
     return (
-        <ImageCollection url="/i/featured?limit=4" title="Featured Images"/>
+        <ImageCollection url="/i/featured" title="Featured Images"/>
     )
 };
 
 const TrendingImages = () => {
     return (
-        <ImageCollection url="/i/hot?limit=4" title="Trending Images"/>
+        <ImageCollection url="/i/hot" title="Trending Images"/>
     )
 };
 
-const UserImages = (props) => {
-    const url = '/u/' + props.match.params.id + '/images?limit=4';
-    return (
-        <ImageCollection url={url} title={props.match.params.id}/>
-    )
-};
-
-UserImages.propTypes = {
-    match : PropTypes.shape({
-        params: PropTypes.shape({
-            id: PropTypes.string.isRequired
-        })
-    })
-};
 
 
-export {FeaturedImages, RecentImages, TrendingImages, UserImages,ImageCollection};
+export {FeaturedImages, RecentImages, TrendingImages,ImageCollection};

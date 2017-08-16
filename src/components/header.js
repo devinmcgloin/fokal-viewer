@@ -45,7 +45,9 @@ const LoggedInHeader = (props) => {
 
             <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/manage" title="Store">
                 Manage</Link>
-            <Link className="sans-serif link dim gray    f6 f5-ns dib" to="/upload" title="Contact">Upload</Link>
+            <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/upload" title="Contact">Upload</Link>
+            <Link className="sans-serif link dim gray    f6 f5-ns dib" to="/logout" title="Contact">Logout</Link>
+
 
         </nav>
 

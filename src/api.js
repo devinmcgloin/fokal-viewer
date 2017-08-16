@@ -1,14 +1,17 @@
+import {GetJWT, LoggedIn} from "./auth";
+
 console.log(process.env.NODE_ENV);
 const endpoint = process.env.NODE_ENV === "production" ? "https://api.sprioc.xyz/v0" : "http://localhost:8000/v0";
 
 var headers = new Headers();
 
-const setHeadersAuth = (jwt) => {
-    headers.append("Authorization", "Bearer " + jwt)
-};
-
-const removeHeadersAuth = () => {
-    headers.delete("Authorization")
+const setHeadersAuth = () => {
+    if (LoggedIn()){
+        const jwt = GetJWT();
+        headers.append("Authorization", "Bearer " + jwt)
+    } else {
+        headers.removeItem("Authorization");
+    }
 };
 
 const FetchImage = (shortcode) => {
@@ -97,7 +100,6 @@ const FormatPermalink = (url) => {
 
 export {
     setHeadersAuth,
-    removeHeadersAuth,
     FetchImage,
     FetchImages,
     FetchMe,

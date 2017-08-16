@@ -5,16 +5,18 @@ import {Search} from './containers/search'
 import {NotFound} from './containers/not-found';
 import {ImageContainer} from './containers/image';
 import {HeaderContainer} from "./components/header"
-import {Login} from './containers/login/login'
+import {Login} from './containers/auth/login'
 import {Join} from './containers/join'
 import {UserContainer} from './containers/user'
-import {removeHeadersAuth, setHeadersAuth} from "./api"
+import {setHeadersAuth} from "./api"
+import {LogIn, Logout, LoggedIn, GetJWT} from "./auth"
 import {Footer} from './components/footer'
 import 'tachyons/css/tachyons.css'
 import 'font-awesome/css/font-awesome.css'
 import {UploadContainer} from "./containers/manage/upload";
 import PropTypes from 'prop-types'
 import {ManageImages} from "./containers/manage/patch"
+import {LogoutPage} from "./containers/auth/logout"
 
 class App extends React.Component {
     constructor(props) {
@@ -28,15 +30,25 @@ class App extends React.Component {
         this.onLogout = this.onLogout.bind(this);
     }
 
+    componentDidMount() {
+        if (LoggedIn()) {
+            setHeadersAuth();
+            this.setState({isLoggedIn: true, appToken: GetJWT()})
+        }
+    }
+
     onLogin(googleUser) {
         const jwtToken = googleUser.getAuthResponse().id_token;
-        console.log(jwtToken);
-        setHeadersAuth(jwtToken);
+        LogIn(jwtToken);
+        setHeadersAuth();
         this.setState({isLoggedIn: true, appToken: jwtToken})
     }
 
+
+
     onLogout() {
-        this.setState({isLoggedIn: false, appToken: ""})
+        this.setState({isLoggedIn: false, appToken: ""});
+        Logout();
     }
 
     render() {
@@ -47,9 +59,11 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path="/" render={() =>
                             <div>
-                                {!this.state.isLoggedIn ? <CallToAction title="Join Fokal"
-                                              message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
-                                              call="Join for Free"/> : null }
+                                {!this.state.isLoggedIn ?
+                                    <CallToAction title="Join Fokal"
+                                                  message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
+                                                  call="Join for Free"/>
+                                    : null}
                                 <FeaturedImages/>
                             </div>
                         }/>
@@ -64,6 +78,7 @@ class App extends React.Component {
 
                         <Route path="/login"
                                render={() => <Login onSuccess={this.onLogin} isLoggedIn={this.state.isLoggedIn}/>}/>
+                        <Route path="/logout" render={()=> <LogoutPage onSuccess={this.onLogout}/>}/>
                         <Route path="/join" component={Join}/>
                         <Route path="/upload" component={UploadContainer}/>
                         <Route path="/manage" component={ManageImages}/>
