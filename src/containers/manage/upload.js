@@ -11,7 +11,8 @@ class UploadContainer extends Component {
             contentType: null,
             processing: false,
             patch: {},
-            failed: false
+            failed: false,
+            filename: null
         };
 
         bindAll(this, 'handleSubmit', 'handleFile')
@@ -36,12 +37,17 @@ class UploadContainer extends Component {
 
     handleFile(e) {
         const reader = new FileReader(),
-            file = e.target.files[0];
+            file = e.target.files[0],
+            path = e.target.value;
+
+        let fileName = path.split("\\").pop();
 
         reader.onload = (upload) => {
+            console.log(upload);
             this.setState({
                 uri: upload.target.result,
-                contentType: file.type
+                contentType: file.type,
+                filename: fileName,
             })
         };
 
@@ -75,8 +81,8 @@ class UploadContainer extends Component {
                     <form onSubmit={this.handleSubmit} encType="multipart/form-data">
                         <input type="file" name="file" id="file" style={hiddenInput} onChange={this.handleFile}/>
                         <label htmlFor="file"
-                               className="f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center">Choose
-                            a file</label>
+                               className="f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center">{
+                                   this.state.filename || "Choose a file"}</label>
                         <input className="f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white" type="Submit" value="Upload"/>
                     </form>
                 </div>
