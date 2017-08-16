@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {Colors} from './color';
 import PropTypes from 'prop-types';
 import {MetadataViewer} from './metadata'
-import ReactLoading from 'react-loading'
+import {Loading} from './loading'
 
 const Tags = ({tags}) => {
     const rend = tags.map((t) =>
@@ -22,9 +22,8 @@ Tags.propTypes = {
 
 const Image = ({image, isSummary, isLoading}) => {
     if (isLoading) {
-        return (<ReactLoading type='cubes' color='#000000' height={100} width={100}/>)
+        return <Loading/>
     }
-
 
     let url = image.permalink.split("/");
     let shortcode = url[url.length - 1];

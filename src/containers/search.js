@@ -5,6 +5,8 @@ import {Collection} from "../components/collection"
 import CirclePicker from '../components/colorPicker'
 import {bindAll} from 'lodash'
 import URI from 'urijs'
+import {BlockPicker} from 'react-color'
+
 
 class Search extends Component {
     constructor(props) {
@@ -54,14 +56,18 @@ class Search extends Component {
         return (
             <div>
                 <div className="sans-serif mw7 pa5 ma2 tc br2 center bg-lightest-blue ba b--light-blue">
-                    <input className="f6 f5-l input-reset bn fl black-80 bg-white pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns" type="text"
-                           onChange={this.handleTextChange}/>
+                    <input
+                        className="f6 f5-l input-reset bn fl black-80 bg-white pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
+                        type="text"
+                        onChange={this.handleTextChange}/>
                     <span onClick={this.loadImages}
                           className="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns">
                                 Search
                     </span>
-                    <CirclePicker width={500} onChange={this.handleColorChange}
-                                  color={this.state.color}/>
+                    <div>
+                        <CirclePicker onChange={this.handleColorChange}
+                                     color={this.state.color}/>
+                    </div>
 
                 </div>
                 <Collection images={this.state.images} isGrid={false} isLoading={false} summary={true}/>

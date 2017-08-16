@@ -1,16 +1,15 @@
 import React from 'react'
 import {Image} from './image'
 import PropTypes from 'prop-types'
-import ReactLoading from 'react-loading';
 import {Link} from 'react-router-dom'
+import {Loading} from './loading'
 
 const Collection = ({title, images, isLoading, isGrid, summary}) => {
     if (isLoading) {
         return (
-            <div>
-                <ReactLoading type='cubes' color='#000000' height={100} width={100}/>
-            </div>
+            <Loading/>
         )
+
     }
     else {
         if (isGrid) {

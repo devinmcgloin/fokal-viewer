@@ -2,13 +2,13 @@ import React from 'react'
 import FontAwesome from 'react-fontawesome'
 import PropTypes from 'prop-types'
 import {Collection} from "./collection";
-import ReactLoading from 'react-loading'
 import {Link} from 'react-router-dom'
 import moment from 'moment';
+import {Loading} from './loading'
 
 const User = ({user, images, isGrid, isLoading, isSummary}) => {
     if (isLoading){
-        return <ReactLoading/>
+        return <Loading/>
     }
     else {
         return (

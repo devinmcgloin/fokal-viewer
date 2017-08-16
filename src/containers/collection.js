@@ -34,7 +34,7 @@ class ImageCollection extends Component {
     }
     render() {
         return (
-            <Collection title={this.state.title} images={this.state.images} isGrid={this.state.isGrid} isLoading={false} summary={false}/>
+            <Collection title={this.state.title} images={this.state.images} isGrid={this.state.isGrid} isLoading={this.state.images.length === 0} summary={false}/>
         )
     }
 }
