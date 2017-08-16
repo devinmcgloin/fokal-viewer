@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {bindAll} from 'lodash'
-import {UploadImage} from '../api'
+import {UploadImage} from '../../api'
+import {InfoAlert, ErrorAlert} from '../../components/alerts'
 
 class UploadContainer extends Component {
     constructor(props) {
@@ -26,7 +27,8 @@ class UploadContainer extends Component {
             .then(
                 () => {
                     this.setState({processing: false});
-                }, () => {
+                },
+                () => {
                     this.setState({processing: false, failed: true});
                 });
 
@@ -48,15 +50,39 @@ class UploadContainer extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-                    <input type="file" onChange={this.handleFile} accept="image/*"/>
-                    <input disabled={this.state.processing} className='btn btn-primary' type="submit" value="Upload"/>
-                </form>
+        const hiddenInput = {
+            width: '0.1px',
+            height: '0.1px',
+            opacity: 0,
+            overflow: 'hidden',
+            position: 'absolute',
+            zIndex: -1
+        };
 
-                {this.state.uri ? <img src={this.state.uri}/> : <div/>}
+        return (
+            <div className="sans-serif">
+                {this.state.processing ?
+                    <InfoAlert message="Upload in progress."/>
+                    :
+                    null}
+
+                {this.state.failed ?
+                    <ErrorAlert message="Upload failed."/>
+                    :
+                    null}
+
+                <div className="mw6 pa5 ma4 tc center">
+                    <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+                        <input type="file" name="file" id="file" style={hiddenInput}/>
+                        <label htmlFor="file"
+                               className="f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center">Choose
+                            a file</label>
+                    </form>
+                </div>
+
             </div>
+
+
         )
     }
 }

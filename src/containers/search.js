@@ -53,16 +53,16 @@ class Search extends Component {
     render() {
         return (
             <div>
-                <div className="mw7 pa5 ma2 tc center">
-                    <input className="input-reset ba b--black-20 pa2 mb2 db w-100" type="text"
+                <div className="sans-serif mw7 pa5 ma2 tc br2 center bg-lightest-blue ba b--light-blue">
+                    <input className="f6 f5-l input-reset bn fl black-80 bg-white pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns" type="text"
                            onChange={this.handleTextChange}/>
-
-                    <CirclePicker width={500} onChange={this.handleColorChange}
-                                  color={this.state.color}/>
                     <span onClick={this.loadImages}
-                          className="sans-serif f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer">
+                          className="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns">
                                 Search
                     </span>
+                    <CirclePicker width={500} onChange={this.handleColorChange}
+                                  color={this.state.color}/>
+
                 </div>
                 <Collection images={this.state.images} isGrid={false} isLoading={false} summary={true}/>
             </div>

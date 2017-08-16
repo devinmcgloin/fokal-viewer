@@ -12,9 +12,9 @@ import {removeHeadersAuth, setHeadersAuth} from "./api"
 import {Footer} from './components/footer'
 import 'tachyons/css/tachyons.css'
 import 'font-awesome/css/font-awesome.css'
-import {UploadContainer} from "./containers/upload";
-import {TextSearch} from "./containers/search";
+import {UploadContainer} from "./containers/manage/upload";
 import PropTypes from 'prop-types'
+import {ManageImages} from "./containers/manage/patch"
 
 class App extends React.Component {
     constructor(props) {
@@ -43,10 +43,16 @@ class App extends React.Component {
         return (
             <div>
                 <HeaderContainer isLoggedIn={this.state.isLoggedIn}/>
-                <CallToAction title="Join Fokal" message="Sprioc helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for." call="Join for Free"/>
                 <div>
                     <Switch>
-                        <Route exact path="/" component={FeaturedImages}/>
+                        <Route exact path="/" render={() =>
+                            <div>
+                                {!this.state.isLoggedIn ? <CallToAction title="Join Fokal"
+                                              message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
+                                              call="Join for Free"/> : null }
+                                <FeaturedImages/>
+                            </div>
+                        }/>
                         <Route path="/recent" component={RecentImages}/>
                         <Route path="/trending" component={TrendingImages}/>
                         <Route path="/featured" component={FeaturedImages}/>
@@ -56,9 +62,11 @@ class App extends React.Component {
 
                         <Route path="/search" component={Search}/>
 
-                        <Route path="/login" render={()=><Login onSuccess={this.onLogin} isLoggedIn={this.state.isLoggedIn}/>}/>
+                        <Route path="/login"
+                               render={() => <Login onSuccess={this.onLogin} isLoggedIn={this.state.isLoggedIn}/>}/>
                         <Route path="/join" component={Join}/>
                         <Route path="/upload" component={UploadContainer}/>
+                        <Route path="/manage" component={ManageImages}/>
 
 
                         <Route path="/*" component={NotFound}/>
@@ -71,23 +79,24 @@ class App extends React.Component {
 }
 
 const CallToAction = ({title, message, call}) =>
-        <section className="sans-serif ph3 ph5-ns pv5">
-            <article className="mw8 center br2 ba b--light-blue bg-lightest-blue">
-                <div className="dt-ns dt--fixed-ns w-100">
-                    <div className="pa3 pa4-ns dtc-ns v-mid">
-                        <div>
-                            <h2 className="fw4 blue mt0 mb3">{title}</h2>
-                            <p className="black-70 measure lh-copy mv0">
-                                {message}
-                            </p>
-                        </div>
-                    </div>
-                    <div className="pa3 pa4-ns dtc-ns v-mid">
-                        <Link to="/login" className="no-underline f6 tc db w-100 pv3 bg-animate bg-blue hover-bg-dark-blue white br2">{call}</Link>
+    <section className="sans-serif ph3 ph5-ns pv5">
+        <article className="mw8 center br2 ba b--light-blue bg-lightest-blue">
+            <div className="dt-ns dt--fixed-ns w-100">
+                <div className="pa3 pa4-ns dtc-ns v-mid">
+                    <div>
+                        <h2 className="fw4 blue mt0 mb3">{title}</h2>
+                        <p className="black-70 measure lh-copy mv0">
+                            {message}
+                        </p>
                     </div>
                 </div>
-            </article>
-        </section>;
+                <div className="pa3 pa4-ns dtc-ns v-mid">
+                    <Link to="/login"
+                          className="no-underline f6 tc db w-100 pv3 bg-animate bg-blue hover-bg-dark-blue white br2">{call}</Link>
+                </div>
+            </div>
+        </article>
+    </section>;
 
 CallToAction.propTypes = {
     title: PropTypes.string.isRequired,

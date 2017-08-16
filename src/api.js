@@ -23,7 +23,8 @@ const FetchImage = (shortcode) => {
 
 const FetchImages = (relurl) => {
     return fetch(endpoint + relurl, {
-        headers: headers})
+        headers: headers
+    })
         .then((resp) => resp.json())
         .then((resp) =>
             resp.map((img) => {
@@ -35,7 +36,8 @@ const FetchImages = (relurl) => {
 
 const SearchImages = (relurl) => {
     return fetch(endpoint + relurl, {
-        headers: headers})
+        headers: headers
+    })
         .then((resp) => resp.json())
         .then((data) => data.map((img) => img.Image))
         .then((resp) =>
@@ -47,27 +49,27 @@ const SearchImages = (relurl) => {
 };
 
 const FetchMe = () => {
-    return fetch(endpoint+"/me", {headers: headers})
+    return fetch(endpoint + "/u/me", {headers: headers})
         .then((resp) => resp.json())
 };
 
 const FetchUser = (username) => {
     return fetch(endpoint + "/u/" + username)
         .then((resp) => resp.json())
-        // .then((data) => {
-        //     data.permalink = FormatPermalink(data.permalink);
-        //     data.user.permalink = FormatPermalink(data.user.permalink);
-        //     return data
-        // });
+    // .then((data) => {
+    //     data.permalink = FormatPermalink(data.permalink);
+    //     data.user.permalink = FormatPermalink(data.user.permalink);
+    //     return data
+    // });
 };
 
 const FetchUserImages = (username) => {
-    return FetchImages( "/u/" + username + "/images")
+    return FetchImages("/u/" + username + "/images")
 };
 
 
 const UploadImage = (body) => {
-    return fetch(endpoint+"/i", {
+    return fetch(endpoint + "/i", {
         headers: headers,
         method: 'POST',
         body: body
@@ -76,11 +78,15 @@ const UploadImage = (body) => {
 };
 
 const Patch = (id, type, changes) => {
-    return fetch(endpoint + "/"+type+"/" + id, {
+    console.log(id, type, changes);
+    headers.append("Content-Type", "text/json");
+    let promise = fetch(endpoint + "/" + type + "/" + id, {
         headers: headers,
         method: 'PATCH',
-        body: JSON.Stringify(changes)
-    })
+        body: JSON.stringify(changes)
+    });
+    headers.delete("Content-Type");
+    return promise
 };
 
 const FormatPermalink = (url) => {
@@ -89,4 +95,15 @@ const FormatPermalink = (url) => {
     return rel;
 };
 
-export {setHeadersAuth, removeHeadersAuth, FetchImage, FetchImages, FetchMe, FetchUser, UploadImage, FetchUserImages, Patch, SearchImages};
+export {
+    setHeadersAuth,
+    removeHeadersAuth,
+    FetchImage,
+    FetchImages,
+    FetchMe,
+    FetchUser,
+    UploadImage,
+    FetchUserImages,
+    Patch,
+    SearchImages
+};

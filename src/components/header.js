@@ -39,14 +39,12 @@ const LoggedInHeader = (props) => {
             <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/recent" title="About">Recent</Link>
             <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/trending"
                   title="Store">Trending</Link>
-            <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/color" title="Store">Color
-                Search</Link>
-            <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/text" title="Store">Text
-                Search</Link>
-            <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/geo" title="Store">Geo
+            <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search" title="Store">
                 Search</Link>
 
 
+            <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/manage" title="Store">
+                Manage</Link>
             <Link className="sans-serif link dim gray    f6 f5-ns dib" to="/upload" title="Contact">Upload</Link>
 
         </nav>
