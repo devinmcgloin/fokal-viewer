@@ -17,6 +17,7 @@ import {UploadContainer} from "./containers/manage/upload";
 import PropTypes from 'prop-types'
 import {ManageImages} from "./containers/manage/patch"
 import {LogoutPage} from "./containers/auth/logout"
+import ScrollToTop from "./util/scroll";
 
 class App extends React.Component {
     constructor(props) {
@@ -56,6 +57,7 @@ class App extends React.Component {
             <div>
                 <HeaderContainer isLoggedIn={this.state.isLoggedIn}/>
                 <div>
+                    <ScrollToTop>
                     <Switch>
                         <Route exact path="/" render={() =>
                             <div>
@@ -86,6 +88,7 @@ class App extends React.Component {
 
                         <Route path="/*" component={NotFound}/>
                     </Switch>
+                    </ScrollToTop>
                 </div>
                 <Footer/>
             </div>
