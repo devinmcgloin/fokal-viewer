@@ -7,7 +7,7 @@ import moment from 'moment';
 import {Loading} from './loading'
 
 const User = ({user, images, isGrid, isLoading, isSummary}) => {
-    if (isLoading){
+    if (isLoading) {
         return <Loading/>
     }
     else {
@@ -25,20 +25,20 @@ const User = ({user, images, isGrid, isLoading, isSummary}) => {
                     <div className="fl-ns w-100 w-20-l pr3-m pr5-l">
                         <p>
                             <a className="sans-serif link dim gray" href={user.url}>
-                            <FontAwesome name="link"/> Personal Site
+                                <FontAwesome name="link"/> Personal Site
                             </a>
                         </p>
                     </div>
                     <div className="fl-ns w-50-m w-20-l pr3-m pr5-l">
                         <p>
-                            <Link className="sans-serif link dim gray" to={user.permalink + "/map"} >
+                            <Link className="sans-serif link dim gray" to={'/u/' + user.id + "/map"}>
                                 <FontAwesome name="map-o"/> Images Geo
                             </Link>
                         </p>
                     </div>
                     <div className="fl-ns w-50-m w-20-l pr3-m pr5-l">
                         <p>
-                            <Link className="sans-serif link dim gray" to={user.permalink + "/favorites"} >
+                            <Link className="sans-serif link dim gray" to={'/u/' + user.id + "/favorites"}>
                                 <FontAwesome name="heart-o"/> Favorites
                             </Link>
                         </p>
@@ -50,7 +50,7 @@ const User = ({user, images, isGrid, isLoading, isSummary}) => {
                     </div>
                     <div className="fl-ns w-50-m w-20-l pr3-m pr5-l">
                         <p>
-                            <Link className="sans-serif link dim gray" to={user.permalink + "/stats"} >
+                            <Link className="sans-serif link dim gray" to={'/u/' + user.id + "/stats"}>
                                 <FontAwesome name="line-chart"/> Stats
                             </Link>
                         </p>
