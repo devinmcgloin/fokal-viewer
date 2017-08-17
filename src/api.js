@@ -8,7 +8,8 @@ var headers = new Headers();
 const setHeadersAuth = () => {
     if (LoggedIn()){
         const jwt = GetJWT();
-        headers.append("Authorization", "Bearer " + jwt)
+        // headers.removeItem("Authorization");
+        headers.set("Authorization", "Bearer " + jwt)
     } else {
         headers.removeItem("Authorization");
     }

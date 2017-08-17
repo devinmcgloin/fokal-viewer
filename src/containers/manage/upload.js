@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {bindAll} from 'lodash'
-import {UploadImage} from '../../api'
-import {InfoAlert, ErrorAlert} from '../../components/alerts'
+import {UploadImage, FetchImage} from '../../api'
+import {InfoAlert, ErrorAlert, SuccessAlert} from '../../components/alerts'
+import {PatchImage} from "./patch";
 
 class UploadContainer extends Component {
     constructor(props) {
@@ -12,7 +13,9 @@ class UploadContainer extends Component {
             processing: false,
             patch: {},
             failed: false,
-            filename: null
+            filename: null,
+            succeeded: false,
+            image: null
         };
 
         bindAll(this, 'handleSubmit', 'handleFile')
@@ -26,8 +29,10 @@ class UploadContainer extends Component {
         // send to server
         UploadImage(this.state.uri)
             .then(
-                () => {
-                    this.setState({processing: false});
+                (data) => {
+                    this.setState({processing: false, succeeded: true, imageID: data.id});
+                    FetchImage(data.id)
+                        .then(data => this.setState({image:data}))
                 },
                 () => {
                     this.setState({processing: false, failed: true});
@@ -76,15 +81,25 @@ class UploadContainer extends Component {
                     <ErrorAlert message="Upload failed."/>
                     :
                     null}
+                {this.state.succeeded ?
+                    <SuccessAlert message="Upload Succeded."/>
+                    :
+                    null}
 
                 <div className="mw6 pa5 ma4 tc center">
-                    <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-                        <input type="file" name="file" id="file" style={hiddenInput} onChange={this.handleFile}/>
-                        <label htmlFor="file"
-                               className="f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center">{
-                                   this.state.filename || "Choose a file"}</label>
-                        <input className="f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white" type="Submit" value="Upload"/>
-                    </form>
+                    {this.state.succeeded && this.state.image !== null ?
+                        <PatchImage image={this.state.image}/>
+                        :
+                        <form onSubmit={this.handleSubmit} encType="multipart/form-data">
+                            <input type="file" name="file" id="file" style={hiddenInput} onChange={this.handleFile}/>
+                            <label htmlFor="file"
+                                   className="f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center">{
+                                this.state.filename || "Choose a file"}</label>
+                            <input
+                                className="f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white"
+                                type="Submit" value="Upload" readOnly/>
+                        </form>
+                    }
                 </div>
 
             </div>
