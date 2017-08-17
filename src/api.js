@@ -15,6 +15,18 @@ const setHeadersAuth = () => {
     }
 };
 
+const FavoriteImage = (shortcode) =>
+    fetch(endpoint+"/i/"+shortcode+"/favorite", {
+        headers: headers,
+        method: 'PUT',
+    });
+
+const FollowUser = (shortcode) =>
+    fetch(endpoint+"/u/"+shortcode+"/follow", {
+        headers: headers,
+        method: 'PUT',
+    });
+
 const FetchImage = (shortcode) => {
     return fetch(endpoint + "/i/" + shortcode)
         .then((resp) => resp.json())
@@ -108,5 +120,7 @@ export {
     UploadImage,
     FetchUserImages,
     Patch,
-    SearchImages
+    SearchImages,
+    FollowUser,
+    FavoriteImage
 };

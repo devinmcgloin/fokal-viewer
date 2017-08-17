@@ -7,10 +7,10 @@ import {Loading} from './loading'
 
 const Tags = ({tags}) => {
     const rend = tags.map((t) =>
-        <li className="dib mr2" key={t}><a href="#" className="f6 f5-ns b db pa2 link dim mid-gray">{t}</a></li>
+        <li className="dib mr2" key={t}><Link to={"/t/"+t} className="f6 f5-ns b db pa2 link dim mid-gray">{t}</Link></li>
     );
     return (
-        <ul className="list ph3 ph5-ns pv4">
+        <ul className="sans-serif list ph3 ph5-ns pv4">
             {rend}
         </ul>
     );
@@ -30,6 +30,7 @@ const Image = ({image, isSummary, isLoading}) => {
 
     return (
         <div>
+            {image.tags.length !== 0 ? <Tags tags={image.tags}/> : null}
             <Link to={"/i/" + shortcode}>
                 <img className="image"
                      src={image.src_url.large}

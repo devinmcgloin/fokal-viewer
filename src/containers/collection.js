@@ -32,6 +32,7 @@ class ImageCollection extends Component {
     componentDidMount() {
         this.loadImageFromServer()
     }
+
     render() {
         return (
             <Collection title={this.state.title} images={this.state.images} isGrid={this.state.isGrid} isLoading={this.state.images.length === 0} summary={false}/>
@@ -50,6 +51,43 @@ const RecentImages = () => {
     )
 };
 
+class TaggedImages extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            images: [],
+            tag: props.match.params.id,
+            isGrid: false
+        };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState({tag: nextProps.match.params.id, images:[]});
+        this.loadImageFromServer(nextProps.match.params.id)
+    }
+
+    loadImageFromServer(tag) {
+        let t = this;
+        FetchImages('/t/'+tag)
+            .then(function (data) {
+                console.log(data);
+                t.setState({
+                    images: data
+                })
+            })
+            .catch((err) => console.log(err));
+    }
+
+    componentDidMount() {
+        this.loadImageFromServer(this.state.tag)
+    }
+
+    render() {
+        return (
+            <Collection title={this.state.tag} images={this.state.images} isGrid={this.state.isGrid} isLoading={this.state.images.length === 0} summary={false}/>
+        )
+    }
+}
 const FeaturedImages = () => {
     return (
         <ImageCollection url="/i/featured" title="Featured Images"/>
@@ -64,4 +102,4 @@ const TrendingImages = () => {
 
 
 
-export {FeaturedImages, RecentImages, TrendingImages,ImageCollection};
+export {FeaturedImages, RecentImages, TrendingImages,ImageCollection, TaggedImages};

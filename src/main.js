@@ -1,6 +1,6 @@
 import React from 'react';
 import {Route, Switch, Link} from 'react-router-dom';
-import {RecentImages, FeaturedImages, TrendingImages} from './containers/collection';
+import {RecentImages, FeaturedImages, TrendingImages, TaggedImages} from './containers/collection';
 import {Search} from './containers/search'
 import {NotFound} from './containers/not-found';
 import {ImageContainer} from './containers/image';
@@ -75,6 +75,7 @@ class App extends React.Component {
 
                         <Route path="/i/:id" component={ImageContainer}/>
                         <Route path="/u/:id" component={UserContainer}/>
+                        <Route path="/t/:id" component={TaggedImages}/>
 
                         <Route path="/search" component={Search}/>
 
