@@ -7,7 +7,7 @@ import {Loading} from './loading'
 
 const Tags = ({tags}) => {
     const rend = tags.map((t) =>
-        <li className="dib mr2" key={t}><Link to={"/t/"+t} className="f6 f5-ns b db pa2 link dim mid-gray">{t}</Link></li>
+        <li className="dib mr1 mb2" key={t}><Link to={"/t/"+t} className="f6 f5-ns b db pa2 link dim dark-gray ba b--black-20">{t}</Link></li>
     );
     return (
         <ul className="sans-serif list ph3 ph5-ns pv4">
