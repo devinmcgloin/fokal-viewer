@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import {FetchUser, FetchUserImages} from '../api'
+import {FetchUser, FetchUserImages} from '../services/api/api'
 import {User} from '../components/user'
 
 

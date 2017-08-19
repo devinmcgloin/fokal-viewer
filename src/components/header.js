@@ -10,11 +10,7 @@ const LoggedOutHeader = (props) => {
         <nav className="pa3 pa4-ns bb b--black-10 black-70">
             <Link className="sans-serif link dim black b f6 f5-ns dib mr3" to="/" title="Home">Fokal</Link>
 
-                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/featured"
-                      title="Home">Featured</Link>
-                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/recent" title="About">Recent</Link>
-                <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/trending"
-                      title="Store">Trending</Link>
+
                 <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search" title="Store">
                     Search</Link>
 
@@ -34,11 +30,6 @@ const LoggedInHeader = (props) => {
         <nav className="pa3 pa4-ns bb b--black-10 black-70">
             <Link className="sans-serif link dim black b f6 f5-ns dib mr3" to="/" title="Home">Fokal</Link>
 
-            <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/featured"
-                  title="Home">Featured</Link>
-            <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/recent" title="About">Recent</Link>
-            <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/trending"
-                  title="Store">Trending</Link>
             <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search" title="Store">
                 Search</Link>
 

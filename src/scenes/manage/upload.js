@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {bindAll} from 'lodash'
-import {UploadImage, FetchImage} from '../../api'
+import {UploadImage, FetchImage} from '../../services/api/api'
 import {InfoAlert, ErrorAlert, SuccessAlert} from '../../components/alerts'
 import {PatchImage} from "./patch";
 

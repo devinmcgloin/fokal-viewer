@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Image} from '../components/image'
-import {SearchImages} from '../api'
+import {SearchImages} from '../services/api/api'
 import {Collection} from "../components/collection"
 import CirclePicker from '../components/colorPicker'
 import {bindAll} from 'lodash'

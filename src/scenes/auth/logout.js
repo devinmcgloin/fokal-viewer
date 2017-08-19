@@ -1,4 +1,4 @@
-import {Logout} from "../../auth"
+import {Logout} from "../../services/store/auth"
 import {Redirect} from 'react-router-dom'
 import React from 'react'
 import PropTypes from 'prop-types'

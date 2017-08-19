@@ -1,6 +1,5 @@
-import {GetJWT, LoggedIn} from "./auth";
+import {GetJWT, LoggedIn} from "../store/auth";
 
-console.log(process.env.NODE_ENV);
 const endpoint = process.env.NODE_ENV === "production" ? "https://api.sprioc.xyz/v0" : "http://localhost:8000/v0";
 
 var headers = new Headers();
@@ -107,8 +106,7 @@ const Patch = (id, type, changes) => {
 
 const FormatPermalink = (url) => {
     let split = url.split("/");
-    const rel = "/" + split[4] + "/" + split[5];
-    return rel;
+    return "/" + split[4] + "/" + split[5];
 };
 
 export {

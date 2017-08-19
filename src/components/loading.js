@@ -1,9 +1,9 @@
 import React from 'react'
 
-import ReactLoading from 'react-loading'
+import {ScaleLoader} from 'halogen'
 
-const Loading = () => <div className="center ma7 center" style={{height: 150, width: 150}}>
-    <ReactLoading type='cubes' color='#000000' height={150} width={150}/>
-</div>
+const Loading = () => <div className="center ma7 center" style={{height: '40px', width: '45px'}}>
+    <ScaleLoader color='#000' size="150px"/>
+</div>;
 
 export {Loading}

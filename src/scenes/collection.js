@@ -3,53 +3,59 @@ import React, {
 } from 'react'
 import {Image} from '../components/image'
 import PropTypes from 'prop-types';
-import {FetchImages} from '../api'
+import {FetchImages} from '../services/api/api'
 import {Collection} from "../components/collection";
+import {bindAll} from 'lodash'
 
 class ImageCollection extends Component {
     constructor(props) {
         super(props);
         this.state = {
             images: [],
-            url: props.url,
-            title: props.title,
-            isGrid: false
+            type: 'featured',
+            isGrid: false,
+            failed: false,
+            isLoading: true
         };
+
+        bindAll(this, 'handleChange')
     }
 
-    loadImageFromServer() {
+    loadImageFromServer(type) {
         let t = this;
-        FetchImages(this.state.url)
+        FetchImages('/i/'+type)
             .then(function (data) {
                 console.log(data);
                 t.setState({
-                    images: data
+                    images: data,
+                    isLoading: false
                 })
             })
-            .catch((err) => console.log(err));
+            .catch((err) => t.setState({failed:true}));
+    }
+
+
+    handleChange(type) {
+        this.setState({
+            type: type,
+            images: [],
+            isLoading: true
+        });
+        this.loadImageFromServer(type)
     }
 
     componentDidMount() {
-        this.loadImageFromServer()
+        this.loadImageFromServer(this.state.type)
     }
 
     render() {
         return (
-            <Collection title={this.state.title} images={this.state.images} isGrid={this.state.isGrid} isLoading={this.state.images.length === 0} summary={false}/>
+            <Collection title={this.state.type} images={this.state.images}
+                        isGrid={this.state.isGrid} isLoading={this.state.isLoading}
+                        summary={false} handleChange={this.handleChange}/>
         )
     }
 }
-
-ImageCollection.propTypes = {
-    url: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
-};
-
-const RecentImages = () => {
-    return (
-        <ImageCollection url="/i/recent" title="Recent Images"/>
-    )
-};
 
 class TaggedImages extends Component {
     constructor(props) {
@@ -88,18 +94,7 @@ class TaggedImages extends Component {
         )
     }
 }
-const FeaturedImages = () => {
-    return (
-        <ImageCollection url="/i/featured" title="Featured Images"/>
-    )
-};
-
-const TrendingImages = () => {
-    return (
-        <ImageCollection url="/i/hot" title="Trending Images"/>
-    )
-};
 
 
 
-export {FeaturedImages, RecentImages, TrendingImages,ImageCollection, TaggedImages};
+export {ImageCollection, TaggedImages};

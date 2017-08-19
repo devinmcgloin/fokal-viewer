@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {FetchMe, Patch, FetchImages} from "../../api"
+import {FetchMe, Patch, FetchImages} from "../../services/api/api"
 import PropTypes from 'prop-types'
 import {bindAll} from 'lodash'
 
