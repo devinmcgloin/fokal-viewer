@@ -1925,7 +1925,7 @@ domhandler@2.1:
   dependencies:
     domelementtype "1"
 
-domkit@0.0.1:
+domkit@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/domkit/-/domkit-0.0.1.tgz#88399d586794efc1154fec6c22cfe50f19bd4dbb"
 
@@ -2895,12 +2895,6 @@ gzip-size@3.0.0:
   resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-3.0.0.tgz#546188e9bdc337f673772f81660464b389dce520"
   dependencies:
     duplexer "^0.1.1"
-
-halogen@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/halogen/-/halogen-0.2.0.tgz#1c65a99a9352e6bf02f41beb7081852fce7e7473"
-  dependencies:
-    domkit "0.0.1"
 
 handle-thing@^1.2.5:
   version "1.2.5"
@@ -5345,6 +5339,12 @@ react-scripts@1.0.11:
     whatwg-fetch "2.0.3"
   optionalDependencies:
     fsevents "1.1.2"
+
+react-spinners@^0.0.30:
+  version "0.0.30"
+  resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.0.30.tgz#dd2a2e16794c38f42e6da8f49aa16d9ceb338e7d"
+  dependencies:
+    domkit "^0.0.1"
 
 react@^15.6.1:
   version "15.6.1"

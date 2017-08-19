@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "font-awesome": "^4.7.0",
-    "halogen": "^0.2.0",
     "history": "^4.6.3",
     "leaflet": "^1.1.0",
     "lodash": "^4.17.4",
@@ -20,6 +19,7 @@
     "react-load-script": "^0.0.6",
     "react-loading": "^0.1.4",
     "react-router-dom": "^4.1.1",
+    "react-spinners": "^0.0.30",
     "tangram": "^0.13.0",
     "urijs": "^1.18.12",
     "webfontloader": "^1.6.28"
