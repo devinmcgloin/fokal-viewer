@@ -29,11 +29,7 @@ const FollowUser = (shortcode) =>
 const FetchImage = (shortcode) => {
     return fetch(endpoint + "/i/" + shortcode)
         .then((resp) => resp.json())
-        .then((data) => {
-            data.permalink = FormatPermalink(data.permalink);
-            data.user.permalink = FormatPermalink(data.user.permalink);
-            return data
-        });
+
 };
 
 const FetchImages = (relurl) => {
@@ -41,12 +37,7 @@ const FetchImages = (relurl) => {
         headers: headers
     })
         .then((resp) => resp.json())
-        .then((resp) =>
-            resp.map((img) => {
-                img.permalink = FormatPermalink(img.permalink);
-                img.user.permalink = FormatPermalink(img.user.permalink);
-                return img;
-            }))
+
 };
 
 const SearchImages = (relurl) => {
@@ -54,13 +45,8 @@ const SearchImages = (relurl) => {
         headers: headers
     })
         .then((resp) => resp.json())
-        .then((data) => data.map((img) => img.Image))
-        .then((resp) =>
-            resp.map((img) => {
-                img.permalink = FormatPermalink(img.permalink);
-                img.user.permalink = FormatPermalink(img.user.permalink);
-                return img;
-            }))
+        .then((data) => data.map((img) => img.image))
+
 };
 
 const FetchMe = () => {
@@ -102,11 +88,6 @@ const Patch = (id, type, changes) => {
     });
     headers.delete("Content-Type");
     return promise
-};
-
-const FormatPermalink = (url) => {
-    let split = url.split("/");
-    return "/" + split[4] + "/" + split[5];
 };
 
 export {

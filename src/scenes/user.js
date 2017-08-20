@@ -2,15 +2,17 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import {FetchUser, FetchUserImages} from '../services/api/api'
 import {User} from '../components/user'
-
+import {Loading} from "../components/loading"
 
 class UserContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             username: props.match.params.id,
-            user: null,
-            images: null
+            user: {},
+            images: [],
+            isLoadingUser: true,
+            isLoadingImages: true
         }
     }
 
@@ -18,16 +20,21 @@ class UserContainer extends React.Component {
         let t = this;
         FetchUser(this.state.username)
             .then(function (data) {
+                console.log(data);
                 t.setState({
-                    user: data
+                    user: data,
+                    isLoadingUser: false
                 })
             });
 
         FetchUserImages(this.state.username)
             .then((data) => {
-            t.setState({
-                images: data
-            })
+                console.log(data);
+
+                t.setState({
+                    images: data,
+                    isLoadingImages: false
+                })
             })
 
     }
@@ -37,10 +44,10 @@ class UserContainer extends React.Component {
     }
 
     render() {
-        return (
-            <User user={this.state.user} images={this.state.images} isLoading={this.state.user === null || this.state.images === null} isSummary={true} isGrid={true}/>
+        if(this.state.isLoadingImages || this.state.isLoadingUser)
+            return <Loading/>;
+        return <User user={this.state.user} images={this.state.images}/>
 
-        )
     }
 }
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Tangram from 'tangram'
 import L from 'leaflet'
 
-class MapView extends React.Component {
+class MapPointView extends React.Component {
     constructor(props) {
         super(props);
         this.state= {
@@ -29,10 +29,10 @@ class MapView extends React.Component {
 }
 
 
-MapView.propTypes = {
+MapPointView.propTypes = {
     lng: PropTypes.number.isRequired,
     lat: PropTypes.number.isRequired,
 };
 
 
-export {MapView};
+export {MapPointView};

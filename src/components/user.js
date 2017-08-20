@@ -1,18 +1,12 @@
 import React from 'react'
 import FontAwesome from 'react-fontawesome'
 import PropTypes from 'prop-types'
-import {Collection} from "./collection";
+import {GridCollection} from "./collection";
 import {Link} from 'react-router-dom'
 import moment from 'moment';
-import {Loading} from './loading'
 
-const User = ({user, images, isGrid, isLoading, isSummary}) => {
-    if (isLoading) {
-        return <Loading/>
-    }
-    else {
-        return (
-            <main className="cf pa3 pa4-m pa5-l mw9 center">
+const User = ({user, images}) =>
+            <main className="cf pa3 pa4-ns mw9 center">
                 <div className="fr w-100 w-80-l">
                     <p className="sans-serif f6">
                         {user.bio}
@@ -56,11 +50,10 @@ const User = ({user, images, isGrid, isLoading, isSummary}) => {
                         </p>
                     </div>
                 </div>
-                <Collection images={images} isGrid={isGrid} isLoading={isLoading} summary={isSummary}/>
-            </main>
-        )
-    }
-};
+                <GridCollection images={images}/>
+            </main>;
+
+
 
 User.propTypes = {
     user: PropTypes.shape(
@@ -70,9 +63,6 @@ User.propTypes = {
             url: PropTypes.string,
         }
     ),
-    isGrid: PropTypes.bool.isRequired,
-    isLoading: PropTypes.bool.isRequired,
-    isSummary: PropTypes.bool.isRequired,
     images: PropTypes.array,
 
 };

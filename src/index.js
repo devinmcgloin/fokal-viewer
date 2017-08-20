@@ -6,7 +6,7 @@ import WebFont from 'webfontloader'
 import {ImageCollection, TaggedImages} from './scenes/collection';
 import {Search} from './scenes/search'
 import {NotFound} from './scenes/not-found';
-import {ImageContainer} from './scenes/image';
+import {ImageContainer} from './scenes/images/image';
 import {HeaderContainer} from "./components/header"
 import {Login} from './scenes/auth/login'
 import {Join} from './scenes/auth/join'

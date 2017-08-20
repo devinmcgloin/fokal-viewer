@@ -46,8 +46,24 @@ const Colors = (props) => {
 };
 
 Colors.propTypes = {
-    colors: PropTypes.array.isRequired
+    colors: PropTypes.arrayOf(PropTypes.shape({
+        sRGB: {
+            R: PropTypes.number.isRequired,
+            G: PropTypes.number.isRequired,
+            B: PropTypes.number.isRequired
+        },
+        Hex: PropTypes.string.isRequired,
+        HSV: {
+            H: PropTypes.number.isRequired,
+            S: PropTypes.number.isRequired,
+            V: PropTypes.number.isRequired
+        },
+        shade: PropTypes.string.isRequired,
+        color_name: PropTypes.string.isRequired,
+        pixel_fraction: PropTypes.number.isRequired,
+        score: PropTypes.number.isRequired,
+    })).isRequired
 };
 
 
-export {ColorDisplay, Colors};
+export {Colors};

@@ -29,7 +29,7 @@ const Login = (props) => {
             </div>
         )
     }
-}
+};
 
 Login.propTypes = {
     onSuccess: PropTypes.func.isRequired,

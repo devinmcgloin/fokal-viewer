@@ -17,21 +17,15 @@ const Tags = ({tags}) => {
     };
 
 Tags.propTypes = {
-    tags: PropTypes.array
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
-const Image = ({image, isSummary, isLoading}) => {
-    if (isLoading) {
-        return <Loading/>
-    }
-
-    let url = image.permalink.split("/");
-    let shortcode = url[url.length - 1];
-
+const Image = ({image, isSummary}) => {
+    let id = image.id;
     return (
         <div>
-            {image.tags.length !== 0 ? <Tags tags={image.tags}/> : null}
-            <Link to={"/i/" + shortcode}>
+            {image.tags.length !== 0 && !isSummary ? <Tags tags={image.tags}/> : null}
+            <Link to={"/i/" + id}>
                 <img className="image"
                      src={image.src_url.large}
                      alt=""
@@ -45,6 +39,7 @@ const Image = ({image, isSummary, isLoading}) => {
 
 Image.propTypes = {
     image: PropTypes.shape({
+        id: PropTypes.string.isRequired,
         src_url: PropTypes.object,
         colors: PropTypes.array.isRequired,
         permalink: PropTypes.string.isRequired,
@@ -59,9 +54,8 @@ Image.propTypes = {
             permalink: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired
         })
-    }),
-    isSummary: PropTypes.bool,
-    isLoading: PropTypes.bool
+    }).isRequired,
+    isSummary: PropTypes.bool.isRequired,
 };
 
 

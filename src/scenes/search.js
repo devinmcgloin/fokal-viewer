@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Image} from '../components/image'
 import {SearchImages} from '../services/api/api'
-import {Collection} from "../components/collection"
+import {GridCollection, LinearCollection} from "../components/collection"
 import CirclePicker from '../components/colorPicker'
 import {bindAll} from 'lodash'
 import URI from 'urijs'
@@ -70,7 +70,7 @@ class Search extends Component {
                     </div>
 
                 </div>
-                <Collection images={this.state.images} isGrid={false} isLoading={false} summary={true}/>
+                <LinearCollection images={this.state.images} summary={true}/>
             </div>
         )
     }

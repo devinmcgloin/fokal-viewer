@@ -50,7 +50,7 @@ const MetadataViewer = ({user, metadata, stats}) => {
                 </dl>
                 <dl className="fl fn-l w-50 dib-l w-auto-l lh-title">
                     <dd className="f6 fw4 ml0">Photographer</dd>
-                    <dd className="f3 fw6 ml0"><Link className="link dim gray" to={user.permalink}>{user.name}</Link></dd>
+                    <dd className="f3 fw6 ml0"><Link className="link dim gray" to={"/u/"+user.id}>{user.name}</Link></dd>
                 </dl>
             </div>
         </article>
@@ -75,6 +75,7 @@ MetadataViewer.propTypes = {
     }),
     user: PropTypes.shape({
         name: PropTypes.string,
+        id: PropTypes.string.isRequired,
         permalink: PropTypes.string,
     })
 };
