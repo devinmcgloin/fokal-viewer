@@ -36,7 +36,6 @@ class App extends React.Component {
 
     componentDidMount() {
         if (LoggedIn()) {
-            setHeadersAuth();
             this.setState({isLoggedIn: true, appToken: GetJWT()})
         }
     }
@@ -44,7 +43,6 @@ class App extends React.Component {
     onLogin(googleUser) {
         const jwtToken = googleUser.getAuthResponse().id_token;
         LogIn(jwtToken);
-        setHeadersAuth();
         this.setState({isLoggedIn: true, appToken: jwtToken})
     }
 

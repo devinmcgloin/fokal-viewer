@@ -69,19 +69,19 @@ class ImageCollection extends Component {
 
         return (
             <div className="sans-serif ph3 ph4-ns">
-                    <h1 className="tc f1" style={{textTransform: 'capitalize'}}>{this.state.type}</h1>
+                <h1 className="tc f1" style={{textTransform: 'capitalize'}}>{this.state.type}</h1>
 
-                    <section className="inline-flex">
+                <section className="inline-flex pv1">
                     <span className="f5 link hover-dark-blue b no-underline black dib ph2 pv1 pointer"
                           onClick={() => this.handleChange("featured")}>Featured</span>
-                        <span className="f5 link hover-dark-blue b no-underline black dib ph2 pv1 pointer"
-                              onClick={() => this.handleChange("trending")}>Trending</span>
-                        <span className="f5 link hover-dark-blue b no-underline black dib ph2 pv1 pointer"
-                              onClick={() => this.handleChange("recent")}>Recent</span>
-                        {layoutToggle}
-                    </section>
+                    <span className="f5 link hover-dark-blue b no-underline black dib ph2 pv1 pointer"
+                          onClick={() => this.handleChange("trending")}>Trending</span>
+                    <span className="f5 link hover-dark-blue b no-underline black dib ph2 pv1 pointer"
+                          onClick={() => this.handleChange("recent")}>Recent</span>
+                    {layoutToggle}
+                </section>
 
-                    {content}
+                {content}
             </div>
         )
 

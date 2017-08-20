@@ -32,10 +32,10 @@ class PatchImage extends Component {
     commitChanges(e) {
         e.preventDefault();
         Patch(this.state.image.id, 'i', {
-            'aperture':this.state.aperture,
-            'iso':this.state.iso,
-            'exposure_time':this.state.exposure_time,
-            'focal_length':this.state.focal_length,
+            'aperture': this.state.aperture,
+            'iso': this.state.iso,
+            'exposure_time': this.state.exposure_time,
+            'focal_length': this.state.focal_length,
 
         });
     }
@@ -45,10 +45,11 @@ class PatchImage extends Component {
             <div className="dt center pt0 pb5 pv5-m pv6-ns">
                 <div className="db dtc-ns v-mid-ns">
                     <img src={this.state.image.src_links.medium} alt=""
-                         className="w-100 mw7"/>
+                         className="w-100 mw6"/>
                 </div>
-                <div className="db dtc-ns v-mid ph2 pr0-ns pl3-ns mr5">
-                    <form onSubmit={this.commitChanges}>
+                <form onSubmit={this.commitChanges}>
+                    <div className="db dtc-ns v-mid ph2 pr0-ns pl3-ns mr5">
+
                         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                             <legend className="ph0 mh0 fw6 clip">Metadata</legend>
                             <div className="mt3">
@@ -84,8 +85,9 @@ class PatchImage extends Component {
                             <input className="b ph3 pv2 input-reset ba b--black bg-transparent pointer f6" type="Submit"
                                    value="Submit"/>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+
             </div>
         )
     }
@@ -121,7 +123,7 @@ class PatchUser extends Component {
 
     commitChanges(e) {
         e.preventDefault();
-        Patch(this.state.image.id, 'u', {
+        Patch(this.state.user.id, 'u', {
             bio: this.state.bio,
             url: this.state.url,
             name: this.state.name,
@@ -133,7 +135,7 @@ class PatchUser extends Component {
             <div className="sans-serif dt center pt0 pb5 pv5-m pv6-ns">
                 <div className="db dtc-ns v-mid-ns">
                     <img src={this.state.user.avatar_links.medium} alt=""
-                         className="w-100 mw7"/>
+                         className="w-100 mw6"/>
                 </div>
                 <div className="db dtc-ns v-mid ph2 pr0-ns pl3-ns mr5">
                     <form onSubmit={this.commitChanges}>
@@ -215,7 +217,7 @@ class ManageImages extends Component {
 
         return (
             <div>
-                {!this.state.isLoadingUser ? <PatchUser user={this.state.user}/> : null }
+                {!this.state.isLoadingUser ? <PatchUser user={this.state.user}/> : null}
                 {imgs}
             </div>
         )

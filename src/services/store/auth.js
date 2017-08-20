@@ -11,4 +11,4 @@ const LoggedIn = () =>
 const Logout = () =>
     localStorage.removeItem("auth");
 
-export {LoggedIn, Logout,LogIn, GetJWT};
+export {LoggedIn, Logout, LogIn, GetJWT};

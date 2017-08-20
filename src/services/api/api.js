@@ -2,39 +2,37 @@ import {GetJWT, LoggedIn} from "../store/auth";
 
 const endpoint = process.env.NODE_ENV === "production" ? "https://api.sprioc.xyz/v0" : "http://localhost:8000/v0";
 
-var headers = new Headers();
-
-const setHeadersAuth = () => {
-    if (LoggedIn()){
+const getHeaders = () => {
+    let headers = new Headers();
+    if (LoggedIn()) {
         const jwt = GetJWT();
-        // headers.removeItem("Authorization");
-        headers.set("Authorization", "Bearer " + jwt)
-    } else {
-        headers.removeItem("Authorization");
+        headers.set("Authorization", "Bearer " + jwt);
+        console.log(headers.get('Authorization'))
     }
+    return headers
 };
 
 const FavoriteImage = (shortcode) =>
-    fetch(endpoint+"/i/"+shortcode+"/favorite", {
-        headers: headers,
+    fetch(endpoint + "/i/" + shortcode + "/favorite", {
+        headers: getHeaders(),
         method: 'PUT',
     });
 
 const FollowUser = (shortcode) =>
-    fetch(endpoint+"/u/"+shortcode+"/follow", {
-        headers: headers,
+    fetch(endpoint + "/u/" + shortcode + "/follow", {
+        headers: getHeaders(),
         method: 'PUT',
     });
 
 const FetchImage = (shortcode) => {
-    return fetch(endpoint + "/i/" + shortcode)
+    return fetch(endpoint + "/i/" + shortcode, {headers: getHeaders()})
         .then((resp) => resp.json())
 
 };
 
 const FetchImages = (relurl) => {
     return fetch(endpoint + relurl, {
-        headers: headers
+        headers: getHeaders()
     })
         .then((resp) => resp.json())
 
@@ -42,7 +40,7 @@ const FetchImages = (relurl) => {
 
 const SearchImages = (relurl) => {
     return fetch(endpoint + relurl, {
-        headers: headers
+        headers: getHeaders()
     })
         .then((resp) => resp.json())
         .then((data) => data.map((img) => img.image))
@@ -50,12 +48,12 @@ const SearchImages = (relurl) => {
 };
 
 const FetchMe = () => {
-    return fetch(endpoint + "/u/me", {headers: headers})
+    return fetch(endpoint + "/u/me", {headers: getHeaders()})
         .then((resp) => resp.json())
 };
 
 const FetchUser = (username) => {
-    return fetch(endpoint + "/u/" + username)
+    return fetch(endpoint + "/u/" + username, {headers: getHeaders()})
         .then((resp) => resp.json())
     // .then((data) => {
     //     data.permalink = FormatPermalink(data.permalink);
@@ -71,7 +69,7 @@ const FetchUserImages = (username) => {
 
 const UploadImage = (body) => {
     return fetch(endpoint + "/i", {
-        headers: headers,
+        headers: getHeaders(),
         method: 'POST',
         body: body
     })
@@ -80,18 +78,16 @@ const UploadImage = (body) => {
 
 const Patch = (id, type, changes) => {
     console.log(id, type, changes);
-    headers.append("Content-Type", "text/json");
-    let promise = fetch(endpoint + "/" + type + "/" + id, {
-        headers: headers,
+    let jsonHeaders = getHeaders();
+    jsonHeaders.append("Content-Type", "text/json");
+    return fetch(endpoint + "/" + type + "/" + id, {
+        headers: jsonHeaders,
         method: 'PATCH',
         body: JSON.stringify(changes)
     });
-    headers.delete("Content-Type");
-    return promise
 };
 
 export {
-    setHeadersAuth,
     FetchImage,
     FetchImages,
     FetchMe,
