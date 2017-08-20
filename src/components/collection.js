@@ -28,7 +28,7 @@ const GridCollection = ({images}) => {
         <div className="fl w-50 w-third-m w-25-ns" key={img.id}>
             <div className="aspect-ratio aspect-ratio--9x16">
                 <Link to={'/i/'+img.id}>
-                    <img style={{backgroundImage: 'url(' + img.src_url.medium + ')'}}
+                    <img style={{backgroundImage: 'url(' + img.src_links.medium + ')'}}
                          className="db bg-center cover aspect-ratio--object"/>
                 </Link>
             </div>

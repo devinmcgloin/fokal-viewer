@@ -27,7 +27,7 @@ const Image = ({image, isSummary}) => {
             {image.tags.length !== 0 && !isSummary ? <Tags tags={image.tags}/> : null}
             <Link to={"/i/" + id}>
                 <img className="image"
-                     src={image.src_url.large}
+                     src={image.src_links.large}
                      alt=""
                      style={{marginTop: '1rem'}}/>
             </Link>
@@ -40,7 +40,7 @@ const Image = ({image, isSummary}) => {
 Image.propTypes = {
     image: PropTypes.shape({
         id: PropTypes.string.isRequired,
-        src_url: PropTypes.object,
+        src_links: PropTypes.object,
         colors: PropTypes.array.isRequired,
         permalink: PropTypes.string.isRequired,
         metadata: PropTypes.shape({
