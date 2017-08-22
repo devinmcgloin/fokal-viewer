@@ -7,7 +7,7 @@ import moment from 'moment';
 
 const UserHeader = ({user}) =>
     <main className="cf pa3 pa4-ns mw9 center">
-        <div className="fl pa4 center ph5">
+        <div className="fl pa2 center ph5">
             <img src={user.avatar_links.medium} className="br1 ba b--black-10 h4 w4" alt="avatar"/>
         </div>
         <div className="fr w-100 w-80-l">
