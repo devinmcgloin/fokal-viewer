@@ -24,7 +24,7 @@ class ImageCollection extends Component {
 
     loadImageFromServer(type) {
         let t = this;
-        FetchImages('/i/' + type)
+        FetchImages('/images/' + type)
             .then(function (data) {
                 console.log(data);
                 t.setState({
@@ -105,7 +105,7 @@ class TaggedImages extends Component {
 
     loadImageFromServer(tag) {
         let t = this;
-        FetchImages('/t/' + tag)
+        FetchImages('/tags/' + tag)
             .then(function (data) {
                 console.log(data);
                 t.setState({

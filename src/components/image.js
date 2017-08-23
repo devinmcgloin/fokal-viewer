@@ -23,10 +23,10 @@ Tags.propTypes = {
 const Image = ({image, isSummary}) => {
     let id = image.id;
     return (
-        <div>
+        <div className="pa4">
             {image.tags.length !== 0 && !isSummary ? <Tags tags={image.tags}/> : null}
             <Link to={"/i/" + id}>
-                <img className="image"
+                <img
                      src={image.src_links.large}
                      alt=""
                      style={{marginTop: '1rem'}}/>

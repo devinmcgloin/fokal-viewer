@@ -31,7 +31,7 @@ class PatchImage extends Component {
 
     commitChanges(e) {
         e.preventDefault();
-        Patch(this.state.image.id, 'i', {
+        Patch(this.state.image.id, 'images', {
             'aperture': this.state.aperture,
             'iso': this.state.iso,
             'exposure_time': this.state.exposure_time,
@@ -45,7 +45,7 @@ class PatchImage extends Component {
             <div className="dt center pt0 pb5 pv5-m pv6-ns">
                 <div className="db dtc-ns v-mid-ns">
                     <img src={this.state.image.src_links.medium} alt=""
-                         className="w-100 mw6"/>
+                         className="w-100 mw5"/>
                 </div>
                 <form onSubmit={this.commitChanges}>
                     <div className="db dtc-ns v-mid ph2 pr0-ns pl3-ns mr5">
@@ -123,7 +123,7 @@ class PatchUser extends Component {
 
     commitChanges(e) {
         e.preventDefault();
-        Patch(this.state.user.id, 'u', {
+        Patch(this.state.user.id, 'user', {
             bio: this.state.bio,
             url: this.state.url,
             name: this.state.name,
@@ -135,7 +135,7 @@ class PatchUser extends Component {
             <div className="sans-serif dt center pt0 pb5 pv5-m pv6-ns">
                 <div className="db dtc-ns v-mid-ns">
                     <img src={this.state.user.avatar_links.medium} alt=""
-                         className="w-100 mw6"/>
+                         className="w-100 mw5"/>
                 </div>
                 <div className="db dtc-ns v-mid ph2 pr0-ns pl3-ns mr5">
                     <form onSubmit={this.commitChanges}>
@@ -199,7 +199,7 @@ class ManageImages extends Component {
             })
             .catch((err) => console.log(err));
 
-        FetchImages('/u/me/images')
+        FetchImages('/users/me/images')
             .then((dat) => this.setState({
                 images: dat,
                 isLoadingImages: false

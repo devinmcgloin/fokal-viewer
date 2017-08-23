@@ -5,6 +5,7 @@ import {FetchImages, FetchUser, FetchUserImages} from '../services/api/api'
 import {UserStats, UserHeader} from '../components/user'
 import {Loading} from "../components/loading"
 import {GridCollection} from "../components/collection";
+import Masonry from 'react-masonry-component';
 
 class UserContainer extends React.Component {
     constructor(props) {
@@ -38,7 +39,7 @@ class UserContainer extends React.Component {
                 }))
             });
 
-        FetchImages('/u/' + this.state.username + '/favorites')
+        FetchImages('/users/' + this.state.username + '/favorites')
             .then((data)=>{
                 t.setState((prev) => ({
                     favorites: data,

@@ -12,6 +12,7 @@ class MapPointView extends React.Component {
         };
         this.mapEl = 'map'
     }
+
     componentDidMount () {
         const map = L.map(this.mapEl);
         const layer = Tangram.leafletLayer({

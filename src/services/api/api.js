@@ -13,19 +13,19 @@ const getHeaders = () => {
 };
 
 const FavoriteImage = (shortcode) =>
-    fetch(endpoint + "/i/" + shortcode + "/favorite", {
+    fetch(endpoint + "/images/" + shortcode + "/favorite", {
         headers: getHeaders(),
         method: 'PUT',
     });
 
 const FollowUser = (shortcode) =>
-    fetch(endpoint + "/u/" + shortcode + "/follow", {
+    fetch(endpoint + "/users/" + shortcode + "/follow", {
         headers: getHeaders(),
         method: 'PUT',
     });
 
 const FetchImage = (shortcode) => {
-    return fetch(endpoint + "/i/" + shortcode, {headers: getHeaders()})
+    return fetch(endpoint + "/images/" + shortcode, {headers: getHeaders()})
         .then((resp) => resp.json())
 
 };
@@ -48,12 +48,12 @@ const SearchImages = (relurl) => {
 };
 
 const FetchMe = () => {
-    return fetch(endpoint + "/u/me", {headers: getHeaders()})
+    return fetch(endpoint + "/users/me", {headers: getHeaders()})
         .then((resp) => resp.json())
 };
 
 const FetchUser = (username) => {
-    return fetch(endpoint + "/u/" + username, {headers: getHeaders()})
+    return fetch(endpoint + "/users/" + username, {headers: getHeaders()})
         .then((resp) => resp.json())
     // .then((data) => {
     //     data.permalink = FormatPermalink(data.permalink);
@@ -63,12 +63,12 @@ const FetchUser = (username) => {
 };
 
 const FetchUserImages = (username) => {
-    return FetchImages("/u/" + username + "/images")
+    return FetchImages("/users/" + username + "/images")
 };
 
 
 const UploadImage = (body) => {
-    return fetch(endpoint + "/i", {
+    return fetch(endpoint + "/images", {
         headers: getHeaders(),
         method: 'POST',
         body: body
