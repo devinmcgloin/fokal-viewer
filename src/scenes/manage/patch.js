@@ -42,10 +42,10 @@ class PatchImage extends Component {
 
     render() {
         return (
-            <div className="dt center pt0 pb5 pv5-m pv6-ns">
+            <div className="sans-serif dt center pt0 pb2 pv3-m pv4-ns">
                 <div className="db dtc-ns v-mid-ns">
                     <img src={this.state.image.src_links.medium} alt=""
-                         className="w-100 mw5"/>
+                         className="w-100 mw6"/>
                 </div>
                 <form onSubmit={this.commitChanges}>
                     <div className="db dtc-ns v-mid ph2 pr0-ns pl3-ns mr5">
@@ -132,10 +132,10 @@ class PatchUser extends Component {
 
     render() {
         return (
-            <div className="sans-serif dt center pt0 pb5 pv5-m pv6-ns">
+            <div className="sans-serif dt center pt0 pb2 pv3-m pv4-ns">
                 <div className="db dtc-ns v-mid-ns">
                     <img src={this.state.user.avatar_links.medium} alt=""
-                         className="w-100 mw5"/>
+                         className="w-100 mw6"/>
                 </div>
                 <div className="db dtc-ns v-mid ph2 pr0-ns pl3-ns mr5">
                     <form onSubmit={this.commitChanges}>
