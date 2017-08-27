@@ -1,6 +1,6 @@
 import {GetJWT, LoggedIn} from "../store/auth";
 
-const endpoint = process.env.NODE_ENV === "production" ? "https://api.sprioc.xyz/v0" : "http://localhost:8000/v0";
+const endpoint = process.env.NODE_ENV === "production" ? "https://api.fok.al/v0" : "http://localhost:8000/v0";
 
 const getHeaders = () => {
     let headers = new Headers();
