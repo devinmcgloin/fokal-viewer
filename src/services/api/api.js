@@ -2,12 +2,13 @@ import {GetJWT, LoggedIn} from "../store/auth";
 
 const endpoint = process.env.NODE_ENV === "production" ? "https://api.fok.al/v0" : "http://localhost:8000/v0";
 
-const getHeaders = () => {
+const getHeaders = (method) => {
     let headers = new Headers();
     if (LoggedIn()) {
         const jwt = GetJWT();
-        headers.set("Authorization", "Bearer " + jwt);
-        console.log(headers.get('Authorization'))
+        headers.append("Authorization", "Bearer " + jwt);
+        if (method === 'POST')
+            headers.append("Content-Type", 'application/json')
     }
     return headers
 };
@@ -38,12 +39,14 @@ const FetchImages = (relurl) => {
 
 };
 
-const SearchImages = (relurl) => {
+const SearchImages = (relurl, body) => {
+    console.log(JSON.stringify(body));
     return fetch(endpoint + relurl, {
-        headers: getHeaders()
+        headers: getHeaders('POST'),
+        body: JSON.stringify(body),
+        method:'POST'
     })
         .then((resp) => resp.json())
-        .then((data) => data.map((img) => img.image))
 
 };
 

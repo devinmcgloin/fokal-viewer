@@ -1,12 +1,7 @@
 import React, {Component} from 'react'
-import {Image} from '../components/image'
 import {SearchImages} from '../services/api/api'
-import {GridCollection, LinearCollection} from "../components/collection"
-import CirclePicker from '../components/cards/search/colorPicker'
+import {LinearCollection} from "../components/collection"
 import {bindAll} from 'lodash'
-import URI from 'urijs'
-import {BlockPicker} from 'react-color'
-
 
 class Search extends Component {
     constructor(props) {
@@ -34,19 +29,20 @@ class Search extends Component {
     }
 
     loadImages() {
-        let url = URI('/i/search');
-        if (this.state.hex !== undefined)
-            url.addSearch("hex", this.state.hex);
-        if (this.state.q !== undefined)
-            url.addSearch("q", this.state.q);
+        const q = this.state.q;
+        let querybody = {
+            required_terms: q.split(' ').map(t => t.trim()),
+            document_types: ['image']
+        };
+
+        console.log(querybody);
 
         let t = this;
-        console.log(url.toString(), this.state);
-        SearchImages(url.toString())
+        SearchImages('/search', querybody)
             .then(function (data) {
                 console.log(data);
                 t.setState({
-                    images: data
+                    images: data.images
                 })
             })
             .catch((err) => console.log(err));
@@ -54,8 +50,8 @@ class Search extends Component {
 
     render() {
         return (
-            <div>
-                <div className="sans-serif mw7 pa5 ma2 tc br2 center bg-lightest-blue ba b--light-blue">
+            <div className="bg-black-05">
+                <div className="sans-serif mw7 pa5 ma2 tc br2 center">
                     <input
                         className="f6 f5-l input-reset bn fl black-80 bg-white pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
                         type="text"
@@ -64,13 +60,8 @@ class Search extends Component {
                           className="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns">
                                 Search
                     </span>
-                    <div>
-                        <CirclePicker onChange={this.handleColorChange}
-                                     color={this.state.color}/>
-                    </div>
-
                 </div>
-                <LinearCollection images={this.state.images} summary={true}/>
+                <LinearCollection images={this.state.images} isSummary={true}/>
             </div>
         )
     }
