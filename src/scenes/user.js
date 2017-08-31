@@ -1,11 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import {Route} from 'react-router-dom'
+import {Link, Route} from 'react-router-dom'
 import {FetchImages, FetchUser, FetchUserImages} from '../services/api/api'
-import {UserTitleCard, UserStatsCard} from '../components/cards/user/user'
 import {Loading} from "../components/loading"
 import {GridCollection} from "../components/collection";
-import {Link} from 'react-router-dom'
 import FontAwesome from 'react-fontawesome'
 
 class UserContainer extends React.Component {
@@ -41,7 +39,7 @@ class UserContainer extends React.Component {
             });
 
         FetchImages('/users/' + this.state.username + '/favorites')
-            .then((data)=>{
+            .then((data) => {
                 t.setState((prev) => ({
                     favorites: data,
                     isLoadingImages: prev.isLoadingImages + 1
@@ -55,11 +53,12 @@ class UserContainer extends React.Component {
     }
 
     render() {
-        if (this.state.isLoadingImages !== 2 || this.state.isLoadingUser )
+        if (this.state.isLoadingImages !== 2 || this.state.isLoadingUser)
             return <Loading/>;
 
         const usr = this.state.user;
-        const userTitle =  <div className="pa4 ba" style={{background: "linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2) ), url("+usr.avatar_links.medium + ") center"}}>
+        const userTitle = <div className="pa4 ba"
+                               style={{background: "linear-gradient( rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2) ), url(" + usr.avatar_links.medium + ") center"}}>
             <h1 className="f4 f2-l fw7 mt0 pv3 bb near-white b--near-white ">@{usr.id}</h1>
             <span className="f6 fw7 lh-solid near-white dim">{usr.location}</span>
             <p className="lh-copy mt2 tc mt3-m mt5-l f6 near-white">
@@ -102,15 +101,14 @@ class UserContainer extends React.Component {
                         />
                         <Route
                             path={this.props.match.url + '/favorites'}
-                            render={() => <GridCollection headerCards={[userTitle]}  images={this.state.favorites}/>}
+                            render={() => <GridCollection headerCards={[userTitle]} images={this.state.favorites}/>}
                         />
                         <Route
                             path={this.props.match.url + '/stats'}
-                            render={() => <GridCollection headerCards={[userTitle]}  images={this.state.images}/>}
+                            render={() => <GridCollection headerCards={[userTitle]} images={this.state.images}/>}
                         />
                     </switch>
                 </div>
-
 
 
             </div>

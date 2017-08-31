@@ -3,7 +3,6 @@ import {Image} from './image'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 import Masonry from 'react-masonry-component';
-import FontAwesome from 'react-fontawesome'
 
 const LinearCollection = ({images, isSummary}) => {
         const rend = images.map((img) =>
@@ -54,6 +53,7 @@ const GridCollection = ({headerCards, images}) => {
 
             <Link to={'/i/' + img.id}>
                 <img
+                    alt=""
                     src={img.src_links.medium}
                      className="bg-center cover br2 shadow-4"
                     // style={{background: 'url('+img.src_links.small+')'}}

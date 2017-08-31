@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import logo from '../assets/logo.svg'
 import PropTypes from 'prop-types'
 
 const LoggedOutHeader = (props) => {
@@ -12,7 +11,7 @@ const LoggedOutHeader = (props) => {
             <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search" title="Search">
                 Search</Link>
             <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/explore" title="Explore">
-            Explore</Link>
+                Explore</Link>
             <Link className="sans-serif link dim gray    f6 f5-ns dib" to="/login" title="Login">Login</Link>
         </nav>
 

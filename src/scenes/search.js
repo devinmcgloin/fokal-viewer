@@ -2,14 +2,14 @@ import React, {Component} from 'react'
 import {SearchImages} from '../services/api/api'
 import {LinearCollection} from "../components/collection"
 import {bindAll} from 'lodash'
+import {NoResults} from '../components/error'
 
 class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            hex: undefined,
             images: [],
-            q: undefined
+            q: ''
         };
         bindAll(this, 'handleColorChange', 'handleTextChange', 'loadImages');
     }
@@ -30,6 +30,10 @@ class Search extends Component {
 
     loadImages() {
         const q = this.state.q;
+
+        if (q === '')
+            return;
+
         let querybody = {
             required_terms: q.split(' ').map(t => t.trim()),
             document_types: ['image']
@@ -51,17 +55,18 @@ class Search extends Component {
     render() {
         return (
             <div>
-                <div className="sans-serif mw7 pa5 ma2 tc br2 center">
+                <div className="sans-serif mw7 pa5 pb6 ma2 tc br2 center">
                     <input
-                        className="f6 f5-l input-reset bn fl white bg-black-50 pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns ba b--black-70"
+                        className="f6 f5-l input-reset bn fl white bg-black-70 pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns ba b--black-70"
                         type="text"
                         onChange={this.handleTextChange}/>
                     <span onClick={this.loadImages}
-                          className="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-70 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns">
+                          className="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-80 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns">
                                 Search
                     </span>
                 </div>
-                <LinearCollection images={this.state.images} isSummary={true}/>
+                {this.state.images.length === 0 ? <NoResults/> :
+                <LinearCollection images={this.state.images} isSummary={true}/> }
             </div>
         )
     }

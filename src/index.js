@@ -5,13 +5,12 @@ import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import WebFont from 'webfontloader'
 import {ImageCollection, TaggedImages} from './scenes/collection';
 import {Search} from './scenes/search'
-import {NotFound} from './scenes/not-found';
+import {NotFound} from './components/error';
 import {ImageContainer} from './scenes/images/image';
 import {HeaderContainer} from "./components/header"
 import {Login} from './scenes/auth/login'
 import {Join} from './scenes/auth/join'
 import {UserContainer} from './scenes/user'
-import {setHeadersAuth} from "./services/api/api"
 import {GetJWT, LoggedIn, LogIn, Logout} from "./services/store/auth"
 import {Footer} from './components/footer'
 import 'tachyons/css/tachyons.css'

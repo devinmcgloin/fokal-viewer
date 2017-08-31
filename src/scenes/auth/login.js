@@ -1,6 +1,4 @@
-import React, {
-    Component
-} from 'react'
+import React from 'react'
 
 import PropTypes from 'prop-types'
 import GoogleLogin from 'react-google-login'
@@ -21,8 +19,9 @@ const Login = (props) => {
                     onSuccess={props.onSuccess}
                     onFailure={(err) => console.log(err)} style={{}}
                     tag="span">
-                            <span className="sans-serif f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center">
-                                <img src={glogo} className="mh2 dib fl"/>
+                            <span
+                                className="sans-serif f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center">
+                                <img src={glogo} className="mh2 dib fl" alt="Google Logo"/>
                                 {props.isLoggedIn ? 'Logged in with Google' : 'Login with Google'}
                             </span>
                 </GoogleLogin>

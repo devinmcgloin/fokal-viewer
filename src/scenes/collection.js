@@ -1,7 +1,6 @@
 import React, {
     Component
 } from 'react'
-import PropTypes from 'prop-types';
 import {FetchImages} from '../services/api/api'
 import {GridCollection, LinearCollection} from "../components/collection";
 import {bindAll} from 'lodash'
