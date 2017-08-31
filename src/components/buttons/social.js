@@ -1,5 +1,5 @@
 import React from 'react'
-import {FavoriteImage, FollowUser} from "../services/api/api"
+import {FavoriteImage, FollowUser} from "../../services/api/api"
 
 const Favorite = ({id, isFavorited}) => {
 

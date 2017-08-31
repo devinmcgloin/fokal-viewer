@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {Image} from '../components/image'
 import {SearchImages} from '../services/api/api'
 import {GridCollection, LinearCollection} from "../components/collection"
-import CirclePicker from '../components/colorPicker'
+import CirclePicker from '../components/cards/search/colorPicker'
 import {bindAll} from 'lodash'
 import URI from 'urijs'
 import {BlockPicker} from 'react-color'

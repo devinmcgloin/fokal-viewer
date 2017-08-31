@@ -1,38 +1,79 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Colors} from './color';
 import PropTypes from 'prop-types';
-import {MetadataViewer} from './metadata'
-import {Loading} from './loading'
-
-const Tags = ({tags}) => {
-    const rend = tags.map((t) =>
-        <li className="dib mr1 mb2" key={t}><Link to={"/t/"+t} className="f6 f5-ns b db pa2 link dim dark-gray ba b--black-20">{t}</Link></li>
-    );
-    return (
-        <ul className="sans-serif list ph3 ph5-ns pv4">
-            {rend}
-        </ul>
-    );
-    };
-
-Tags.propTypes = {
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired
-};
 
 const Image = ({image, isSummary}) => {
-    let id = image.id;
+    let id = image.id,
+        meta = image.metadata,
+        user = image.user;
     return (
-        <div className="pa4">
-            {image.tags.length !== 0 && !isSummary ? <Tags tags={image.tags}/> : null}
-            <Link to={"/i/" + id}>
-                <img
-                     src={image.src_links.large}
-                     alt=""
-                     style={{marginTop: '1rem'}}/>
-            </Link>
-            {!isSummary ? <Colors colors={image.colors}/> : null}
-            <MetadataViewer user={image.user} metadata={image.metadata} stats={image.stats}/>
+        <div className="ma4 sans-serif">
+            <div className="br4 shadow-5"
+                 style={{background: '#3C3C3C'}}>
+                <Link to={"/i/" + id}>
+                    <img
+                        src={image.src_links.large}
+                        alt=""
+                        // className="mb7"
+                        style={{borderRadius: '4px 4px 0 0'}}
+                    />
+                </Link>
+                <div className="fw1 dt dt--fixed pa3 flex justify-between ph5">
+                    <div className="dtc w-33">
+                        {image.title ?
+                            <div>
+                                <p className="f7 ttu tracked white-50">Title</p>
+                                <span className="f5 fw2 white">{image.title}</span>
+                            </div> : null}
+                        {meta.location ?
+                            <div>
+                                <p className="f7 ttu tracked white-50">Location</p>
+                                <span className="f5 fw2 white">{meta.location.X + ' ' + meta.location.Y}</span>
+                            </div> : null}
+                        <p className="f7 ttu tracked white-50">Photographer</p>
+                        <Link to={"/u/" + user.id} className="link dim no-underline">
+                            <span className="f5 fw2 white ">{user.name}</span>
+                        </Link>
+                    </div>
+
+                    <div className="dtc w-33">
+                        <p className="f7 ttu tracked white-50">Metadata</p>
+                        <article className="cf f5 fw2 white">
+                            <div className="fl w-50">
+                                <span><span className="white-50">f/</span>{meta.aperture}</span>
+                            </div>
+                            <div className="fl w-50">
+                                <span>{meta.focal_length}<span className="white-50">mm</span></span>
+                            </div>
+                        </article>
+                        <article className="cf f5 fw2 white">
+                            <div className="fl w-50">
+                                <span><span className="white-50">ISO </span>{meta.iso}</span>
+                            </div>
+                            <div className="fl w-50">
+                                <span>{meta.exposure_time}<span className="white-50">s</span></span>
+                            </div>
+                        </article>
+                        <p className="f7 ttu tracked white-50">Colors</p>
+                        <div>
+                            {image.colors.map((clr) =>
+                                <div key={clr.Hex} className="fl pa3 br-100 ma1 ba b--white-50"
+                                     style={{background: '#' + clr.Hex}}>
+                                </div>)}
+
+                        </div>
+                    </div>
+                    <div className="dtc w-33">
+                        <p className="f7 ttu tracked white-50">Tags</p>
+                        <div className="list">
+                            {image.tags.map((t) =>
+                                <Link key={t} to={"/t/" + t}>
+                                    <div className="dib mr2 mb2 f5 fw2 white br1 ba b--white-50 pa1">{t}</div>
+                                </Link>)}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };

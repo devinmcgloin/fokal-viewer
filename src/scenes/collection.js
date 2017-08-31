@@ -13,8 +13,8 @@ class ImageCollection extends Component {
         super(props);
         this.state = {
             images: [],
-            type: 'featured',
-            isGrid: false,
+            type: 'recent',
+            isGrid: true,
             failed: false,
             isLoading: true
         };

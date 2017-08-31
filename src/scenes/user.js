@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import {Route} from 'react-router-dom'
 import {FetchImages, FetchUser, FetchUserImages} from '../services/api/api'
-import {UserStats, UserHeader} from '../components/user'
+import {UserTitleCard, UserStatsCard} from '../components/cards/user/user'
 import {Loading} from "../components/loading"
 import {GridCollection} from "../components/collection";
 import {Link} from 'react-router-dom'
@@ -98,15 +98,15 @@ class UserContainer extends React.Component {
                         <Route
                             exact
                             path={this.props.match.url}
-                            render={() => <GridCollection title={userTitle} images={this.state.images}/>}
+                            render={() => <GridCollection headerCards={[userTitle]} images={this.state.images}/>}
                         />
                         <Route
                             path={this.props.match.url + '/favorites'}
-                            render={() => <GridCollection title={userTitle}  images={this.state.favorites}/>}
+                            render={() => <GridCollection headerCards={[userTitle]}  images={this.state.favorites}/>}
                         />
                         <Route
                             path={this.props.match.url + '/stats'}
-                            render={() => <UserStats title={userTitle}  images={this.state.images}/>}
+                            render={() => <GridCollection headerCards={[userTitle]}  images={this.state.images}/>}
                         />
                     </switch>
                 </div>
