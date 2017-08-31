@@ -50,10 +50,10 @@ class Search extends Component {
 
     render() {
         return (
-            <div className="bg-black-05">
+            <div>
                 <div className="sans-serif mw7 pa5 ma2 tc br2 center">
                     <input
-                        className="f6 f5-l input-reset bn fl black-80 bg-white pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns"
+                        className="f6 f5-l input-reset bn fl black-80 bg-black-50 pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns ba b--black-70"
                         type="text"
                         onChange={this.handleTextChange}/>
                     <span onClick={this.loadImages}
