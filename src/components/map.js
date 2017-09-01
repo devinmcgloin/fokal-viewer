@@ -1,3 +1,5 @@
+/* global process */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tangram from 'tangram'
@@ -16,7 +18,7 @@ class MapPointView extends React.Component {
     componentDidMount () {
         const map = L.map(this.mapEl);
         const layer = Tangram.leafletLayer({
-            scene: 'http://localhost:3000/scene.yml',
+            scene: process.env.PUBLIC_URL+'/scene.yml',
             attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'
         });
         layer.addTo(map);
