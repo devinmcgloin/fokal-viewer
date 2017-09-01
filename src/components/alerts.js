@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const InfoAlert = ({message}) =>
-    <div className="flex items-center justify-center pa4 bg-lightest-blue navy">
+    <div className="sans-serif flex items-center justify-center pa4 bg-lightest-blue navy">
         <svg className="w1" data-icon="info" viewBox="0 0 32 32" style={{fill: 'currentcolor'}}>
             <title>info icon</title>
             <path
@@ -16,7 +16,7 @@ InfoAlert.propTypes = {
 };
 
 const ErrorAlert = ({message}) =>
-    <div className="flex items-center justify-center pa4 bg-light-red navy">
+    <div className="sans-serif flex items-center justify-center pa4 bg-light-red navy">
         <svg className="w1" data-icon="info" viewBox="0 0 32 32" style={{fill: 'currentcolor'}}>
             <title>info icon</title>
             <path
@@ -30,7 +30,7 @@ ErrorAlert.propTypes = {
 };
 
 const SuccessAlert = ({message}) =>
-    <div className="flex items-center justify-center pa4 bg-light-green navy">
+    <div className="sans-serif flex items-center justify-center pa4 bg-light-green navy">
         <svg className="w1" data-icon="info" viewBox="0 0 32 32" style={{fill: 'currentcolor'}}>
             <title>info icon</title>
             <path
