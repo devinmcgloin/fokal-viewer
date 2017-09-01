@@ -16,7 +16,7 @@ class MapPointView extends React.Component {
     componentDidMount () {
         const map = L.map(this.mapEl);
         const layer = Tangram.leafletLayer({
-            scene: 'https://mapzen.com/carto/bubble-wrap-style/bubble-wrap.yaml',
+            scene: 'http://localhost:3000/scene.yml',
             attribution: '<a href="https://mapzen.com/tangram" target="_blank">Tangram</a> | &copy; OSM contributors | <a href="https://mapzen.com/" target="_blank">Mapzen</a>'
         });
         layer.addTo(map);
@@ -24,7 +24,7 @@ class MapPointView extends React.Component {
     }
     render () {
         return (
-            <div ref={(ref) => {this.mapEl = ref }}/>
+           <div className="w-100 vh-75" ref={(ref) => {this.mapEl = ref }}/>
         )
     }
 }

@@ -6,6 +6,7 @@ import {GridCollection, LinearCollection} from "../components/collection";
 import {bindAll} from 'lodash'
 import {Loading} from "../components/loading"
 import FontAwesome from 'react-fontawesome'
+import PropTypes from 'prop-types'
 
 class ImageCollection extends Component {
     constructor(props) {
@@ -128,6 +129,10 @@ class TaggedImages extends Component {
             </div>
         )
     }
+}
+
+TaggedImages.propTypes = {
+    match: PropTypes.object,
 }
 
 

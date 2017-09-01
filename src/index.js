@@ -18,6 +18,7 @@ import 'font-awesome/css/font-awesome.css'
 import {UploadContainer} from "./scenes/manage/upload";
 import PropTypes from 'prop-types'
 import {ManageImages} from "./scenes/manage/patch"
+import {ExploreScene} from "./scenes/explore"
 import {LogoutPage} from "./scenes/auth/logout"
 import ScrollToTop from "./components/scroll";
 
@@ -81,6 +82,7 @@ class App extends React.Component {
                             <Route path="/join" component={Join}/>
                             <Route path="/upload" component={UploadContainer}/>
                             <Route path="/manage" component={ManageImages}/>
+                            <Route path="/explore" component={ExploreScene}/>
 
 
                             <Route path="/*" component={NotFound}/>
