@@ -21,6 +21,7 @@ import {ManageImages} from "./scenes/manage/patch"
 import {ExploreScene} from "./scenes/explore"
 import {LogoutPage} from "./scenes/auth/logout"
 import ScrollToTop from "./components/scroll";
+import Raven from 'raven-js';
 
 class App extends React.Component {
     constructor(props) {
@@ -129,6 +130,9 @@ ReactDOM.render((
     document.getElementById('root'));
 
 registerServiceWorker();
+Raven
+    .config('https://98f3dbb4874649db845e711d275f07da@sentry.io/211802')
+    .install();
 WebFont.load({
     google: {
         families: ['Montserrat:400,700', 'sans-serif']
