@@ -39,8 +39,12 @@ class Search extends Component {
         if (q === '')
             return;
 
+        const terms = q.split(' ').map(t => t.trim());
+
         let querybody = {
-            required_terms: q.split(' ').map(t => t.trim()),
+            required_terms: terms.filter(t => !t.startsWith('+') && !t.startsWith('-')),
+            optional_terms: terms.filter(t => t.startsWith('+')).map(t => t.slice(1)),
+            excluded_terms: terms.filter(t => t.startsWith('-')).map(t => t.slice(1)),
             document_types: ['image']
         };
 
