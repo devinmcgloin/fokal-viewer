@@ -50,7 +50,7 @@ class App extends React.Component {
         RefreshToken(jwtToken)
             .then((data) => {
                 data.body.then(d => {
-                    const token = data.body.token;
+                    const token = d.token;
                     LogIn(token);
                     this.setState({isLoggedIn: true, appToken: token});
                     const t = JwtDecode(jwtToken);

@@ -4,6 +4,8 @@ import {FetchImages, FetchMe} from "../../services/api/retrieval";
 import PropTypes from 'prop-types'
 import {bindAll} from 'lodash'
 import {Loading} from "../../components/loading"
+import Raven from 'raven-js'
+import {ErrorAlert} from "../../components/alerts";
 
 class PatchImage extends Component {
     constructor(props) {
@@ -186,26 +188,37 @@ class ManageImages extends Component {
             images: [],
             isLoadingUser: true,
             isLoadingImages: true,
+            failed: false
         }
     }
 
     componentDidMount() {
         FetchMe()
-            .then((dat) => {
-                this.setState({
-                    user: dat.body,
-                    isLoadingUser: false
-                });
+            .then((resp) => {
+                if (resp.ok)
+                    resp.body.then(d =>
+                        this.setState({
+                            user: d,
+                            isLoadingUser: false
+                        }));
+                else
+                    this.setState({failed: true})
 
             })
-            .catch((err) => console.log(err));
+            .catch((err) => Raven.captureException(err));
 
         FetchImages('/users/me/images')
-            .then((dat) => this.setState({
-                images: dat.body,
-                isLoadingImages: false
+            .then((resp) => {
+                if (resp.ok)
+                    resp.body.then(d =>
+                        this.setState({
+                            images: d,
+                            isLoadingImages: false
+                        }));
+                else
+                    this.setState({failed: true})
+            })
 
-            }))
             .catch((err) => console.log(err));
     }
 
@@ -218,6 +231,7 @@ class ManageImages extends Component {
 
         return (
             <div>
+                {this.state.failed? <ErrorAlert message="Something seems to have gone wrong..."/>:null}
                 {!this.state.isLoadingUser ? <PatchUser user={this.state.user}/> : null}
                 {imgs}
             </div>
