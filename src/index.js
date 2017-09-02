@@ -49,12 +49,14 @@ class App extends React.Component {
         const jwtToken = googleUser.getAuthResponse().id_token;
         RefreshToken(jwtToken)
             .then((data) => {
-                const token = data.body.token;
-                LogIn(token);
-                this.setState({isLoggedIn: true, appToken: token});
-                const t = JwtDecode(jwtToken);
-                Raven.setUserContext({
-                    username: t.sub
+                data.body.then(d => {
+                    const token = data.body.token;
+                    LogIn(token);
+                    this.setState({isLoggedIn: true, appToken: token});
+                    const t = JwtDecode(jwtToken);
+                    Raven.setUserContext({
+                        username: t.sub
+                    })
                 })
             });
     }
