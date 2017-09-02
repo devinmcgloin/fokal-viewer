@@ -144,7 +144,7 @@ class TaggedImages extends Component {
         else
             content = <GridCollection images={this.state.images}/>;
         return (
-            <div className="sans-serif ph3 ph4-ns">
+            <div className="sans-serif pa3 pa4-ns">
                 <h1 className="tc f1" style={{textTransform: 'lowercase'}}>#{this.state.tag}</h1>
                 {content}
             </div>
