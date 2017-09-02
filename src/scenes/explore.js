@@ -1,9 +1,9 @@
 import React, {Component} from 'react'
-import {MapPointView} from '../components/map'
+import {NotImplemented} from '../components/error'
 
 class ExploreScene extends Component {
-    render(){
-        return <MapPointView lat={0.0} lng={0.0}/>
+    render() {
+        return <NotImplemented/>
     }
 }
 

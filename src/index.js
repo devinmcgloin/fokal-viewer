@@ -1,3 +1,5 @@
+/* global process */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './services/registerServiceWorker';
@@ -6,7 +8,7 @@ import WebFont from 'webfontloader'
 import {ImageCollection, TaggedImages} from './scenes/collection';
 import {Search} from './scenes/search'
 import {NotFound} from './components/error';
-import {ImageContainer} from './scenes/images/image';
+import {ImageContainer} from './scenes/image';
 import {HeaderContainer} from "./components/header"
 import {Login} from './scenes/auth/login'
 import {Join} from './scenes/auth/join'
@@ -22,6 +24,8 @@ import {ExploreScene} from "./scenes/explore"
 import {LogoutPage} from "./scenes/auth/logout"
 import ScrollToTop from "./components/scroll";
 import Raven from 'raven-js';
+import JwtDecode from 'jwt-decode'
+import {RefreshToken} from "./services/api/auth";
 
 class App extends React.Component {
     constructor(props) {
@@ -43,13 +47,22 @@ class App extends React.Component {
 
     onLogin(googleUser) {
         const jwtToken = googleUser.getAuthResponse().id_token;
-        LogIn(jwtToken);
-        this.setState({isLoggedIn: true, appToken: jwtToken})
+        RefreshToken(jwtToken)
+            .then((data) => {
+                const token = data.body.token;
+                LogIn(token);
+                this.setState({isLoggedIn: true, appToken: token});
+                const t = JwtDecode(jwtToken);
+                Raven.setUserContext({
+                    username: t.sub
+                })
+            });
     }
 
 
     onLogout() {
         this.setState({isLoggedIn: false, appToken: ""});
+        Raven.setUserContext();
         Logout();
     }
 
@@ -130,9 +143,13 @@ ReactDOM.render((
     document.getElementById('root'));
 
 registerServiceWorker();
+
 Raven
     .config('https://98f3dbb4874649db845e711d275f07da@sentry.io/211802')
     .install();
+Raven.setTagsContext({
+    environment: process.env.NODE_ENV,
+});
 WebFont.load({
     google: {
         families: ['Montserrat:400,700', 'sans-serif']

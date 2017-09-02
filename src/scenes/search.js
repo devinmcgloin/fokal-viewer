@@ -1,15 +1,19 @@
 import React, {Component} from 'react'
-import {SearchImages} from '../services/api/api'
-import {LinearCollection} from "../components/collection"
+import {SearchImages} from "../services/api/search";
+import {GridCollection} from "../components/collection"
 import {bindAll} from 'lodash'
 import {NoResults} from '../components/error'
+import {Loading} from "../components/loading";
+import {Error} from "../components/error";
 
 class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
             images: [],
-            q: ''
+            q: '',
+            failed: false,
+            loading: false,
         };
         bindAll(this, 'handleColorChange', 'handleTextChange', 'loadImages');
     }
@@ -29,6 +33,7 @@ class Search extends Component {
     }
 
     loadImages() {
+        this.setState({loading: true});
         const q = this.state.q;
 
         if (q === '')
@@ -43,18 +48,33 @@ class Search extends Component {
 
         let t = this;
         SearchImages('/search', querybody)
-            .then(function (data) {
-                console.log(data);
-                t.setState({
-                    images: data.images
-                })
+            .then( (data) => {
+                if (data.ok)
+                    data.body.then(
+                        d => t.setState({
+                            images: d.images,
+                            loading: false
+                        })
+                    )
+                else
+                    t.setState({failed: true})
+
             })
             .catch((err) => console.log(err));
     }
 
     render() {
+        let content;
+        if (this.state.loading)
+            content = <Loading/>;
+        else if (this.state.failed)
+            content = <Error/>;
+        else if (this.state.images.length === 0)
+            content = <NoResults/>;
+        else
+            content = <GridCollection images={this.state.images}/>;
         return (
-            <div>
+            <div className="pa3">
                 <div className="sans-serif mw7 pa5 pb6 ma2 tc br2 center">
                     <input
                         className="f6 f5-l input-reset bn fl white bg-black-70 pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns ba b--black-70"
@@ -65,8 +85,8 @@ class Search extends Component {
                                 Search
                     </span>
                 </div>
-                {this.state.images.length === 0 ? <NoResults/> :
-                <LinearCollection images={this.state.images} isSummary={true}/> }
+
+                {content}
             </div>
         )
     }

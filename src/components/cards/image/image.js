@@ -1,8 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom'
 
-const Image = ({image, isSummary}) => {
+
+const ImageCard = ({image}) => {
     let id = image.id,
         meta = image.metadata,
         user = image.user;
@@ -25,10 +26,11 @@ const Image = ({image, isSummary}) => {
                                 <p className="f7 ttu tracked white-50">Title</p>
                                 <span className="f5 fw2 white">{image.title}</span>
                             </div> : null}
-                        {meta.location ?
+                        {meta.location && meta.location.point ?
                             <div>
                                 <p className="f7 ttu tracked white-50">Location</p>
-                                <span className="f5 fw2 white">{meta.location.X + ' ' + meta.location.Y}</span>
+                                <span
+                                    className="f5 fw2 white">{meta.location.point.X + ' ' + meta.location.point.Y}</span>
                             </div> : null}
                         <p className="f7 ttu tracked white-50">Photographer</p>
                         <Link to={"/u/" + user.id} className="link dim no-underline">
@@ -77,8 +79,7 @@ const Image = ({image, isSummary}) => {
         </div>
     );
 };
-
-Image.propTypes = {
+ImageCard.propTypes = {
     image: PropTypes.shape({
         id: PropTypes.string.isRequired,
         src_links: PropTypes.object,
@@ -96,8 +97,7 @@ Image.propTypes = {
             name: PropTypes.string.isRequired
         })
     }).isRequired,
-    isSummary: PropTypes.bool.isRequired,
 };
 
 
-export {Image};
+export {ImageCard};

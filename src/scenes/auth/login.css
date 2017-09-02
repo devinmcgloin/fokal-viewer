@@ -8,6 +8,7 @@
     box-shadow: 1px 1px 1px grey;
     white-space: nowrap;
 }
+
 #g-button:hover {
     cursor: pointer;
 }

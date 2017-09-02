@@ -10,4 +10,14 @@ const NoResults = () =>
         <h1 className="f-headline lh-solid tc">No Results</h1>
     </div>;
 
-export {NotFound, NoResults};
+const NotImplemented = () =>
+    <div className="sans-serif">
+        <h1 className="f-headline lh-solid tc">Not Implemented</h1>
+    </div>;
+
+const Error = () =>
+    <div className="sans-serif">
+        <h1 className="f-headline lh-solid tc">Hmmm... Something went wrong...</h1>
+    </div>;
+
+export {NotFound, NoResults, NotImplemented, Error};

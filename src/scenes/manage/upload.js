@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {bindAll} from 'lodash'
-import {UploadImage, FetchImage} from '../../services/api/api'
-import {InfoAlert, ErrorAlert, SuccessAlert} from '../../components/alerts'
+import {UploadImage} from "../../services/api/upload";
+import {FetchImage} from "../../services/api/retrieval";
+import {ErrorAlert, InfoAlert, SuccessAlert} from '../../components/alerts'
 import {PatchImage} from "./patch";
 
 class UploadContainer extends Component {
@@ -32,7 +33,7 @@ class UploadContainer extends Component {
                 (data) => {
                     this.setState({processing: false, succeeded: true, imageID: data.id});
                     FetchImage(data.id)
-                        .then(data => this.setState({image:data}))
+                        .then(data => this.setState({image: data}))
                 },
                 () => {
                     this.setState({processing: false, failed: true});

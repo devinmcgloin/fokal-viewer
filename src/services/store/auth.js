@@ -1,4 +1,3 @@
-
 const GetJWT = () =>
     localStorage.getItem("auth");
 

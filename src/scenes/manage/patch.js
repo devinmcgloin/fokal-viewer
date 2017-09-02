@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import {FetchMe, Patch, FetchImages} from "../../services/api/api"
+import {Patch} from "../../services/api/patch";
+import {FetchImages, FetchMe} from "../../services/api/retrieval";
 import PropTypes from 'prop-types'
 import {bindAll} from 'lodash'
 import {Loading} from "../../components/loading"
@@ -192,7 +193,7 @@ class ManageImages extends Component {
         FetchMe()
             .then((dat) => {
                 this.setState({
-                    user: dat,
+                    user: dat.body,
                     isLoadingUser: false
                 });
 
@@ -201,7 +202,7 @@ class ManageImages extends Component {
 
         FetchImages('/users/me/images')
             .then((dat) => this.setState({
-                images: dat,
+                images: dat.body,
                 isLoadingImages: false
 
             }))

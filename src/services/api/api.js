@@ -16,92 +16,12 @@ const getHeaders = (method) => {
     return headers
 };
 
-const FavoriteImage = (shortcode) =>
-    fetch(endpoint + "/images/" + shortcode + "/favorite", {
-        headers: getHeaders(),
-        method: 'PUT',
-    });
-
-const FollowUser = (shortcode) =>
-    fetch(endpoint + "/users/" + shortcode + "/follow", {
-        headers: getHeaders(),
-        method: 'PUT',
-    });
-
-const FetchImage = (shortcode) => {
-    return fetch(endpoint + "/images/" + shortcode, {headers: getHeaders()})
-        .then((resp) => resp.json())
-
-};
-
-const FetchImages = (relurl) => {
-    return fetch(endpoint + relurl, {
-        headers: getHeaders()
-    })
-        .then((resp) => resp.json())
-
-};
-
-const SearchImages = (relurl, body) => {
-    console.log(JSON.stringify(body));
-    return fetch(endpoint + relurl, {
-        headers: getHeaders('POST'),
-        body: JSON.stringify(body),
-        method:'POST'
-    })
-        .then((resp) => resp.json())
-
-};
-
-const FetchMe = () => {
-    return fetch(endpoint + "/users/me", {headers: getHeaders()})
-        .then((resp) => resp.json())
-};
-
-const FetchUser = (username) => {
-    return fetch(endpoint + "/users/" + username, {headers: getHeaders()})
-        .then((resp) => resp.json())
-    // .then((data) => {
-    //     data.permalink = FormatPermalink(data.permalink);
-    //     data.user.permalink = FormatPermalink(data.user.permalink);
-    //     return data
-    // });
-};
-
-const FetchUserImages = (username) => {
-    return FetchImages("/users/" + username + "/images")
-};
-
-
-const UploadImage = (body) => {
-    return fetch(endpoint + "/images", {
-        headers: getHeaders(),
-        method: 'POST',
-        body: body
-    })
-        .then((resp) => resp.json());
-};
-
-const Patch = (id, type, changes) => {
-    console.log(id, type, changes);
-    let jsonHeaders = getHeaders();
-    jsonHeaders.append("Content-Type", "text/json");
-    return fetch(endpoint + "/" + type + "/" + id, {
-        headers: jsonHeaders,
-        method: 'PATCH',
-        body: JSON.stringify(changes)
-    });
+const ParseResponse = (resp) => {
+    return {ok: resp.ok, status: resp.status, body: resp.json()}
 };
 
 export {
-    FetchImage,
-    FetchImages,
-    FetchMe,
-    FetchUser,
-    UploadImage,
-    FetchUserImages,
-    Patch,
-    SearchImages,
-    FollowUser,
-    FavoriteImage
+    endpoint,
+    getHeaders,
+    ParseResponse
 };

@@ -1,20 +1,20 @@
 import React from 'react'
-import {Image} from './image'
+import {ImageCard} from './cards/image/image'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
 import Masonry from 'react-masonry-component';
 
 const LinearCollection = ({images, isSummary}) => {
-        const rend = images.map((img) =>
-            <Image key={img.id} image={img} isSummary={isSummary}/>
-        );
+    const rend = images.map((img) =>
+        <ImageCard key={img.id} image={img} isSummary={isSummary}/>
+    );
 
-        return (
-            <div>
-                {rend}
-            </div>
-        );
-    };
+    return (
+        <div>
+            {rend}
+        </div>
+    );
+};
 
 LinearCollection.propTypes = {
     images: PropTypes.array.isRequired,
@@ -55,7 +55,7 @@ const GridCollection = ({headerCards, images}) => {
                 <img
                     alt=""
                     src={img.src_links.medium}
-                     className="bg-center cover br2 shadow-4"
+                    className="bg-center cover br2 shadow-5"
                     // style={{background: 'url('+img.src_links.small+')'}}
                 />
             </Link>
@@ -72,7 +72,7 @@ const GridCollection = ({headerCards, images}) => {
     let titleBox = [<div key="width" className="w-third"/>];
     if (headerCards)
         titleBox = titleBox.concat(headerCards.map(card =>
-            <div key={card.id} className="grid-item sans-serif fl w-100 w-two-thirds-ns pa2 br3 shadow-4">
+            <div key={card.id} className="grid-item fl w-100 w-third-ns pa2">
                 {card}
             </div>
         ));
@@ -87,7 +87,12 @@ const GridCollection = ({headerCards, images}) => {
 
 GridCollection.propTypes = {
     images: PropTypes.array.isRequired,
-    headerCards: PropTypes.arrayOf(PropTypes.node).isRequired
+    headerCards: PropTypes.arrayOf(PropTypes.node).required
+};
+
+GridCollection.defaultProps = {
+    images: [],
+    headerCards: []
 };
 
 export {LinearCollection, GridCollection};

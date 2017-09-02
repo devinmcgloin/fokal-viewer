@@ -26,7 +26,7 @@ ColorDisplay.propTypes = {
 const Colors = (props) => {
     const total = props.colors.reduce((sum, clr) => sum += clr.score, 0) / 100;
 
-    const clrs = props.colors.map((clr,i) => {
+    const clrs = props.colors.map((clr, i) => {
         return <ColorDisplay key={i} hex={clr.Hex} pixel_fraction={clr.pixel_fraction / total}/>
     });
 

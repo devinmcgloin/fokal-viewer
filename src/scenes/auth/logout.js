@@ -3,8 +3,7 @@ import {Redirect} from 'react-router-dom'
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const LogoutPage = ({onSuccess}) =>
-{
+const LogoutPage = ({onSuccess}) => {
     Logout();
     onSuccess();
     return (<Redirect to="/"/>)

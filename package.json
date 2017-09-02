@@ -29,6 +29,7 @@
     "history": "^4.6.3",
     "html-webpack-plugin": "2.29.0",
     "jest": "20.0.4",
+    "jwt-decode": "^2.2.0",
     "leaflet": "^1.1.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",

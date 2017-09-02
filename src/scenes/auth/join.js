@@ -1,7 +1,4 @@
-
-import React, {
-    Component
-} from 'react'
+import React, {Component} from 'react'
 
 class Join extends Component {
     constructor(props) {
@@ -21,19 +18,19 @@ class Join extends Component {
     }
 
     handleEmail(event) {
-        this.setState({email:event.target.value})
+        this.setState({email: event.target.value})
     }
 
     handlePassword(event) {
-        this.setState({password:event.target.value})
+        this.setState({password: event.target.value})
     }
 
     handleUsername(event) {
-        this.setState({username:event.target.value})
+        this.setState({username: event.target.value})
     }
 
     handleSubmit(event) {
-        alert(this.state.email + ' ' +this.state.password);
+        alert(this.state.email + ' ' + this.state.password);
         event.preventDefault()
     }
 
@@ -43,7 +40,8 @@ class Join extends Component {
             <form className="container" onSubmit={this.handleSubmit}>
                 <div className="field">
                     <p className="control has-icons-left has-icons-right">
-                        <input className="input" type="email" placeholder="Email" value={this.state.email} onChange={this.handleEmail}/>
+                        <input className="input" type="email" placeholder="Email" value={this.state.email}
+                               onChange={this.handleEmail}/>
                         <span className="icon is-small is-left">
                             <i className="fa fa-envelope"/>
                         </span>
@@ -55,7 +53,8 @@ class Join extends Component {
 
                 <div className="field">
                     <p className="control has-icons-left has-icons-right">
-                        <input className="input" type="text" placeholder="Username" value={this.state.username} onChange={this.handleUsername}/>
+                        <input className="input" type="text" placeholder="Username" value={this.state.username}
+                               onChange={this.handleUsername}/>
                         <span className="icon is-small is-left">
                             <i className="fa fa-user"/>
                         </span>
@@ -67,7 +66,8 @@ class Join extends Component {
 
                 <div className="field">
                     <p className="control has-icons-left">
-                        <input className="input" type="password" placeholder="Password" value={this.state.password} onChange={this.handlePassword}/>
+                        <input className="input" type="password" placeholder="Password" value={this.state.password}
+                               onChange={this.handlePassword}/>
                         <span className="icon is-small is-left">
                           <i className="fa fa-lock"/>
                         </span>
@@ -76,7 +76,8 @@ class Join extends Component {
 
                 <div className="field">
                     <p className="control has-icons-left">
-                        <input className="input" type="password" placeholder="Password" value={this.state.password} onChange={this.handlePassword}/>
+                        <input className="input" type="password" placeholder="Password" value={this.state.password}
+                               onChange={this.handlePassword}/>
                         <span className="icon is-small is-left">
                           <i className="fa fa-lock"/>
                         </span>
@@ -93,4 +94,4 @@ class Join extends Component {
     }
 }
 
-export{Join};
+export {Join};

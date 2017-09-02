@@ -1,12 +1,12 @@
-import React, {
-    Component
-} from 'react'
-import {FetchImages} from '../services/api/api'
+import React, {Component} from 'react'
+import {FetchImages} from "../services/api/retrieval";
 import {GridCollection, LinearCollection} from "../components/collection";
 import {bindAll} from 'lodash'
 import {Loading} from "../components/loading"
 import FontAwesome from 'react-fontawesome'
 import PropTypes from 'prop-types'
+import Raven from 'raven-js'
+import {Error} from "../components/error";
 
 class ImageCollection extends Component {
     constructor(props) {
@@ -27,12 +27,19 @@ class ImageCollection extends Component {
         FetchImages('/images/' + type)
             .then(function (data) {
                 console.log(data);
-                t.setState({
-                    images: data,
-                    isLoading: false
-                })
+                switch (data.ok) {
+                    case true:
+                        data.body.then(b => t.setState({images: b, isLoading: false}))
+                        break;
+                    case false:
+                        t.setState({
+                            isLoading: false,
+                            failed: true
+                        });
+                        Raven.captureException(new Error("Invalid Response code from server."), {code: data.code})
+                }
+
             })
-            .catch((err) => t.setState({failed: true}));
     }
 
 
@@ -58,6 +65,8 @@ class ImageCollection extends Component {
         let content;
         if (this.state.isLoading)
             content = <Loading/>;
+        else if (this.state.failed)
+            content = <Error/>;
         else if (this.state.isGrid)
             content = <GridCollection images={this.state.images}/>;
         else
