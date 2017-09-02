@@ -28,10 +28,18 @@ const ImageCard = ({image}) => {
                             </div> : null}
                         {meta.location && meta.location.point ?
                             <div>
-                                <p className="f7 ttu tracked white-50">Location</p>
+                            <div>
+                                <p className="f7 ttu tracked white-50">lat</p>
                                 <span
-                                    className="f5 fw2 white">{meta.location.point.X + ' ' + meta.location.point.Y}</span>
-                            </div> : null}
+                                    className="f5 fw2 white">{meta.location.point.Y}</span>
+                            </div>
+                            <div>
+                            <p className="f7 ttu tracked white-50">lng</p>
+                            <span
+                            className="f5 fw2 white">{meta.location.point.X}</span>
+                            </div>
+                            </div>
+                            : null}
                         <p className="f7 ttu tracked white-50">Photographer</p>
                         <Link to={"/u/" + user.id} className="link dim no-underline">
                             <span className="f5 fw2 white ">{user.name}</span>
