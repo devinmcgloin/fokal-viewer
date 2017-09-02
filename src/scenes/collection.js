@@ -116,11 +116,17 @@ class TaggedImages extends Component {
         let t = this;
         FetchImages('/tags/' + tag)
             .then(function (data) {
-                console.log(data);
-                t.setState({
-                    images: data,
-                    isLoading: false
-                })
+                switch (data.ok) {
+                    case true:
+                        data.body.then(b => t.setState({images: b, isLoading: false}))
+                        break;
+                    case false:
+                        t.setState({
+                            isLoading: false,
+                            failed: true
+                        });
+                        Raven.captureException(new Error("Invalid Response code from server."), {code: data.code})
+                }
             })
             .catch((err) => console.log(err));
     }
@@ -130,11 +136,17 @@ class TaggedImages extends Component {
     }
 
     render() {
-
+        let content;
+        if (this.state.isLoading)
+            content = <Loading/>;
+        else if (this.state.failed)
+            content = <Error/>;
+        else
+            content = <GridCollection images={this.state.images}/>;
         return (
-            <div className="sans-serif">
+            <div className="sans-serif ph3 ph4-ns">
                 <h1 className="tc f1" style={{textTransform: 'lowercase'}}>#{this.state.tag}</h1>
-                {this.state.isLoading ? <Loading/> : <LinearCollection images={this.state.images} isSummary={true}/>}
+                {content}
             </div>
         )
     }
