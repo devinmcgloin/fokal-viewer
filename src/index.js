@@ -47,18 +47,26 @@ class App extends React.Component {
 
     onLogin(googleUser) {
         const jwtToken = googleUser.getAuthResponse().id_token;
+        const tok = JwtDecode(jwtToken),
+            unix = Math.round((new Date()).getTime() / 1000);
+        console.log(tok.iat, unix, unix - tok.iat );
         RefreshToken(jwtToken)
             .then((data) => {
-                data.body.then(d => {
-                    const token = d.token;
-                    LogIn(token);
-                    this.setState({isLoggedIn: true, appToken: token});
-                    const t = JwtDecode(jwtToken);
-                    Raven.setUserContext({
-                        username: t.sub
-                    })
-                })
-            });
+                if (data.ok)
+                    data.body.then(d => {
+                        const token = d.token;
+                        LogIn(token);
+                        this.setState({isLoggedIn: true, appToken: token});
+                        Raven.setUserContext({
+                            username: tok.sub
+                        })
+                    });
+                else {
+                    console.log(jwtToken)
+                }
+
+            })
+
     }
 
 

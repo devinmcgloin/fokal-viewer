@@ -26,24 +26,24 @@ const ImageCard = ({image}) => {
                                 <p className="f7 ttu tracked white-50">Title</p>
                                 <span className="f5 fw2 white">{image.title}</span>
                             </div> : null}
-                        {meta.location && meta.location.point ?
-                            <div>
-                            <div>
-                                <p className="f7 ttu tracked white-50">lat</p>
-                                <span
-                                    className="f5 fw2 white">{meta.location.point.Y}</span>
-                            </div>
-                            <div>
-                            <p className="f7 ttu tracked white-50">lng</p>
-                            <span
-                            className="f5 fw2 white">{meta.location.point.X}</span>
-                            </div>
-                            </div>
-                            : null}
                         <p className="f7 ttu tracked white-50">Photographer</p>
                         <Link to={"/u/" + user.id} className="link dim no-underline">
                             <span className="f5 fw2 white ">{user.name}</span>
                         </Link>
+                        {meta.location && meta.location.point ?
+                            <div>
+                                <div>
+                                    <p className="f7 ttu tracked white-50">lat</p>
+                                    <span
+                                        className="f5 fw2 white">{meta.location.point.Y.toFixed(8)}</span>
+                                </div>
+                                <div>
+                                    <p className="f7 ttu tracked white-50">lng</p>
+                                    <span
+                                        className="f5 fw2 white">{meta.location.point.X.toFixed(8)}</span>
+                                </div>
+                            </div>
+                            : null}
                     </div>
 
                     <div className="dtc w-33">

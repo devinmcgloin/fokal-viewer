@@ -6,6 +6,7 @@ import {bindAll} from 'lodash'
 import {Loading} from "../../components/loading"
 import Raven from 'raven-js'
 import {ErrorAlert} from "../../components/alerts";
+import Collapsible from 'react-collapsible'
 
 class PatchImage extends Component {
     constructor(props) {
@@ -55,6 +56,7 @@ class PatchImage extends Component {
 
                         <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
                             <legend className="ph0 mh0 fw6 clip">Metadata</legend>
+                            <Collapsible>
                             <div className="mt3">
                                 <label className="db fw4 lh-copy f6">Aperture</label>
                                 <input className="b pa2 input-reset ba bg-transparent"
@@ -83,6 +85,7 @@ class PatchImage extends Component {
                                        id="focal-length"
                                        value={this.state.focal_length}/>
                             </div>
+                            </Collapsible>
                         </fieldset>
                         <div className="mt3">
                             <input className="b ph3 pv2 input-reset ba b--black bg-transparent pointer f6" type="Submit"

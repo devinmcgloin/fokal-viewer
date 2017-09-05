@@ -5275,6 +5275,14 @@ react-clickdrag@^3.0.1:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/react-clickdrag/-/react-clickdrag-3.0.2.tgz#54df5f3df6d695c54e9978a08253f83de7611bd2"
 
+react-collapsible@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-collapsible/-/react-collapsible-2.0.0.tgz#a98113bb26ab55fc5ed95a4835c3fbf8cbf973af"
+  dependencies:
+    prop-types "^15.5.8"
+    react "^15.5.4"
+    react-dom "^15.5.4"
+
 react-color@^2.13.4:
   version "2.13.4"
   resolved "https://registry.yarnpkg.com/react-color/-/react-color-2.13.4.tgz#43f1cc5e0b63ac37c9bb192a3bdce65b151f6c35"
@@ -5326,7 +5334,7 @@ react-dnd@^2.0.2:
     lodash "^4.2.0"
     prop-types "^15.5.8"
 
-react-dom@^15.6.1:
+react-dom@^15.5.4, react-dom@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.6.1.tgz#2cb0ed4191038e53c209eb3a79a23e2a4cf99470"
   dependencies:
@@ -5429,7 +5437,7 @@ react-tag-input@^4.7.2:
     react-dnd "^2.0.2"
     react-dnd-html5-backend "^2.0.0"
 
-react@^15.6.1:
+react@^15.5.4, react@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react/-/react-15.6.1.tgz#baa8434ec6780bde997cdc380b79cd33b96393df"
   dependencies:
