@@ -6,6 +6,7 @@ import {Loading} from "../components/loading"
 import {GridCollection} from "../components/collection";
 import {Error} from "../components/error";
 import {UserTitleCard} from "../components/cards/user/user";
+import {ImageCardSmall} from "../components/cards/image/image";
 
 class UserContainer extends React.Component {
     constructor(props) {
@@ -77,7 +78,7 @@ class UserContainer extends React.Component {
             return <Loading/>;
 
         const usr = this.state.user;
-        const userTitle = <UserTitleCard usr={usr}/>;
+        const userTitle = <UserTitleCard usr={usr} key={usr.id}/>;
 
         return (
             <div className="pv3">
@@ -86,15 +87,15 @@ class UserContainer extends React.Component {
                         <Route
                             exact
                             path={this.props.match.url}
-                            render={() => <GridCollection headerCards={[userTitle]} images={this.state.images}/>}
+                            render={() => <GridCollection cards={[userTitle].concat(this.state.images.map(i => <ImageCardSmall key={i.id} image={i}/>))}/>}
                         />
                         <Route
                             path={this.props.match.url + '/favorites'}
-                            render={() => <GridCollection headerCards={[userTitle]} images={this.state.favorites}/>}
+                            render={() => <GridCollection cards={[userTitle].concat(this.state.favorites.map(i => <ImageCardSmall key={i.id} image={i}/>))}/>}
                         />
                         <Route
                             path={this.props.match.url + '/stats'}
-                            render={() => <GridCollection headerCards={[userTitle]} images={this.state.images}/>}
+                            render={() => <GridCollection cards={[userTitle]}/>}
                         />
                     </switch>
                 </div>

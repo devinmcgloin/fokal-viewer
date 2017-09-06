@@ -7,6 +7,7 @@ import FontAwesome from 'react-fontawesome'
 import PropTypes from 'prop-types'
 import Raven from 'raven-js'
 import {Error} from "../components/error";
+import {ImageCardSmall} from "../components/cards/image/image";
 
 class ImageCollection extends Component {
     constructor(props) {
@@ -68,7 +69,7 @@ class ImageCollection extends Component {
         else if (this.state.failed)
             content = <Error/>;
         else if (this.state.isGrid)
-            content = <GridCollection images={this.state.images}/>;
+            content = <GridCollection cards={this.state.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>;
         else
             content = <LinearCollection images={this.state.images} isSummary={true}/>;
 
@@ -142,7 +143,7 @@ class TaggedImages extends Component {
         else if (this.state.failed)
             content = <Error/>;
         else
-            content = <GridCollection images={this.state.images}/>;
+            content = <GridCollection cards={this.state.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>;
         return (
             <div className="sans-serif pa3 pa4-ns">
                 <h1 className="tc f1" style={{textTransform: 'lowercase'}}>#{this.state.tag}</h1>

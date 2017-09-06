@@ -5,6 +5,7 @@ import {bindAll} from 'lodash'
 import {NoResults} from '../components/error'
 import {Loading} from "../components/loading";
 import {Error} from "../components/error";
+import {ImageCardSmall} from "../components/cards/image/image";
 
 class Search extends Component {
     constructor(props) {
@@ -76,7 +77,7 @@ class Search extends Component {
         else if (this.state.images.length === 0)
             content = <NoResults/>;
         else
-            content = <GridCollection images={this.state.images}/>;
+            content = <GridCollection cards={this.state.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>;
         return (
             <div className="pa3">
                 <div className="sans-serif mw7 pa5 pb6 ma2 tc br2 center">

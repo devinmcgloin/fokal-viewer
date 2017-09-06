@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import {ImageCard} from '../components/cards/image/image';
+import { ImageCardFull} from '../components/cards/image/image';
 import PropTypes from 'prop-types';
 import {FetchImage} from "../services/api/retrieval";
 import {Loading} from "../components/loading"
@@ -40,7 +40,7 @@ class ImageContainer extends Component {
     render() {
         if (this.state.isLoading)
             return <Loading/>;
-        return <ImageCard image={this.state.image}/>;
+        return <ImageCardFull image={this.state.image}/>;
     }
 }
 

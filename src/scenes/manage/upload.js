@@ -3,7 +3,6 @@ import {bindAll} from 'lodash'
 import {UploadImage} from "../../services/api/upload";
 import {FetchImage} from "../../services/api/retrieval";
 import {ErrorAlert, InfoAlert, SuccessAlert} from '../../components/alerts'
-import {PatchImage} from "./patch";
 
 class UploadContainer extends Component {
     constructor(props) {
@@ -89,7 +88,7 @@ class UploadContainer extends Component {
 
                 <div className="mw6 pa5 ma4 tc center">
                     {this.state.succeeded && this.state.image !== null ?
-                        <PatchImage image={this.state.image}/>
+                        null
                         :
                         <form onSubmit={this.handleSubmit} encType="multipart/form-data">
                             <input type="file" name="file" id="file" style={hiddenInput} onChange={this.handleFile}/>

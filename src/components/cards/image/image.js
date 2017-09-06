@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom'
 
 
-const ImageCard = ({image}) => {
+const ImageCardFull = ({image}) => {
     let id = image.id,
         meta = image.metadata,
         user = image.user;
@@ -87,7 +87,8 @@ const ImageCard = ({image}) => {
         </div>
     );
 };
-ImageCard.propTypes = {
+
+ImageCardFull.propTypes = {
     image: PropTypes.shape({
         id: PropTypes.string.isRequired,
         src_links: PropTypes.object,
@@ -107,5 +108,36 @@ ImageCard.propTypes = {
     }).isRequired,
 };
 
+const ImageCardSmall = ({image}) =>
+    <div>
+        <Link to={'/i/' + image.id}>
+            <img
+                alt=""
+                src={image.src_links.medium}
+                className="bg-center cover br2 shadow-5"
+                // style={{background: 'url('+img.src_links.small+')'}}
+            />
+        </Link>
+    </div>;
 
-export {ImageCard};
+ImageCardSmall.propTypes = {
+    image: PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        src_links: PropTypes.object,
+        colors: PropTypes.array.isRequired,
+        permalink: PropTypes.string.isRequired,
+        metadata: PropTypes.shape({
+            location: PropTypes.shape({
+                X: PropTypes.number,
+                Y: PropTypes.number,
+            }),
+            capture_time: PropTypes.string,
+        }),
+        user: PropTypes.shape({
+            permalink: PropTypes.string.isRequired,
+            name: PropTypes.string.isRequired
+        })
+    }).isRequired,
+};
+
+export {ImageCardFull, ImageCardSmall};
