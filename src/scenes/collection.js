@@ -3,11 +3,11 @@ import {FetchImages} from "../services/api/retrieval";
 import {GridCollection, LinearCollection} from "../components/collection";
 import {bindAll} from 'lodash'
 import {Loading} from "../components/loading"
-import FontAwesome from 'react-fontawesome'
 import PropTypes from 'prop-types'
 import Raven from 'raven-js'
 import {Error} from "../components/error";
 import {ImageCardSmall} from "../components/cards/image/image";
+import {Controls} from "../components/collectionControls";
 
 class ImageCollection extends Component {
     constructor(props) {
@@ -73,23 +73,12 @@ class ImageCollection extends Component {
         else
             content = <LinearCollection images={this.state.images}/>;
 
-        const layoutToggle = <FontAwesome
-            className="f5 link dim b no-underline black dib ph2 pv1 pointer"
-            name={this.state.isGrid ? "align-justify" : "th-large"}
-            onClick={this.handleLayoutChange}/>;
-
         return (
             <div className="sans-serif ph3 ph4-ns pv3">
-                <section className="inline-flex pv1">
-                    <span className="f5 link dim b no-underline black dib ph2 pv1 pointer"
-                          onClick={() => this.handleChange("featured")}>Featured</span>
-                    <span className="f5 link dim b no-underline black dib ph2 pv1 pointer"
-                          onClick={() => this.handleChange("trending")}>Trending</span>
-                    <span className="f5 link dim b no-underline black dib ph2 pv1 pointer"
-                          onClick={() => this.handleChange("recent")}>Recent</span>
-                    {layoutToggle}
-                </section>
-
+                <Controls options={["recent", "featured", "trending"]} selected={this.state.type}
+                          layout={this.state.isGrid ? 'grid' : 'inline'}
+                          handleLayoutChange={(l) => this.setState({isGrid: l === 'grid'})}
+                          handleTypeChange={(t) => this.handleChange(t)}/>
                 {content}
             </div>
         )
