@@ -7,22 +7,28 @@ const UserTitleCard = ({usr}) =>
     <div className="sans-serif">
         <div className="br2 shadow-5"
              style={{background: '#3C3C3C'}}>
-            <div className="inline-flex">
-                <Link to={"/u/" + usr.id}>
-                    <span className="justify-between dib ma3 br2 pa1 ba b--white-80 f5 fw2 white link dim no-underline pointer hover-white-80">
+            <div className="flex justify-around">
+                <div className="flex mv3">
+                    <Link to={"/u/" + usr.id}>
+                    <span className="br2 pa1 ba b--white-80 f5 fw2 white link dim no-underline pointer hover-white-80">
                         Images
                     </span>
-                </Link>
-                <Link to={"/u/" + usr.id + "/favorites"}>
-                    <span className="justify-between dib ma3 br2 pa1 ba b--white-80 f5 fw2 white link dim no-underline pointer hover-white-80">
+                    </Link>
+                </div>
+                <div className="flex mv3">
+                    <Link to={"/u/" + usr.id + "/favorites"}>
+                    <span className="br2 pa1 ba b--white-80 f5 fw2 white link dim no-underline pointer hover-white-80">
                         Favorites
                     </span>
-                </Link>
-                <Link to={"/u/"+usr.id+"/stats"}>
-                    <span className="justify-between dib ma3 br2 pa1 ba b--white-80 f5 fw2 white link dim no-underline pointer hover-white-80">
+                    </Link>
+                </div>
+                <div className="flex mv3">
+                    <Link to={"/u/" + usr.id + "/stats"}>
+                    <span className="br2 pa1 ba b--white-80 f5 fw2 white link dim no-underline pointer hover-white-80">
                         Stats
                     </span>
-                </Link>
+                    </Link>
+                </div>
             </div>
             <Link to={"/u/" + usr.id}>
                 <img

@@ -81,17 +81,22 @@ class UserContainer extends React.Component {
         const userTitle = <UserTitleCard usr={usr} key={usr.id}/>;
 
         return (
+
             <div className="pv3">
                 <div className="ph3 ph4-ns">
                     <switch>
                         <Route
                             exact
                             path={this.props.match.url}
-                            render={() => <GridCollection cards={[userTitle].concat(this.state.images.map(i => <ImageCardSmall key={i.id} image={i}/>))}/>}
+                            render={() => <GridCollection
+                                cards={[userTitle].concat(this.state.images.map(i => <ImageCardSmall key={i.id}
+                                                                                                     image={i}/>))}/>}
                         />
                         <Route
                             path={this.props.match.url + '/favorites'}
-                            render={() => <GridCollection cards={[userTitle].concat(this.state.favorites.map(i => <ImageCardSmall key={i.id} image={i}/>))}/>}
+                            render={() => <GridCollection
+                                cards={[userTitle].concat(this.state.favorites.map(i => <ImageCardSmall key={i.id}
+                                                                                                        image={i}/>))}/>}
                         />
                         <Route
                             path={this.props.match.url + '/stats'}
@@ -99,7 +104,6 @@ class UserContainer extends React.Component {
                         />
                     </switch>
                 </div>
-
 
             </div>
         )

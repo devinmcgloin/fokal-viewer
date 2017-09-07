@@ -2,9 +2,8 @@ import React, {Component} from 'react'
 import {SearchImages} from "../services/api/search";
 import {GridCollection} from "../components/collection"
 import {bindAll} from 'lodash'
-import {NoResults} from '../components/error'
+import {Error, NoResults} from '../components/error'
 import {Loading} from "../components/loading";
-import {Error} from "../components/error";
 import {ImageCardSmall} from "../components/cards/image/image";
 
 class Search extends Component {
@@ -43,17 +42,28 @@ class Search extends Component {
         const terms = q.split(' ').map(t => t.trim());
 
         let querybody = {
-            required_terms: terms.filter(t => !t.startsWith('+') && !t.startsWith('-')),
-            optional_terms: terms.filter(t => t.startsWith('+')).map(t => t.slice(1)),
-            excluded_terms: terms.filter(t => t.startsWith('-')).map(t => t.slice(1)),
+            required_terms: [],
+            optional_terms: [],
+            excluded_terms: [],
             document_types: ['image']
         };
+
+        terms.map(t => {
+            if (t.startsWith("color:"))
+                querybody.color = {hex: t.replace('color:', ''), pixel_fraction: 0.15};
+            else if (t.startsWith("+"))
+                querybody.optional_terms.push(t.replace('+', ''));
+            else if (t.startsWith("-"))
+                querybody.excluded_terms.push(t.replace('-', ''));
+            else
+                querybody.required_terms.push(t);
+        });
 
         console.log(querybody);
 
         let t = this;
         SearchImages('/search', querybody)
-            .then( (data) => {
+            .then((data) => {
                 if (data.ok)
                     data.body.then(
                         d => t.setState({

@@ -71,22 +71,21 @@ class ImageCollection extends Component {
         else if (this.state.isGrid)
             content = <GridCollection cards={this.state.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>;
         else
-            content = <LinearCollection images={this.state.images} isSummary={true}/>;
+            content = <LinearCollection images={this.state.images}/>;
 
-        const layoutToggle = <FontAwesome className="f5 link hover-dark-blue b no-underline black dib ph2 pv1 pointer"
-                                          name={this.state.isGrid ? "align-justify" : "th-large"}
-                                          onClick={this.handleLayoutChange}/>;
+        const layoutToggle = <FontAwesome
+            className="f5 link dim b no-underline black dib ph2 pv1 pointer"
+            name={this.state.isGrid ? "align-justify" : "th-large"}
+            onClick={this.handleLayoutChange}/>;
 
         return (
-            <div className="sans-serif ph3 ph4-ns">
-                <h1 className="tc f1" style={{textTransform: 'capitalize'}}>{this.state.type}</h1>
-
+            <div className="sans-serif ph3 ph4-ns pv3">
                 <section className="inline-flex pv1">
-                    <span className="f5 link hover-dark-blue b no-underline black dib ph2 pv1 pointer"
+                    <span className="f5 link dim b no-underline black dib ph2 pv1 pointer"
                           onClick={() => this.handleChange("featured")}>Featured</span>
-                    <span className="f5 link hover-dark-blue b no-underline black dib ph2 pv1 pointer"
+                    <span className="f5 link dim b no-underline black dib ph2 pv1 pointer"
                           onClick={() => this.handleChange("trending")}>Trending</span>
-                    <span className="f5 link hover-dark-blue b no-underline black dib ph2 pv1 pointer"
+                    <span className="f5 link dim b no-underline black dib ph2 pv1 pointer"
                           onClick={() => this.handleChange("recent")}>Recent</span>
                     {layoutToggle}
                 </section>

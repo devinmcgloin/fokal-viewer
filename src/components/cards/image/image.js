@@ -19,8 +19,8 @@ const ImageCardFull = ({image}) => {
                         style={{borderRadius: '4px 4px 0 0'}}
                     />
                 </Link>
-                <div className="fw1 dt dt--fixed pa3 flex justify-between ph5">
-                    <div className="dtc w-33">
+                <div className="fw1 pa3 flex flex-row-ns flex-column justify-between ph3">
+                    <div className="fl w-100 w-33-ns">
                         {image.title ?
                             <div>
                                 <p className="f7 ttu tracked white-50">Title</p>
@@ -46,7 +46,7 @@ const ImageCardFull = ({image}) => {
                             : null}
                     </div>
 
-                    <div className="dtc w-33">
+                    <div className="fl w-100 w-33-ns">
                         <p className="f7 ttu tracked white-50">Metadata</p>
                         <article className="cf f5 fw2 white">
                             <div className="fl w-50">
@@ -73,7 +73,7 @@ const ImageCardFull = ({image}) => {
 
                         </div>
                     </div>
-                    <div className="dtc w-33">
+                    <div className="fl w-100 w-33-ns">
                         <p className="f7 ttu tracked white-50">Tags</p>
                         <div className="list">
                             {image.tags.map((t) =>

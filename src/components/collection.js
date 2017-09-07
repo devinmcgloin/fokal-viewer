@@ -3,9 +3,9 @@ import { ImageCardFull} from './cards/image/image'
 import PropTypes from 'prop-types'
 import Masonry from 'react-masonry-component';
 
-const LinearCollection = ({images, isSummary}) => {
+const LinearCollection = ({images}) => {
     const rend = images.map((img) =>
-        <ImageCardFull key={img.id} image={img} isSummary={isSummary}/>
+        <ImageCardFull key={img.id} image={img} />
     );
 
     return (
@@ -17,7 +17,6 @@ const LinearCollection = ({images, isSummary}) => {
 
 LinearCollection.propTypes = {
     images: PropTypes.array.isRequired,
-    isSummary: PropTypes.bool.isRequired,
 };
 
 const GridCollection = ({cards}) => {
