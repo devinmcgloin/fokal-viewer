@@ -75,8 +75,6 @@ Session.vim
 # temporary
 .netrwhist
 *~
-# auto-generated tag files
-tags
 
 # End of https://www.gitignore.io/api/npm,node,vim
 #
