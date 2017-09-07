@@ -5,30 +5,27 @@ import {bindAll} from 'lodash'
 import {Error, NoResults} from '../components/error'
 import {Loading} from "../components/loading";
 import {ImageCardSmall} from "../components/cards/image/image";
+import {Controls} from "../components/collectionControls";
+import {UserTitleCard} from "../components/cards/user/user";
+import {TagCard} from "../components/cards/tags/tags";
 
 class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            images: [],
+            results: {images:[], users:[], tags:[]},
             q: '',
             failed: false,
             loading: false,
+            type: 'images',
         };
-        bindAll(this, 'handleColorChange', 'handleTextChange', 'loadImages');
-    }
-
-    handleColorChange(color, event) {
-        this.setState({
-            hex: color.hex.slice(1),
-            images: []
-        });
+        bindAll(this, 'handleTextChange', 'loadImages');
     }
 
     handleTextChange(e) {
         this.setState({
             q: e.target.value,
-            images: []
+            results: {images:[], users:[], tags:[]}
         });
     }
 
@@ -39,13 +36,13 @@ class Search extends Component {
         if (q === '')
             return;
 
-        const terms = q.split(' ').map(t => t.trim());
+        const terms = q.split(' ').map(t => t.trim()).filter(t => t !== '');
 
         let querybody = {
             required_terms: [],
             optional_terms: [],
             excluded_terms: [],
-            document_types: ['image']
+            document_types: ['image', 'user','tag']
         };
 
         terms.map(t => {
@@ -67,10 +64,10 @@ class Search extends Component {
                 if (data.ok)
                     data.body.then(
                         d => t.setState({
-                            images: d.images,
+                            results: d,
                             loading: false
                         })
-                    )
+                    );
                 else
                     t.setState({failed: true})
 
@@ -84,10 +81,13 @@ class Search extends Component {
             content = <Loading/>;
         else if (this.state.failed)
             content = <Error/>;
-        else if (this.state.images.length === 0)
-            content = <NoResults/>;
-        else
-            content = <GridCollection cards={this.state.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>;
+        else if(this.state.type === 'images')
+            content = this.state.results.images.length === 0 ? <NoResults/> : <GridCollection cards={this.state.results.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>;
+        else if(this.state.type === 'users')
+            content = this.state.results.users.length === 0 ? <NoResults/> : <GridCollection cards={this.state.results.users.map(u => <UserTitleCard key={u.id} usr={u}/>)}/>;
+        else if(this.state.type === 'tags')
+            content = this.state.results.tags.length === 0 ? <NoResults/> : <GridCollection cards={this.state.results.tags.map(t => <TagCard key={t.id} id={t.id} image={t.image}/>)}/>;
+
         return (
             <div className="pa3">
                 <div className="sans-serif mw7 pa5 pb6 ma2 tc br2 center">
@@ -100,6 +100,7 @@ class Search extends Component {
                                 Search
                     </span>
                 </div>
+                <Controls options={["images","users","tags"]} selected={this.state.type} layout="grid" handleLayoutChange={()=>{}} handleTypeChange={(t)=> this.setState({type: t})}/>
 
                 {content}
             </div>

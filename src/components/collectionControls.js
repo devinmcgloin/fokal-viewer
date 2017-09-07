@@ -7,7 +7,7 @@ const Controls = ({options, selected, layout, handleLayoutChange, handleTypeChan
                                            className={"fl f5 link dim b no-underline black-50 dib ph2 pointer ttc " + (o === selected ? "black" : "")}
                                           onClick={() => handleTypeChange(o)}>{o}</span> );
 
-    return <section className="pv1 w-100 h2">
+    return <section className="pv1 w-100 h2 sans-serif">
         {control}
 
         <FontAwesome
