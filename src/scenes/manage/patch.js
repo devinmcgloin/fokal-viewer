@@ -139,7 +139,7 @@ class ManageImages extends Component {
 
         return (
             <div>
-                {this.state.failed? <ErrorAlert message="Something seems to have gone wrong..."/>:null}
+                {this.state.failed ? <ErrorAlert message="Something seems to have gone wrong..."/> : null}
                 {!this.state.isLoadingUser ? <PatchUser user={this.state.user}/> : null}
                 {imgs}
             </div>

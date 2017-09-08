@@ -1,11 +1,11 @@
 import React from 'react'
-import { ImageCardFull} from './cards/image/image'
+import {ImageCardFull} from './cards/image/image'
 import PropTypes from 'prop-types'
 import Masonry from 'react-masonry-component';
 
 const LinearCollection = ({images}) => {
     const rend = images.map((img) =>
-        <ImageCardFull key={img.id} image={img} />
+        <ImageCardFull key={img.id} image={img}/>
     );
 
     return (

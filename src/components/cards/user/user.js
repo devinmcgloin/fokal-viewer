@@ -70,7 +70,7 @@ const UserStatsCard = ({title, value, background}) =>
 
 UserStatsCard.propTypes = {
     title: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired,
+    value: PropTypes.string.isRequired,
     background: PropTypes.string.isRequired
 };
 

@@ -13,7 +13,7 @@ class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            results: {images:[], users:[], tags:[]},
+            results: {images: [], users: [], tags: []},
             q: '',
             failed: false,
             loading: false,
@@ -25,7 +25,7 @@ class Search extends Component {
     handleTextChange(e) {
         this.setState({
             q: e.target.value,
-            results: {images:[], users:[], tags:[]}
+            results: {images: [], users: [], tags: []}
         });
     }
 
@@ -42,7 +42,7 @@ class Search extends Component {
             required_terms: [],
             optional_terms: [],
             excluded_terms: [],
-            document_types: ['image', 'user','tag']
+            document_types: ['image', 'user', 'tag']
         };
 
         terms.map(t => {
@@ -56,8 +56,6 @@ class Search extends Component {
                 querybody.required_terms.push(t);
         });
 
-        console.log(querybody);
-
         let t = this;
         SearchImages('/search', querybody)
             .then((data) => {
@@ -65,14 +63,18 @@ class Search extends Component {
                     data.body.then(
                         d => t.setState({
                             results: d,
-                            loading: false
+                            loading: false,
+                            failed: false,
                         })
                     );
                 else
-                    t.setState({failed: true})
+                    t.setState({failed: true, loading: false})
 
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {
+                console.log(err);
+                t.setState({failed: true, loading: false})
+            });
     }
 
     render() {
@@ -81,12 +83,19 @@ class Search extends Component {
             content = <Loading/>;
         else if (this.state.failed)
             content = <Error/>;
-        else if(this.state.type === 'images')
-            content = this.state.results.images.length === 0 ? <NoResults/> : <GridCollection cards={this.state.results.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>;
-        else if(this.state.type === 'users')
-            content = this.state.results.users.length === 0 ? <NoResults/> : <GridCollection cards={this.state.results.users.map(u => <UserTitleCard key={u.id} usr={u}/>)}/>;
-        else if(this.state.type === 'tags')
-            content = this.state.results.tags.length === 0 ? <NoResults/> : <GridCollection cards={this.state.results.tags.map(t => <TagCard key={t.id} id={t.id} image={t.image}/>)}/>;
+        else if (this.state.type === 'images')
+            content = this.state.results.images.length === 0 ?
+                <NoResults/> :
+                <GridCollection cards={this.state.results.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>;
+        else if (this.state.type === 'users')
+            content = this.state.results.users.length === 0 ?
+                <NoResults/> :
+                <GridCollection cards={this.state.results.users.map(u => <UserTitleCard key={u.id} usr={u}/>)}/>;
+        else if (this.state.type === 'tags')
+            content = this.state.results.tags.length === 0 ?
+                <NoResults/> :
+                <GridCollection
+                    cards={this.state.results.tags.map(t => <TagCard key={t.id} id={t.id} image={t.image}/>)}/>;
 
         return (
             <div className="pa3">
@@ -100,7 +109,9 @@ class Search extends Component {
                                 Search
                     </span>
                 </div>
-                <Controls options={["images","users","tags"]} selected={this.state.type} layout="grid" handleLayoutChange={()=>{}} handleTypeChange={(t)=> this.setState({type: t})}/>
+                <Controls options={["images", "users", "tags"]} selected={this.state.type} layout="grid"
+                          handleLayoutChange={() => {
+                          }} handleTypeChange={(t) => this.setState({type: t})}/>
 
                 {content}
             </div>

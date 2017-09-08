@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom'
+import {Image} from "../../image";
 
 
 const ImageCardFull = ({image}) => {
@@ -12,12 +13,10 @@ const ImageCardFull = ({image}) => {
             <div className="br4 shadow-5"
                  style={{background: '#3C3C3C'}}>
                 <Link to={"/i/" + id}>
-                    <img
-                        src={image.src_links.large}
-                        alt=""
-                        // className="mb7"
-                        style={{borderRadius: '4px 4px 0 0'}}
-                    />
+                    <Image pixel_xd={image.metadata.pixel_xd}
+                           pixel_yd={image.metadata.pixel_yd}
+                           url={image.src_links.large}
+                           style={{borderRadius: '4px 4px 0 0'}}/>
                 </Link>
                 <div className="fw1 pa3 flex flex-row-ns flex-column justify-between ph3">
                     <div className="fl w-100 w-33-ns">
@@ -111,12 +110,7 @@ ImageCardFull.propTypes = {
 const ImageCardSmall = ({image}) =>
     <div>
         <Link to={'/i/' + image.id}>
-            <img
-                alt=""
-                src={image.src_links.medium}
-                className="bg-center cover br2 shadow-5"
-                // style={{background: 'url('+img.src_links.small+')'}}
-            />
+            <Image pixel_xd={image.metadata.pixel_xd} pixel_yd={image.metadata.pixel_yd} url={image.src_links.medium} className="bg-center cover br2 shadow-5"/>
         </Link>
     </div>;
 

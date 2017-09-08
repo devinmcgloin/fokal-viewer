@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import { ImageCardFull} from '../components/cards/image/image';
+import {ImageCardFull} from '../components/cards/image/image';
 import PropTypes from 'prop-types';
 import {FetchImage} from "../services/api/retrieval";
 import {Loading} from "../components/loading"

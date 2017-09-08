@@ -50,11 +50,11 @@ export default class PatchImage extends Component {
                 </div>
                 <Collapsible trigger="Metadata" classParentString="ml2 pa2 w-100 Collapsible">
 
-                <form onSubmit={this.commitChanges}>
-                    <div className="db dtc-ns v-mid ph2 pr0-ns pl3-ns mr5">
+                    <form onSubmit={this.commitChanges}>
+                        <div className="db dtc-ns v-mid ph2 pr0-ns pl3-ns mr5">
 
-                        <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                            <legend className="ph0 mh0 fw6 clip">Metadata</legend>
+                            <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
+                                <legend className="ph0 mh0 fw6 clip">Metadata</legend>
                                 <div className="mt3">
                                     <label className="db fw4 lh-copy f6">Aperture</label>
                                     <input className="b pa2 input-reset ba bg-transparent"
@@ -83,13 +83,14 @@ export default class PatchImage extends Component {
                                            id="focal-length"
                                            value={this.state.focal_length}/>
                                 </div>
-                        </fieldset>
-                        <div className="mt3">
-                            <input className="b ph3 pv2 input-reset ba b--black bg-transparent pointer f6" type="Submit"
-                                   value="Submit"/>
+                            </fieldset>
+                            <div className="mt3">
+                                <input className="b ph3 pv2 input-reset ba b--black bg-transparent pointer f6"
+                                       type="Submit"
+                                       value="Submit"/>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
                 </Collapsible>
 
 

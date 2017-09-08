@@ -14,20 +14,20 @@ const TagCard = ({id, image}) =>
                     style={{borderRadius: '4px 4px 0 0'}}
                 />
             </Link>
+
             <div className="fw1 pa3">
                 <div>
                     <p className="f7 ttu tracked white-50">Tag</p>
                     <span className="tc f5 fw2 white">{id}</span>
                 </div>
             </div>
-
         </div>
     </div>;
 
 TagCard.propTypes = {
     id: PropTypes.string.isRequired,
     image: PropTypes.shape({
-        src_links : PropTypes.object.isRequired,
+        src_links: PropTypes.object.isRequired,
     })
 };
 

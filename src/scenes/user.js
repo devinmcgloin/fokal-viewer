@@ -92,11 +92,12 @@ class UserContainer extends React.Component {
             <div className="sans-serif">
                 <nav className="ph3 ph4-ns pv2 pv3-ns bb b--black-10 black-70">
                     <div className="nowrap overflow-x-auto">
-                        <Link className="sans-serif link dim gray    f6 f5-ns dib mr3"  title="Images"
+                        <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" title="Images"
                               to={this.props.match.url}>Images</Link>
-                        <Link className="sans-serif link dim gray    f6 f5-ns dib mr3"  title="Favorites"
+                        <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" title="Favorites"
                               to={this.props.match.url + '/favorites'}>Favorites</Link>
-                        <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to={this.props.match.url + '/stats'}
+                        <Link className="sans-serif link dim gray    f6 f5-ns dib mr3"
+                              to={this.props.match.url + '/stats'}
                               title="Images">Stats</Link>
                     </div>
                 </nav>
@@ -120,10 +121,16 @@ class UserContainer extends React.Component {
                             <Route
                                 path={this.props.match.url + '/stats'}
                                 render={() => <GridCollection cards={[userTitle,
-                                    <UserStatsCard key="views" title="Views" value={s.views.toLocaleString()} background="linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)"/>,
-                                    <UserStatsCard key="downloads" title="Downloads" value={s.downloads.toLocaleString()} background="linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)"/>,
-                                    <UserStatsCard key="favorites" title="Favorites" value={s.favorites.toLocaleString()} background="linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%)"/>,
-                                    <UserStatsCard key="joined" title="Joined" value={moment(usr.created_at).fromNow()} background="linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)"/>,
+                                    <UserStatsCard key="views" title="Views" value={s.views.toLocaleString()}
+                                                   background="linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)"/>,
+                                    <UserStatsCard key="downloads" title="Downloads"
+                                                   value={s.downloads.toLocaleString()}
+                                                   background="linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)"/>,
+                                    <UserStatsCard key="favorites" title="Favorites"
+                                                   value={s.favorites.toLocaleString()}
+                                                   background="linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%)"/>,
+                                    <UserStatsCard key="joined" title="Joined" value={moment(usr.created_at).fromNow()}
+                                                   background="linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%)"/>,
 
                                 ]}/>}
                             />

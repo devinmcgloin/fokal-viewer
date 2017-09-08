@@ -160,6 +160,7 @@ Raven
 Raven.setTagsContext({
     environment: process.env.NODE_ENV,
 });
+
 WebFont.load({
     google: {
         families: ['Montserrat:400,700', 'sans-serif']
