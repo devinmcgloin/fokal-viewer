@@ -1,12 +1,16 @@
 import React from 'react'
 import FontAwesome from 'react-fontawesome'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 
 const Controls = ({options, selected, layout, handleLayoutChange, handleTypeChange}) => {
-    const control = options.map(o => <span key={o}
-                                           className={"fl f5 link dim b no-underline black-50 dib pr3 pointer ttc " +
-                                           (o === selected ? "black" : "")}
-                                           onClick={() => handleTypeChange(o)}>{o}</span>);
+    const control = options.map(o =>
+        <Link key={o.tag} to={o.link}>
+        <span
+            className={"fl f5 link dim b no-underline black-50 dib pr3 pointer ttc " +
+            (o.tag === selected ? "black" : "")}
+            onClick={() => handleTypeChange(o.tag)}>{o.tag}</span>
+        </Link>);
 
     return (
         <section className="pv1 w-100 h2 sans-serif">
@@ -25,7 +29,7 @@ const Controls = ({options, selected, layout, handleLayoutChange, handleTypeChan
 };
 
 Controls.propTypes = {
-    options: PropTypes.arrayOf(PropTypes.string).isRequired,
+    options: PropTypes.arrayOf(PropTypes.object).isRequired,
     selected: PropTypes.string.isRequired,
     layout: PropTypes.string.isRequired,
     handleLayoutChange: PropTypes.func.isRequired,

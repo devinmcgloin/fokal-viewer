@@ -18,7 +18,7 @@ const ImageCardFull = ({image}) => {
                            url={image.src_links.large}
                            style={{borderRadius: '4px 4px 0 0'}}/>
                 </Link>
-                <div className="fw1 pa3 flex flex-row-ns flex-column justify-between ph3">
+                <div className="fw1 pv3 ph4 flex flex-row-ns flex-column justify-between ph3">
                     <div className="fl w-100 w-33-ns">
                         {image.title ?
                             <div>
@@ -66,8 +66,8 @@ const ImageCardFull = ({image}) => {
                         <p className="f7 ttu tracked white-50">Colors</p>
                         <div>
                             {image.colors.map((clr) =>
-                                <div key={clr.Hex} className="fl pa3 br-100 ma1 ba b--white-50"
-                                     style={{background: '#' + clr.Hex}}>
+                                <div key={clr.hex} className="fl pa3 br-100 ma1 ba b--white-50"
+                                     style={{background: '#' + clr.hex}}>
                                 </div>)}
 
                         </div>

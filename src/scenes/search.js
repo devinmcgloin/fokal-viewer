@@ -1,23 +1,23 @@
 import React, {Component} from 'react'
 import {SearchImages} from "../services/api/search";
-import {GridCollection} from "../components/collection"
 import {bindAll} from 'lodash'
-import {Error, NoResults} from '../components/error'
+import {Error} from '../components/error'
 import {Loading} from "../components/loading";
-import {ImageCardSmall} from "../components/cards/image/image";
 import {Controls} from "../components/collectionControls";
-import {UserTitleCard} from "../components/cards/user/user";
-import {TagCard} from "../components/cards/tags/tags";
+import {Route, Switch} from 'react-router-dom'
+import {SearchTagsView, SearchUsersView, SearchImagesView} from "../components/search";
+import PropTypes from 'prop-types'
 
 class Search extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
             results: {images: [], users: [], tags: []},
             q: '',
             failed: false,
             loading: false,
-            type: 'images',
+            type: props.match.params.type,
         };
         bindAll(this, 'handleTextChange', 'loadImages');
     }
@@ -78,24 +78,14 @@ class Search extends Component {
     }
 
     render() {
-        let content;
+        let content = null;
         if (this.state.loading)
             content = <Loading/>;
         else if (this.state.failed)
             content = <Error/>;
-        else if (this.state.type === 'images')
-            content = this.state.results.images.length === 0 ?
-                <NoResults/> :
-                <GridCollection cards={this.state.results.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>;
-        else if (this.state.type === 'users')
-            content = this.state.results.users.length === 0 ?
-                <NoResults/> :
-                <GridCollection cards={this.state.results.users.map(u => <UserTitleCard key={u.id} usr={u}/>)}/>;
-        else if (this.state.type === 'tags')
-            content = this.state.results.tags.length === 0 ?
-                <NoResults/> :
-                <GridCollection
-                    cards={this.state.results.tags.map(t => <TagCard key={t.id} id={t.id} image={t.image}/>)}/>;
+
+        const results = this.state.results;
+        const controllerOptions = [{link:'/search/images', tag: 'images'},{link:"/search/users", tag: 'users'},{link:'/search/tags', tag:'tags'}];
 
         return (
             <div className="pa3">
@@ -109,14 +99,26 @@ class Search extends Component {
                                 Search
                     </span>
                 </div>
-                <Controls options={["images", "users", "tags"]} selected={this.state.type} layout="grid"
+                <Controls options={controllerOptions} selected={this.state.type} layout="grid"
                           handleLayoutChange={() => {
                           }} handleTypeChange={(t) => this.setState({type: t})}/>
 
-                {content}
+                {content ? content :
+                    <Switch>
+                        <Route path={"/search/images"}
+                               render={() => <SearchImagesView images={results.images}/>}/>
+                        <Route path={"/search/users"}
+                               render={() => <SearchUsersView users={results.users}/>}/>
+                        <Route path={"/search/tags"}
+                               render={() => <SearchTagsView tags={results.tags}/>}/>
+                    </Switch>
+                }
             </div>
         )
     }
 }
 
+Search.propTypes = {
+    match : PropTypes.object.isRequired
+}
 export {Search};

@@ -5,7 +5,7 @@ import {bindAll} from 'lodash'
 import Collapsible from 'react-collapsible'
 import './collapse.css'
 
-export default class PatchImage extends Component {
+export default class ManageImage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -37,7 +37,6 @@ export default class PatchImage extends Component {
             'iso': this.state.iso,
             'exposure_time': this.state.exposure_time,
             'focal_length': this.state.focal_length,
-
         });
     }
 
@@ -99,6 +98,6 @@ export default class PatchImage extends Component {
     }
 }
 
-PatchImage.propTypes = {
+ManageImage.propTypes = {
     image: PropTypes.object.isRequired
 };

@@ -3,12 +3,11 @@ import {Patch} from "../../services/api/patch";
 import {FetchImages, FetchMe} from "../../services/api/retrieval";
 import PropTypes from 'prop-types'
 import {bindAll} from 'lodash'
-import {Loading} from "../../components/loading"
 import Raven from 'raven-js'
-import {ErrorAlert} from "../../components/alerts";
-import PatchImage from './images/patch'
+import {Route, Switch, Link} from 'react-router-dom'
+import {Loading} from "../../components/loading";
 
-class PatchUser extends Component {
+class ManageUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,7 +15,6 @@ class PatchUser extends Component {
             bio: props.user.bio,
             url: props.user.url,
             name: props.user.name,
-
         };
 
         bindAll(this, 'handleChange', 'commitChanges')
@@ -84,11 +82,11 @@ class PatchUser extends Component {
     }
 }
 
-PatchUser.propTypes = {
-    user: PropTypes.object.isRequired
+ManageUser.propTypes = {
+    user: PropTypes.object.isRequired,
 };
 
-class ManageImages extends Component {
+class Account extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -131,20 +129,32 @@ class ManageImages extends Component {
     }
 
     render() {
-        let imgs;
-        if (this.state.isLoadingImages)
-            imgs = <Loading/>;
-        else
-            imgs = this.state.images.map((i) => <PatchImage key={i.id} image={i}/>);
-
         return (
-            <div>
-                {this.state.failed ? <ErrorAlert message="Something seems to have gone wrong..."/> : null}
-                {!this.state.isLoadingUser ? <PatchUser user={this.state.user}/> : null}
-                {imgs}
+            <div className="sans-serif">
+                <div className="w-100 w-30-ns fl pa3">
+                    <ul className="no-underline link hover dim black nested-list-reset">
+                        <li><Link to={this.props.match.url}>Account</Link></li>
+                        <li><Link to={this.props.match.url + '/manage'}>Manage Images</Link></li>
+                        <li><Link to={this.props.match.url + '/delete'}>Delete</Link></li>
+                    </ul>
+                </div>
+                <div className="w-100 w-70-ns fl pa3">
+                {this.state.isLoadingUser ? <Loading/> :
+                    <Switch>
+                        <Route exact path={this.props.match.url} render={() => <ManageUser user={this.state.user}/>}/>
+                        {/*<Route exact path={this.props.match.url} render={() => <ManageImages user={this.state.images}/>}/>*/}
+                        {/*<Route exact path={this.props.match.url} render={() => <DeleteUser user={this.state.user}/>}/>*/}
+
+                    </Switch>
+                }
+                </div>
             </div>
         )
     }
 }
 
-export {ManageImages};
+Account.propTypes = {
+    match: PropTypes.object.isRequired,
+};
+
+export {Account};

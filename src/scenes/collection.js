@@ -8,13 +8,14 @@ import Raven from 'raven-js'
 import {Error} from "../components/error";
 import {ImageCardSmall} from "../components/cards/image/image";
 import {Controls} from "../components/collectionControls";
+import {Route, Switch } from 'react-router-dom'
 
 class ImageCollection extends Component {
     constructor(props) {
         super(props);
         this.state = {
             images: [],
-            type: 'recent',
+            type: this.props.match.params.type || 'featured',
             isGrid: true,
             failed: false,
             isLoading: true
@@ -30,7 +31,7 @@ class ImageCollection extends Component {
                 console.log(data);
                 switch (data.ok) {
                     case true:
-                        data.body.then(b => t.setState({images: b, isLoading: false}))
+                        data.body.then(b => t.setState({[type]: b, isLoading: false}))
                         break;
                     case false:
                         t.setState({
@@ -43,11 +44,9 @@ class ImageCollection extends Component {
             })
     }
 
-
     handleChange(type) {
         this.setState({
             type: type,
-            images: [],
             isLoading: true,
         });
         this.loadImageFromServer(type)
@@ -63,27 +62,41 @@ class ImageCollection extends Component {
 
     render() {
 
-        let content;
+        let content= null;
         if (this.state.isLoading)
             content = <Loading/>;
         else if (this.state.failed)
             content = <Error/>;
-        else if (this.state.isGrid)
-            content = <GridCollection cards={this.state.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>;
-        else
-            content = <LinearCollection images={this.state.images}/>;
+
+        const controllerOptions = [{link: '/', tag: 'featured'}, {link: "/recent", tag: 'recent'}, {
+            link: '/trending',
+            tag: 'trending'
+        }];
 
         return (
             <div className="sans-serif ph3 ph4-ns pv3">
-                <Controls options={["recent", "featured", "trending"]} selected={this.state.type}
+                <Controls options={controllerOptions} selected={this.state.type}
                           layout={this.state.isGrid ? 'grid' : 'inline'}
                           handleLayoutChange={(l) => this.setState({isGrid: l === 'grid'})}
                           handleTypeChange={(t) => this.handleChange(t)}/>
-                {content}
+                {content ? content :
+                    <Switch>
+                        <Route path={"/recent"} render={() => this.state.isGrid ? <GridCollection cards={this.state.recent.map(i => <ImageCardSmall key={i.id} image={i}/>)}/> : <LinearCollection images={this.state.recent}/>}/>
+                        <Route path={"/trending"} render={() => this.state.isGrid ? <GridCollection cards={this.state.trending.map(i => <ImageCardSmall key={i.id} image={i}/>)}/> : <LinearCollection images={this.state.trending}/>}/>
+
+                        <Route exact path={"/"} render={() => this.state.isGrid ? <GridCollection cards={this.state.featured.map(i => <ImageCardSmall key={i.id} image={i}/>)}/> : <LinearCollection images={this.state.featured}/>}/>
+
+                    </Switch>
+                }
+
             </div>
         )
 
     }
+}
+
+ImageCollection.propTypes = {
+    match: PropTypes.object,
 }
 
 class TaggedImages extends Component {

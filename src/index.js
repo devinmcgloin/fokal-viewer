@@ -19,7 +19,7 @@ import 'tachyons/css/tachyons.css'
 import 'font-awesome/css/font-awesome.css'
 import {UploadContainer} from "./scenes/manage/upload";
 import PropTypes from 'prop-types'
-import {ManageImages} from "./scenes/manage/patch"
+import {Account} from "./scenes/manage/patch"
 import {ExploreScene} from "./scenes/explore"
 import {LogoutPage} from "./scenes/auth/logout"
 import ScrollToTop from "./components/scroll";
@@ -83,14 +83,14 @@ class App extends React.Component {
                 <div>
                     <ScrollToTop>
                         <Switch>
-                            <Route exact path="/" render={() =>
+                            <Route exact path="/:type(recent|trending|)" render={(props) =>
                                 <div>
                                     {!this.state.isLoggedIn ?
                                         <CallToAction title="Join Fokal"
                                                       message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
                                                       call="Join for Free"/>
                                         : null}
-                                    <ImageCollection/>
+                                    <ImageCollection {...props}/>
                                 </div>
                             }/>
 
@@ -98,14 +98,14 @@ class App extends React.Component {
                             <Route path="/u/:id" component={UserContainer}/>
                             <Route path="/t/:id" component={TaggedImages}/>
 
-                            <Route path="/search" component={Search}/>
+                            <Route path="/search/:type" component={Search}/>
 
                             <Route path="/login"
                                    render={() => <Login onSuccess={this.onLogin} isLoggedIn={this.state.isLoggedIn}/>}/>
                             <Route path="/logout" render={() => <LogoutPage onSuccess={this.onLogout}/>}/>
                             <Route path="/join" component={Join}/>
                             <Route path="/upload" component={UploadContainer}/>
-                            <Route path="/manage" component={ManageImages}/>
+                            <Route path="/account/settings" component={Account}/>
                             <Route path="/explore" component={ExploreScene}/>
 
 
