@@ -1,4 +1,4 @@
-import {endpoint, getHeaders, ParseResponse} from "./api";
+import {endpoint, getHeaders} from "./api";
 
 const Patch = (id, type, changes) => {
     console.log(id, type, changes);
@@ -8,7 +8,7 @@ const Patch = (id, type, changes) => {
         headers: jsonHeaders,
         method: 'PATCH',
         body: JSON.stringify(changes)
-    }).then(ParseResponse)
+    })
 };
 
 export {Patch};

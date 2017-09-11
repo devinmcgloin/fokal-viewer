@@ -2,10 +2,12 @@ import React, {Component} from 'react'
 import {Patch} from "../../../services/api/patch";
 import PropTypes from 'prop-types'
 import {bindAll} from 'lodash'
-import Collapsible from 'react-collapsible'
 import './collapse.css'
+import {TextField} from "../../../components/fields";
+import {Tabs, TabList, TabPanel, Tab} from 'react-tabs'
+import 'react-tabs/style/react-tabs.css';
 
-export default class ManageImage extends Component {
+class ManageImage extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,7 +15,12 @@ export default class ManageImage extends Component {
             iso: props.image.metadata.iso,
             aperture: props.image.metadata.aperture,
             exposure_time: props.image.metadata.exposure_time,
-            focal_length: props.image.metadata.focal_length
+            focal_length: props.image.metadata.focal_length,
+
+            model: props.image.metadata.model,
+            make: props.image.metadata.make,
+            lens_model: props.image.metadata.lens_model,
+            lens_make: props.image.metadata.lens_make,
 
         };
 
@@ -33,64 +40,81 @@ export default class ManageImage extends Component {
     commitChanges(e) {
         e.preventDefault();
         Patch(this.state.image.id, 'images', {
-            'aperture': this.state.aperture,
-            'iso': this.state.iso,
+            'aperture': Number(this.state.aperture),
+            'iso': Number(this.state.iso),
             'exposure_time': this.state.exposure_time,
-            'focal_length': this.state.focal_length,
+            'focal_length': Number(this.state.focal_length),
+
+            'make': this.state.make,
+            'model': this.state.model,
+            'lens_make': this.state.lens_make,
+            'lens_model': this.state.lens_model,
         });
     }
 
     render() {
         return (
-            <div className="sans-serif dt center pt0 pb2 pv3-m pv4-ns w-100">
-                <div className="db dtc-ns v-mid-ns">
+            <div className="sans-serif dib pv3 mv4 w-100">
+                <div className="dib tc">
                     <img src={this.state.image.src_links.medium} alt=""
-                         className="w-100 mw3"/>
+                         className="w-20"/>
                 </div>
-                <Collapsible trigger="Metadata" classParentString="ml2 pa2 w-100 Collapsible">
+                <Tabs>
+                    <TabList>
+                        <Tab>Image Metadata</Tab>
+                        <Tab>Camera</Tab>
+                    </TabList>
+                    <TabPanel>
+                        <div className="fl ph2 pr0-ns pl3-ns w-80 dib">
+                            <form onSubmit={this.commitChanges}>
+                                <TextField handleChange={this.handleChange} name="aperture" val={this.state.aperture}
+                                           desc="Your name will be displayed alongside your username." optional={true}/>
 
-                    <form onSubmit={this.commitChanges}>
-                        <div className="db dtc-ns v-mid ph2 pr0-ns pl3-ns mr5">
+                                <TextField handleChange={this.handleChange} name="iso" presentation_name={"ISO"} val={this.state.iso}
+                                           desc="Your location will appear on your profile and be available for searches."
+                                           optional={true}/>
 
-                            <fieldset id="sign_up" className="ba b--transparent ph0 mh0">
-                                <legend className="ph0 mh0 fw6 clip">Metadata</legend>
-                                <div className="mt3">
-                                    <label className="db fw4 lh-copy f6">Aperture</label>
-                                    <input className="b pa2 input-reset ba bg-transparent"
-                                           onChange={this.handleChange} type="text" name="aperture"
-                                           id="aperture"
-                                           value={this.state.aperture}/>
-                                </div>
-                                <div className="mt3">
-                                    <label className="db fw4 lh-copy f6">ISO</label>
-                                    <input className="b pa2 input-reset ba bg-transparent"
-                                           onChange={this.handleChange} type="text" name="iso"
-                                           id="iso" value={this.state.iso}/>
-                                </div>
+                                <TextField handleChange={this.handleChange} name="exposure_time" presentation_name={"Exposure Time"} val={this.state.exposure_time}
+                                           desc="The portfolio link is present on your profile page." optional={true}/>
+
+                                <TextField handleChange={this.handleChange} name="focal_length" presentation_name={"Focal Length"} val={this.state.focal_length}
+                                           desc="Adding your Instagram allows us to feature you on Instagram." optional={true}/>
+
 
                                 <div className="mt3">
-                                    <label className="db fw4 lh-copy f6">Shutter Speed</label>
-                                    <input className="b pa2 input-reset ba bg-transparent"
-                                           onChange={this.handleChange} type="text" name="exposure_time"
-                                           id="shutter-speed"
-                                           value={this.state.exposure_time}/>
+                                    <input className="b ph3 pv2 input-reset ba b--black bg-transparent pointer f6" type="Submit"
+                                           value="Submit"/>
                                 </div>
-                                <div className="mt3">
-                                    <label className="db fw4 lh-copy f6">Focal Length</label>
-                                    <input className="b pa2 input-reset ba bg-transparent"
-                                           onChange={this.handleChange} type="text" name="focal_length"
-                                           id="focal-length"
-                                           value={this.state.focal_length}/>
-                                </div>
-                            </fieldset>
-                            <div className="mt3">
-                                <input className="b ph3 pv2 input-reset ba b--black bg-transparent pointer f6"
-                                       type="Submit"
-                                       value="Submit"/>
-                            </div>
+                            </form>
                         </div>
-                    </form>
-                </Collapsible>
+                    </TabPanel>
+                    <TabPanel>
+                        <div className="fl ph2 pr0-ns pl3-ns w-80 dib">
+                            <form onSubmit={this.commitChanges}>
+                                <TextField handleChange={this.handleChange} name="make" val={this.state.make}
+                                           desc="Your name will be displayed alongside your username." optional={true}/>
+
+                                <TextField handleChange={this.handleChange} name="model"  val={this.state.model}
+                                           desc="Your location will appear on your profile and be available for searches."
+                                           optional={true}/>
+
+                                <TextField handleChange={this.handleChange} name="lens_make" presentation_name={"Lens Make"} val={this.state.lens_make}
+                                           desc="The portfolio link is present on your profile page." optional={true}/>
+
+                                <TextField handleChange={this.handleChange} name="lens_model" presentation_name={"Lens Model"} val={this.state.lens_model}
+                                           desc="Adding your Instagram allows us to feature you on Instagram." optional={true}/>
+
+
+                                <div className="mt3">
+                                    <input className="b ph3 pv2 input-reset ba b--black bg-transparent pointer f6" type="Submit"
+                                           value="Submit"/>
+                                </div>
+                            </form>
+                        </div>
+                    </TabPanel>
+
+                </Tabs>
+
 
 
             </div>
@@ -101,3 +125,14 @@ export default class ManageImage extends Component {
 ManageImage.propTypes = {
     image: PropTypes.object.isRequired
 };
+
+
+const ManageImages = ({images}) =>
+    <div>
+        {images.map(i=> <ManageImage key={i.id} image={i}/>)}
+    </div>;
+ManageImages.propTypes = {
+    images: PropTypes.array.isRequired
+};
+
+    export {ManageImages};

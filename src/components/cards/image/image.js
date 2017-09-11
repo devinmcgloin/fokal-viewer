@@ -9,7 +9,7 @@ const ImageCardFull = ({image}) => {
         meta = image.metadata,
         user = image.user;
     return (
-        <div className="ma4 sans-serif">
+        <div className="mv4 sans-serif">
             <div className="br4 shadow-5"
                  style={{background: '#3C3C3C'}}>
                 <Link to={"/i/" + id}>

@@ -40,7 +40,9 @@ class ImageContainer extends Component {
     render() {
         if (this.state.isLoading)
             return <Loading/>;
-        return <ImageCardFull image={this.state.image}/>;
+        return <div className="pa4">
+            <ImageCardFull image={this.state.image}/>
+        </div>
     }
 }
 

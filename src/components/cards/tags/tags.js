@@ -17,7 +17,7 @@ const TagCard = ({id, image}) =>
 
             <div className="fw1 pa3">
                 <div>
-                    <p className="f7 ttu tracked white-50">Tag</p>
+                    <p className="f7 ttu tracked white-50 mt0">Tag</p>
                     <span className="tc f5 fw2 white">{id}</span>
                 </div>
             </div>

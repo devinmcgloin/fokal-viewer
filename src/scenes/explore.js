@@ -18,15 +18,7 @@ class ExploreScene extends Component {
     render() {
         return (
             <div className="pa3 sans-serif">
-                <div>
-                    <h1 className="f-headline lh-solid">Tags</h1>
-                    <NotImplemented/>
-                </div>
-                <div>
-                    <h1 className="f-headline lh-solid">Locations</h1>
-                    <NotImplemented/>
-                </div>
-
+                <NotImplemented/>
             </div>
         )
     }

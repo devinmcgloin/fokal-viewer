@@ -1,5 +1,7 @@
 .Collapsible {
     background-color: #fff;
+    width: 80%;
+    float: left;
 }
 
 .Collapsible__contentInner {
