@@ -8,7 +8,7 @@ import Raven from 'raven-js'
 import {Error} from "../components/error";
 import {ImageCardSmall} from "../components/cards/image/image";
 import {Controls} from "../components/collectionControls";
-import {Route, Switch } from 'react-router-dom'
+import {Redirect, Route, Switch} from 'react-router-dom'
 
 class ImageCollection extends Component {
     constructor(props) {
@@ -62,7 +62,7 @@ class ImageCollection extends Component {
 
     render() {
 
-        let content= null;
+        let content = null;
         if (this.state.isLoading)
             content = <Loading/>;
         else if (this.state.failed)
@@ -81,10 +81,16 @@ class ImageCollection extends Component {
                           handleTypeChange={(t) => this.handleChange(t)}/>
                 {content ? content :
                     <Switch>
-                        <Route path={"/recent"} render={() => this.state.isGrid ? <GridCollection cards={this.state.recent.map(i => <ImageCardSmall key={i.id} image={i}/>)}/> : <LinearCollection images={this.state.recent}/>}/>
-                        <Route path={"/trending"} render={() => this.state.isGrid ? <GridCollection cards={this.state.trending.map(i => <ImageCardSmall key={i.id} image={i}/>)}/> : <LinearCollection images={this.state.trending}/>}/>
+                        <Route path={"/recent"} render={() => this.state.isGrid ? <GridCollection
+                                cards={this.state.recent.map(i => <ImageCardSmall key={i.id} image={i}/>)}/> :
+                            <LinearCollection images={this.state.recent}/>}/>
+                        <Route path={"/trending"} render={() => this.state.isGrid ? <GridCollection
+                                cards={this.state.trending.map(i => <ImageCardSmall key={i.id} image={i}/>)}/> :
+                            <LinearCollection images={this.state.trending}/>}/>
 
-                        <Route exact path={"/"} render={() => this.state.isGrid ? <GridCollection cards={this.state.featured.map(i => <ImageCardSmall key={i.id} image={i}/>)}/> : <LinearCollection images={this.state.featured}/>}/>
+                        <Route exact path={"/"} render={() => this.state.isGrid ? <GridCollection
+                                cards={this.state.featured.map(i => <ImageCardSmall key={i.id} image={i}/>)}/> :
+                            <LinearCollection images={this.state.featured}/>}/>
 
                     </Switch>
                 }
@@ -106,6 +112,8 @@ class TaggedImages extends Component {
             images: [],
             tag: props.match.params.id,
             isLoading: true,
+            failed: false,
+            not_found: false
         };
     }
 
@@ -123,10 +131,14 @@ class TaggedImages extends Component {
                         data.body.then(b => t.setState({images: b, isLoading: false}))
                         break;
                     case false:
-                        t.setState({
-                            isLoading: false,
-                            failed: true
-                        });
+                        data.status === 404 ? t.setState({
+                                isLoading: false,
+                                not_found: true,
+                            }) :
+                            t.setState({
+                                isLoading: false,
+                                failed: true
+                            });
                         Raven.captureException(new Error("Invalid Response code from server."), {code: data.code})
                 }
             })
@@ -143,8 +155,11 @@ class TaggedImages extends Component {
             content = <Loading/>;
         else if (this.state.failed)
             content = <Error/>;
+        else if (this.state.not_found)
+            content = <Redirect to={"/404"}/>;
         else
             content = <GridCollection cards={this.state.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>;
+
         return (
             <div className="sans-serif pa3 pa4-ns">
                 <h1 className="tc f1" style={{textTransform: 'lowercase'}}>#{this.state.tag}</h1>

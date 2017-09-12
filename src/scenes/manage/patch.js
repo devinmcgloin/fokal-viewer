@@ -58,11 +58,11 @@ class ManageUser extends Component {
         return (
             <div className="sans-serif pt0 pb2 pv1-m pv2-ns">
                 {alert}
-                <div className="tc pv2 measure">
+                <div className="tc pv2 measure center">
                     <img src={this.state.user.avatar_links.medium} alt="avatar"
                          className="br1 h4 w4 dib"/>
                 </div>
-                {/*<div className="fl ph2 pr0-ns pl3-ns">*/}
+                <div className="measure center">
                     <form onSubmit={this.commitChanges}>
                         <TextField handleChange={this.handleChange} name="name" val={this.state.name}
                                    desc="Your name will be displayed alongside your username." optional={true}/>
@@ -88,7 +88,7 @@ class ManageUser extends Component {
                                    value="Submit"/>
                         </div>
                     </form>
-                {/*</div>*/}
+                </div>
             </div>
         )
     }
@@ -143,17 +143,18 @@ class Account extends Component {
     render() {
         return (
             <div className="sans-serif">
-                <div className="w-100 w-30-ns fl pa3">
-                    <ul className="nested-list-reset">
-                        <li><Link className="no-underline link hover dim black" to={this.props.match.url}>Account</Link>
-                        </li>
-                        <li><Link className="no-underline link hover dim black" to={this.props.match.url + '/manage'}>Manage
-                            Images</Link></li>
-                        <li><Link className="no-underline link hover dim black" to={this.props.match.url + '/delete'}>Delete</Link>
-                        </li>
-                    </ul>
-                </div>
-                <div className="w-100 w-70-ns fl pa3">
+                <nav className="ph3 ph4-ns pv2 pv3-ns bb b--black-10 black-70">
+                    <div className="nowrap overflow-x-auto">
+                        <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" title="Images"
+                              to={this.props.match.url}>Account</Link>
+                        <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" title="Favorites"
+                              to={this.props.match.url + '/manage'}>Manage</Link>
+                        <Link className="sans-serif link dim gray    f6 f5-ns dib mr3"
+                              to={this.props.match.url + '/delete'}
+                              title="Images">Delete</Link>
+                    </div>
+                </nav>
+                <div className="w-100 pa3">
                     {this.state.isLoadingUser ? <Loading/> :
                         <Switch>
                             <Route exact path={this.props.match.url}

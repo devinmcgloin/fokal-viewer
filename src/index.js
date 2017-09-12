@@ -14,7 +14,6 @@ import {Login} from './scenes/auth/login'
 import {Join} from './scenes/auth/join'
 import {UserContainer} from './scenes/user'
 import {GetJWT, LoggedIn, LogIn, Logout} from "./services/store/auth"
-import {Footer} from './components/footer'
 import 'tachyons/css/tachyons.css'
 import 'font-awesome/css/font-awesome.css'
 import {UploadContainer} from "./scenes/manage/upload";
@@ -113,7 +112,6 @@ class App extends React.Component {
                         </Switch>
                     </ScrollToTop>
                 </div>
-                <Footer/>
             </div>
         );
     }

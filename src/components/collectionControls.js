@@ -7,7 +7,7 @@ const Controls = ({options, selected, layout, handleLayoutChange, handleTypeChan
     const control = options.map(o =>
         <Link key={o.tag} to={o.link}>
         <span
-            className={"fl f5 link dim b no-underline black-50 dib pr3 pointer ttc " +
+            className={"fl f5 link dim b no-underline black-50 dib pr2 pr3-ns pointer ttc " +
             (o.tag === selected ? "black" : "")}
             onClick={() => handleTypeChange(o.tag)}>{o.tag}</span>
         </Link>);
@@ -17,11 +17,11 @@ const Controls = ({options, selected, layout, handleLayoutChange, handleTypeChan
             {control}
 
             <FontAwesome
-                className={"fr f5 link dim b no-underline black-50 dib pl3 pointer " + (layout === 'inline' ? 'black' : '')}
+                className={"fr f5 link dim b no-underline black-50 dib pl2 pl3-ns pointer " + (layout === 'inline' ? 'black' : '')}
                 name={"align-justify"}
                 onClick={() => handleLayoutChange('inline')}/>
             <FontAwesome
-                className={"fr f5 link dim b no-underline black-50 dib pl3 pointer " + (layout === 'grid' ? 'black' : '')}
+                className={"fr f5 link dim b no-underline black-50 dib pl2 pl3-ns pointer " + (layout === 'grid' ? 'black' : '')}
                 name={"th-large"}
                 onClick={() => handleLayoutChange('grid')}/>
         </section>

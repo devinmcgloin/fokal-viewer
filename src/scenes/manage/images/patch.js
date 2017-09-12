@@ -55,17 +55,17 @@ class ManageImage extends Component {
     render() {
         return (
             <div className="sans-serif dib pv3 mv4 w-100">
-                <div className="dib tc">
+                <div className="fl w-100 w-50-m w-50-l dt pa2">
                     <img src={this.state.image.src_links.medium} alt=""
-                         className="w-20"/>
+                         className="dtc v-mid"/>
                 </div>
-                <Tabs>
+                <Tabs className={"fl mw6 w-100 w-50-m w-50-l"}>
                     <TabList>
-                        <Tab>Image Metadata</Tab>
-                        <Tab>Camera</Tab>
+                        <Tab>Exif</Tab>
+                        <Tab>Gear</Tab>
                     </TabList>
                     <TabPanel>
-                        <div className="fl ph2 pr0-ns pl3-ns w-80 dib">
+                        <div className="fl ph2 pr0-ns pl3-ns w-100 dib">
                             <form onSubmit={this.commitChanges}>
                                 <TextField handleChange={this.handleChange} name="aperture" val={this.state.aperture}
                                            desc="Your name will be displayed alongside your username." optional={true}/>
