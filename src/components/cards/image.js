@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom'
-import {Image} from "../../image";
+import {Image} from "../image";
 
 
 const ImageCardFull = ({image}) => {
@@ -9,7 +9,7 @@ const ImageCardFull = ({image}) => {
         meta = image.metadata,
         user = image.user;
     return (
-        <div className="mv4 sans-serif">
+                      <div className="sans-serif">
             <div className="br4 shadow-5"
                  style={{background: '#3C3C3C'}}>
                 <Link to={"/i/" + id}>

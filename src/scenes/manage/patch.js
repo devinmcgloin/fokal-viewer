@@ -149,9 +149,9 @@ class Account extends Component {
                               to={this.props.match.url}>Account</Link>
                         <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" title="Favorites"
                               to={this.props.match.url + '/manage'}>Manage</Link>
-                        <Link className="sans-serif link dim gray    f6 f5-ns dib mr3"
-                              to={this.props.match.url + '/delete'}
-                              title="Images">Delete</Link>
+                        {/*<Link className="sans-serif link dim gray    f6 f5-ns dib mr3"*/}
+                              {/*to={this.props.match.url + '/delete'}*/}
+                              {/*title="Images">Delete</Link>*/}
                     </div>
                 </nav>
                 <div className="w-100 pa3">

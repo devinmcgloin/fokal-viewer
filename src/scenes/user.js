@@ -5,8 +5,8 @@ import {FetchImages, FetchUser, FetchUserImages} from '../services/api/retrieval
 import {Loading} from "../components/loading"
 import {GridCollection} from "../components/collection";
 import {Error} from "../components/error";
-import {UserStatsCard, UserTitleCard} from "../components/cards/user/user";
-import {ImageCardSmall} from "../components/cards/image/image";
+import {UserStatsCard, UserTitleCard} from "../components/cards/user";
+import {ImageCardSmall} from "../components/cards/image";
 import moment from 'moment'
 
 class UserContainer extends React.Component {
@@ -79,7 +79,7 @@ class UserContainer extends React.Component {
             return <Loading/>;
 
         const usr = this.state.user;
-        const userTitle = <UserTitleCard usr={usr} key={usr.id}/>;
+        const userTitle = <UserTitleCard user={usr} key={usr.id}/>;
 
         let init = {views: 0, favorites: 0, downloads: 0};
         const s = this.state.images.reduce((acc, cur) => ({

@@ -6,7 +6,7 @@ import {Loading} from "../components/loading"
 import PropTypes from 'prop-types'
 import Raven from 'raven-js'
 import {Error} from "../components/error";
-import {ImageCardSmall} from "../components/cards/image/image";
+import {ImageCardSmall} from "../components/cards/image";
 import {Controls} from "../components/collectionControls";
 import {Redirect, Route, Switch} from 'react-router-dom'
 
@@ -113,7 +113,8 @@ class TaggedImages extends Component {
             tag: props.match.params.id,
             isLoading: true,
             failed: false,
-            not_found: false
+            not_found: false,
+            count: 0,
         };
     }
 
@@ -128,7 +129,7 @@ class TaggedImages extends Component {
             .then(function (data) {
                 switch (data.ok) {
                     case true:
-                        data.body.then(b => t.setState({images: b, isLoading: false}))
+                        data.body.then(b => t.setState({images: b.images, count: b.count, isLoading: false}))
                         break;
                     case false:
                         data.status === 404 ? t.setState({

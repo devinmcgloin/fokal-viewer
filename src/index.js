@@ -16,6 +16,7 @@ import {UserContainer} from './scenes/user'
 import {GetJWT, LoggedIn, LogIn, Logout} from "./services/store/auth"
 import 'tachyons/css/tachyons.css'
 import 'font-awesome/css/font-awesome.css'
+import './assets/main.css'
 import {UploadContainer} from "./scenes/manage/upload";
 import PropTypes from 'prop-types'
 import {Account} from "./scenes/manage/patch"
@@ -48,7 +49,7 @@ class App extends React.Component {
         const jwtToken = googleUser.getAuthResponse().id_token;
         const tok = JwtDecode(jwtToken),
             unix = Math.round((new Date()).getTime() / 1000);
-        console.log(tok.iat, unix, unix - tok.iat );
+        console.log(tok.iat, unix, unix - tok.iat);
         RefreshToken(jwtToken)
             .then((data) => {
                 if (data.ok)
@@ -79,19 +80,20 @@ class App extends React.Component {
         return (
             <div>
                 <HeaderContainer isLoggedIn={this.state.isLoggedIn}/>
-                <div>
-                    <ScrollToTop>
-                        <Switch>
-                            <Route exact path="/:type(recent|trending|)" render={(props) =>
-                                <div>
-                                    {!this.state.isLoggedIn ?
-                                        <CallToAction title="Join Fokal"
-                                                      message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
-                                                      call="Join for Free"/>
-                                        : null}
-                                    <ImageCollection {...props}/>
-                                </div>
-                            }/>
+                <ScrollToTop>
+                    <div>
+                    <Switch>
+                        <Route exact path="/:type(recent|trending|)" render={(props) =>
+                            <div>
+                                {!this.state.isLoggedIn ?
+                                    <CallToAction title="Join Fokal"
+                                                  message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
+                                                  call="Join for Free"/>
+                                    : null}
+                                <ImageCollection {...props}/>
+                            </div>
+                        }/>
+
 
                             <Route path="/i/:id" component={ImageContainer}/>
                             <Route path="/u/:id" component={UserContainer}/>
@@ -106,12 +108,11 @@ class App extends React.Component {
                             <Route path="/upload" component={UploadContainer}/>
                             <Route path="/account/settings" component={Account}/>
                             <Route path="/explore" component={ExploreScene}/>
-
-
                             <Route path="/*" component={NotFound}/>
-                        </Switch>
-                    </ScrollToTop>
-                </div>
+                    </Switch>
+                    </div>
+
+                </ScrollToTop>
             </div>
         );
     }

@@ -1,9 +1,9 @@
 import React from 'react'
 import {GridCollection} from "./collection";
-import {ImageCardSmall} from "./cards/image/image";
+import {ImageCardSmall} from "./cards/image";
 import {NoResults} from "./error";
-import {UserTitleCard} from "./cards/user/user";
-import {TagCard} from "./cards/tags/tags";
+import {UserCard} from "./cards/user";
+import {TagCard} from "./cards/tags";
 import PropTypes from 'prop-types'
 
 const SearchImagesView = ({images}) =>
@@ -20,18 +20,17 @@ SearchImagesView.propTypes = {
 
 const SearchUsersView = ({users}) =>
     users.length ?
-        <GridCollection cards={users.map(u => <UserTitleCard key={u.id} usr={u}/>)}/>
+        <GridCollection cards={users.map(u => <UserCard key={u.id} user={u}/>)}/>
         : <NoResults/>;
 SearchUsersView.propTypes = {
     users: PropTypes.arrayOf(PropTypes.shape({
         id: PropTypes.string.isRequried,
-
     }))
 };
 
 const SearchTagsView = ({tags}) =>
     tags.length ?
-        <GridCollection cards={tags.map(t => <TagCard key={t.id} id={t.id} image={t.image}/>)}/>
+        <GridCollection cards={tags.map(t => <TagCard key={t.id} {...t}/>)}/>
         : <NoResults/>;
 
 SearchTagsView.propTypes = {

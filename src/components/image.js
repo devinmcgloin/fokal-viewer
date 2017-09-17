@@ -9,7 +9,7 @@ class Image extends Component {
         this.pixel_yd = props.pixel_yd;
         this.url = props.url;
         this.className = props.className;
-this.style = props.style;
+        this.style = props.style;
 
         this.state = {
             isLoaded: false,
@@ -28,7 +28,7 @@ this.style = props.style;
     }
 
     render() {
-        const style = this.state.isLoaded ? this.style : Object.assign( {
+        const style = this.state.isLoaded ? this.style : Object.assign({
             paddingBottom: (this.pixel_yd / this.pixel_xd) * 100 + '%',
         }, this.style);
 

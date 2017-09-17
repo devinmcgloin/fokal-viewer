@@ -1,12 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types'
+// import FontAwesome from 'react-fontawesome'
 
 const LoggedOutHeader = (props) => {
-
-
     return (
-        <nav className="pa3 pa4-ns bb b--black-10 black-70">
+        <nav className="pa3 pa4-ns bb b--black-10 black-70 bg-white">
+            {/*<FontAwesome name={"ellipsis-v"} size='2x' fixedWidth className={"ph2"}/>*/}
             <Link className="sans-serif link dim black b f6 f5-ns dib mr3" to="/" title="Home">Fokal</Link>
             <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/images" title="Search">
                 Search</Link>
@@ -22,7 +22,7 @@ const LoggedOutHeader = (props) => {
 
 const LoggedInHeader = (props) => {
     return (
-        <nav className="pa3 pa4-ns bb b--black-10 black-70">
+        <nav className="pa3 pa4-ns bb b--black-10 black-70 bg-white">
             <Link className="sans-serif link dim black b f6 f5-ns dib mr3" to="/" title="Home">Fokal</Link>
             <Link className="sans-serif link dim gray    f6 f5-ns dib mr3" to="/search/images" title="Search">
                 Search</Link>
