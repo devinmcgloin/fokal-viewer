@@ -90,7 +90,7 @@ class Search extends Component {
 
         return (
             <div className="ph3 ph4-ns">
-                <form onSubmit={this.loadImages} className="sans-serif mw7 pa5 pb6 ma2 tc br2 center">
+                <form onSubmit={this.loadImages} className="sans-serif mw7 pa5-ns pa2 pb6 ma2 tc br2 center">
                     <input
                         className="f6 f5-l input-reset bn fl white bg-black-70 pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns ba b--black-70"
                         type="text" id={"query"} name={"query"}
