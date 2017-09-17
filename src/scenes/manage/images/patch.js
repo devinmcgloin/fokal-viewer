@@ -113,7 +113,9 @@ class ManageImage extends Component {
                                         // suggestions={this.state.labels}
                                                handleDelete={(i) => {
                                                    let tags = this.state.tags;
-                                                   tags.splice(i, 0);
+                                                   console.log(tags);
+                                                   tags.splice(i, 1);
+                                                   console.log(tags);
                                                    this.setState({tags: tags})
                                                }}
                                                handleAddition={(tag) => {
