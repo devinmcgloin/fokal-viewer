@@ -96,7 +96,7 @@ class Search extends Component {
             <div className="ph3 ph4-ns">
                 <form onSubmit={this.loadImages} className="sans-serif mw7 pa5-ns pa2 pb6 ma2 tc br2 center">
                     <input
-                        className="f6 f5-l input-reset bn fl white bg-black-70 pa3 lh-solid w-75 w-80-l br2 br--left ba b--black-70 h3"
+                        className="f5 input-reset bn fl white bg-black-70 pa3 lh-solid w-75 w-80-l br2 br--left ba b--black-70 h3"
                         type="text" id={"query"} name={"query"}
                         onChange={this.handleTextChange}
                         value={this.state.q}
@@ -104,7 +104,7 @@ class Search extends Component {
                     />
                     <button
                         onClick={this.loadImages}
-                        className="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-80 hover-bg-black white pointer w-25 w-20-l br2 br--right"
+                        className="f5 button-reset fl pv3 tc bn bg-animate bg-black-80 hover-bg-black white pointer w-25 w-20-l br2 br--right"
                     style={{height: '3rem'}}><FontAwesome name={'search'}/></button>
 
                 </form>
