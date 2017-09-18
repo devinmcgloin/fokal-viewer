@@ -11,7 +11,6 @@ import {NotFound} from './components/error';
 import {ImageContainer} from './scenes/image';
 import {HeaderContainer} from "./components/header"
 import {Login} from './scenes/auth/login'
-import {Join} from './scenes/auth/join'
 import {UserContainer} from './scenes/user'
 import {GetJWT, LoggedIn, LogIn, Logout} from "./services/store/auth"
 import 'tachyons/css/tachyons.css'
@@ -104,7 +103,6 @@ class App extends React.Component {
                             <Route path="/login"
                                    render={() => <Login onSuccess={this.onLogin} isLoggedIn={this.state.isLoggedIn}/>}/>
                             <Route path="/logout" render={() => <LogoutPage onSuccess={this.onLogout}/>}/>
-                            <Route path="/join" component={Join}/>
                             <Route path="/upload" component={UploadContainer}/>
                             <Route path="/account/settings" component={Account}/>
                             <Route path="/explore" component={ExploreScene}/>
