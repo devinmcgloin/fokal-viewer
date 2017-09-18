@@ -1,295 +1,955 @@
 import React, {Component} from 'react'
-import {MapCard} from "../components/cards/geo";
+import {ImageCardSmall} from "../components/cards/image";
+import {GridCollection} from "../components/collection";
+import {Link} from 'react-router-dom'
 
-const image = {
-    "id": "zTWfoZXJwlOT",
-    "permalink": "http://localhost:8000/v0/images/zTWfoZXJwlOT",
-    "publish_time": "2017-09-02T03:37:14.678055-04:00",
-    "last_modified": "2017-09-02T03:37:14.678055-04:00",
-    "landmarks": [],
-    "colors": [
+const sierras = {
+    "images": [
         {
-            "sRGB": {
-                "r": 86,
-                "g": 117,
-                "b": 153
+            "id": "LVXlAOlmkTKR",
+            "permalink": "https://api.fok.al/v0/images/LVXlAOlmkTKR",
+            "publish_time": "2017-09-08T22:57:31.800226Z",
+            "last_modified": "2017-09-08T22:57:31.800226Z",
+            "landmarks": [],
+            "colors": [
+                {
+                    "sRGB": {
+                        "r": 103,
+                        "g": 110,
+                        "b": 58
+                    },
+                    "hex": "676E3A",
+                    "hsv": {
+                        "h": 68,
+                        "s": 47,
+                        "v": 43
+                    },
+                    "shade": "Grey",
+                    "color_name": "Costa Del Sol",
+                    "pixel_fraction": 0.013575109,
+                    "score": 0.18298304
+                },
+                {
+                    "sRGB": {
+                        "r": 86,
+                        "g": 88,
+                        "b": 79
+                    },
+                    "hex": "56584F",
+                    "hsv": {
+                        "h": 73,
+                        "s": 10,
+                        "v": 34
+                    },
+                    "shade": "Grey",
+                    "color_name": "Fuscous Gray",
+                    "pixel_fraction": 0.19262782,
+                    "score": 0.108436346
+                },
+                {
+                    "sRGB": {
+                        "r": 199,
+                        "g": 194,
+                        "b": 186
+                    },
+                    "hex": "C7C2BA",
+                    "hsv": {
+                        "h": 36,
+                        "s": 6,
+                        "v": 78
+                    },
+                    "shade": "White",
+                    "color_name": "Cotton Seed",
+                    "pixel_fraction": 0.1621086,
+                    "score": 0.088675156
+                },
+                {
+                    "sRGB": {
+                        "r": 89,
+                        "g": 98,
+                        "b": 46
+                    },
+                    "hex": "59622E",
+                    "hsv": {
+                        "h": 70,
+                        "s": 53,
+                        "v": 38
+                    },
+                    "shade": "Grey",
+                    "color_name": "Woodland",
+                    "pixel_fraction": 0.031609196,
+                    "score": 0.15638207
+                },
+                {
+                    "sRGB": {
+                        "r": 82,
+                        "g": 92,
+                        "b": 49
+                    },
+                    "hex": "525C31",
+                    "hsv": {
+                        "h": 73,
+                        "s": 46,
+                        "v": 36
+                    },
+                    "shade": "Grey",
+                    "color_name": "Woodland",
+                    "pixel_fraction": 0.011791518,
+                    "score": 0.107565224
+                },
+                {
+                    "sRGB": {
+                        "r": 116,
+                        "g": 115,
+                        "b": 105
+                    },
+                    "hex": "747369",
+                    "hsv": {
+                        "h": 54,
+                        "s": 9,
+                        "v": 45
+                    },
+                    "shade": "Grey",
+                    "color_name": "Flint",
+                    "pixel_fraction": 0.08977408,
+                    "score": 0.07946398
+                },
+                {
+                    "sRGB": {
+                        "r": 122,
+                        "g": 121,
+                        "b": 92
+                    },
+                    "hex": "7A795C",
+                    "hsv": {
+                        "h": 57,
+                        "s": 24,
+                        "v": 47
+                    },
+                    "shade": "Grey",
+                    "color_name": "Flax Smoke",
+                    "pixel_fraction": 0.02705113,
+                    "score": 0.05329309
+                },
+                {
+                    "sRGB": {
+                        "r": 164,
+                        "g": 159,
+                        "b": 151
+                    },
+                    "hex": "A49F97",
+                    "hsv": {
+                        "h": 36,
+                        "s": 7,
+                        "v": 64
+                    },
+                    "shade": "Grey",
+                    "color_name": "Dawn",
+                    "pixel_fraction": 0.14070551,
+                    "score": 0.042474333
+                },
+                {
+                    "sRGB": {
+                        "r": 111,
+                        "g": 119,
+                        "b": 76
+                    },
+                    "hex": "6F774C",
+                    "hsv": {
+                        "h": 71,
+                        "s": 36,
+                        "v": 46
+                    },
+                    "shade": "Grey",
+                    "color_name": "Go Ben",
+                    "pixel_fraction": 0.00307174,
+                    "score": 0.031641234
+                },
+                {
+                    "sRGB": {
+                        "r": 89,
+                        "g": 90,
+                        "b": 69
+                    },
+                    "hex": "595A45",
+                    "hsv": {
+                        "h": 62,
+                        "s": 23,
+                        "v": 35
+                    },
+                    "shade": "Grey",
+                    "color_name": "Finch",
+                    "pixel_fraction": 0.020610385,
+                    "score": 0.030743629
+                }
+            ],
+            "tags": [
+                "lake",
+                "sierras",
+                "california",
+                "grass"
+            ],
+            "labels": [
+                {
+                    "description": "waterway",
+                    "score": 0.91011
+                },
+                {
+                    "description": "water",
+                    "score": 0.8421425
+                },
+                {
+                    "description": "water resources",
+                    "score": 0.90767175
+                },
+                {
+                    "description": "lake",
+                    "score": 0.89586926
+                },
+                {
+                    "description": "nature reserve",
+                    "score": 0.9179224
+                },
+                {
+                    "description": "wetland",
+                    "score": 0.8099532
+                },
+                {
+                    "description": "bank",
+                    "score": 0.8332987
+                },
+                {
+                    "description": "river",
+                    "score": 0.8323779
+                },
+                {
+                    "description": "reservoir",
+                    "score": 0.80503726
+                },
+                {
+                    "description": "inlet",
+                    "score": 0.6523049
+                }
+            ],
+            "user": {
+                "id": "devinmcgloin",
+                "permalink": "https://api.fok.al/v0/users/devinmcgloin",
+                "email": "devinmcgloin@gmail.com",
+                "name": "Devin McGloin",
+                "bio": "Working on Fokal",
+                "url": "https://devinmcgloin.com",
+                "location": "New York, NY",
+                "avatar_links": {
+                    "thumb": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=200&fit=max",
+                    "small": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=400&fit=max",
+                    "medium": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max",
+                    "large": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy",
+                    "raw": "https://images.fok.al/avatar/devinmcgloin"
+                },
+                "images_links": [
+                    "https://api.fok.al/v0/images/DWzfwTCaFIXq",
+                    "https://api.fok.al/v0/images/zTWfoZXJwlOT",
+                    "https://api.fok.al/v0/images/UmCoFGzEVUIc",
+                    "https://api.fok.al/v0/images/LVXlAOlmkTKR",
+                    "https://api.fok.al/v0/images/edziXgZtrysX",
+                    "https://api.fok.al/v0/images/SHqZVnQXJObk",
+                    "https://api.fok.al/v0/images/ADZtkxuhvqke",
+                    "https://api.fok.al/v0/images/DjXiFqiVgFmX",
+                    "https://api.fok.al/v0/images/bVQOctiXBTPw",
+                    "https://api.fok.al/v0/images/tcNgvMvItujL",
+                    "https://api.fok.al/v0/images/kwvHKBzTXkFe",
+                    "https://api.fok.al/v0/images/pjQYthDqvzyv",
+                    "https://api.fok.al/v0/images/pAZSFKAMqgMO",
+                    "https://api.fok.al/v0/images/aGTfljGAqmxR",
+                    "https://api.fok.al/v0/images/jjXiNDWEXhdi",
+                    "https://api.fok.al/v0/images/dPdrDMJZWugx",
+                    "https://api.fok.al/v0/images/GNxMVGjvaKwI",
+                    "https://api.fok.al/v0/images/JRWZqSsZTRYg",
+                    "https://api.fok.al/v0/images/VmCJUtDkhxZK",
+                    "https://api.fok.al/v0/images/zMANRzvPTkDF",
+                    "https://api.fok.al/v0/images/XtMuhzUoietc",
+                    "https://api.fok.al/v0/images/lzvSBEcEVBCr",
+                    "https://api.fok.al/v0/images/vkNdnysMjfYC",
+                    "https://api.fok.al/v0/images/oobIKfadRAAw",
+                    "https://api.fok.al/v0/images/iFMzeQPUSLXa"
+                ],
+                "favorite_links": [
+                    "https://api.fok.al/v0/images/kvYjDTJuJNnS"
+                ],
+                "featured": false,
+                "admin": false,
+                "created_at": "2017-06-29T05:33:39.926126Z",
+                "last_modified": "2017-06-29T05:33:39.926126Z"
             },
-            "hex": "567599",
-            "hsv": {
-                "h": 212,
-                "s": 43,
-                "v": 60
+            "featured": false,
+            "stats": {
+                "downloads": 0,
+                "views": 5,
+                "favorites": 0
             },
-            "shade": "Grey",
-            "color_name": "Kashmir Blue",
-            "pixel_fraction": 0.1313912,
-            "score": 0.1425244
-        }, {
-            "sRGB": {
-                "r": 215,
-                "g": 190,
-                "b": 156
+            "src_links": {
+                "thumb": "https://images.fok.al/content/LVXlAOlmkTKR?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=200&fit=max",
+                "small": "https://images.fok.al/content/LVXlAOlmkTKR?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=400&fit=max",
+                "medium": "https://images.fok.al/content/LVXlAOlmkTKR?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max",
+                "large": "https://images.fok.al/content/LVXlAOlmkTKR?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy",
+                "raw": "https://images.fok.al/content/LVXlAOlmkTKR"
             },
-            "hex": "D7BE9C",
-            "hsv": {
-                "h": 34,
-                "s": 27,
-                "v": 84
-            },
-            "shade": "White",
-            "color_name": "Cameo",
-            "pixel_fraction": 0.07699168,
-            "score": 0.09110739
-        }, {
-            "sRGB": {
-                "r": 193,
-                "g": 148,
-                "b": 101
-            },
-            "hex": "C19465",
-            "hsv": {
-                "h": 30,
-                "s": 47,
-                "v": 75
-            },
-            "shade": "Grey",
-            "color_name": "Muddy Waters",
-            "pixel_fraction": 0.029726516,
-            "score": 0.05988673
-        }, {
-            "sRGB": {
-                "r": 76,
-                "g": 111,
-                "b": 156
-            },
-            "hex": "4C6F9C",
-            "hsv": {
-                "h": 213,
-                "s": 51,
-                "v": 61
-            },
-            "shade": "Grey",
-            "color_name": "Kashmir Blue",
-            "pixel_fraction": 0.059056677,
-            "score": 0.11343246
-        }, {
-            "sRGB": {
-                "r": 177,
-                "g": 153,
-                "b": 120
-            },
-            "hex": "B19978",
-            "hsv": {
-                "h": 34,
-                "s": 32,
-                "v": 69
-            },
-            "shade": "Grey",
-            "color_name": "Mongoose",
-            "pixel_fraction": 0.07025366,
-            "score": 0.08217777
-        }, {
-            "sRGB": {
-                "r": 139,
-                "g": 116,
-                "b": 85
-            },
-            "hex": "8B7455",
-            "hsv": {
-                "h": 34,
-                "s": 38,
-                "v": 54
-            },
-            "shade": "Grey",
-            "color_name": "Shadow",
-            "pixel_fraction": 0.044589773,
-            "score": 0.062442455
-        }, {
-            "sRGB": {
-                "r": 222,
-                "g": 186,
-                "b": 139
-            },
-            "hex": "DEBA8B",
-            "hsv": {
-                "h": 33,
-                "s": 37,
-                "v": 87
-            },
-            "shade": "Grey",
-            "color_name": "Gold Sand",
-            "pixel_fraction": 0.022592152,
-            "score": 0.055182274
-        }, {
-            "sRGB": {
-                "r": 187,
-                "g": 153,
-                "b": 108
-            },
-            "hex": "BB996C",
-            "hsv": {
-                "h": 34,
-                "s": 42,
-                "v": 73
-            },
-            "shade": "Grey",
-            "color_name": "Teak",
-            "pixel_fraction": 0.02080856,
-            "score": 0.05239654
-        }, {
-            "sRGB": {
-                "r": 224,
-                "g": 179,
-                "b": 129
-            },
-            "hex": "E0B381",
-            "hsv": {
-                "h": 31,
-                "s": 42,
-                "v": 87
-            },
-            "shade": "Grey",
-            "color_name": "Gold Sand",
-            "pixel_fraction": 0.019817678,
-            "score": 0.04464528
-        }, {
-            "sRGB": {
-                "r": 103,
-                "g": 83,
-                "b": 55
-            },
-            "hex": "675337",
-            "hsv": {
-                "h": 35,
-                "s": 46,
-                "v": 40
-            },
-            "shade": "Grey",
-            "color_name": "Shingle Fawn",
-            "pixel_fraction": 0.046472453,
-            "score": 0.04005093
-        }
-    ],
-    "tags": [],
-    "labels": [
-        {
-            "description": "sky",
-            "score": 0.84031916
-        }, {
-            "description": "angle",
-            "score": 0.54458255
-        }, {
-            "description": "building",
-            "score": 0.9597556
-        }, {
-            "description": "facade",
-            "score": 0.7733835
-        }, {
-            "description": "commercial building",
-            "score": 0.7039918
-        }, {
-            "description": "property",
-            "score": 0.91119367
-        }, {
-            "description": "condominium",
-            "score": 0.8257533
-        }, {
-            "description": "apartment",
-            "score": 0.76639
-        }, {
-            "description": "real estate",
-            "score": 0.7513293
-        }, {
-            "description": "window",
-            "score": 0.54851705
-        }
-    ],
-    "user": {
-        "id": "devinmcgloin",
-        "permalink": "http://localhost:8000/v0/users/devinmcgloin",
-        "email": "devinmcgloin@gmail.com",
-        "name": "Devin McGloin",
-        "bio": "Working on Fokal",
-        "url": "https://devinmcgloin.com",
-        "instagram": "devinmcgloin",
-        "twitter": "devinmcgloin",
-        "location": "New York, NY",
-        "avatar_links": {
-            "thumb": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=200&fit=max",
-            "small": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=400&fit=max",
-            "medium": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max",
-            "large": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy",
-            "raw": "https://images.fok.al/avatar/devinmcgloin"
+            "metadata": {
+                "aperture": 9,
+                "exposure_time": "1/320",
+                "focal_length": 19,
+                "iso": 200,
+                "make": "OLYMPUS IMAGING CORP.",
+                "model": "E-M5",
+                "lens_model": "OLYMPUS M.12-50mm F3.5-6.3",
+                "pixel_xd": 4608,
+                "pixel_yd": 3456,
+                "capture_time": "2014-07-22T02:45:58Z",
+                "location": {
+                    "point": {
+                        "SRID": 4326,
+                        "X": -118.22682222222222,
+                        "Y": 36.486625000000004
+                    },
+                    "description": null
+                }
+            }
         },
-        "images_links": [
-            "http://localhost:8000/v0/images/GNxMVGjvaKwI",
-            "http://localhost:8000/v0/images/XtMuhzUoietc",
-            "http://localhost:8000/v0/images/zMANRzvPTkDF",
-            "http://localhost:8000/v0/images/iFMzeQPUSLXa",
-            "http://localhost:8000/v0/images/JRWZqSsZTRYg",
-            "http://localhost:8000/v0/images/jjXiNDWEXhdi",
-            "http://localhost:8000/v0/images/zTWfoZXJwlOT",
-            "http://localhost:8000/v0/images/vkNdnysMjfYC",
-            "http://localhost:8000/v0/images/DjXiFqiVgFmX",
-            "http://localhost:8000/v0/images/aGTfljGAqmxR",
-            "http://localhost:8000/v0/images/kwvHKBzTXkFe",
-            "http://localhost:8000/v0/images/lzvSBEcEVBCr",
-            "http://localhost:8000/v0/images/SHqZVnQXJObk",
-            "http://localhost:8000/v0/images/oobIKfadRAAw",
-            "http://localhost:8000/v0/images/ADZtkxuhvqke",
-            "http://localhost:8000/v0/images/VmCJUtDkhxZK",
-            "http://localhost:8000/v0/images/bVQOctiXBTPw",
-            "http://localhost:8000/v0/images/dPdrDMJZWugx",
-            "http://localhost:8000/v0/images/tcNgvMvItujL",
-            "http://localhost:8000/v0/images/pjQYthDqvzyv",
-            "http://localhost:8000/v0/images/pAZSFKAMqgMO",
-            "http://localhost:8000/v0/images/edziXgZtrysX"
-        ],
-        "favorite_links": ["http://localhost:8000/v0/images/kvYjDTJuJNnS"],
-        "featured": false,
-        "admin": false,
-        "created_at": "2017-06-29T01:33:39.926126-04:00",
-        "last_modified": "2017-06-29T01:33:39.926126-04:00"
-    },
-    "featured": false,
-    "stats": {
-        "downloads": 0,
-        "views": 110,
-        "favorites": 0
-    },
-    "src_links": {
-        "thumb": "https://images.fok.al/content/zTWfoZXJwlOT?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=200&fit=max",
-        "small": "https://images.fok.al/content/zTWfoZXJwlOT?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=400&fit=max",
-        "medium": "https://images.fok.al/content/zTWfoZXJwlOT?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max",
-        "large": "https://images.fok.al/content/zTWfoZXJwlOT?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy",
-        "raw": "https://images.fok.al/content/zTWfoZXJwlOT"
-    },
-    "metadata": {
-        "aperture": 2.2,
-        "exposure_time": "1/2137",
-        "focal_length": 4,
-        "iso": 25,
-        "make": "Apple",
-        "model": "iPhone 6s",
-        "lens_make": "Apple",
-        "lens_model": "iPhone 6s back camera 4.15mm f/2.2",
-        "pixel_xd": 4032,
-        "pixel_yd": 3024,
-        "capture_time": "2017-08-12T14:14:46Z",
-        "location": {
-            "point": {
-                "SRID": 4326,
-                "X": -117.24683333333333,
-                "Y": 32.88741944444445
+        {
+            "id": "UmCoFGzEVUIc",
+            "permalink": "https://api.fok.al/v0/images/UmCoFGzEVUIc",
+            "publish_time": "2017-09-08T22:57:48.633285Z",
+            "last_modified": "2017-09-08T22:57:48.633285Z",
+            "landmarks": [],
+            "colors": [
+                {
+                    "sRGB": {
+                        "r": 67,
+                        "g": 123,
+                        "b": 186
+                    },
+                    "hex": "437BBA",
+                    "hsv": {
+                        "h": 211,
+                        "s": 63,
+                        "v": 72
+                    },
+                    "shade": "Grey",
+                    "color_name": "San Marino",
+                    "pixel_fraction": 0.081847005,
+                    "score": 0.30975908
+                },
+                {
+                    "sRGB": {
+                        "r": 125,
+                        "g": 118,
+                        "b": 119
+                    },
+                    "hex": "7D7677",
+                    "hsv": {
+                        "h": 351,
+                        "s": 5,
+                        "v": 49
+                    },
+                    "shade": "Grey",
+                    "color_name": "Concord",
+                    "pixel_fraction": 0.16428855,
+                    "score": 0.07652742
+                },
+                {
+                    "sRGB": {
+                        "r": 35,
+                        "g": 88,
+                        "b": 151
+                    },
+                    "hex": "235897",
+                    "hsv": {
+                        "h": 212,
+                        "s": 76,
+                        "v": 59
+                    },
+                    "shade": "Grey",
+                    "color_name": "St Tropaz",
+                    "pixel_fraction": 0.10939358,
+                    "score": 0.17965417
+                },
+                {
+                    "sRGB": {
+                        "r": 102,
+                        "g": 154,
+                        "b": 204
+                    },
+                    "hex": "669ACC",
+                    "hsv": {
+                        "h": 209,
+                        "s": 50,
+                        "v": 80
+                    },
+                    "shade": "Grey",
+                    "color_name": "Danube",
+                    "pixel_fraction": 0.045184303,
+                    "score": 0.17462033
+                },
+                {
+                    "sRGB": {
+                        "r": 132,
+                        "g": 168,
+                        "b": 200
+                    },
+                    "hex": "84A8C8",
+                    "hsv": {
+                        "h": 208,
+                        "s": 33,
+                        "v": 78
+                    },
+                    "shade": "Grey",
+                    "color_name": "Polo Blue",
+                    "pixel_fraction": 0.0349782,
+                    "score": 0.10156319
+                },
+                {
+                    "sRGB": {
+                        "r": 155,
+                        "g": 149,
+                        "b": 150
+                    },
+                    "hex": "9B9596",
+                    "hsv": {
+                        "h": 350,
+                        "s": 3,
+                        "v": 60
+                    },
+                    "shade": "Grey",
+                    "color_name": "Mountain Mist",
+                    "pixel_fraction": 0.123067774,
+                    "score": 0.03797412
+                },
+                {
+                    "sRGB": {
+                        "r": 152,
+                        "g": 182,
+                        "b": 209
+                    },
+                    "hex": "98B6D1",
+                    "hsv": {
+                        "h": 208,
+                        "s": 27,
+                        "v": 81
+                    },
+                    "shade": "Grey",
+                    "color_name": "Rock Blue",
+                    "pixel_fraction": 0.010107015,
+                    "score": 0.030867552
+                },
+                {
+                    "sRGB": {
+                        "r": 94,
+                        "g": 87,
+                        "b": 87
+                    },
+                    "hex": "5E5757",
+                    "hsv": {
+                        "h": 0,
+                        "s": 7,
+                        "v": 36
+                    },
+                    "shade": "Grey",
+                    "color_name": "Chicago",
+                    "pixel_fraction": 0.07956798,
+                    "score": 0.028953366
+                },
+                {
+                    "sRGB": {
+                        "r": 15,
+                        "g": 64,
+                        "b": 119
+                    },
+                    "hex": "0F4077",
+                    "hsv": {
+                        "h": 211,
+                        "s": 87,
+                        "v": 46
+                    },
+                    "shade": "Grey",
+                    "color_name": "Midnight Blue",
+                    "pixel_fraction": 0.18024178,
+                    "score": 0.022477524
+                },
+                {
+                    "sRGB": {
+                        "r": 110,
+                        "g": 126,
+                        "b": 146
+                    },
+                    "hex": "6E7E92",
+                    "hsv": {
+                        "h": 213,
+                        "s": 24,
+                        "v": 57
+                    },
+                    "shade": "Grey",
+                    "color_name": "Slate Gray",
+                    "pixel_fraction": 0.016944114,
+                    "score": 0.015326467
+                }
+            ],
+            "tags": [
+                "mountains",
+                "sierras",
+                "mount whitney",
+                "mount langley"
+            ],
+            "labels": [
+                {
+                    "description": "mountainous landforms",
+                    "score": 0.91993165
+                },
+                {
+                    "description": "wilderness",
+                    "score": 0.906365
+                },
+                {
+                    "description": "sky",
+                    "score": 0.8909347
+                },
+                {
+                    "description": "mountain range",
+                    "score": 0.8063167
+                },
+                {
+                    "description": "mountain",
+                    "score": 0.91543525
+                },
+                {
+                    "description": "ridge",
+                    "score": 0.94084543
+                },
+                {
+                    "description": "badlands",
+                    "score": 0.8738911
+                },
+                {
+                    "description": "geological phenomenon",
+                    "score": 0.77251685
+                },
+                {
+                    "description": "massif",
+                    "score": 0.76895565
+                },
+                {
+                    "description": "summit",
+                    "score": 0.7500282
+                }
+            ],
+            "user": {
+                "id": "devinmcgloin",
+                "permalink": "https://api.fok.al/v0/users/devinmcgloin",
+                "email": "devinmcgloin@gmail.com",
+                "name": "Devin McGloin",
+                "bio": "Working on Fokal",
+                "url": "https://devinmcgloin.com",
+                "location": "New York, NY",
+                "avatar_links": {
+                    "thumb": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=200&fit=max",
+                    "small": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=400&fit=max",
+                    "medium": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max",
+                    "large": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy",
+                    "raw": "https://images.fok.al/avatar/devinmcgloin"
+                },
+                "images_links": [
+                    "https://api.fok.al/v0/images/DWzfwTCaFIXq",
+                    "https://api.fok.al/v0/images/zTWfoZXJwlOT",
+                    "https://api.fok.al/v0/images/UmCoFGzEVUIc",
+                    "https://api.fok.al/v0/images/LVXlAOlmkTKR",
+                    "https://api.fok.al/v0/images/edziXgZtrysX",
+                    "https://api.fok.al/v0/images/SHqZVnQXJObk",
+                    "https://api.fok.al/v0/images/ADZtkxuhvqke",
+                    "https://api.fok.al/v0/images/DjXiFqiVgFmX",
+                    "https://api.fok.al/v0/images/bVQOctiXBTPw",
+                    "https://api.fok.al/v0/images/tcNgvMvItujL",
+                    "https://api.fok.al/v0/images/kwvHKBzTXkFe",
+                    "https://api.fok.al/v0/images/pjQYthDqvzyv",
+                    "https://api.fok.al/v0/images/pAZSFKAMqgMO",
+                    "https://api.fok.al/v0/images/aGTfljGAqmxR",
+                    "https://api.fok.al/v0/images/jjXiNDWEXhdi",
+                    "https://api.fok.al/v0/images/dPdrDMJZWugx",
+                    "https://api.fok.al/v0/images/GNxMVGjvaKwI",
+                    "https://api.fok.al/v0/images/JRWZqSsZTRYg",
+                    "https://api.fok.al/v0/images/VmCJUtDkhxZK",
+                    "https://api.fok.al/v0/images/zMANRzvPTkDF",
+                    "https://api.fok.al/v0/images/XtMuhzUoietc",
+                    "https://api.fok.al/v0/images/lzvSBEcEVBCr",
+                    "https://api.fok.al/v0/images/vkNdnysMjfYC",
+                    "https://api.fok.al/v0/images/oobIKfadRAAw",
+                    "https://api.fok.al/v0/images/iFMzeQPUSLXa"
+                ],
+                "favorite_links": [
+                    "https://api.fok.al/v0/images/kvYjDTJuJNnS"
+                ],
+                "featured": false,
+                "admin": false,
+                "created_at": "2017-06-29T05:33:39.926126Z",
+                "last_modified": "2017-06-29T05:33:39.926126Z"
             },
-            "description": null
+            "featured": false,
+            "stats": {
+                "downloads": 0,
+                "views": 4,
+                "favorites": 0
+            },
+            "src_links": {
+                "thumb": "https://images.fok.al/content/UmCoFGzEVUIc?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=200&fit=max",
+                "small": "https://images.fok.al/content/UmCoFGzEVUIc?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=400&fit=max",
+                "medium": "https://images.fok.al/content/UmCoFGzEVUIc?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max",
+                "large": "https://images.fok.al/content/UmCoFGzEVUIc?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy",
+                "raw": "https://images.fok.al/content/UmCoFGzEVUIc"
+            },
+            "metadata": {
+                "aperture": 10,
+                "exposure_time": "1/500",
+                "focal_length": 12,
+                "iso": 200,
+                "make": "OLYMPUS IMAGING CORP.",
+                "model": "E-M5",
+                "lens_model": "OLYMPUS M.12-50mm F3.5-6.3",
+                "pixel_xd": 4608,
+                "pixel_yd": 3456,
+                "capture_time": "2014-07-23T01:41:17Z",
+                "location": {
+                    "point": {
+                        "SRID": 4326,
+                        "X": -118.22682222222222,
+                        "Y": 36.486625000000004
+                    },
+                    "description": null
+                }
+            }
         }
-    }
+    ],
+    "users": [],
+    "tags": [
+        {
+            "id": "sierras",
+            "permalink": "https://api.fok.al/v0/tags/sierras",
+            "image": {
+                "id": "LVXlAOlmkTKR",
+                "permalink": "https://api.fok.al/v0/images/LVXlAOlmkTKR",
+                "publish_time": "2017-09-08T22:57:31.800226Z",
+                "last_modified": "2017-09-08T22:57:31.800226Z",
+                "landmarks": [],
+                "colors": [
+                    {
+                        "sRGB": {
+                            "r": 103,
+                            "g": 110,
+                            "b": 58
+                        },
+                        "hex": "676E3A",
+                        "hsv": {
+                            "h": 68,
+                            "s": 47,
+                            "v": 43
+                        },
+                        "shade": "Grey",
+                        "color_name": "Costa Del Sol",
+                        "pixel_fraction": 0.013575109,
+                        "score": 0.18298304
+                    },
+                    {
+                        "sRGB": {
+                            "r": 86,
+                            "g": 88,
+                            "b": 79
+                        },
+                        "hex": "56584F",
+                        "hsv": {
+                            "h": 73,
+                            "s": 10,
+                            "v": 34
+                        },
+                        "shade": "Grey",
+                        "color_name": "Fuscous Gray",
+                        "pixel_fraction": 0.19262782,
+                        "score": 0.108436346
+                    },
+                    {
+                        "sRGB": {
+                            "r": 199,
+                            "g": 194,
+                            "b": 186
+                        },
+                        "hex": "C7C2BA",
+                        "hsv": {
+                            "h": 36,
+                            "s": 6,
+                            "v": 78
+                        },
+                        "shade": "White",
+                        "color_name": "Cotton Seed",
+                        "pixel_fraction": 0.1621086,
+                        "score": 0.088675156
+                    },
+                    {
+                        "sRGB": {
+                            "r": 89,
+                            "g": 98,
+                            "b": 46
+                        },
+                        "hex": "59622E",
+                        "hsv": {
+                            "h": 70,
+                            "s": 53,
+                            "v": 38
+                        },
+                        "shade": "Grey",
+                        "color_name": "Woodland",
+                        "pixel_fraction": 0.031609196,
+                        "score": 0.15638207
+                    },
+                    {
+                        "sRGB": {
+                            "r": 82,
+                            "g": 92,
+                            "b": 49
+                        },
+                        "hex": "525C31",
+                        "hsv": {
+                            "h": 73,
+                            "s": 46,
+                            "v": 36
+                        },
+                        "shade": "Grey",
+                        "color_name": "Woodland",
+                        "pixel_fraction": 0.011791518,
+                        "score": 0.107565224
+                    },
+                    {
+                        "sRGB": {
+                            "r": 116,
+                            "g": 115,
+                            "b": 105
+                        },
+                        "hex": "747369",
+                        "hsv": {
+                            "h": 54,
+                            "s": 9,
+                            "v": 45
+                        },
+                        "shade": "Grey",
+                        "color_name": "Flint",
+                        "pixel_fraction": 0.08977408,
+                        "score": 0.07946398
+                    },
+                    {
+                        "sRGB": {
+                            "r": 122,
+                            "g": 121,
+                            "b": 92
+                        },
+                        "hex": "7A795C",
+                        "hsv": {
+                            "h": 57,
+                            "s": 24,
+                            "v": 47
+                        },
+                        "shade": "Grey",
+                        "color_name": "Flax Smoke",
+                        "pixel_fraction": 0.02705113,
+                        "score": 0.05329309
+                    },
+                    {
+                        "sRGB": {
+                            "r": 164,
+                            "g": 159,
+                            "b": 151
+                        },
+                        "hex": "A49F97",
+                        "hsv": {
+                            "h": 36,
+                            "s": 7,
+                            "v": 64
+                        },
+                        "shade": "Grey",
+                        "color_name": "Dawn",
+                        "pixel_fraction": 0.14070551,
+                        "score": 0.042474333
+                    },
+                    {
+                        "sRGB": {
+                            "r": 111,
+                            "g": 119,
+                            "b": 76
+                        },
+                        "hex": "6F774C",
+                        "hsv": {
+                            "h": 71,
+                            "s": 36,
+                            "v": 46
+                        },
+                        "shade": "Grey",
+                        "color_name": "Go Ben",
+                        "pixel_fraction": 0.00307174,
+                        "score": 0.031641234
+                    },
+                    {
+                        "sRGB": {
+                            "r": 89,
+                            "g": 90,
+                            "b": 69
+                        },
+                        "hex": "595A45",
+                        "hsv": {
+                            "h": 62,
+                            "s": 23,
+                            "v": 35
+                        },
+                        "shade": "Grey",
+                        "color_name": "Finch",
+                        "pixel_fraction": 0.020610385,
+                        "score": 0.030743629
+                    }
+                ],
+                "tags": [
+                    "lake",
+                    "sierras",
+                    "california",
+                    "grass"
+                ],
+                "labels": [
+                    {
+                        "description": "waterway",
+                        "score": 0.91011
+                    },
+                    {
+                        "description": "water",
+                        "score": 0.8421425
+                    },
+                    {
+                        "description": "water resources",
+                        "score": 0.90767175
+                    },
+                    {
+                        "description": "lake",
+                        "score": 0.89586926
+                    },
+                    {
+                        "description": "nature reserve",
+                        "score": 0.9179224
+                    },
+                    {
+                        "description": "wetland",
+                        "score": 0.8099532
+                    },
+                    {
+                        "description": "bank",
+                        "score": 0.8332987
+                    },
+                    {
+                        "description": "river",
+                        "score": 0.8323779
+                    },
+                    {
+                        "description": "reservoir",
+                        "score": 0.80503726
+                    },
+                    {
+                        "description": "inlet",
+                        "score": 0.6523049
+                    }
+                ],
+                "user": {
+                    "id": "devinmcgloin",
+                    "permalink": "https://api.fok.al/v0/users/devinmcgloin",
+                    "email": "devinmcgloin@gmail.com",
+                    "name": "Devin McGloin",
+                    "bio": "Working on Fokal",
+                    "url": "https://devinmcgloin.com",
+                    "location": "New York, NY",
+                    "avatar_links": {
+                        "thumb": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=200&fit=max",
+                        "small": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=400&fit=max",
+                        "medium": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max",
+                        "large": "https://images.fok.al/avatar/devinmcgloin?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy",
+                        "raw": "https://images.fok.al/avatar/devinmcgloin"
+                    },
+                    "images_links": [
+                        "https://api.fok.al/v0/images/DWzfwTCaFIXq",
+                        "https://api.fok.al/v0/images/zTWfoZXJwlOT",
+                        "https://api.fok.al/v0/images/UmCoFGzEVUIc",
+                        "https://api.fok.al/v0/images/LVXlAOlmkTKR",
+                        "https://api.fok.al/v0/images/edziXgZtrysX",
+                        "https://api.fok.al/v0/images/SHqZVnQXJObk",
+                        "https://api.fok.al/v0/images/ADZtkxuhvqke",
+                        "https://api.fok.al/v0/images/DjXiFqiVgFmX",
+                        "https://api.fok.al/v0/images/bVQOctiXBTPw",
+                        "https://api.fok.al/v0/images/tcNgvMvItujL",
+                        "https://api.fok.al/v0/images/kwvHKBzTXkFe",
+                        "https://api.fok.al/v0/images/pjQYthDqvzyv",
+                        "https://api.fok.al/v0/images/pAZSFKAMqgMO",
+                        "https://api.fok.al/v0/images/aGTfljGAqmxR",
+                        "https://api.fok.al/v0/images/jjXiNDWEXhdi",
+                        "https://api.fok.al/v0/images/dPdrDMJZWugx",
+                        "https://api.fok.al/v0/images/GNxMVGjvaKwI",
+                        "https://api.fok.al/v0/images/JRWZqSsZTRYg",
+                        "https://api.fok.al/v0/images/VmCJUtDkhxZK",
+                        "https://api.fok.al/v0/images/zMANRzvPTkDF",
+                        "https://api.fok.al/v0/images/XtMuhzUoietc",
+                        "https://api.fok.al/v0/images/lzvSBEcEVBCr",
+                        "https://api.fok.al/v0/images/vkNdnysMjfYC",
+                        "https://api.fok.al/v0/images/oobIKfadRAAw",
+                        "https://api.fok.al/v0/images/iFMzeQPUSLXa"
+                    ],
+                    "favorite_links": [
+                        "https://api.fok.al/v0/images/kvYjDTJuJNnS"
+                    ],
+                    "featured": false,
+                    "admin": false,
+                    "created_at": "2017-06-29T05:33:39.926126Z",
+                    "last_modified": "2017-06-29T05:33:39.926126Z"
+                },
+                "featured": false,
+                "stats": {
+                    "downloads": 0,
+                    "views": 5,
+                    "favorites": 0
+                },
+                "src_links": {
+                    "thumb": "https://images.fok.al/content/LVXlAOlmkTKR?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=200&fit=max",
+                    "small": "https://images.fok.al/content/LVXlAOlmkTKR?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=400&fit=max",
+                    "medium": "https://images.fok.al/content/LVXlAOlmkTKR?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max",
+                    "large": "https://images.fok.al/content/LVXlAOlmkTKR?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy",
+                    "raw": "https://images.fok.al/content/LVXlAOlmkTKR"
+                },
+                "metadata": {
+                    "aperture": 9,
+                    "exposure_time": "1/320",
+                    "focal_length": 19,
+                    "iso": 200,
+                    "make": "OLYMPUS IMAGING CORP.",
+                    "model": "E-M5",
+                    "lens_model": "OLYMPUS M.12-50mm F3.5-6.3",
+                    "pixel_xd": 4608,
+                    "pixel_yd": 3456,
+                    "capture_time": "2014-07-22T02:45:58Z",
+                    "location": {
+                        "point": {
+                            "SRID": 4326,
+                            "X": -118.22682222222222,
+                            "Y": 36.486625000000004
+                        },
+                        "description": null
+                    }
+                }
+            },
+            "count": 2
+        }
+    ]
 }
 
 class ExploreScene extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
             images: [],
             users: [],
@@ -302,8 +962,30 @@ class ExploreScene extends Component {
 
     render() {
         return (
-            <div className="pa3 sans-serif">
-                <MapCard lat={image.metadata.location.point.Y} lng={image.metadata.location.point.X} description={'Salk Institute, San Diego, CA'}/>
+            <div className="pa3 pa4-ns sans-serif">
+                <h1 className={'f2 fw5 measure lh-copy'}>Explore</h1>
+                <p className={'f5 measure lh-copy'}>View the popular searches and locations on Fokal and find new images.</p>
+
+                <div className={'pv3'}>
+                    <h2 className={'f3 fw6 measure lh-copy'}>Mountains</h2>
+                    <p className={'f5 measure-wide lh-copy'}>Explore images from iconic mountain ranges around the world.</p>
+                      <p className={'f5 measure-wide lh-copy'}>
+                          <Link to={'/search/images?q=mountains'} className={'link dim hover black underline'}>Explore More</Link>
+                      </p>
+                    <GridCollection cards={sierras.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>
+                </div>
+
+                <div className={'pv3'}>
+                    <h2 className={'f3 fw6 measure lh-copy'}>Architecture</h2>
+                    <p className={'f5 measure-wide lh-copy'}>Find beautiful structures from all corners of the globe.</p>
+                    <GridCollection cards={sierras.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>
+                </div>
+
+                <div className={'pv3'}>
+                    <h2 className={'f3 fw6 measure lh-copy'}>Flatlands</h2>
+                    <p className={'f5 measure-wide lh-copy'}>Run wild in the open planes.</p>
+                    <GridCollection cards={sierras.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>
+                </div>
             </div>
         )
     }

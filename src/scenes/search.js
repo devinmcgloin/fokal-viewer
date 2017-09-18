@@ -8,19 +8,26 @@ import {Route, Switch} from 'react-router-dom'
 import {SearchImagesView, SearchTagsView, SearchUsersView} from "../components/search";
 import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
+import queryString from 'query-string'
 
 class Search extends Component {
     constructor(props) {
         super(props);
         console.log(props);
+        let q = queryString.parse(props.location.search);
         this.state = {
             results: {images: [], users: [], tags: []},
-            q: '',
+            q: q.q || '',
             failed: false,
             loading: false,
             type: props.match.params.type,
+            history: props.history,
         };
         bindAll(this, 'handleTextChange', 'loadImages');
+    }
+
+    componentDidMount() {
+        this.loadImages()
     }
 
     handleTextChange(e) {
@@ -30,13 +37,18 @@ class Search extends Component {
         });
     }
 
-    loadImages(e) {
-        e.preventDefault();
+    loadImages() {
         this.setState({loading: true});
         const q = this.state.q;
 
-        if (q === '')
+        if (q === '') {
+            this.setState({loading: false});
             return;
+        }
+
+        this.state.history.push({
+            search: '?q=' + encodeURIComponent(q)
+        });
 
         const terms = q.split(' ').map(t => t.trim()).filter(t => t !== '');
 
@@ -51,12 +63,16 @@ class Search extends Component {
             if (t.startsWith("color:"))
                 querybody.color = {hex: t.replace('color:', ''), pixel_fraction: 0.15};
             else if (t.startsWith("+"))
-                querybody.optional_terms.push(t.replace('+', ''));
+                querybody.optional_terms.push(t.replace('+', '').trim());
             else if (t.startsWith("-"))
-                querybody.excluded_terms.push(t.replace('-', ''));
+                querybody.excluded_terms.push(t.replace('-', '').trim());
             else
-                querybody.required_terms.push(t);
+                querybody.required_terms.push(t.trim());
         });
+
+        querybody.required_terms = querybody.required_terms.filter((s) => s !== '');
+        querybody.optional_terms = querybody.optional_terms.filter((s) => s !== '');
+        querybody.excluded_terms = querybody.excluded_terms.filter((s) => s !== '');
 
         let t = this;
         SearchImages('/search', querybody)
@@ -94,7 +110,10 @@ class Search extends Component {
 
         return (
             <div className="ph3 ph4-ns">
-                <form onSubmit={this.loadImages} className="sans-serif mw7 pa5-ns pa2 pb6 ma2 tc br2 center">
+                <form onSubmit={(e) => {
+                    e.preventDefault();
+                    this.loadImages()
+                }} className="sans-serif mw7 pa5-ns pa2 pb6 ma2 tc br2 center">
                     <input
                         className="f5 input-reset bn fl white bg-black-70 pa3 lh-solid w-75 w-80-l br2 br--left ba b--black-70 h3"
                         type="text" id={"query"} name={"query"}
@@ -103,14 +122,20 @@ class Search extends Component {
                         style={{height: '3rem'}}
                     />
                     <button
-                        onClick={this.loadImages}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            this.loadImages()
+                        }}
                         className="f5 button-reset fl pv3 tc bn bg-animate bg-black-80 hover-bg-black white pointer w-25 w-20-l br2 br--right"
-                    style={{height: '3rem'}}><FontAwesome name={'search'}/></button>
+                        style={{height: '3rem'}}><FontAwesome name={'search'}/></button>
 
                 </form>
-                <Controls options={controllerOptions} selected={this.state.type} layout="grid"
-                          handleLayoutChange={() => {
-                          }} handleTypeChange={(t) => this.setState({type: t})}/>
+                <Controls options={controllerOptions}
+                          selected={this.state.type}
+                          layout="grid"
+                          handleLayoutChange={() => {}}
+                          handleTypeChange={(t) => this.setState({type: t})}
+                query={'?q=' + encodeURIComponent(this.state.q)}/>
 
                 {content ? content :
                     <Switch>
@@ -128,6 +153,9 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-    match: PropTypes.object.isRequired
-}
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    history: PropTypes.object.isRequired
+};
+
 export {Search};
