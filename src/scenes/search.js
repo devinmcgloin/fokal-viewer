@@ -5,8 +5,9 @@ import {Error} from '../components/error'
 import {Loading} from "../components/loading";
 import {Controls} from "../components/collectionControls";
 import {Route, Switch} from 'react-router-dom'
-import {SearchTagsView, SearchUsersView, SearchImagesView} from "../components/search";
+import {SearchImagesView, SearchTagsView, SearchUsersView} from "../components/search";
 import PropTypes from 'prop-types'
+import FontAwesome from 'react-fontawesome'
 
 class Search extends Component {
     constructor(props) {
@@ -86,22 +87,23 @@ class Search extends Component {
             content = <Error/>;
 
         const results = this.state.results;
-        const controllerOptions = [{link:'/search/images', tag: 'images'},{link:"/search/users", tag: 'users'},{link:'/search/tags', tag:'tags'}];
+        const controllerOptions = [{link: '/search/images', tag: 'images'}, {
+            link: "/search/users",
+            tag: 'users'
+        }, {link: '/search/tags', tag: 'tags'}];
 
         return (
             <div className="ph3 ph4-ns">
                 <form onSubmit={this.loadImages} className="sans-serif mw7 pa5-ns pa2 pb6 ma2 tc br2 center">
                     <input
-                        className="f6 f5-l input-reset bn fl white bg-black-70 pa3 lh-solid w-100 w-75-m w-80-l br2-ns br--left-ns ba b--black-70"
+                        className="f6 f5-l input-reset bn fl white bg-black-70 pa3 lh-solid w-75 w-80-l br2-ns br--left-ns ba b--black-70"
                         type="text" id={"query"} name={"query"}
                         onChange={this.handleTextChange}
                         value={this.state.q}
                     />
-                    <input
-
+                    <button
                         onClick={this.loadImages}
-                          type="submit" value={"Submit"}
-                           className="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-80 hover-bg-black white pointer w-100 w-25-m w-20-l br2-ns br--right-ns" />
+                        className="f6 f5-l button-reset fl pv3 tc bn bg-animate bg-black-80 hover-bg-black white pointer w-25 w-20-l br2-ns br--right-ns"><FontAwesome name={'search'}/></button>
 
                 </form>
                 <Controls options={controllerOptions} selected={this.state.type} layout="grid"
@@ -124,6 +126,6 @@ class Search extends Component {
 }
 
 Search.propTypes = {
-    match : PropTypes.object.isRequired
+    match: PropTypes.object.isRequired
 }
 export {Search};
