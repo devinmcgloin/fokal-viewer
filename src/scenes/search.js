@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {SearchImages} from "../services/api/search";
+import {Search} from "../services/api/search";
 import {bindAll} from 'lodash'
 import {Error} from '../components/error'
 import {Loading} from "../components/loading";
@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 import FontAwesome from 'react-fontawesome'
 import queryString from 'query-string'
 
-class Search extends Component {
+class SearchContainer extends Component {
     constructor(props) {
         super(props);
         console.log(props);
@@ -75,7 +75,7 @@ class Search extends Component {
         querybody.excluded_terms = querybody.excluded_terms.filter((s) => s !== '');
 
         let t = this;
-        SearchImages('/search', querybody)
+        Search('/search', querybody)
             .then((data) => {
                 if (data.ok)
                     data.body.then(
@@ -152,10 +152,10 @@ class Search extends Component {
     }
 }
 
-Search.propTypes = {
+SearchContainer.propTypes = {
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired
 };
 
-export {Search};
+export {SearchContainer};

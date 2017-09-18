@@ -6,7 +6,7 @@ import registerServiceWorker from './services/registerServiceWorker';
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom';
 import WebFont from 'webfontloader'
 import {ImageCollection, TaggedImages} from './scenes/collection';
-import {Search} from './scenes/search'
+import {SearchContainer} from './scenes/search'
 import {NotFound} from './components/error';
 import {ImageContainer} from './scenes/image';
 import {HeaderContainer} from "./components/header"
@@ -98,7 +98,7 @@ class App extends React.Component {
                             <Route path="/u/:id" component={UserContainer}/>
                             <Route path="/t/:id" component={TaggedImages}/>
 
-                            <Route path="/search/:type" component={Search}/>
+                            <Route path="/search/:type" component={SearchContainer}/>
 
                             <Route path="/join"
                                    render={() => <Join onSuccess={this.onLogin} isLoggedIn={this.state.isLoggedIn}/>}/>

@@ -1,6 +1,6 @@
 import {endpoint, getHeaders, ParseResponse} from "./api";
 
-const SearchImages = (relurl, body) => {
+const Search = (relurl, body) => {
     console.log(JSON.stringify(body));
     return fetch(endpoint + relurl, {
         headers: getHeaders('POST'),
@@ -11,4 +11,4 @@ const SearchImages = (relurl, body) => {
 
 };
 
-export {SearchImages}
+export {Search}
