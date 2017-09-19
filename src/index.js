@@ -31,7 +31,8 @@ class App extends React.Component {
         super(props);
         this.state = {
             isLoggedIn: false,
-            appToken: ""
+            appToken: "",
+            menu: false
         };
 
         this.onLogin = this.onLogin.bind(this);
@@ -78,7 +79,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <HeaderContainer isLoggedIn={this.state.isLoggedIn}/>
+                <HeaderContainer isLoggedIn={this.state.isLoggedIn} menu={this.state.menu}/>
                 <ScrollToTop>
                     <div>
                     <Switch>

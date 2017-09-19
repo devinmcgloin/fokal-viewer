@@ -1,15 +1,16 @@
 import React, {Component} from 'react'
 import {bindAll} from 'lodash'
 import {UploadImage} from "../../services/api/upload";
-import {FetchImage} from "../../services/api/retrieval";
 import {ErrorAlert, InfoAlert, SuccessAlert} from '../../components/alerts'
+import Dropzone from 'react-dropzone'
+import FontAwesome from 'react-fontawesome'
 
 class UploadContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            uri: null,
-            contentType: null,
+            blob: null,
+            preview: '',
             processing: false,
             patch: {},
             failed: false,
@@ -26,49 +27,50 @@ class UploadContainer extends Component {
         e.preventDefault();
         this.setState({processing: true});
 
+        console.log(this.state.blob);
+
         // send to server
-        UploadImage(this.state.uri)
-            .then(
-                (data) => {
-                    this.setState({processing: false, succeeded: true, imageID: data.id});
-                    FetchImage(data.id)
-                        .then(data => this.setState({image: data}))
-                },
-                () => {
-                    this.setState({processing: false, failed: true});
-                });
+        UploadImage(this.state.blob)
+            .then((data) => {
+                if (data.ok)
+                    data.body.then(
+                        d => this.setState({
+                            processing: false,
+                            failed: false,
+                            succeeded: true
+                        })
+                    );
+                else
+                    this.setState({failed: true, processing: false, succeeded: false})
+            })
 
     }
 
-    handleFile(e) {
-        const reader = new FileReader(),
-            file = e.target.files[0],
-            path = e.target.value;
+    handleFile(files) {
+        const reader = new FileReader();
 
-        let fileName = path.split("\\").pop();
+        reader.onload = () => {
+            const blob = reader.result;
 
-        reader.onload = (upload) => {
-            console.log(upload);
             this.setState({
-                uri: upload.target.result,
-                contentType: file.type,
-                filename: fileName,
+                blob: blob,
+                filename: files[0].name,
+                preview: files[0].preview,
             })
         };
 
-        // reader.readAsDataURL(file);
-        reader.readAsArrayBuffer(file);
+        reader.readAsArrayBuffer(files[0]);
     }
 
     render() {
-        const hiddenInput = {
-            width: '0.1px',
-            height: '0.1px',
-            opacity: 0,
-            overflow: 'hidden',
-            position: 'absolute',
-            zIndex: -1
-        };
+        // const hiddenInput = {
+        //     width: '0.1px',
+        //     height: '0.1px',
+        //     opacity: 0,
+        //     overflow: 'hidden',
+        //     position: 'absolute',
+        //     zIndex: -1
+        // };
 
         return (
             <div className="sans-serif">
@@ -91,12 +93,30 @@ class UploadContainer extends Component {
                         null
                         :
                         <form onSubmit={this.handleSubmit} encType="multipart/form-data">
-                            <input type="file" name="file" id="file" style={hiddenInput} onChange={this.handleFile}/>
-                            <label htmlFor="file"
-                                   className="f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center">{
-                                this.state.filename || "Choose a file"}</label>
+                            <Dropzone
+                                accept={'image/*'}
+                                multiple={false}
+                                className={'center ma3 ba br2 b--dashed pa4'}
+                                onDropAccepted={this.handleFile}
+                                acceptClassName={'center ma3 ba br2 b--dashed pa4 bg-washed-green'}
+                                rejectClassName={'center ma3 ba br2 b--dashed pa4 bg-washed-red'}>
+                                {({acceptedFiles}) => {
+                                    return acceptedFiles.length
+                                        ? <div className={'dib v-mid center'}>
+                                            <img src={this.state.preview}/>
+                                            <p className={'mh3 tc measure-narrow'}>{this.state.filename}</p>
+                                        </div>
+                                        : <div className={'dib v-mid center'}>
+                                            <FontAwesome name={'file-image-o'} size={'3x'}/>
+                                            <p className={'mh3 tc measure-narrow'}>Drag and drop your files or browse
+                                                from your computer</p>
+                                        </div>;
+                                }}
+
+
+                            </Dropzone>
                             <input
-                                className="f6 link dim ba ph5 pv3 mb2 dib dark-gray pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white"
+                                className="f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white"
                                 type="Submit" value="Upload" readOnly/>
                         </form>
                     }

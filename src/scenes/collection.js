@@ -68,10 +68,12 @@ class ImageCollection extends Component {
         else if (this.state.failed)
             content = <Error/>;
 
-        const controllerOptions = [{link: '/', tag: 'featured'}, {link: "/recent", tag: 'recent'}, {
-            link: '/trending',
-            tag: 'trending'
-        }];
+        const controllerOptions = [
+            {link: '/', tag: 'featured'},
+            {link: "/recent", tag: 'recent'}, {
+                link: '/trending',
+                tag: 'trending'
+            }];
 
         return (
             <div className="sans-serif ph3 ph4-ns pv3">

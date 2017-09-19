@@ -1,13 +1,13 @@
 import React from 'react'
-import {ImageCardFull} from './cards/image'
+import {ImageCardSmall} from './cards/image'
 import PropTypes from 'prop-types'
 import Masonry from 'react-masonry-component';
 
 const LinearCollection = ({images}) => {
-    const rend = images.map((img) =>
-      <div key={img.id} className="mv4">
-          <ImageCardFull  image={img}/>
-      </div>
+    const rend = images.map((img, i) =>
+        <div key={img.id} className={i === 0 ? "mb4" : "mv4"}>
+            <ImageCardSmall image={img}/>
+        </div>
     );
 
     return (
@@ -45,7 +45,7 @@ const GridCollection = ({cards}) => {
 };
 
 GridCollection.propTypes = {
-    cards: PropTypes.arrayOf(PropTypes.element).required
+    cards: PropTypes.arrayOf(PropTypes.node).required
 };
 
 GridCollection.defaultProps = {

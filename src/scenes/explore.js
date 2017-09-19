@@ -38,9 +38,9 @@ class SearchDisplay extends Component {
 
     render() {
         return <div className={'pv3'}>
-            <h2 className={'f3 fw6 measure lh-copy'}>{this.props.title}</h2>
-            <p className={'f5 measure-wide lh-copy'}>{this.props.description}</p>
-            <p className={'f5 measure-wide lh-copy'}>
+            <h2 className={'f3 measure lh-copy'}>{this.props.title}</h2>
+            <p className={'measure-wide lh-copy'}>{this.props.description}</p>
+            <p className={'measure-wide lh-copy'}>
                 <Link to={'/search/images?q=' + this.props.search} className={'link dim hover black underline'}>Explore
                     More</Link>
             </p>
@@ -74,8 +74,8 @@ class ExploreScene extends Component {
     render() {
         return (
             <div className="pa3 pa4-ns sans-serif">
-                <h1 className={'f2 fw5 measure lh-copy'}>Explore</h1>
-                <p className={'f5 measure lh-copy'}>View the popular searches and locations on Fokal and find
+                <h1 className={' f3 f1-m f-headline-l measure lh-copy'}>Explore</h1>
+                <p className={'measure lh-copy'}>View the popular searches and locations on Fokal and find
                     new images.</p>
 
                 <SearchDisplay title={'Mountains'}
