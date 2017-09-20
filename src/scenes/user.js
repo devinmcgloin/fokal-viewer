@@ -6,7 +6,7 @@ import {Loading} from "../components/loading"
 import {GridCollection} from "../components/collection";
 import {Error} from "../components/error";
 import {UserStatsCard, UserTitleCard} from "../components/cards/user";
-import {ImageCardSmall} from "../components/cards/image";
+import {ImageCard} from "../components/cards/image";
 import moment from 'moment'
 
 class UserContainer extends React.Component {
@@ -109,13 +109,13 @@ class UserContainer extends React.Component {
                                 exact
                                 path={this.props.match.url}
                                 render={() => <GridCollection
-                                    cards={[userTitle].concat(this.state.images.map(i => <ImageCardSmall key={i.id}
+                                    cards={[userTitle].concat(this.state.images.map(i => <ImageCard key={i.id}
                                                                                                          image={i}/>))}/>}
                             />
                             <Route
                                 path={this.props.match.url + '/favorites'}
                                 render={() => <GridCollection
-                                    cards={[userTitle].concat(this.state.favorites.map(i => <ImageCardSmall key={i.id}
+                                    cards={[userTitle].concat(this.state.favorites.map(i => <ImageCard key={i.id}
                                                                                                             image={i}/>))}/>}
                             />
                             <Route

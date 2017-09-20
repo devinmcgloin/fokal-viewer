@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {ImageCardSmall} from "../components/cards/image";
+import {ImageCard} from "../components/cards/image";
 import {GridCollection} from "../components/collection";
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -38,14 +38,14 @@ class SearchDisplay extends Component {
 
     render() {
         return <div className={'pv3'}>
-            <h2 className={'f3 measure lh-copy'}>{this.props.title}</h2>
+            <h2 className={'f2 measure lh-copy'}>{this.props.title}</h2>
             <p className={'measure-wide lh-copy'}>{this.props.description}</p>
             <p className={'measure-wide lh-copy'}>
                 <Link to={'/search/images?q=' + this.props.search} className={'link dim hover black underline'}>Explore
                     More</Link>
             </p>
             {this.state.loading ? <Loading/>:
-            <GridCollection cards={this.state.images.slice(0,3).map(i => <ImageCardSmall key={i.id} image={i}/>)}/> }
+            <GridCollection cards={this.state.images.slice(0,3).map(i => <ImageCard key={i.id} image={i}/>)}/> }
         </div>;
     }
 
@@ -87,9 +87,9 @@ class ExploreScene extends Component {
                                search={'architecture'}/>
 
 
-                <SearchDisplay title={'Flatlands'}
-                               description={'Run wild in the open planes.'}
-                               search={'plains'}/>
+                <SearchDisplay title={'Skyline'}
+                               description={'View iconic skylines from different cities.'}
+                               search={'skyline'}/>
 
             </div>
         )

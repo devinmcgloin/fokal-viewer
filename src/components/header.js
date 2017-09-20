@@ -71,6 +71,15 @@ class HeaderContainer extends React.Component {
                           })}
                     >Join</Link>}
 
+                    {this.props.isLoggedIn ? 
+                           
+                            <Link to={'/account/settings'} className={'sans-serif ttu link dim black b f3 f2-ns'}
+                          onClick={() => this.setState((prev) => {
+                              return {isOpen: !prev.isOpen}
+                          })}
+                    >Account</Link>
+                         :null}
+
                     <hr/>
 
                     <Link to={'/join'} className={'sans-serif ttu link dim black b f3 f2-ns'}
@@ -105,8 +114,10 @@ class HeaderContainer extends React.Component {
                     <Link className="sans-serif link dim black b f6 f5-ns dib mr3 tc pa2" to="/"
                           title="Home">Fokal</Link>
 
+                      <Link to="/search/images">
                     <FontAwesome name={'search'}
                                  className={'link dim black hover pointer pa2'}/>
+                         </Link>
 
                 </nav>
             </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {GridCollection} from "./collection";
-import {ImageCardSmall} from "./cards/image";
+import {ImageCard} from "./cards/image";
 import {NoResults} from "./error";
 import {UserCard} from "./cards/user";
 import {TagCard} from "./cards/tags";
@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 
 const SearchImagesView = ({images}) =>
     images.length ?
-        <GridCollection cards={images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>
+        <GridCollection cards={images.map(i => <ImageCard key={i.id} image={i}/>)}/>
         : <NoResults/>;
 
 SearchImagesView.propTypes = {

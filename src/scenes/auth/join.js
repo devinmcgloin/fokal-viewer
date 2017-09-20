@@ -12,12 +12,12 @@ const Join = (props) => {
     } else {
         return (
             <div className="sans-serif mw6 pa5 ma4 tc center">
-                <h1 className={'f2'}>Join</h1>
-                <p className={'measure f6 tc'}>
+                <h1 className={'f1'}>Join</h1>
+                <p className={'measure f4 tc'}>
                     Fokal does not save your password. We let Google manage passwords, resets and authentication.
                 </p>
 
-                <p className={'measure f6 tc'}>
+                <p className={'measure f4 tc'}>
                     We have plans to add additional providers, if you have one in mind let us know.
                 </p>
 
@@ -28,7 +28,7 @@ const Join = (props) => {
                     onFailure={(err) => console.log(err)} style={{}}
                     tag="span">
                             <span
-                                className="sans-serif f6 link dim ba ph5-ns ph3 pv3 mb2 dib dark-gray pointer inline-flex items-center bg-white">
+                                className="sans-serif br2 shadow-5 f6 link dim ba ph5-ns ph3 pv3 mb2 dib dark-gray pointer inline-flex items-center bg-white">
                                 <img src={glogo} className="mh2 dib fl" alt="Google Logo"/>
                                 {props.isLoggedIn ?
                                     <span className={'dib'}>Joined in with Google</span> :

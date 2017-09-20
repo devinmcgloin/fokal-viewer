@@ -6,7 +6,7 @@ import {Loading} from "../components/loading"
 import PropTypes from 'prop-types'
 import Raven from 'raven-js'
 import {Error} from "../components/error";
-import {ImageCardSmall} from "../components/cards/image";
+import {ImageCard} from "../components/cards/image";
 import {Controls} from "../components/collectionControls";
 import {Redirect, Route, Switch} from 'react-router-dom'
 
@@ -84,14 +84,14 @@ class ImageCollection extends Component {
                 {content ? content :
                     <Switch>
                         <Route path={"/recent"} render={() => this.state.isGrid ? <GridCollection
-                                cards={this.state.recent.map(i => <ImageCardSmall key={i.id} image={i}/>)}/> :
+                                cards={this.state.recent.map(i => <ImageCard key={i.id} image={i}/>)}/> :
                             <LinearCollection images={this.state.recent}/>}/>
                         <Route path={"/trending"} render={() => this.state.isGrid ? <GridCollection
-                                cards={this.state.trending.map(i => <ImageCardSmall key={i.id} image={i}/>)}/> :
+                                cards={this.state.trending.map(i => <ImageCard key={i.id} image={i}/>)}/> :
                             <LinearCollection images={this.state.trending}/>}/>
 
                         <Route exact path={"/"} render={() => this.state.isGrid ? <GridCollection
-                                cards={this.state.featured.map(i => <ImageCardSmall key={i.id} image={i}/>)}/> :
+                                cards={this.state.featured.map(i => <ImageCard key={i.id} image={i}/>)}/> :
                             <LinearCollection images={this.state.featured}/>}/>
 
                     </Switch>
@@ -161,7 +161,7 @@ class TaggedImages extends Component {
         else if (this.state.not_found)
             content = <Redirect to={"/404"}/>;
         else
-            content = <GridCollection cards={this.state.images.map(i => <ImageCardSmall key={i.id} image={i}/>)}/>;
+            content = <GridCollection cards={this.state.images.map(i => <ImageCard key={i.id} image={i}/>)}/>;
 
         return (
             <div className="sans-serif pa3 pa4-ns">
