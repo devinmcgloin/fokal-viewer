@@ -11,11 +11,9 @@ class UploadContainer extends Component {
         this.state = {
             blob: null,
             preview: '',
-            processing: false,
             patch: {},
-            failed: false,
             filename: null,
-            succeeded: false,
+            status: '',
             image: null
         };
 
@@ -25,7 +23,7 @@ class UploadContainer extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.setState({processing: true});
+        this.setState({status: 'processing'});
 
         console.log(this.state.blob);
 
@@ -35,18 +33,17 @@ class UploadContainer extends Component {
                 if (data.ok)
                     data.body.then(
                         d => this.setState({
-                            processing: false,
-                            failed: false,
-                            succeeded: true
+                            status: 'succeded',
                         })
                     );
                 else
-                    this.setState({failed: true, processing: false, succeeded: false})
+                    this.setState({status: 'failed'})
             })
 
     }
 
     handleFile(files) {
+        this.setState({status:''});
         const reader = new FileReader();
 
         reader.onload = () => {
@@ -74,16 +71,16 @@ class UploadContainer extends Component {
 
         return (
             <div className="sans-serif">
-                {this.state.processing ?
+                {this.state.status === 'processing' ?
                     <InfoAlert message="Upload in progress."/>
                     :
                     null}
 
-                {this.state.failed ?
+                {this.state.status === 'failed' ?
                     <ErrorAlert message="Upload failed."/>
                     :
                     null}
-                {this.state.succeeded ?
+                {this.state.status === 'succeded' ?
                     <SuccessAlert message="Upload Succeded."/>
                     :
                     null}
