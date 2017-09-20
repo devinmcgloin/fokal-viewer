@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Patch} from "../../../services/api/patch";
+import {DeleteImage} from "../../../services/api/delete";
 import PropTypes from 'prop-types'
 import {bindAll} from 'lodash'
 import {TextField} from "../../../components/fields";
@@ -71,6 +72,7 @@ class ManageImage extends Component {
                         <Tab>Exif</Tab>
                         <Tab>Tags</Tab>
                         <Tab>Gear</Tab>
+                        <Tab>Delete</Tab>
                     </TabList>
                     <TabPanel>
                         <div className="fl ph2 pr0-ns pl3-ns  dib">
@@ -171,6 +173,14 @@ class ManageImage extends Component {
                         </div>
                     </TabPanel>
 
+                    <TabPanel>
+                        <div className="fl ph2 pr0-ns pl3-ns dib">
+                            <p className="measure f7">Deleting an image cannot be undone. All stats, favorites, tags will loose access to this image. Users who have downloaded it will retain their own copy.</p>
+                            <button className="f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-red hover-bg-dark-red white" onClick={() => DeleteImage(this.state.image.id)}>
+                            Delete
+                            </button>
+                        </div>
+                    </TabPanel>
                 </Tabs>
 
 
