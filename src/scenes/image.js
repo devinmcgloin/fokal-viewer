@@ -3,11 +3,6 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types';
 import {FetchImage} from "../services/api/retrieval";
 import {Loading} from "../components/loading"
-// import {UserCard} from "../components/cards/user";
-// // import {Link} from 'react-router-dom'
-// import {MetadataCard} from "../components/cards/metadata";
-// import {ColorCard} from "../components/cards/color";
-// import {MapCard} from "../components/cards/geo";
 import moment from 'moment'
 import {Link} from 'react-router-dom'
 import {Stats} from '../components/stats'

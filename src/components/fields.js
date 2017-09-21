@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const TextArea = ({handleChange, name, val, desc, optional, presentation_name}) =>
-    <div>
+    <div className="w-100">
         <label htmlFor={name} className="f6 b db mb2 ttc">{presentation_name || name} {optional ?
             <span className="normal black-60">(optional)</span> : null}</label>
         <textarea id={name} name={name} className="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2"
@@ -20,7 +20,7 @@ TextArea.propTypes = {
 };
 
 const TextField = ({handleChange, name, val, desc, optional, presentation_name}) =>
-    <div className="measure">
+    <div className="measure w-100">
         <label htmlFor={name} className="f6 b db mb2 ttc">{presentation_name || name} {optional ?
             <span className="normal black-60">(optional)</span> : null}</label>
         <input id={name} className="input-reset ba b--black-20 pa2 br2 mb2 db w-100" type="text" name={name}

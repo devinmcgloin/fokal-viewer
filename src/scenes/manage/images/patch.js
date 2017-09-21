@@ -75,14 +75,14 @@ class ManageImage extends Component {
                         <Tab>Delete</Tab>
                     </TabList>
                     <TabPanel>
-                        <div className="fl ph2 pr0-ns pl3-ns  dib">
+                        <div className="fl ph2 pr0-ns pl3-ns dib w-100">
                             <form onSubmit={this.commitChanges}>
                                 <TextField handleChange={this.handleChange} name="aperture" val={this.state.aperture}
-                                           desc="Your name will be displayed alongside your username." optional={true}/>
+                                           desc="" optional={true}/>
 
                                 <TextField handleChange={this.handleChange} name="iso" presentation_name={"ISO"}
                                            val={this.state.iso}
-                                           desc="Your location will appear on your profile and be available for searches."
+                                           desc="Your location will appear on your profile and be available."
                                            optional={true}/>
 
                                 <TextField handleChange={this.handleChange} name="exposure_time"
@@ -96,7 +96,7 @@ class ManageImage extends Component {
 
 
                                 <div className="mt3">
-                                    <input className="b ph3 pv2 input-reset ba b--black bg-transparent pointer f6"
+                                    <input className="f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white" 
                                            type="Submit"
                                            value="Submit"/>
                                 </div>
@@ -104,7 +104,7 @@ class ManageImage extends Component {
                         </div>
                     </TabPanel>
                     <TabPanel>
-                        <div className="fl ph2 pr0-ns pl3-ns dib">
+                        <div className="fl ph2 pr0-ns pl3-ns dib w-100">
                             <form onSubmit={this.commitChanges}>
 
 
@@ -145,7 +145,7 @@ class ManageImage extends Component {
                         </div>
                     </TabPanel>
                     <TabPanel>
-                        <div className="fl ph2 pr0-ns pl3-ns dib">
+                        <div className="fl ph2 pr0-ns pl3-ns dib w-100">
                             <form onSubmit={this.commitChanges}>
                                 <TextField handleChange={this.handleChange} name="make" val={this.state.make}
                                            desc="Your name will be displayed alongside your username." optional={true}/>
@@ -174,7 +174,7 @@ class ManageImage extends Component {
                     </TabPanel>
 
                     <TabPanel>
-                        <div className="fl ph2 pr0-ns pl3-ns dib">
+                        <div className="fl ph2 pr0-ns pl3-ns dib w-100">
                             <p className="measure f7">Deleting an image cannot be undone. All stats, favorites, tags will loose access to this image. Users who have downloaded it will retain their own copy.</p>
                             <button className="f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-red hover-bg-dark-red white" onClick={() => DeleteImage(this.state.image.id)}>
                             Delete
