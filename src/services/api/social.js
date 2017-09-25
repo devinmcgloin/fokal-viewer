@@ -1,15 +1,15 @@
-import {endpoint, getHeaders, ParseResponse} from "./api";
+import { endpoint, getHeaders, ParseResponse } from "./api";
 
-const FavoriteImage = (shortcode) =>
+const FavoriteImage = (shortcode, method) =>
     fetch(endpoint + "/images/" + shortcode + "/favorite", {
         headers: getHeaders(),
-        method: 'PUT',
-    }).then(ParseResponse);
+        method: method
+    });
 
-const FollowUser = (shortcode) =>
+const FollowUser = shortcode =>
     fetch(endpoint + "/users/" + shortcode + "/follow", {
         headers: getHeaders(),
-        method: 'PUT',
+        method: "PUT"
     }).then(ParseResponse);
 
-export {FollowUser, FavoriteImage}
+export { FollowUser, FavoriteImage };

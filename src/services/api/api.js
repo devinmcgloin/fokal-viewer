@@ -16,7 +16,6 @@ const getHeaders = method => {
             tok = JwtDecode(jwt),
             unix = Math.round(new Date().getTime() / 1000);
 
-        console.log(tok.exp, unix, tok.exp > unix)
         if (unix > tok.exp) {
             // token is expired
             console.log("Token is expired");

@@ -4,7 +4,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import registerServiceWorker from "./services/registerServiceWorker";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
-import WebFont from "webfontloader";
 import { ImageCollection, TaggedImages } from "./scenes/collection";
 import { SearchContainer } from "./scenes/search";
 import { NotFound } from "./components/error";
@@ -24,7 +23,7 @@ import { LogoutPage } from "./scenes/auth/logout";
 import ScrollToTop from "./components/scroll";
 import Raven from "raven-js";
 import JwtDecode from "jwt-decode";
-import { RefreshToken } from "./services/api/auth";
+import { RefreshToken, CreateUser } from "./services/api/auth";
 import { bindAll } from "lodash";
 
 class App extends React.Component {
@@ -59,7 +58,6 @@ class App extends React.Component {
     }
 
     refreshAuthStatus() {
-        console.log(LoggedIn(), GetJWT())
         LoggedIn()
             ? this.setState({ isLoggedIn: true, appToken: GetJWT() })
             : this.setState({ isLoggedIn: false, appToken: "" });
@@ -68,20 +66,42 @@ class App extends React.Component {
     onLogin(googleUser) {
         const jwtToken = googleUser.getAuthResponse().id_token,
             tok = JwtDecode(jwtToken);
-        RefreshToken(jwtToken).then(data => {
-            if (data.ok)
-                data.body.then(d => {
-                    const token = d.token;
-                    LogIn(token);
-                    this.setState({ isLoggedIn: true, appToken: token });
-                    Raven.setUserContext({
-                        username: tok.sub
-                    });
-                });
-            else {
-                console.log(jwtToken);
-            }
-        });
+        this.setState({ isLoggedIn: true, appToken: jwtToken });
+        LogIn(jwtToken);
+        setTimeout(
+            () =>
+                RefreshToken(jwtToken).then(data => {
+                    if (data.ok)
+                        data.body.then(d => {
+                            const token = d.token;
+                            LogIn(token);
+                            this.setState({
+                                isLoggedIn: true,
+                                appToken: token
+                            });
+                            Raven.setUserContext({
+                                username: tok.sub
+                            });
+                        });
+                    else {
+                        CreateUser(jwtToken).then(data => {
+                            if (data.ok)
+                                data.body.then(d => {
+                                    const token = d.token;
+                                    LogIn(token);
+                                    this.setState({
+                                        isLoggedIn: true,
+                                        appToken: token
+                                    });
+                                    Raven.setUserContext({
+                                        username: tok.sub
+                                    });
+                                });
+                        });
+                    }
+                }),
+            10000
+        );
     }
 
     onLogout() {
@@ -201,10 +221,4 @@ Raven.config(
 ).install();
 Raven.setTagsContext({
     environment: process.env.NODE_ENV
-});
-
-WebFont.load({
-    google: {
-        families: ["Montserrat:400,700", "sans-serif"]
-    }
 });

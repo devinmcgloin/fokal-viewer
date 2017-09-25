@@ -5457,6 +5457,12 @@ react-masonry-component@^5.0.7:
     masonry-layout "^4.2.0"
     prop-types "^15.5.8"
 
+react-notification@^6.8.0:
+  version "6.8.0"
+  resolved "https://registry.yarnpkg.com/react-notification/-/react-notification-6.8.0.tgz#9cb7aa06c8e5085b4c0dc2e8d9aa1da1fbc61d93"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-number-editor@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/react-number-editor/-/react-number-editor-4.0.2.tgz#59e035ec75ead056785eb58f10f0923265ab10dc"

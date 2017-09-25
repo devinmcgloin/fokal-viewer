@@ -1,14 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom'
-import {Image} from "../image";
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { Image } from "../image";
 
-const ImageCard= ({image, width}) =>
+const ImageCard = ({ image, width }) => (
     <div>
-        <Link to={'/i/' + image.id}>
-            <Image pixel_xd={image.metadata.pixel_xd} pixel_yd={image.metadata.pixel_yd} url={image.src_links.medium} className={"bg-center cover br2 shadow-5 " + width}/>
+        <Link to={"/i/" + image.id} className="relative">
+            <Image
+                pixel_xd={image.metadata.pixel_xd}
+                pixel_yd={image.metadata.pixel_yd}
+                url={image.src_links.medium}
+                className={"bg-center cover br2 shadow-5 " + width}
+            />
         </Link>
-    </div>;
+    </div>
+);
 
 ImageCard.propTypes = {
     image: PropTypes.shape({
@@ -19,9 +25,9 @@ ImageCard.propTypes = {
         metadata: PropTypes.shape({
             location: PropTypes.shape({
                 X: PropTypes.number,
-                Y: PropTypes.number,
+                Y: PropTypes.number
             }),
-            capture_time: PropTypes.string,
+            capture_time: PropTypes.string
         }),
         user: PropTypes.shape({
             permalink: PropTypes.string.isRequired,
@@ -32,7 +38,7 @@ ImageCard.propTypes = {
 };
 
 ImageCard.defaultProps = {
-    width: 'w-100'
-}
+    width: "w-100"
+};
 
-export {ImageCard};
+export { ImageCard };

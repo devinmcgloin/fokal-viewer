@@ -1,46 +1,62 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Notification } from "react-notification";
 
-const InfoAlert = ({message}) =>
-    <div className="sans-serif flex items-center justify-center pa4 bg-lightest-blue navy">
-        <svg className="w1" data-icon="info" viewBox="0 0 32 32" style={{fill: 'currentcolor'}}>
-            <title>info icon</title>
-            <path
-                d="M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3 3 0 0 0 16 6"/>
-        </svg>
-        <span className="lh-title ml3">{message}</span>
-    </div>;
+const InfoAlert = ({ message }) => (
+    <Alert message={message} action="Dismiss" title="Success" />
+);
 
 InfoAlert.propTypes = {
     message: PropTypes.string.isRequired
 };
 
-const ErrorAlert = ({message}) =>
-    <div className="sans-serif flex items-center justify-center pa4 bg-light-red navy">
-        <svg className="w1" data-icon="info" viewBox="0 0 32 32" style={{fill: 'currentcolor'}}>
-            <title>info icon</title>
-            <path
-                d="M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3 3 0 0 0 16 6"/>
-        </svg>
-        <span className="lh-title ml3">{message}</span>
-    </div>;
-
+const ErrorAlert = ({ message }) => (
+    <Alert message={message} action="Dismiss" title="Error" />
+);
 ErrorAlert.propTypes = {
     message: PropTypes.string.isRequired
 };
 
-const SuccessAlert = ({message}) =>
-    <div className="sans-serif flex items-center justify-center pa4 bg-light-green navy">
-        <svg className="w1" data-icon="info" viewBox="0 0 32 32" style={{fill: 'currentcolor'}}>
-            <title>info icon</title>
-            <path
-                d="M16 0 A16 16 0 0 1 16 32 A16 16 0 0 1 16 0 M19 15 L13 15 L13 26 L19 26 z M16 6 A3 3 0 0 0 16 12 A3 3 0 0 0 16 6"/>
-        </svg>
-        <span className="lh-title ml3">{message}</span>
-    </div>;
+const SuccessAlert = ({ message }) => (
+    <Alert message={message} action="Dismiss" title="Success" />
+);
 
 SuccessAlert.propTypes = {
     message: PropTypes.string.isRequired
 };
 
-export {ErrorAlert, InfoAlert, SuccessAlert}
+class Alert extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            active: true
+        };
+    }
+
+    render() {
+        return (
+            <Notification
+                isActive={this.state.active}
+                message={this.props.message}
+                action={this.props.action}
+                title={this.props.title}
+                onClick={() =>
+                    this.setState(prev => {
+                        return { active: !prev.active };
+                    })}
+                onDismiss={() =>
+                    this.setState(prev => {
+                        return { active: !prev.active };
+                    })}
+            />
+        );
+    }
+}
+
+Alert.propTypes = {
+    title: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+    action: PropTypes.string.isRequired
+};
+
+export { ErrorAlert, InfoAlert, SuccessAlert };

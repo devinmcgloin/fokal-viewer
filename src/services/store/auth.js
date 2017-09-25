@@ -1,12 +1,19 @@
-const GetJWT = () =>
-    localStorage.getItem("auth");
+import JwtDecode from "jwt-decode";
 
-const LogIn = (jwt) => localStorage.setItem("auth", jwt);
+const GetJWT = () => localStorage.getItem("auth");
 
-const LoggedIn = () =>
-    localStorage.getItem("auth") !== null;
+const GetUser = () => localStorage.getItem("auth-user");
 
-const Logout = () =>
-    localStorage.removeItem("auth");
+const LogIn = jwt => {
+    const tok = JwtDecode(jwt);
+    if (tok.iss === "fokal") {
+        localStorage.setItem("auth-user", tok.sub);
+    }
+    localStorage.setItem("auth", jwt);
+};
 
-export {LoggedIn, Logout, LogIn, GetJWT};
+const LoggedIn = () => localStorage.getItem("auth") !== null;
+
+const Logout = () => localStorage.removeItem("auth");
+
+export { LoggedIn, Logout, LogIn, GetJWT, GetUser };

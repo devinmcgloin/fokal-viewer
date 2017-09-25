@@ -1,5 +1,14 @@
 import { endpoint, ParseResponse } from "./api";
-import Raven from "raven-js";
+
+const CreateUser = token => {
+    let headers = new Headers();
+    headers.append("Authorization", "Bearer " + token);
+
+    return fetch(endpoint + "/users", {
+        method: "POST",
+        headers: headers
+    }).then(ParseResponse);
+};
 
 const RefreshToken = token => {
     let headers = new Headers();
@@ -7,8 +16,6 @@ const RefreshToken = token => {
 
     return fetch(endpoint + "/auth/refresh", {
         headers: headers
-    })
-        .then(ParseResponse)
-        .catch(err => Raven.captureException(err));
+    }).then(ParseResponse);
 };
-export { RefreshToken };
+export { RefreshToken, CreateUser };

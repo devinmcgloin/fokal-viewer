@@ -54,6 +54,7 @@
     "react-load-script": "^0.0.6",
     "react-loading": "^0.1.4",
     "react-masonry-component": "^5.0.7",
+    "react-notification": "^6.8.0",
     "react-number-editor": "^4.0.2",
     "react-router-dom": "^4.1.1",
     "react-spinners": "^0.0.30",
