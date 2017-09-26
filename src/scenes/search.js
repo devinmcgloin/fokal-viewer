@@ -14,6 +14,10 @@ import PropTypes from "prop-types";
 import FontAwesome from "react-fontawesome";
 import queryString from "query-string";
 
+//const rgbRegex = /(rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\))/,
+//hexRegex = /(#[A-Fa-f0-9]{6})/,
+//hslRegex = /(hsl\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\))/;
+
 class SearchContainer extends Component {
     constructor(props) {
         super(props);

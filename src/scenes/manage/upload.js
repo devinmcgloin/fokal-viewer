@@ -59,14 +59,23 @@ class UploadContainer extends Component {
         return (
             <div className="sans-serif">
                 {this.state.status === "processing" ? (
-                    <InfoAlert message="Upload in progress." />
+                    <InfoAlert
+                        message="Upload in progress."
+                        active={this.state.action !== ""}
+                    />
                 ) : null}
 
                 {this.state.status === "failed" ? (
-                    <ErrorAlert message="Upload failed." />
+                    <ErrorAlert
+                        message="Upload failed."
+                        active={this.state.action !== ""}
+                    />
                 ) : null}
                 {this.state.status === "succeded" ? (
-                    <SuccessAlert message="Upload Succeded." />
+                    <SuccessAlert
+                        message="Upload Succeded."
+                        active={this.state.action !== ""}
+                    />
                 ) : null}
 
                 <div className="mw6 pa5 ma4 tc center">

@@ -43,23 +43,36 @@ class ManageUser extends Component {
             bio: this.state.bio,
             url: this.state.portfolio,
             name: this.state.name,
+            portfolio: this.state.portfolio,
+            location: this.state.location,
             instagram: this.state.instagram,
             twitter: this.state.twitter,
             username: this.state.username
         }).then(
             resp =>
                 resp.ok
-                    ? this.setState({ action: "success" })
-                    : this.setState({ action: "failure" })
+                    ? this.setState({ status: "success" })
+                    : this.setState({ status: "failure" })
         );
+        setTimeout(() => this.setState({ status: "" }), 5000);
     }
 
     render() {
         let alert = null;
-        if (this.state.action === "success")
-            alert = <SuccessAlert message="User Settings Changed." />;
-        else if (this.state.action === "failure")
-            alert = <ErrorAlert message="Failed to update user settings." />;
+        if (this.state.status === "success")
+            alert = (
+                <SuccessAlert
+                    message="User Settings Changed."
+                    active={this.state.action !== ""}
+                />
+            );
+        else if (this.state.status === "failure")
+            alert = (
+                <ErrorAlert
+                    message="Failed to update user settings."
+                    active={this.state.action !== ""}
+                />
+            );
 
         return (
             <div className="sans-serif pt0 pb2 pv1-m pv2-ns">

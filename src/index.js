@@ -31,8 +31,7 @@ class App extends React.Component {
         super(props);
         this.state = {
             isLoggedIn: false,
-            appToken: "",
-            menu: false
+            appToken: ""
         };
 
         bindAll(this, "onLogout", "onLogin", "refreshAuthStatus");
@@ -113,10 +112,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <HeaderContainer
-                    isLoggedIn={this.state.isLoggedIn}
-                    menu={this.state.menu}
-                />
+                <HeaderContainer isLoggedIn={this.state.isLoggedIn} />
                 <ScrollToTop>
                     <div>
                         <Switch>

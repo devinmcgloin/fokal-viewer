@@ -7,7 +7,10 @@ import { TextField } from "../../../components/fields";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "./collapse.css";
-import { WithContext as ReactTags } from "react-tag-input";
+//import { WithContext as ReactTags } from "react-tag-input";
+import { ErrorAlert, SuccessAlert } from "../../../components/alerts";
+import { Creatable } from "react-select";
+import "react-select/dist/react-select.css";
 
 class ManageImage extends Component {
     constructor(props) {
@@ -23,10 +26,11 @@ class ManageImage extends Component {
             make: props.image.metadata.make,
             lens_model: props.image.metadata.lens_model,
             lens_make: props.image.metadata.lens_make,
-            tags: props.image.tags.map((v, i) => {
-                return { indx: i, text: v };
+            tags: props.image.tags.map(v => {
+                return { label: v, value: v };
             }),
-            labels: props.image.labels
+            labels: props.image.labels,
+            status: ""
         };
 
         bindAll(this, "handleChange", "commitChanges");
@@ -53,16 +57,39 @@ class ManageImage extends Component {
             model: this.state.model,
             lens_make: this.state.lens_make,
             lens_model: this.state.lens_model,
-            tags: this.state.tags.map(({ text }) => text)
-        });
+            tags: this.state.tags.map(({ value }) => value)
+        }).then(
+            resp =>
+                resp.ok
+                    ? this.setState({ status: "success" })
+                    : this.setState({ status: "failure" })
+        );
+        setTimeout(() => this.setState({ status: "" }), 5000);
     }
 
     render() {
+        let alert = null;
+        if (this.state.status === "success")
+            alert = (
+                <SuccessAlert
+                    message="User Settings Changed."
+                    active={this.state.status !== ""}
+                />
+            );
+        else if (this.state.status === "failure")
+            alert = (
+                <ErrorAlert
+                    message="Failed to update user settings."
+                    active={this.state.status !== ""}
+                />
+            );
+
         return (
             <div
                 id={this.state.image.id}
                 className="sans-serif dib pv3 mv4 w-100"
             >
+                {alert}
                 <div className="fl w-100 w-50-m w-50-l dt pa2">
                     <img
                         src={this.state.image.src_links.medium}
@@ -138,34 +165,17 @@ class ManageImage extends Component {
                                             (optional)
                                         </span>
                                     </label>
-                                    <ReactTags
-                                        tags={this.state.tags}
-                                        // suggestions={this.state.labels}
-                                        handleDelete={i => {
-                                            let tags = this.state.tags;
-                                            console.log(tags);
-                                            tags.splice(i, 1);
-                                            console.log(tags);
-                                            this.setState({ tags: tags });
-                                        }}
-                                        handleAddition={tag => {
-                                            let tags = this.state.tags;
-                                            tags.push({
-                                                id: tags.length + 1,
-                                                text: tag
-                                            });
-                                            this.setState({ tags: tags });
-                                        }}
-                                        classNames={{
-                                            tags: "pv2",
-                                            tagInputField:
-                                                "input-reset ba b--black-20 pa2 br2 mb2 db w-100 mv2",
-                                            tag: "ma1 pa2 br2 bg-blue white dib"
-                                        }}
+                                    <Creatable
+                                        multi={true}
+                                        value={this.state.tags}
+                                        options={[]}
+                                        onChange={v =>
+                                            this.setState({ tags: v })}
                                     />
+
                                     <small
                                         id={"tags-desc"}
-                                        className="f6 black-60 db mb2"
+                                        className="f6 black-60 db mb2 mt1"
                                     >
                                         Tags appear on the image page and are
                                         available for searching.

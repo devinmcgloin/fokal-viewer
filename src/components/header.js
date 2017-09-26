@@ -1,8 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from "react";
+import { Link, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import { slide as Menu } from "react-burger-menu";
 import FontAwesome from "react-fontawesome";
+import { bindAll } from "lodash";
 
 const styles = {
     bmBurgerButton: {
@@ -41,10 +42,11 @@ class HeaderContainer extends React.Component {
         super(props);
         this.state = {
             isOpen: false,
-            searchActive: false
+            searchActive: false,
+            q: "",
+            submitted: false
         };
     }
-
     render() {
         return (
             <div>
@@ -185,21 +187,46 @@ class HeaderContainer extends React.Component {
                         className={"link dim black hover pointer pa2"}
                     />
 
-                    <Link
-                        className="sans-serif link dim black b f6 f5-ns dib mr3 tc pa2"
-                        to="/"
-                        title="Home"
-                    >
-                        Fokal
-                    </Link>
+                    {this.state.searchActive || (
+                        <Link
+                            className="sans-serif link dim black b f6 f5-ns dib mr3 tc pa2"
+                            to="/"
+                            title="Home"
+                        >
+                            Fokal
+                        </Link>
+                    )}
 
-                    <Link to="/search/images">
+                    {this.state.searchActive ? (
+                        <SearchBox
+                            onDismiss={() =>
+                                this.setState({ searchActive: false })}
+                            onSubmit={q => {
+                                this.setState({ submitted: true, q: q });
+                                setTimeout(
+                                    () => this.setState({ submitted: false }),
+                                    1000
+                                );
+                            }}
+                        />
+                    ) : (
                         <FontAwesome
                             name={"search"}
                             className={"link dim black hover pointer pa2"}
+                            onClick={() =>
+                                this.setState({ searchActive: true })}
                         />
-                    </Link>
+                    )}
                 </nav>
+                {this.state.submitted && (
+                    <Redirect
+                        push
+                        to={{
+                            pathname: "/search/images",
+                            search: "?q=" + encodeURIComponent(this.state.q)
+                        }}
+                    />
+                )}
             </div>
         );
     }
@@ -207,8 +234,58 @@ class HeaderContainer extends React.Component {
 
 HeaderContainer.propTypes = {
     isLoggedIn: PropTypes.bool.isRequired,
-    currentUser: PropTypes.object,
-    menu: PropTypes.bool.isRequired
+    currentUser: PropTypes.object
+};
+
+class SearchBox extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            q: ""
+        };
+
+        bindAll(this, "handleTextChange");
+    }
+
+    handleTextChange(e) {
+        this.setState({
+            q: e.target.value
+        });
+    }
+
+    render() {
+        return (
+            <form
+                onSubmit={e => {
+                    e.preventDefault();
+                    this.props.onSubmit(this.state.q);
+                    this.props.onDismiss();
+                }}
+                className="w-80 bb flex"
+            >
+                <input
+                    type="text"
+                    id="query"
+                    name="query"
+                    autoFocus
+                    onChange={this.handleTextChange}
+                    value={this.state.q}
+                    className="dib pa2 fl bn"
+                    style={{ flexGrow: "100" }}
+                />
+                <FontAwesome
+                    name={"times"}
+                    className={"dib link dim black hover pointer pa2 fr"}
+                    onClick={() => this.props.onDismiss()}
+                />
+            </form>
+        );
+    }
+}
+
+SearchBox.propTypes = {
+    onDismiss: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired
 };
 
 export { HeaderContainer };
