@@ -72,14 +72,14 @@ class ManageImage extends Component {
         if (this.state.status === "success")
             alert = (
                 <SuccessAlert
-                    message="User Settings Changed."
+                    message="Image Attributes Changed."
                     active={this.state.status !== ""}
                 />
             );
         else if (this.state.status === "failure")
             alert = (
                 <ErrorAlert
-                    message="Failed to update user settings."
+                    message="Failed to update image attributes."
                     active={this.state.status !== ""}
                 />
             );

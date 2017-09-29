@@ -25,6 +25,7 @@ import Raven from "raven-js";
 import JwtDecode from "jwt-decode";
 import { RefreshToken, CreateUser } from "./services/api/auth";
 import { bindAll } from "lodash";
+import { TermsOfService, PrivacyPolicy } from "./static/legal";
 
 class App extends React.Component {
     constructor(props) {
@@ -163,6 +164,9 @@ class App extends React.Component {
                                 component={Account}
                             />
                             <Route path="/explore" component={ExploreScene} />
+
+                            <Route path="/tos" component={TermsOfService} />
+                            <Route path="/privacy" component={PrivacyPolicy} />
                             <Route path="/*" component={NotFound} />
                         </Switch>
                     </div>
@@ -212,9 +216,11 @@ ReactDOM.render(
 
 registerServiceWorker();
 
-Raven.config(
-    "https://98f3dbb4874649db845e711d275f07da@sentry.io/211802"
-).install();
-Raven.setTagsContext({
-    environment: process.env.NODE_ENV
-});
+if (process.env.NODE_ENV === "production") {
+    Raven.config(
+        "https://98f3dbb4874649db845e711d275f07da@sentry.io/211802"
+    ).install();
+    Raven.setTagsContext({
+        environment: process.env.NODE_ENV
+    });
+}

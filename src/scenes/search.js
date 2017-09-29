@@ -10,32 +10,115 @@ import {
     SearchTagsView,
     SearchUsersView
 } from "../components/search";
+import { tagEntities } from "../services/geo/google";
 import PropTypes from "prop-types";
 import FontAwesome from "react-fontawesome";
 import queryString from "query-string";
 
-//const rgbRegex = /(rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\))/,
-//hexRegex = /(#[A-Fa-f0-9]{6})/,
-//hslRegex = /(hsl\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\))/;
+import convert from "color-convert";
+
+const rgbRegex = /rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)/,
+    hexRegex = /#[A-Fa-f0-9]{6}/,
+    hslRegex = /hsl\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)/;
+const extractTags = str => {
+    // eslint-disable-next-line no-useless-escape
+    const exc = /\-\w+/,
+        opt = /\+\w+/;
+
+    let optional_terms = str.match(opt);
+    str = str.replace(opt, "");
+
+    let excluded_terms = str.match(exc);
+    str = str.replace(exc, "");
+
+    return [
+        str.trim(),
+        optional_terms ? optional_terms.splice(-2, 2).map(t => t.slice(1)) : [],
+        excluded_terms ? excluded_terms.splice(-2, 2).map(t => t.slice(1)) : []
+    ];
+};
+
+const extractColor = str => {
+    const digits = /\d+/g;
+    if (str.search(rgbRegex) !== -1) {
+        let m = str.match(rgbRegex);
+        let values = m[0].match(digits);
+        let hex = convert.rgb.hex(values[0], values[1], values[2]);
+        let query = str.replace(rgbRegex, "");
+        return [query.trim(), "#" + hex];
+    } else if (str.search(hslRegex) !== -1) {
+        let m = str.match(hslRegex);
+        let values = m[0].match(digits);
+        let hex = convert.hsl.hex(values[0], values[1], values[2]);
+        let query = str.replace(hslRegex, "");
+        return [query.trim(), "#" + hex];
+    } else if (str.search(hexRegex) !== -1) {
+        let m = str.match(hexRegex);
+        let query = str.replace(hexRegex, "");
+        return [query.trim(), m[0]];
+    } else return [str.trim(), null];
+};
 
 class SearchContainer extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         let q = queryString.parse(props.location.search);
         this.state = {
-            results: { images: [], users: [], tags: [] },
+            results: {
+                images: [],
+                users: [],
+                tags: []
+            },
             q: q.q || "",
             failed: false,
             loading: false,
             type: props.match.params.type,
             history: props.history
         };
-        bindAll(this, "handleTextChange", "loadImages");
+        bindAll(
+            this,
+            "handleTextChange",
+            "handleSubmit",
+            "parseQuery",
+            "loadImages"
+        );
     }
 
     componentDidMount() {
-        this.loadImages();
+        this.handleSubmit();
+    }
+
+    parseQuery(str) {
+        let query_body = {};
+        let [q, color] = extractColor(str);
+        if (color) {
+            query_body.color = {
+                color: color,
+                pixel_fraction: 0.15
+            };
+        }
+
+        let [t, optional_terms, excluded_terms] = extractTags(q);
+        if (optional_terms.length !== 0)
+            query_body.optional_terms = optional_terms;
+        if (excluded_terms.length !== 0)
+            query_body.excluded_terms = excluded_terms;
+
+        query_body.document_types = ["user", "image", "tag"];
+
+        tagEntities(t, query => {
+            const q = Object.assign(query_body, query);
+            q.required_terms = q.required_terms.reduce(
+                (acc, v) =>
+                    v.search(/\s+/)
+                        ? acc.concat(v.split(/\s+/))
+                        : acc.concat(v),
+                []
+            );
+
+            console.log(q);
+            this.loadImages(q);
+        });
     }
 
     handleTextChange(e) {
@@ -45,56 +128,9 @@ class SearchContainer extends Component {
         });
     }
 
-    loadImages() {
-        this.setState({ loading: true });
-        const q = this.state.q;
-
-        if (q === "") {
-            this.setState({ loading: false });
-            return;
-        }
-
-        this.state.history.push({
-            search: "?q=" + encodeURIComponent(q)
-        });
-
-        const terms = q
-            .split(" ")
-            .map(t => t.trim())
-            .filter(t => t !== "");
-
-        let querybody = {
-            required_terms: [],
-            optional_terms: [],
-            excluded_terms: [],
-            document_types: ["image", "user", "tag"]
-        };
-
-        terms.map(t => {
-            if (t.startsWith("color:"))
-                querybody.color = {
-                    hex: t.replace("color:", ""),
-                    pixel_fraction: 0.15
-                };
-            else if (t.startsWith("+"))
-                querybody.optional_terms.push(t.replace("+", "").trim());
-            else if (t.startsWith("-"))
-                querybody.excluded_terms.push(t.replace("-", "").trim());
-            else querybody.required_terms.push(t.trim());
-        });
-
-        querybody.required_terms = querybody.required_terms.filter(
-            s => s !== ""
-        );
-        querybody.optional_terms = querybody.optional_terms.filter(
-            s => s !== ""
-        );
-        querybody.excluded_terms = querybody.excluded_terms.filter(
-            s => s !== ""
-        );
-
+    loadImages(query) {
         let t = this;
-        Search("/search", querybody)
+        Search("/search", query)
             .then(data => {
                 if (data.ok)
                     data.body.then(d =>
@@ -104,12 +140,39 @@ class SearchContainer extends Component {
                             failed: false
                         })
                     );
-                else t.setState({ failed: true, loading: false });
+                else
+                    t.setState({
+                        failed: true,
+                        loading: false
+                    });
             })
             .catch(err => {
-                console.log(err);
-                t.setState({ failed: true, loading: false });
+                t.setState({
+                    failed: true,
+                    loading: false
+                });
             });
+    }
+
+    handleSubmit() {
+        this.setState({
+            loading: true
+        });
+        const q = this.state.q;
+
+        if (q === "") {
+            this.setState({
+                loading: false
+            });
+            return;
+        }
+
+        this.state.history.push({
+            search: "?q=" + encodeURIComponent(q)
+        });
+        console.log(q);
+
+        this.parseQuery(q);
     }
 
     render() {
@@ -119,9 +182,18 @@ class SearchContainer extends Component {
 
         const results = this.state.results;
         const controllerOptions = [
-            { link: "/search/images", tag: "images" },
-            { link: "/search/users", tag: "users" },
-            { link: "/search/tags", tag: "tags" }
+            {
+                link: "/search/images",
+                tag: "images"
+            },
+            {
+                link: "/search/users",
+                tag: "users"
+            },
+            {
+                link: "/search/tags",
+                tag: "tags"
+            }
         ];
 
         return (
@@ -129,7 +201,7 @@ class SearchContainer extends Component {
                 <form
                     onSubmit={e => {
                         e.preventDefault();
-                        this.loadImages();
+                        this.handleSubmit();
                     }}
                     className="sans-serif mw7 pa5-ns pa2 pb6 ma2 tc br2 center"
                 >
@@ -140,15 +212,19 @@ class SearchContainer extends Component {
                         name={"query"}
                         onChange={this.handleTextChange}
                         value={this.state.q}
-                        style={{ height: "3rem" }}
+                        style={{
+                            height: "3rem"
+                        }}
                     />
                     <button
                         onClick={e => {
                             e.preventDefault();
-                            this.loadImages();
+                            this.handleSubmit();
                         }}
                         className="f5 button-reset fl pv3 tc bn bg-animate bg-black-80 hover-bg-black white pointer w-25 w-20-l br2 br--right"
-                        style={{ height: "3rem" }}
+                        style={{
+                            height: "3rem"
+                        }}
                     >
                         <FontAwesome name={"search"} />
                     </button>
@@ -158,10 +234,12 @@ class SearchContainer extends Component {
                     selected={this.state.type}
                     layout="grid"
                     handleLayoutChange={() => {}}
-                    handleTypeChange={t => this.setState({ type: t })}
+                    handleTypeChange={t =>
+                        this.setState({
+                            type: t
+                        })}
                     query={"?q=" + encodeURIComponent(this.state.q)}
                 />
-
                 {content ? (
                     content
                 ) : (
@@ -197,4 +275,4 @@ SearchContainer.propTypes = {
     history: PropTypes.object.isRequired
 };
 
-export { SearchContainer };
+export { SearchContainer, extractColor, extractTags };

@@ -137,17 +137,28 @@ class HeaderContainer extends React.Component {
                     <hr />
 
                     <Link
-                        to={"/join"}
+                        to={"/why"}
                         className={"sans-serif ttu link dim black b f3 f2-ns"}
                         onClick={() =>
                             this.setState(prev => {
                                 return { isOpen: !prev.isOpen };
                             })}
                     >
-                        About
+                        Why
+                    </Link>
+
+                    <Link
+                        to={"/how"}
+                        className={"sans-serif ttu link dim black b f3 f2-ns"}
+                        onClick={() =>
+                            this.setState(prev => {
+                                return { isOpen: !prev.isOpen };
+                            })}
+                    >
+                        How
                     </Link>
                     <Link
-                        to={"/join"}
+                        to={"/api"}
                         className={"sans-serif ttu link dim black b f3 f2-ns"}
                         onClick={() =>
                             this.setState(prev => {
@@ -156,26 +167,13 @@ class HeaderContainer extends React.Component {
                     >
                         API
                     </Link>
-                    <Link
-                        to={"/join"}
+                    <a
+                        target="_blank"
+                        href={"https://github.com/fokal"}
                         className={"sans-serif ttu link dim black b f3 f2-ns"}
-                        onClick={() =>
-                            this.setState(prev => {
-                                return { isOpen: !prev.isOpen };
-                            })}
                     >
-                        Roadmap
-                    </Link>
-                    <Link
-                        to={"/join"}
-                        className={"sans-serif ttu link dim black b f3 f2-ns"}
-                        onClick={() =>
-                            this.setState(prev => {
-                                return { isOpen: !prev.isOpen };
-                            })}
-                    >
-                        source
-                    </Link>
+                        Source
+                    </a>
                 </Menu>
                 <nav className="pa2 pa3-ns bb b--black-10 black-70 bg-white flex justify-between">
                     <FontAwesome
