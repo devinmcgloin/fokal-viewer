@@ -93,7 +93,7 @@ class SearchContainer extends Component {
         let [q, color] = extractColor(str);
         if (color) {
             query_body.color = {
-                color: color,
+                hex: color,
                 pixel_fraction: 0.15
             };
         }

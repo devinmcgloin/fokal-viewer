@@ -26,6 +26,7 @@ import JwtDecode from "jwt-decode";
 import { RefreshToken, CreateUser } from "./services/api/auth";
 import { bindAll } from "lodash";
 import { TermsOfService, PrivacyPolicy } from "./static/legal";
+import { Why } from "./static/why";
 
 class App extends React.Component {
     constructor(props) {
@@ -167,6 +168,7 @@ class App extends React.Component {
 
                             <Route path="/tos" component={TermsOfService} />
                             <Route path="/privacy" component={PrivacyPolicy} />
+                            <Route path="/why" component={Why} />
                             <Route path="/*" component={NotFound} />
                         </Switch>
                     </div>

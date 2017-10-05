@@ -177,6 +177,30 @@ class ImageContainer extends Component {
                         </ul>
                     </article>
                 ) : null}
+                {image.colors.length !== 0 ? (
+                    <article
+                        className="sans-serif pa3 pa5-ns"
+                        data-name="slab-stat-large"
+                    >
+                        <h3 className="f6 ttu tracked">Colors</h3>
+                        <ul className="pl0">
+                            {image.colors.map(color => (
+                                <li key={color.hex} className="dib mr2">
+                                    <Link
+                                        to={
+                                            "/search/images?q=" +
+                                            encodeURIComponent(color.hex)
+                                        }
+                                        className="f4 f2-ns b db pa2 link dim mid-gray"
+                                        style={{ color: color.hex }}
+                                    >
+                                        {color.hex}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </article>
+                ) : null}
 
                 {image.metadata.location ? (
                     <article
@@ -193,15 +217,15 @@ class ImageContainer extends Component {
                                 </dd>
                             </dl>
                             <dl className="db dib-ns w-auto-ns lh-title mr6-ns">
-                                <dd className="f6 fw4 ml0">Longitude</dd>
-                                <dd className="f2 f-subheadline-ns fw6 ml0">
-                                    {image.metadata.location.point.X.toFixed(3)}
-                                </dd>
-                            </dl>
-                            <dl className="db dib-ns w-auto-ns lh-title">
                                 <dd className="f6 fw4 ml0">Latitude</dd>
                                 <dd className="f2 f-subheadline-ns fw6 ml0">
                                     {image.metadata.location.point.Y.toFixed(3)}
+                                </dd>
+                            </dl>
+                            <dl className="db dib-ns w-auto-ns lh-title mr6-ns">
+                                <dd className="f6 fw4 ml0">Longitude</dd>
+                                <dd className="f2 f-subheadline-ns fw6 ml0">
+                                    {image.metadata.location.point.X.toFixed(3)}
                                 </dd>
                             </dl>
                         </div>
