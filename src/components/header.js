@@ -147,26 +147,6 @@ class HeaderContainer extends React.Component {
                         Why
                     </Link>
 
-                    <Link
-                        to={"/how"}
-                        className={"sans-serif ttu link dim black b f3 f2-ns"}
-                        onClick={() =>
-                            this.setState(prev => {
-                                return { isOpen: !prev.isOpen };
-                            })}
-                    >
-                        How
-                    </Link>
-                    <Link
-                        to={"/api"}
-                        className={"sans-serif ttu link dim black b f3 f2-ns"}
-                        onClick={() =>
-                            this.setState(prev => {
-                                return { isOpen: !prev.isOpen };
-                            })}
-                    >
-                        API
-                    </Link>
                     <a
                         target="_blank"
                         href={"https://github.com/fokal"}

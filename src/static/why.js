@@ -92,9 +92,7 @@ const Why = props => (
             />
         </section>
         <Feature
-            background="linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)"
-            icon_id="camera-retro"
-            left
+            background="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?dpr=1&auto=compress,format&fit=crop&w=2702&h=&q=80&cs=tinysrgb&crop="
             title="For Photographers"
             subtitle="Fokal is a place for people to find your images and use them."
             body={
@@ -108,9 +106,9 @@ const Why = props => (
             }
         />
         <Feature
-            background="linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)"
+            background="https://images.unsplash.com/photo-1503289408281-f8314bf417c3?dpr=1&auto=compress,format&fit=crop&w=3152&h=&q=80&cs=tinysrgb&crop="
+            left
             last
-            icon_id="cubes"
             title="For Creatives"
             subtitle="Fokal is about finding high quality, high resolution photos that you can use in any of your projects."
             body={
@@ -178,37 +176,30 @@ const Feature = ({
     title,
     subtitle,
     body
-}) => {
-    let content = [
+}) => (
+    <section
+        className={
+            "bg-dark-gray white cover fl w-100 pa3 " + (!last ? "pb4" : "")
+        }
+        style={{
+            background: "url(" + background + ") no-repeat center"
+        }}
+    >
         <div
             key={"copy"}
-            className={"fl w-100 h-100 w-50-l pa5-ns pa3 dtc v-mid"}
+            className={
+                (left ? "fl" : "fr") +
+                " w-80 h-100 w-40-l pa5-ns pa3 bg-dark-gray br2 shadow-5"
+            }
         >
             <h3 className="f2 lh-title bb">{title}</h3>
             {subtitle && (
                 <h4 className="f3 lh-copy measure-narrow">{subtitle}</h4>
             )}
             <p className="f5 lh-copy">{body}</p>
-        </div>,
-        <div
-            key={"icon"}
-            className={"fl w-100 h-100 w-50-l pa5-ns pa3 dtc v-mid tc"}
-        >
-            <FontAwesome name={icon_id} style={{ fontSize: "16rem" }} />
         </div>
-    ];
-    if (left) content = content.reverse();
-    return (
-        <section
-            className={"w-100 dt-row pa3 " + (!last ? "pb4" : "")}
-            style={{
-                background: background
-            }}
-        >
-            {content}
-        </section>
-    );
-};
+    </section>
+);
 
 Feature.propTypes = {
     icon_id: PropTypes.string.isRequired,
