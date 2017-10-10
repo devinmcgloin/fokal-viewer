@@ -140,7 +140,7 @@ const Why = props => (
                     Join to collect images, post your own or find your next
                     travel destination.
                 </p>
-                <Link to="/join">
+                <Link to="/join" className="no-underline">
                     <button className="relative z-1 f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white no-underline">
                         Join
                     </button>

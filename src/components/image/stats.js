@@ -7,14 +7,14 @@ const Stats = ({ favorites, downloads, views }) => (
         <div className="dtc tc pv4 ">
             <span className="gray">
                 <FontAwesome name="heart" />
-                <span className="pl2">Favorites</span>
+                <span className="pl2 f6 dn db-ns">Favorites</span>
             </span>
             <h3 className="f3">{favorites}</h3>
         </div>
         <div className="dtc tc pv4">
             <span className="gray">
                 <FontAwesome name="download" />
-                <span className="pl2">Downloads</span>
+                <span className="pl2 f6 dn db-ns">Downloads</span>
             </span>
 
             <h3 className="f3">{downloads}</h3>
@@ -22,7 +22,7 @@ const Stats = ({ favorites, downloads, views }) => (
         <div className="dtc tc pv4">
             <span className="gray">
                 <FontAwesome name="eye" />
-                <span className="pl2">Views</span>
+                <span className="pl2 f6 dn db-ns">Views</span>
             </span>
 
             <h3 className="f3">{views}</h3>

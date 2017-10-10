@@ -69,7 +69,7 @@ class ImageContainer extends Component {
                     />
                 </div>
                 <div className="ph4-l h3-ns h2 ph2 flex justify-between">
-                    <div>
+                    <div className="w-50">
                         <User
                             name={image.user.name}
                             username={image.user.id}
@@ -78,7 +78,7 @@ class ImageContainer extends Component {
                     </div>
 
                     <div className="dt h-100 pa2">
-                        <span className="dtc v-mid pr2">
+                        <span className="dtc v-mid pr1">
                             <Download
                                 id={image.id}
                                 imageURL={image.src_links.raw}
@@ -86,7 +86,7 @@ class ImageContainer extends Component {
                             />
                         </span>
 
-                        <span className="dtc v-mid pl2">
+                        <span className="dtc v-mid pl1">
                             <Favorite
                                 id={image.id}
                                 favorited={favorited}

@@ -7,7 +7,8 @@ const Colors = ({ colors }) => {
         <Link
             key={clr.hex}
             to={"/search/images?q=" + encodeURIComponent(clr.hex)}
-            className="link pointer dim br2 ba mb2 dib mr3 black"
+            className="link pointer dim br2 ba ma2 dib black"
+            style={{ width: "6.5rem" }}
         >
             <span
                 style={{ background: clr.hex }}

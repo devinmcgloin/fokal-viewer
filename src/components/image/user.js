@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const User = ({ name, username, location, avatarURL }) => (
-    <Link to={"/u/" + username}>
+    <Link to={"/u/" + username} className="no-underline">
         <article className="sans-serif dt w-100 pb2 mt2 link hover dim">
-            <div className="dtc w2 w3-ns v-mid">
+            <div className="dtc-ns w2 w3-ns v-mid dn">
                 <img
                     src={avatarURL}
                     className="ba b--black-10 db br2 w2 w3-ns h2 h3-ns"
