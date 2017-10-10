@@ -2,6 +2,7 @@ import React from "react";
 import { FavoriteImage } from "../../services/api/social";
 import { IncrementDownloads } from "../../services/api/retrieval";
 import PropTypes from "prop-types";
+import FontAwesome from "react-fontawesome";
 
 class Favorite extends React.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class Favorite extends React.Component {
     }
     render() {
         return (
-            <div
+            <span
                 onClick={e => {
                     FavoriteImage(
                         this.props.id,
@@ -25,23 +26,26 @@ class Favorite extends React.Component {
                     });
                     e.preventDefault();
                 }}
+                className={
+                    "link pointer dim br2 ba ph3 pv2 dib " +
+                    (this.state.favorited ? "white bg-red b--white" : "black")
+                }
             >
-                <dd
-                    className={
-                        "pointer link dim f2 f-subheadline-l fw6 ml0 " +
-                        (this.state.favorited ? "red" : "mid-gray")
-                    }
-                >
-                    {this.state.favorited ? "Favorited" : "Favorite"}
-                </dd>
-            </div>
+                <span className="flex justify-between">
+                    <FontAwesome className="flex" name="heart" />
+                    <span className="sans-serif flex pl3 f6">
+                        {this.props.count}
+                    </span>
+                </span>
+            </span>
         );
     }
 }
 
 Favorite.propTypes = {
     id: PropTypes.string.isRequired,
-    favorited: PropTypes.bool.isRequired
+    favorited: PropTypes.bool.isRequired,
+    count: PropTypes.number.isRequired
 };
 
 const Redirect = (id, imageURL) => {
@@ -49,23 +53,26 @@ const Redirect = (id, imageURL) => {
     window.open(imageURL + "?dl=fokal-" + id + ".jpg");
 };
 
-const Download = ({ id, imageURL }) => (
-    <div
+const Download = ({ id, imageURL, count }) => (
+    <span
         onClick={e => {
             console.log(id, imageURL);
             Redirect(id, imageURL);
             e.preventDefault();
         }}
+        className="link pointer dim br2 ba ph3 pv2 dib black"
     >
-        <dd className="pointer link dim mid-gray f2 f-subheadline-l fw6 ml0">
-            Download
-        </dd>
-    </div>
+        <span className="flex justify-between">
+            <FontAwesome className="flex" name="download" />
+            <span className="sans-serif pl3 f6">{count}</span>
+        </span>
+    </span>
 );
 
 Download.propTypes = {
     id: PropTypes.string.isRequired,
-    imageURL: PropTypes.string.isRequired
+    imageURL: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired
 };
 
 export { Favorite, Download };

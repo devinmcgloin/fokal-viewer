@@ -22,12 +22,12 @@ const Why = props => (
                 title="Search"
                 body={
                     <span>
-                        Fokal makes complicated search queries easy. We use best
+                        Fokal makes complicated search queries easy.We use best
                         in class machine learning and image recognition to
-                        analyze your queries and match them the relevant images.
-                        All content is uploaded with the permissive Unsplash
-                        Liscence, allowing you to use the images you find for
-                        personal or commercial use.
+                        analyze your queries and match them the relevant
+                        images.All content is uploaded with the permissive
+                        Unsplash Liscence, allowing you to use the images you
+                        find for personal or commercial use.
                     </span>
                 }
             />
@@ -37,13 +37,13 @@ const Why = props => (
                 body={
                     <span>
                         Each Image can be found in relation to the place it was
-                        taken. You can search for{" "}
+                        taken.You can search for{" "}
                         <Link
                             className="link dim"
                             to="/search/images?q=mountains%20in%20California"
                         >
                             Mountains in California
-                        </Link>, or{" "}
+                        </Link>, or {" "}
                         <Link
                             className="link dim"
                             to="/search/images?q=architecture%20in%20New%20York"
@@ -63,12 +63,12 @@ const Why = props => (
                 body={
                     <span>
                         In addition to search based on geography, it&#39;s also
-                        possible to search based on color. For example:{" "}
+                        possible to search based on color. For example{" "}
                         <Link
                             className="link dim"
-                            to="/search/images?q=cars rgb(200,200,0)"
+                            to="/search/images?q=cars%20rgb(200,200,0)"
                         >
-                            Cars rgb(200,200,0)
+                            Cars rgb(200, 200, 0)
                         </Link>{" "}
                         shows images of yellow cars. For any given image you can
                         also view the color components, allowing color pallates
@@ -81,7 +81,7 @@ const Why = props => (
                 title="API &amp; Opensource"
                 body={
                     <span>
-                        Fokal is operates off an extensible API. Allowing
+                        Fokal operates off an extensible API. Allowing
                         developers to build off Fokal&#39;s advanced image
                         tagging and searching. This allows custom domains and
                         more advanced features to be implemened quicker. The
@@ -94,13 +94,13 @@ const Why = props => (
         <Feature
             background="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?dpr=1&auto=compress,format&fit=crop&w=2702&h=&q=80&cs=tinysrgb&crop="
             title="For Photographers"
-            subtitle="Fokal is a place for people to find your images and use them."
+            subtitle="Fokal is a place for your images to be found and enjoyed."
             body={
                 <span>
-                    We&#39;re frusterated by the hundreds of good photos sitting
+                    We&#39;re frustrated by the hundreds of good photos sitting
                     in your archives that only friends and family have seen.
                     With Fokal, those images have a higher chance of being seen
-                    that other platforms. Our specific search allows local
+                    than other platforms. Our specific search allows local
                     winner photographs to be found.
                 </span>
             }
@@ -116,7 +116,7 @@ const Why = props => (
                     Our balance between machine curation and human tagging, as
                     well as an emphasis on metadata means you can find the photo
                     you&#39;re looking for. Fokal handles queries complex like{" "}
-                    <span className="b">cafes in Paris</span> or{" "}
+                    <span className="b">cafes in Paris </span> or{" "}
                     <span className="b">London skyline</span> as you would
                     expect. The goal of all this is to help you find images
                     you&#39;ll love.
@@ -137,11 +137,11 @@ const Why = props => (
             </div>
             <div className="fl w-100 tc pa6-ns pa3">
                 <p className="lh-copy relative z-1">
-                    Join to collect images, post your own or find interesting
-                    places to visit.
+                    Join to collect images, post your own or find your next
+                    travel destination.
                 </p>
                 <Link to="/join">
-                    <button className="relative z-1 f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white">
+                    <button className="relative z-1 f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white no-underline">
                         Join
                     </button>
                 </Link>

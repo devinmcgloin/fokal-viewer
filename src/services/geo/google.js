@@ -60,6 +60,7 @@ const tagEntities = (text, callback) => {
                     entity.mentions[0].type === "PROPER" &&
                     entity.type === "LOCATION"
                 ) {
+                    console.log(entity);
                     loc = entity.name;
                 } else {
                     terms.push(entity.name);
@@ -75,6 +76,7 @@ const tagEntities = (text, callback) => {
                 )
                     .then(resp => resp.json())
                     .then(resp => {
+                        console.log(resp);
                         let geo = resp.results[0].geometry;
 
                         let diameter = DistanceBetween(

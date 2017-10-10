@@ -4,10 +4,13 @@ import PropTypes from "prop-types";
 import { FetchImage } from "../services/api/retrieval";
 import { GetUser } from "../services/store/auth";
 import { Loading } from "../components/loading";
-import moment from "moment";
-import { Link } from "react-router-dom";
-import { Stats } from "../components/stats";
 import { Download, Favorite } from "../components/buttons/social";
+import { User } from "../components/image/user";
+import { Location } from "../components/image/location";
+import { Metadata } from "../components/image/metadata";
+import { Stats } from "../components/image/stats";
+import { Colors } from "../components/image/colors";
+import { Tags } from "../components/image/tags";
 
 class ImageContainer extends Component {
     constructor(props) {
@@ -51,7 +54,7 @@ class ImageContainer extends Component {
 
         return (
             <div>
-                <div className={"pv3"}>
+                <div className={"bg-near-black"}>
                     <div
                         style={{
                             background:
@@ -65,172 +68,58 @@ class ImageContainer extends Component {
                         className={"center"}
                     />
                 </div>
-                <article
-                    className="sans-serif pa3 pa5-ns"
-                    data-name="slab-stat-large"
-                >
-                    <h3 className="f6 ttu tracked">Actions</h3>
-                    <div className="cf">
-                        <dl className="db dib-l w-auto-l lh-title mr6-l">
+                <div className="ph4-l h3-ns h2 ph2 flex justify-between">
+                    <div>
+                        <User
+                            name={image.user.name}
+                            username={image.user.id}
+                            avatarURL={image.user.avatar_links.small}
+                        />
+                    </div>
+
+                    <div className="dt h-100 pa2">
+                        <span className="dtc v-mid pr2">
                             <Download
                                 id={image.id}
                                 imageURL={image.src_links.raw}
+                                count={image.stats.downloads}
                             />
-                        </dl>
-                        <dl className="db dib-l w-auto-l lh-title mr6-l">
-                            <Favorite id={image.id} favorited={favorited} />
-                        </dl>
-                    </div>
-                </article>
+                        </span>
 
-                <article
-                    className="sans-serif pa3 pa5-ns"
-                    data-name="slab-stat-large"
-                >
-                    <h3 className="f6 ttu tracked">Photographer</h3>
-                    <div className="cf">
-                        <dl className="db dib-l w-auto-l lh-title mr6-l">
-                            <dd className="f6 fw4 ml0">Name</dd>
-                            <dd className="f2 f-subheadline-l fw6 ml0">
-                                <Link
-                                    to={"/u/" + image.user.id}
-                                    className={"link dim mid-gray"}
-                                >
-                                    {image.user.name || image.user.id}
-                                </Link>
-                            </dd>
-                        </dl>
-                        <dl className="db dib-l w-auto-l lh-title">
-                            <dd className="f6 fw4 ml0">Location</dd>
-                            <dd className="f2 f-subheadline-l fw6 ml0">
-                                {image.user.location || "--"}
-                            </dd>
-                        </dl>
+                        <span className="dtc v-mid pl2">
+                            <Favorite
+                                id={image.id}
+                                favorited={favorited}
+                                count={image.stats.favorites}
+                            />
+                        </span>
                     </div>
-                </article>
-                <article
-                    className="sans-serif pa3 pa5-ns"
-                    data-name="slab-stat-large"
-                >
-                    <h3 className="f6 ttu tracked">Metadata</h3>
-                    <div className="cf">
-                        <dl className="db dib-l w-auto-l lh-title mr6-l">
-                            <dd className="f6 fw4 ml0">ISO</dd>
-                            <dd className="f2 f-subheadline-l fw6 ml0">
-                                {image.metadata.iso || "--"}
-                            </dd>
-                        </dl>
-                        <dl className="db dib-l w-auto-l lh-title mr6-l">
-                            <dd className="f6 fw4 ml0">Aperture</dd>
-                            <dd className="f2 f-subheadline-l fw6 ml0">
-                                {image.metadata.aperture || "--"}
-                            </dd>
-                        </dl>
-                        <dl className="db dib-l w-auto-l lh-title mr6-l">
-                            <dd className="f6 fw4 ml0">Exposure Time</dd>
-                            <dd className="f2 f-subheadline-l fw6 ml0">
-                                {image.metadata.exposure_time || "--"}
-                            </dd>
-                        </dl>
-                        <dl className="db dib-l w-auto-l lh-title mr6-l">
-                            <dd className="f6 fw4 ml0">Focal Length</dd>
-                            <dd className="f2 f-subheadline-l fw6 ml0">
-                                {image.metadata.focal_length || "--"}
-                            </dd>
-                        </dl>
-                        <dl className="db dib-l w-auto-l lh-title mr6-l">
-                            <dd className="f6 fw4 ml0">Capture Time</dd>
-                            <dd className="f2 f-subheadline-l fw6 ml0">
-                                {moment(image.metadata.capture_time).format(
-                                    "MMM Do YY"
-                                ) || "--"}
-                            </dd>
-                        </dl>
-                        <dl className="db dib-l w-auto-l lh-title">
-                            <dd className="f6 fw4 ml0">Resolution</dd>
-                            <dd className="f2 f-subheadline-l fw6 ml0">
-                                {(image.metadata.pixel_xd || "--") +
-                                    "x" +
-                                    (image.metadata.pixel_yd || "--")}
-                            </dd>
-                        </dl>
-                    </div>
-                </article>
-                <Stats title={"Stats"} stats={image.stats} />
-                {image.tags.length !== 0 ? (
-                    <article
-                        className="sans-serif pa3 pa5-ns"
-                        data-name="slab-stat-large"
-                    >
-                        <h3 className="f6 ttu tracked">Tags</h3>
-                        <ul className="pl0">
-                            {image.tags.map(t => (
-                                <li key={t} className="dib mr2">
-                                    <Link
-                                        to={"/t/" + t}
-                                        className="f4 f2-ns b db pa2 link dim mid-gray"
-                                    >
-                                        {t}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </article>
-                ) : null}
-                {image.colors.length !== 0 ? (
-                    <article
-                        className="sans-serif pa3 pa5-ns"
-                        data-name="slab-stat-large"
-                    >
-                        <h3 className="f6 ttu tracked">Colors</h3>
-                        <ul className="pl0">
-                            {image.colors.map(color => (
-                                <li key={color.hex} className="dib mr2">
-                                    <Link
-                                        to={
-                                            "/search/images?q=" +
-                                            encodeURIComponent(color.hex)
-                                        }
-                                        className="f4 f2-ns b db pa2 link dim mid-gray"
-                                        style={{ color: color.hex }}
-                                    >
-                                        {color.hex}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </article>
-                ) : null}
+                </div>
+                <div className="bg-white pa2 ma3 w-60 center">
+                    <Stats {...image.stats} />
+                    <hr className="w-80 near-black mv2" />
+                    {image.metadata.location ? (
+                        <span className="w-80 center flex justify-around">
+                            <Location {...image.metadata.location} />
+                        </span>
+                    ) : null}
 
-                {image.metadata.location ? (
-                    <article
-                        className="sans-serif pa3 pa5-ns"
-                        data-name="slab-stat-large"
-                    >
-                        <h3 className="f6 ttu tracked">Location</h3>
-                        <div className="cf">
-                            <dl className="db dib-ns w-auto-ns lh-title mr6-ns">
-                                <dd className="f6 fw4 ml0">Description</dd>
-                                <dd className="f2 f-subheadline-ns fw6 ml0">
-                                    {image.metadata.location.description ||
-                                        "--"}
-                                </dd>
-                            </dl>
-                            <dl className="db dib-ns w-auto-ns lh-title mr6-ns">
-                                <dd className="f6 fw4 ml0">Latitude</dd>
-                                <dd className="f2 f-subheadline-ns fw6 ml0">
-                                    {image.metadata.location.point.Y.toFixed(3)}
-                                </dd>
-                            </dl>
-                            <dl className="db dib-ns w-auto-ns lh-title mr6-ns">
-                                <dd className="f6 fw4 ml0">Longitude</dd>
-                                <dd className="f2 f-subheadline-ns fw6 ml0">
-                                    {image.metadata.location.point.X.toFixed(3)}
-                                </dd>
-                            </dl>
-                        </div>
-                    </article>
-                ) : null}
+                    <Metadata {...image.metadata} />
+
+                    {image.tags.length !== 0 ? (
+                        <span>
+                            <hr className="w-80 near-black mv2" />
+                            <Tags tags={image.tags} />
+                        </span>
+                    ) : null}
+
+                    {image.colors.length !== 0 ? (
+                        <span>
+                            <hr className="w-80 near-black mv2" />
+                            <Colors colors={image.colors} />
+                        </span>
+                    ) : null}
+                </div>
             </div>
         );
     }

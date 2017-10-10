@@ -384,8 +384,8 @@ class Geo extends Component {
         this.image_id = props.image.id;
         const loc = props.image.metadata && props.image.metadata.location;
         this.state = {
-            lat: loc ? loc.point.X : "",
-            lng: loc ? loc.point.Y : "",
+            lat: loc ? loc.point.lat : "",
+            lng: loc ? loc.point.lng : "",
             description: loc ? loc.description : "",
             script: "loading"
         };
