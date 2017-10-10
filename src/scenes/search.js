@@ -10,7 +10,6 @@ import {
     SearchTagsView,
     SearchUsersView
 } from "../components/search";
-import { tagEntities } from "../services/geo/google";
 import PropTypes from "prop-types";
 import FontAwesome from "react-fontawesome";
 import queryString from "query-string";
@@ -105,20 +104,10 @@ class SearchContainer extends Component {
             query_body.excluded_terms = excluded_terms;
 
         query_body.document_types = ["user", "image", "tag"];
+        query_body.required_terms = t.split(" ");
+        console.log(query_body, t);
 
-        tagEntities(t, query => {
-            const q = Object.assign(query_body, query);
-            q.required_terms = q.required_terms.reduce(
-                (acc, v) =>
-                    v.search(/\s+/)
-                        ? acc.concat(v.split(/\s+/))
-                        : acc.concat(v),
-                []
-            );
-
-            console.log(q);
-            this.loadImages(q);
-        });
+        this.loadImages(query_body);
     }
 
     handleTextChange(e) {
