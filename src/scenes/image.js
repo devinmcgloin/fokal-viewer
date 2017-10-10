@@ -95,9 +95,9 @@ class ImageContainer extends Component {
                         </span>
                     </div>
                 </div>
-                <div className="bg-white pa2 ma3 w-60 center">
+                <div className="bg-white pa2 ma3 mt4 w-80-l w-90 center">
                     <Stats {...image.stats} />
-                    <hr className="w-80 near-black mv2" />
+                    <hr className="w-90 near-black mv4" />
                     {image.metadata.location ? (
                         <span className="w-80 center flex justify-around">
                             <Location {...image.metadata.location} />
@@ -108,14 +108,14 @@ class ImageContainer extends Component {
 
                     {image.tags.length !== 0 ? (
                         <span>
-                            <hr className="w-80 near-black mv2" />
+                            <hr className="w-90 near-black mv4" />
                             <Tags tags={image.tags} />
                         </span>
                     ) : null}
 
                     {image.colors.length !== 0 ? (
                         <span>
-                            <hr className="w-80 near-black mv2" />
+                            <hr className="w-90 near-black mv4" />
                             <Colors colors={image.colors} />
                         </span>
                     ) : null}

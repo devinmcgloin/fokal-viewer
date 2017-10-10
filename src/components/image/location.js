@@ -10,7 +10,7 @@ const Location = ({ description, point }) => (
     >
         <span className="flex justify-between">
             <FontAwesome className="flex" name="map-marker" />
-            <span className="pl3 f6">
+            <span className="sans-serif pl3 f6">
                 {description ||
                     point.lat.toFixed(3) + ", " + point.lng.toFixed(3)}
             </span>
