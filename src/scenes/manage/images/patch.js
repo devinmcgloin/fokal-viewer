@@ -110,7 +110,10 @@ class ManageImage extends Component {
                             </p>
                             <button
                                 className="f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-red hover-bg-dark-red white"
-                                onClick={() => DeleteImage(this.state.image.id)}
+                                onClick={() =>
+                                    DeleteImage(
+                                        this.state.image.id
+                                    ).then(resp => this.handleSubmit(resp))}
                             >
                                 Delete
                             </button>
