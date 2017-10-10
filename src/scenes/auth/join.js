@@ -87,9 +87,9 @@ const Login = props => {
                             alt="Google Logo"
                         />
                         {props.isLoggedIn ? (
-                            <span className={"dib"}>Joined in with Google</span>
+                            <span className={"dib"}>Logged in with Google</span>
                         ) : (
-                            <span className={"dib"}>Join with Google</span>
+                            <span className={"dib"}>Login with Google</span>
                         )}
                     </span>
                 </GoogleLogin>
