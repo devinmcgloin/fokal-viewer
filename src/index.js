@@ -9,7 +9,7 @@ import { SearchContainer } from "./scenes/search";
 import { NotFound } from "./components/error";
 import { ImageContainer } from "./scenes/image";
 import { HeaderContainer } from "./components/header";
-import { Join } from "./scenes/auth/join";
+import { Join, Login } from "./scenes/auth/join";
 import { UserContainer } from "./scenes/user";
 import { GetJWT, LoggedIn, LogIn, Logout } from "./services/store/auth";
 import "tachyons/css/tachyons.css";
@@ -154,6 +154,16 @@ class App extends React.Component {
                                 )}
                             />
                             <Route
+                                path="/login"
+                                render={() => (
+                                    <Login
+                                        onSuccess={this.onLogin}
+                                        isLoggedIn={this.state.isLoggedIn}
+                                    />
+                                )}
+                            />
+
+                            <Route
                                 path="/logout"
                                 render={() => (
                                     <LogoutPage onSuccess={this.onLogout} />
@@ -193,9 +203,15 @@ const CallToAction = ({ title, message, call }) => (
                 <div className="pa3 pa4-ns dtc-ns v-mid">
                     <Link
                         to="/join"
-                        className="no-underline f6 tc db w-100 pv3 bg-animate bg-blue hover-bg-dark-blue white br2"
+                        className="no-underline f6 tc db w-100 pv3 bg-animate bg-blue hover-bg-dark-blue white br2 mv2"
                     >
                         {call}
+                    </Link>
+                    <Link
+                        to="/login"
+                        className="no-underline f6 tc db w-100 pv3 bg-animate bg-green hover-bg-dark-green white br2 mv2"
+                    >
+                        Login
                     </Link>
                 </div>
             </div>

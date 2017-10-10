@@ -104,6 +104,21 @@ class HeaderContainer extends React.Component {
                         </Link>
                     )}
 
+                    {this.props.isLoggedIn ? null : (
+                        <Link
+                            to={"/login"}
+                            className={
+                                "sans-serif ttu link dim black b f3 f2-ns"
+                            }
+                            onClick={() =>
+                                this.setState(prev => {
+                                    return { isOpen: !prev.isOpen };
+                                })}
+                        >
+                            Login
+                        </Link>
+                    )}
+
                     {this.props.isLoggedIn ? (
                         <Link
                             to={"/account/settings"}
