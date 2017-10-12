@@ -39,7 +39,7 @@ class Image extends Component {
               );
 
         return (
-            <img
+            <Imgix
                 alt=""
                 src={this.url}
                 className={this.className}
