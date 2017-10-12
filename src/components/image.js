@@ -1,6 +1,7 @@
-import React, {Component} from 'react'
-import {bindAll} from 'lodash'
-import PropTypes from 'prop-types'
+import React, { Component } from "react";
+import { bindAll } from "lodash";
+import PropTypes from "prop-types";
+import Imgix from "react-imgix";
 
 class Image extends Component {
     constructor(props) {
@@ -16,30 +17,37 @@ class Image extends Component {
             failed: false
         };
 
-        bindAll(this, 'handleLoad', 'handleLoadFailure')
+        bindAll(this, "handleLoad", "handleLoadFailure");
     }
 
     handleLoad() {
-        this.setState({isLoaded: true})
+        this.setState({ isLoaded: true });
     }
 
     handleLoadFailure() {
-        this.setState({failed: true})
+        this.setState({ failed: true });
     }
 
     render() {
-        const style = this.state.isLoaded ? this.style : Object.assign({
-            paddingBottom: (this.pixel_yd / this.pixel_xd) * 100 + '%',
-        }, this.style);
+        const style = this.state.isLoaded
+            ? this.style
+            : Object.assign(
+                  {
+                      paddingBottom: this.pixel_yd / this.pixel_xd * 100 + "%"
+                  },
+                  this.style
+              );
 
-        return <img
-            alt=""
-            src={this.url}
-            className={this.className}
-            style={style}
-            onLoad={this.handleLoad}
-            onError={this.handleLoadFailure}
-        />
+        return (
+            <img
+                alt=""
+                src={this.url}
+                className={this.className}
+                style={style}
+                onLoad={this.handleLoad}
+                onError={this.handleLoadFailure}
+            />
+        );
     }
 }
 
@@ -52,9 +60,23 @@ Image.propTypes = {
 };
 
 Image.defaultProps = {
-    className: '',
+    className: "",
     style: {}
 };
 
+const ResponsiveImage = ({ url }) => (
+    <Imgix
+        src={url}
+        type={"picture"}
+        faces={false}
+        entropy={true}
+        fit={"crop"}
+        generateSrcSet={true}
+    />
+);
 
-export {Image};
+ResponsiveImage.propTypes = {
+    url: PropTypes.string.isRequired
+};
+
+export { Image, ResponsiveImage };

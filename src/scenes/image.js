@@ -11,6 +11,7 @@ import { Metadata } from "../components/image/metadata";
 import { Stats } from "../components/image/stats";
 import { Colors } from "../components/image/colors";
 import { Tags } from "../components/image/tags";
+import { ResponsiveImage } from "../components/image";
 
 class ImageContainer extends Component {
     constructor(props) {
@@ -54,19 +55,8 @@ class ImageContainer extends Component {
 
         return (
             <div>
-                <div className={"bg-near-black"}>
-                    <div
-                        style={{
-                            background:
-                                "url(" +
-                                image.src_links.large +
-                                ") center center no-repeat",
-                            width: "90vw",
-                            height: "90vh",
-                            backgroundSize: "contain"
-                        }}
-                        className={"center"}
-                    />
+                <div className={"bg-near-black vh-90 vw-100"}>
+                    <ResponsiveImage url={image.src_links.raw} />
                 </div>
                 <div className="ph4-l h3-ns h2 ph2 flex justify-between">
                     <div className="w-50">
