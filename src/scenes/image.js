@@ -53,10 +53,21 @@ class ImageContainer extends Component {
             false
         );
 
+        const aspect = image.metadata.pixel_xd / image.metadata.pixel_yd;
+        const vert = window.innerWidth / (window.innerHeight * aspect) * 100;
+        console.log(aspect, vert);
+
         return (
             <div>
-                <div className={"bg-near-black vh-90 vw-100"}>
-                    <ResponsiveImage url={image.src_links.raw} />
+                <div
+                    className={"bg-near-black vw-100"}
+                    style={{ height: vert + "vh" }}
+                >
+                    <ResponsiveImage
+                        className="vw-100"
+                        imageProps={{ style: { height: vert + "vh" } }}
+                        url={image.src_links.raw}
+                    />
                 </div>
                 <div className="ph4-l h3-ns h2 ph2 flex justify-between">
                     <div className="w-50">

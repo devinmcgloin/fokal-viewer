@@ -9,7 +9,7 @@ const ImageCard = ({ image, width }) => (
             <Image
                 pixel_xd={image.metadata.pixel_xd}
                 pixel_yd={image.metadata.pixel_yd}
-                url={image.src_links.medium}
+                url={image.src_links.small}
                 className={"bg-center cover br2 shadow-5 " + width}
             />
         </Link>

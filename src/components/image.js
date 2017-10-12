@@ -64,19 +64,24 @@ Image.defaultProps = {
     style: {}
 };
 
-const ResponsiveImage = ({ url }) => (
+const ResponsiveImage = ({ url, imageProps, className }) => (
     <Imgix
         src={url}
-        type={"picture"}
+        className={className}
+        type={"bg"}
         faces={false}
         entropy={true}
         fit={"crop"}
+        fluid={true}
         generateSrcSet={true}
+        imgProps={imageProps}
     />
 );
 
 ResponsiveImage.propTypes = {
-    url: PropTypes.string.isRequired
+    url: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    imageProps: PropTypes.object
 };
 
 export { Image, ResponsiveImage };
