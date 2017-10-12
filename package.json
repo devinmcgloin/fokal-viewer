@@ -55,6 +55,7 @@
     "react-geosuggest": "^2.5.0",
     "react-google-login": "^2.9.3",
     "react-google-recaptcha": "^0.9.6",
+    "react-imgix": "^6.0.1",
     "react-load-script": "^0.0.6",
     "react-loading": "^0.1.4",
     "react-masonry-component": "^5.0.7",
