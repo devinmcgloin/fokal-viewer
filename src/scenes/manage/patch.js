@@ -9,6 +9,8 @@ import { Loading } from "../../components/loading";
 import { TextArea, TextField } from "../../components/fields";
 import { ErrorAlert, SuccessAlert } from "../../components/alerts";
 import { ManageImages } from "./images/patch";
+import Dropzone from "react-dropzone";
+import { UploadAvatar } from "../../services/api/upload";
 
 class ManageUser extends Component {
     constructor(props) {
@@ -35,6 +37,29 @@ class ManageUser extends Component {
         this.setState({
             [name]: target.value
         });
+    }
+    handleFile(files) {
+        const reader = new FileReader();
+
+        reader.onload = () => {
+            const blob = reader.result;
+            console.log(blob);
+
+            UploadAvatar(blob).then(resp => {
+                resp.ok
+                    ? this.setState({
+                          avatarURL: resp.url,
+                          status: "success"
+                      })
+                    : this.setState({
+                          status: "failure"
+                      });
+
+                setTimeout(() => this.setState({ status: "" }), 5000);
+            });
+        };
+
+        reader.readAsArrayBuffer(files[0]);
     }
 
     commitChanges(e) {
@@ -78,11 +103,31 @@ class ManageUser extends Component {
             <div className="sans-serif pt0 pb2 pv1-m pv2-ns">
                 {alert}
                 <div className="tc pv2 measure center">
-                    <img
-                        src={this.state.user.avatar_links.medium}
-                        alt="avatar"
-                        className="br1 h4 w4 dib"
-                    />
+                    <Dropzone
+                        accept={"image/*"}
+                        multiple={false}
+                        onDropAccepted={this.handleFile}
+                        className={"center ma1 ba br2 b--dashed pa2"}
+                        acceptClassName={
+                            "center ma3 ba br2 b--dashed pa4 bg-washed-green"
+                        }
+                        rejectClassName={
+                            "center ma3 ba br2 b--dashed pa4 bg-washed-red"
+                        }
+                    >
+                        <img
+                            src={
+                                this.state.avatarURL ||
+                                this.state.user.avatar_links.medium
+                            }
+                            alt="avatar"
+                            className="br1 h4 w4 dib"
+                        />
+                        <p className={"mh3 gray f7 tc  center measure-narrow"}>
+                            Drag and drop your files or browse from your
+                            computer
+                        </p>
+                    </Dropzone>
                 </div>
                 <div className="measure center">
                     <form onSubmit={this.commitChanges}>

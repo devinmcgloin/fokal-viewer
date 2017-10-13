@@ -8,7 +8,7 @@ const User = ({ name, username, location, avatarURL }) => (
             <div className="dtc-ns w2 w3-ns v-mid dn">
                 <img
                     src={avatarURL}
-                    className="ba b--black-10 db br2 w2 w3-ns h2 h3-ns"
+                    className="ba b--black-10 db br-100 w3-ns h2 h3-ns"
                 />
             </div>
             <div className="dtc v-mid pl3">

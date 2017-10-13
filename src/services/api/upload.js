@@ -1,12 +1,17 @@
-import {endpoint, getHeaders, ParseResponse} from "./api";
+import { endpoint, getHeaders, ParseResponse } from "./api";
 
-const UploadImage = (body) => {
-    return fetch(endpoint + "/images", {
+const UploadImage = body =>
+    fetch(endpoint + "/images", {
         headers: getHeaders(),
-        method: 'POST',
+        method: "POST",
         body: body
-    })
-        .then(ParseResponse);
-};
+    }).then(ParseResponse);
 
-export {UploadImage}
+const UploadAvatar = body =>
+    fetch(endpoint + "/users/me/avatar", {
+        headers: getHeaders(),
+        method: "PUT",
+        body: body
+    }).then(ParseResponse);
+
+export { UploadImage, UploadAvatar };
