@@ -421,8 +421,8 @@ class Geo extends Component {
                             })}
                         className="w-100 measure"
                         inputClassName="db border-box hover-black w-100 measure ba b--black-20 pa2 br2 mb2"
-                        suggestsClassName="list pl0 measure center"
-                        suggestItemClassName="lh-copy pv2 ba bl-0 bt-0 br-0 b--dotted b--black-30"
+                        suggestsClassName="list pl0 ml0 center mw6 ba b--light-silver br2"
+                        suggestItemClassName="ph3 pv3 bb b--light-silver"
                         suggestItemActiveClassName="bg-light-blue"
                     />
                     <TextField
