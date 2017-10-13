@@ -261,6 +261,7 @@ class SearchBox extends Component {
                     id="query"
                     name="query"
                     autoFocus
+                    onBlur={() => this.props.onDismiss()}
                     onChange={this.handleTextChange}
                     value={this.state.q}
                     className="dib pa2 fl bn"
