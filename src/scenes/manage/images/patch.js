@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Patch } from "../../../services/api/patch";
+import { FetchImages } from "../../../services/api/retrieval";
 import { DeleteImage } from "../../../services/api/delete";
 import PropTypes from "prop-types";
 import { bindAll } from "lodash";
@@ -113,7 +114,10 @@ class ManageImage extends Component {
                                 onClick={() =>
                                     DeleteImage(
                                         this.state.image.id
-                                    ).then(resp => this.handleSubmit(resp))}
+                                    ).then(resp => {
+                                        this.handleSubmit(resp);
+                                        this.props.onDelete(this.props.indx);
+                                    })}
                             >
                                 Delete
                             </button>
@@ -126,7 +130,9 @@ class ManageImage extends Component {
 }
 
 ManageImage.propTypes = {
-    image: PropTypes.object.isRequired
+    image: PropTypes.object.isRequired,
+    onDelete: PropTypes.func.isRequired,
+    indx: PropTypes.number.isRequired
 };
 
 class Exif extends Component {
@@ -497,9 +503,59 @@ Geo.propTypes = {
     onSubmit: PropTypes.func.isRequired
 };
 
-const ManageImages = ({ images }) => (
-    <div>{images.map(i => <ManageImage key={i.id} image={i} />)}</div>
-);
+class ManageImages extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            status: "loading",
+            images: []
+        };
+        bindAll(this, "handleDelete");
+    }
+
+    componentDidMount() {
+        FetchImages("/users/me/images")
+            .then(resp => {
+                if (resp.ok)
+                    resp.body.then(d =>
+                        this.setState({
+                            images: d,
+                            status: ""
+                        })
+                    );
+                else this.setState({ status: "failed" });
+            })
+            .catch(err => console.log(err));
+    }
+
+    handleDelete(indx) {
+        setTimeout(
+            () =>
+                this.setState(prev => {
+                    let img = prev.images;
+                    img.splice(indx, 1);
+                    return { images: img };
+                }),
+            1000
+        );
+    }
+
+    render() {
+        if (this.state.status === "loading") return <Loading />;
+        return (
+            <div>
+                {this.state.images.map((image, indx) => (
+                    <ManageImage
+                        key={image.id}
+                        image={image}
+                        indx={indx}
+                        onDelete={this.handleDelete}
+                    />
+                ))}
+            </div>
+        );
+    }
+}
 ManageImages.propTypes = {
     images: PropTypes.array.isRequired
 };

@@ -37,7 +37,7 @@ const Why = props => (
                 body={
                     <span>
                         Each Image can be found in relation to the place it was
-                        taken.You can search for{" "}
+                        taken. You can search for{" "}
                         <Link
                             className="link dim"
                             to="/search/images?q=mountains%20in%20California"
@@ -49,10 +49,11 @@ const Why = props => (
                             to="/search/images?q=architecture%20in%20New%20York"
                         >
                             Architecture in New York
-                        </Link>. If your planning a road trip, or traveling you
-                        can get images from a specific region and decide what
-                        places to spend your time. It also means you can search
-                        for images from a specific small town or national park.
+                        </Link>. If you&#39;re planning a road trip, or
+                        traveling you can get images from a specific region and
+                        decide what places to spend your time. It also means you
+                        can search for images from a specific small town or
+                        national park.
                     </span>
                 }
             />

@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Patch } from "../../services/api/patch";
-import { FetchImages, FetchMe } from "../../services/api/retrieval";
+import { FetchMe } from "../../services/api/retrieval";
 import PropTypes from "prop-types";
 import { bindAll } from "lodash";
 import Raven from "raven-js";
 import { Link, Route, Switch } from "react-router-dom";
 import { Loading } from "../../components/loading";
+import { Error } from "../../components/error";
 import { TextArea, TextField } from "../../components/fields";
 import { ErrorAlert, SuccessAlert } from "../../components/alerts";
 import { ManageImages } from "./images/patch";
@@ -16,18 +17,34 @@ class ManageUser extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: props.user,
-            bio: props.user.bio,
-            portfolio: props.user.url,
-            name: props.user.name,
-            location: props.user.location,
-            instagram: props.user.instagram,
-            twitter: props.user.twitter,
-            username: props.user.id,
+            status: "loading",
             avatar_links: undefined
         };
 
         bindAll(this, "handleChange", "commitChanges", "handleFile");
+    }
+
+    componentDidMount() {
+        FetchMe()
+            .then(resp => {
+                if (resp.ok)
+                    resp.body.then(d =>
+                        this.setState({
+                            user: d,
+                            bio: d.bio,
+                            portfolio: d.url,
+                            name: d.name,
+                            location: d.location,
+                            instagram: d.instagram,
+                            twitter: d.twitter,
+                            username: d.id,
+                            avatar_links: undefined,
+                            status: ""
+                        })
+                    );
+                else this.setState({ status: "failed" });
+            })
+            .catch(err => Raven.captureException(err));
     }
 
     handleChange(e) {
@@ -39,6 +56,7 @@ class ManageUser extends Component {
             [name]: target.value
         });
     }
+
     handleFile(files) {
         const reader = new FileReader();
 
@@ -89,6 +107,8 @@ class ManageUser extends Component {
     }
 
     render() {
+        if (this.state.status === "loading") return <Loading />;
+        if (this.state.status === "failed") return <Error />;
         let alert = null;
         if (this.state.status === "success")
             alert = (
@@ -211,94 +231,37 @@ ManageUser.propTypes = {
     user: PropTypes.object.isRequired
 };
 
-class Account extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            user: null,
-            images: [],
-            isLoadingUser: true,
-            isLoadingImages: true,
-            failed: false
-        };
-    }
-
-    componentDidMount() {
-        FetchMe()
-            .then(resp => {
-                if (resp.ok)
-                    resp.body.then(d =>
-                        this.setState({
-                            user: d,
-                            isLoadingUser: false
-                        })
-                    );
-                else this.setState({ failed: true });
-            })
-            .catch(err => Raven.captureException(err));
-
-        FetchImages("/users/me/images")
-            .then(resp => {
-                if (resp.ok)
-                    resp.body.then(d =>
-                        this.setState({
-                            images: d,
-                            isLoadingImages: false
-                        })
-                    );
-                else this.setState({ failed: true });
-            })
-            .catch(err => console.log(err));
-    }
-
-    render() {
-        return (
-            <div className="sans-serif">
-                <nav className="ph3 ph4-ns pv2 pv3-ns bb b--black-10 black-70">
-                    <div className="nowrap overflow-x-auto">
-                        <Link
-                            className="sans-serif link dim gray    f6 f5-ns dib mr3"
-                            title="Images"
-                            to={this.props.match.url}
-                        >
-                            Account
-                        </Link>
-                        <Link
-                            className="sans-serif link dim gray    f6 f5-ns dib mr3"
-                            title="Favorites"
-                            to={this.props.match.url + "/manage"}
-                        >
-                            Manage
-                        </Link>
-                    </div>
-                </nav>
-                <div className="w-100 pa3">
-                    {this.state.isLoadingUser ? (
-                        <Loading />
-                    ) : (
-                        <Switch>
-                            <Route
-                                exact
-                                path={this.props.match.url}
-                                render={() => (
-                                    <ManageUser user={this.state.user} />
-                                )}
-                            />
-                            <Route
-                                path={this.props.match.url + "/manage"}
-                                render={() => (
-                                    <ManageImages images={this.state.images} />
-                                )}
-                            />
-                            {/*<Route exact path={this.props.match.url} render={() => <DeleteUser user={this.state.user}/>}/>*/}
-                        </Switch>
-                    )}
-                </div>
+const Account = ({ match }) => (
+    <div className="sans-serif">
+        <nav className="ph3 ph4-ns pv2 pv3-ns bb b--black-10 black-70">
+            <div className="nowrap overflow-x-auto">
+                <Link
+                    className="sans-serif link dim gray    f6 f5-ns dib mr3"
+                    title="Images"
+                    to={match.url}
+                >
+                    Account
+                </Link>
+                <Link
+                    className="sans-serif link dim gray    f6 f5-ns dib mr3"
+                    title="Favorites"
+                    to={match.url + "/manage"}
+                >
+                    Manage
+                </Link>
             </div>
-        );
-    }
-}
-
+        </nav>
+        <div className="w-100 pa3">
+            <Switch>
+                <Route exact path={match.url} render={() => <ManageUser />} />
+                <Route
+                    path={match.url + "/manage"}
+                    render={() => <ManageImages />}
+                />
+            </Switch>
+        </div>
+    </div>
+);
 Account.propTypes = {
     match: PropTypes.object.isRequired
 };
