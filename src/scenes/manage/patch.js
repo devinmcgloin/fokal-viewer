@@ -23,10 +23,11 @@ class ManageUser extends Component {
             location: props.user.location,
             instagram: props.user.instagram,
             twitter: props.user.twitter,
-            username: props.user.id
+            username: props.user.id,
+            avatar_links: undefined
         };
 
-        bindAll(this, "handleChange", "commitChanges");
+        bindAll(this, "handleChange", "commitChanges", "handleFile");
     }
 
     handleChange(e) {
@@ -46,14 +47,19 @@ class ManageUser extends Component {
             console.log(blob);
 
             UploadAvatar(blob).then(resp => {
-                resp.ok
-                    ? this.setState({
-                          avatarURL: resp.url,
-                          status: "success"
-                      })
-                    : this.setState({
-                          status: "failure"
-                      });
+                if (resp.ok) {
+                    this.setState({
+                        status: "success"
+                    });
+                    resp.body.then(b => {
+                        console.log(b);
+                        this.setState({ avatar_links: b.links });
+                    });
+                } else {
+                    this.setState({
+                        status: "failure"
+                    });
+                }
 
                 setTimeout(() => this.setState({ status: "" }), 5000);
             });
@@ -117,8 +123,9 @@ class ManageUser extends Component {
                     >
                         <img
                             src={
-                                this.state.avatarURL ||
-                                this.state.user.avatar_links.medium
+                                this.state.avatar_links
+                                    ? this.state.avatar_links.medium
+                                    : this.state.user.avatar_links.medium
                             }
                             alt="avatar"
                             className="br1 h4 w4 dib"
