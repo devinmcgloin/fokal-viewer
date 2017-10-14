@@ -14,6 +14,9 @@ const LogIn = jwt => {
 
 const LoggedIn = () => localStorage.getItem("auth") !== null;
 
-const Logout = () => localStorage.removeItem("auth");
+const Logout = () => {
+    localStorage.removeItem("auth");
+    localStorage.removeItem("auth-user");
+};
 
 export { LoggedIn, Logout, LogIn, GetJWT, GetUser };
