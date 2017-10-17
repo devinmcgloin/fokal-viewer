@@ -105,7 +105,6 @@ class SearchContainer extends Component {
 
         query_body.document_types = ["user", "image", "tag"];
         query_body.required_terms = t.split(" ");
-        console.log(query_body, t);
 
         this.loadImages(query_body);
     }
@@ -159,7 +158,6 @@ class SearchContainer extends Component {
         this.state.history.push({
             search: "?q=" + encodeURIComponent(q)
         });
-        console.log(q);
 
         this.parseQuery(q);
     }

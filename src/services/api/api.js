@@ -18,7 +18,6 @@ const getHeaders = method => {
 
         if (unix > tok.exp) {
             // token is expired
-            console.log("Token is expired");
             Logout();
         } else if (tok.exp > unix + 60000) {
             // token needs to be refreshed

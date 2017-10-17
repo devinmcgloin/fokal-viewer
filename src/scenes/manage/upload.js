@@ -126,8 +126,6 @@ class ImageUpload extends Component {
         e.preventDefault();
         this.setState({ status: "processing" });
 
-        console.log(this.state.blob);
-
         // send to server
         UploadImage(this.state.blob).then(data => {
             if (data.ok)

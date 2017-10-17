@@ -52,7 +52,6 @@ class ManageUser extends Component {
         const target = e.target;
         const name = target.name;
 
-        console.log(name, target.value);
         this.setState({
             [name]: target.value
         });
@@ -63,7 +62,6 @@ class ManageUser extends Component {
 
         reader.onload = () => {
             const blob = reader.result;
-            console.log(blob);
 
             UploadAvatar(blob).then(resp => {
                 if (resp.ok) {
@@ -71,7 +69,6 @@ class ManageUser extends Component {
                         status: "success"
                     });
                     resp.body.then(b => {
-                        console.log(b);
                         this.setState({ avatar_links: b.links });
                     });
                 } else {

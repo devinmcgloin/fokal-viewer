@@ -5,12 +5,10 @@
 const key = process.env.REACT_APP_GOOGLE_KEY;
 
 const DistanceBetween = (northeast, southwest) => {
-    console.log(northeast, southwest);
     const center = {
         lat: (northeast.lat + southwest.lat) / 2,
         lng: (northeast.lng + southwest.lng) / 2
     };
-    console.log(center);
     const toRad = d => d * Math.PI / 180;
 
     const R = 6371e3;
@@ -60,7 +58,6 @@ const tagEntities = (text, callback) => {
                     entity.mentions[0].type === "PROPER" &&
                     entity.type === "LOCATION"
                 ) {
-                    console.log(entity);
                     loc = entity.name;
                 } else {
                     terms.push(entity.name);
@@ -76,7 +73,6 @@ const tagEntities = (text, callback) => {
                 )
                     .then(resp => resp.json())
                     .then(resp => {
-                        console.log(resp);
                         let geo = resp.results[0].geometry;
 
                         let diameter = DistanceBetween(

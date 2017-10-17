@@ -56,7 +56,6 @@ const Redirect = (id, imageURL) => {
 const Download = ({ id, imageURL, count }) => (
     <span
         onClick={e => {
-            console.log(id, imageURL);
             Redirect(id, imageURL);
             e.preventDefault();
         }}

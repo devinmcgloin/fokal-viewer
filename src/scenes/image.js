@@ -57,7 +57,6 @@ class ImageContainer extends Component {
 
         const aspect = image.metadata.pixel_xd / image.metadata.pixel_yd;
         const vert = window.innerWidth / (window.innerHeight * aspect) * 100;
-        console.log(aspect, vert);
 
         return (
             <div>
