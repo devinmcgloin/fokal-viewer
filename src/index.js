@@ -15,7 +15,7 @@ import { GetJWT, LoggedIn, LogIn, Logout } from "./services/store/auth";
 import "tachyons/css/tachyons.css";
 import "font-awesome/css/font-awesome.css";
 import "./assets/main.css";
-import { UploadContainer } from "./scenes/manage/upload";
+import { ImageUpload, ImageModify } from "./scenes/manage/upload";
 import PropTypes from "prop-types";
 import { Account } from "./scenes/manage/patch";
 import { ExploreScene } from "./scenes/explore";
@@ -169,7 +169,8 @@ class App extends React.Component {
                                     <LogoutPage onSuccess={this.onLogout} />
                                 )}
                             />
-                            <Route path="/upload" component={UploadContainer} />
+                            <Route path="/upload" component={ImageUpload} />
+                            <Route path="/manage/:id" component={ImageModify} />
                             <Route
                                 path="/account/settings"
                                 component={Account}

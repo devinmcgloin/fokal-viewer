@@ -211,7 +211,7 @@ class Exif extends Component {
                         <input
                             className="f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white"
                             type="Submit"
-                            value="Submit"
+                            value={this.props.buttonValue}
                             readOnly
                         />
                     </div>
@@ -226,7 +226,12 @@ Exif.propTypes = {
         id: PropTypes.string.isRequired,
         metadata: PropTypes.object.isRequired
     }),
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    buttonValue: PropTypes.string
+};
+
+Exif.defaultProps = {
+    buttonValue: "Submit"
 };
 
 class Tags extends Component {
@@ -277,7 +282,7 @@ class Tags extends Component {
                         <input
                             className="f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white"
                             type="Submit"
-                            value="Submit"
+                            value={this.props.buttonValue}
                             readOnly
                         />
                     </div>
@@ -292,7 +297,13 @@ Tags.propTypes = {
         id: PropTypes.string.isRequired,
         tags: PropTypes.arrayOf(PropTypes.string).isRequired
     }),
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+
+    buttonValue: PropTypes.string
+};
+
+Tags.defaultProps = {
+    buttonValue: "Submit"
 };
 
 class Gear extends Component {
@@ -369,7 +380,7 @@ class Gear extends Component {
                         <input
                             className="f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white"
                             type="Submit"
-                            value="Submit"
+                            value={this.props.buttonValue}
                             readOnly
                         />
                     </div>
@@ -384,7 +395,12 @@ Gear.propTypes = {
         id: PropTypes.string.isRequired,
         metadata: PropTypes.object.isRequired
     }),
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    buttonValue: PropTypes.string
+};
+
+Gear.defaultProps = {
+    buttonValue: "Submit"
 };
 
 class Geo extends Component {
@@ -464,11 +480,11 @@ class Geo extends Component {
                         </div>
                     </div>
 
-                    <div className="mt3">
+                    <div className="fl w-100 mt3">
                         <input
                             className="f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white"
                             type="Submit"
-                            value="Submit"
+                            value={this.props.buttonValue}
                             readOnly
                         />
                     </div>
@@ -500,7 +516,13 @@ Geo.propTypes = {
         id: PropTypes.string.isRequired,
         metadata: PropTypes.object.isRequired
     }),
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+
+    buttonValue: PropTypes.string
+};
+
+Geo.defaultProps = {
+    buttonValue: "Submit"
 };
 
 class ManageImages extends Component {
@@ -560,4 +582,4 @@ ManageImages.propTypes = {
     images: PropTypes.array.isRequired
 };
 
-export { ManageImages };
+export { ManageImages, ManageImage, Exif, Tags, Geo, Gear };

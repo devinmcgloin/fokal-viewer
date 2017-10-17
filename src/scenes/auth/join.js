@@ -8,7 +8,7 @@ import glogo from "./g-normal.svg";
 
 const Join = props => {
     if (props.isLoggedIn) {
-        return <Redirect to="/" />;
+        return <Redirect to="/why" />;
     } else {
         return (
             <div className="sans-serif mw6 pa5 ma4 tc center">

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 import { FetchImage } from "../services/api/retrieval";
 import { GetUser } from "../services/store/auth";
 import { Loading } from "../components/loading";
@@ -45,6 +46,7 @@ class ImageContainer extends Component {
 
     render() {
         if (this.state.isLoading) return <Loading />;
+        if (this.state.failed) return <Redirect to="/404" />;
 
         const image = this.state.image;
         const username = GetUser();
