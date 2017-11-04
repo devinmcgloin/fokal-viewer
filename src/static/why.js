@@ -22,12 +22,12 @@ const Why = props => (
                 title="Search"
                 body={
                     <span>
-                        Fokal makes complicated search queries easy.We use best
+                        Fokal makes complicated search queries easy. We use best
                         in class machine learning and image recognition to
-                        analyze your queries and match them the relevant
-                        images.All content is uploaded with the permissive
-                        Unsplash Liscence, allowing you to use the images you
-                        find for personal or commercial use.
+                        analyze your queries and match them the relevant images.
+                        All content is uploaded with the permissive Unsplash
+                        Liscence, allowing you to use the images you find for
+                        personal or commercial use.
                     </span>
                 }
             />
@@ -85,7 +85,7 @@ const Why = props => (
                         Fokal operates off an extensible API. Allowing
                         developers to build off Fokal&#39;s advanced image
                         tagging and searching. This allows custom domains and
-                        more advanced features to be implemened quicker. The
+                        more advanced features to be implemented quicker. The
                         code for Fokal is opensource, and welcomes pull
                         requests.
                     </span>
