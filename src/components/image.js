@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { bindAll } from "lodash";
 import PropTypes from "prop-types";
 import Imgix from "react-imgix";
+import LazyLoad from "react-lazyload";
 
 class Image extends Component {
     constructor(props) {
@@ -10,43 +10,22 @@ class Image extends Component {
         this.pixel_yd = props.pixel_yd;
         this.url = props.url;
         this.className = props.className;
-        this.style = props.style;
-
-        this.state = {
-            isLoaded: false,
-            failed: false
-        };
-
-        bindAll(this, "handleLoad", "handleLoadFailure");
-    }
-
-    handleLoad() {
-        this.setState({ isLoaded: true });
-    }
-
-    handleLoadFailure() {
-        this.setState({ failed: true });
     }
 
     render() {
-        const style = this.state.isLoaded
-            ? this.style
-            : Object.assign(
-                  {
-                      paddingBottom: this.pixel_yd / this.pixel_xd * 100 + "%"
-                  },
-                  this.style
-              );
-
         return (
-            <Imgix
-                alt=""
-                src={this.url}
-                className={this.className}
-                style={style}
-                onLoad={this.handleLoad}
-                onError={this.handleLoadFailure}
-            />
+            <LazyLoad>
+                <Imgix
+                    aggressiveLoad={true}
+                    alt=""
+                    src={this.url}
+                    className={this.className}
+                    customParams={{ fm: "pjpg", q: 0.6 }}
+                    generateSrcSet={true}
+                    width={0.3}
+                    height={0.3}
+                />
+            </LazyLoad>
         );
     }
 }
@@ -56,7 +35,9 @@ Image.propTypes = {
     pixel_yd: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
     className: PropTypes.string,
-    style: PropTypes.object
+    style: PropTypes.object,
+    width: PropTypes.number,
+    height: PropTypes.number
 };
 
 Image.defaultProps = {
@@ -75,6 +56,7 @@ const ResponsiveImage = ({ url, imageProps, className }) => (
         fluid={true}
         generateSrcSet={true}
         imgProps={imageProps}
+        customParams={{ fm: "pjpg" }}
     />
 );
 

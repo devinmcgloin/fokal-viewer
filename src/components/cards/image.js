@@ -7,10 +7,8 @@ const ImageCard = ({ image, width }) => (
     <div>
         <Link to={"/i/" + image.id} className="relative">
             <Image
-                pixel_xd={image.metadata.pixel_xd}
-                pixel_yd={image.metadata.pixel_yd}
-                url={image.src_links.thumb}
-                className={"bg-center cover br2 shadow-5 " + width}
+                url={image.src_links.raw}
+                className={"bg-center cover br2 shadow-5 "}
             />
         </Link>
     </div>
