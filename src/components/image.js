@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Imgix from "react-imgix";
-import LazyLoad from "react-lazyload";
 
 class Image extends Component {
     constructor(props) {
         super(props);
-        this.pixel_xd = props.pixel_xd;
-        this.pixel_yd = props.pixel_yd;
         this.url = props.url;
         this.className = props.className;
         this.progressive = props.progressive;
@@ -18,25 +15,21 @@ class Image extends Component {
             ? { fm: "pjpg", q: 0.6 }
             : { q: 0.6 };
         return (
-            <LazyLoad>
-                <Imgix
-                    aggressiveLoad={true}
-                    alt=""
-                    src={this.url}
-                    className={this.className}
-                    customParams={customParams}
-                    generateSrcSet={true}
-                    width={0.3}
-                    height={0.3}
-                />
-            </LazyLoad>
+            <Imgix
+                aggressiveLoad={true}
+                alt=""
+                src={this.url}
+                className={this.className}
+                customParams={customParams}
+                generateSrcSet={true}
+                width={0.3}
+                height={0.3}
+            />
         );
     }
 }
 
 Image.propTypes = {
-    pixel_xd: PropTypes.number.isRequired,
-    pixel_yd: PropTypes.number.isRequired,
     url: PropTypes.string.isRequired,
     className: PropTypes.string,
     style: PropTypes.object,

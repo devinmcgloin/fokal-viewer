@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Image } from "../image";
 import Measure from "react-measure";
 
+import LazyLoad from "react-lazyload";
 class ImageCard extends Component {
     constructor(props) {
         super(props);
@@ -18,7 +19,12 @@ class ImageCard extends Component {
     render() {
         const { width } = this.state.dimensions,
             image = this.props.image,
-            color = image.colors[0];
+            color = image.colors[0],
+            height =
+                width !== -1
+                    ? width *
+                      (image.metadata.pixel_yd / image.metadata.pixel_xd)
+                    : 300;
 
         return (
             <Measure
@@ -32,21 +38,17 @@ class ImageCard extends Component {
                         ref={measureRef}
                         className="br2"
                         style={{
-                            height:
-                                width !== -1
-                                    ? width *
-                                      (image.metadata.pixel_yd /
-                                          image.metadata.pixel_xd)
-                                    : 300,
-                            width: width,
+                            height: height,
                             backgroundColor: color ? color.hex : "#ededed"
                         }}
                     >
                         <Link to={"/i/" + image.id} className="relative">
-                            <Image
-                                url={image.src_links.raw}
-                                className={"bg-center cover br2 shadow-5 "}
-                            />
+                            <LazyLoad height={height}>
+                                <Image
+                                    url={image.src_links.raw}
+                                    className={"bg-center cover br2 shadow-5 "}
+                                />
+                            </LazyLoad>
                         </Link>
                     </div>
                 )}
