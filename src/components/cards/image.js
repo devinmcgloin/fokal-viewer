@@ -30,6 +30,7 @@ class ImageCard extends Component {
                 {({ measureRef }) => (
                     <div
                         ref={measureRef}
+                        className="br2"
                         style={{
                             height:
                                 width !== -1
