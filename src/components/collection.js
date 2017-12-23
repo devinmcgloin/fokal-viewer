@@ -19,7 +19,7 @@ LinearCollection.propTypes = {
 
 const GridCollection = ({ cards }) => {
     let opts = {
-        transitionDuration: 0,
+        //transitionDuration: 0,
         percentPosition: true,
         itemSelector: ".grid-item"
     };
@@ -37,11 +37,7 @@ const GridCollection = ({ cards }) => {
         ))
     );
 
-    return (
-        <Masonry options={opts} updateOnEachImageLoad={true}>
-            {titleBox}
-        </Masonry>
-    );
+    return <Masonry options={opts}> {titleBox}</Masonry>;
 };
 
 GridCollection.propTypes = {

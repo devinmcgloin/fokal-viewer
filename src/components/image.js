@@ -10,9 +10,13 @@ class Image extends Component {
         this.pixel_yd = props.pixel_yd;
         this.url = props.url;
         this.className = props.className;
+        this.progressive = props.progressive;
     }
 
     render() {
+        const customParams = this.progressive
+            ? { fm: "pjpg", q: 0.6 }
+            : { q: 0.6 };
         return (
             <LazyLoad>
                 <Imgix
@@ -20,7 +24,7 @@ class Image extends Component {
                     alt=""
                     src={this.url}
                     className={this.className}
-                    customParams={{ fm: "pjpg", q: 0.6 }}
+                    customParams={customParams}
                     generateSrcSet={true}
                     width={0.3}
                     height={0.3}
@@ -37,12 +41,14 @@ Image.propTypes = {
     className: PropTypes.string,
     style: PropTypes.object,
     width: PropTypes.number,
-    height: PropTypes.number
+    height: PropTypes.number,
+    progressive: PropTypes.bool
 };
 
 Image.defaultProps = {
     className: "",
-    style: {}
+    style: {},
+    progressive: false
 };
 
 const ResponsiveImage = ({ url, imageProps, className }) => (
