@@ -57,11 +57,14 @@ class ImageContainer extends Component {
         const vert = window.innerWidth / (window.innerHeight * aspect) * 100;
         console.log(aspect, vert);
 
+        const firstColor = image.colors[0];
+        const color = firstColor ? firstColor.hex : "rgb(12, 12, 12)";
+
         return (
             <div>
                 <div
-                    className={"bg-near-black vw-100"}
-                    style={{ height: vert + "vh" }}
+                    className={"vw-100"}
+                    style={{ height: vert + "vh", backgroundColor: color }}
                 >
                     <ResponsiveImage
                         className="vw-100"

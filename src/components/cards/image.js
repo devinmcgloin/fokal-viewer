@@ -6,6 +6,14 @@ import { Image } from "../image";
 const ImageCard = ({ image, width }) => (
     <div>
         <Link to={"/i/" + image.id} className="relative">
+            <div
+                className="bg-blue"
+                style={{
+                    height:
+                        width *
+                        (image.metadata.pixel_yd / image.metadata.pixel_xd)
+                }}
+            />
             <Image
                 url={image.src_links.raw}
                 className={"bg-center cover br2 shadow-5 "}
