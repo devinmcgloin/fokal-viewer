@@ -1,19 +1,15 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
 import { FetchImage } from "../services/api/retrieval";
 import { GetUser } from "../services/store/auth";
 import { Loading } from "../components/loading";
-import { Download, Favorite } from "../components/buttons/social";
-import { User } from "../components/image/user";
-import { Location } from "../components/image/location";
-import { Metadata } from "../components/image/metadata";
-import { Stats } from "../components/image/stats";
-import { Colors } from "../components/image/colors";
-import { Tags } from "../components/image/tags";
 import { ResponsiveImage } from "../components/image";
+import { GridCollection } from "../components/collection";
+import { UserStatsCard, UserTitleCard } from "../components/cards/user";
 
+import moment from "moment";
 class ImageContainer extends Component {
     constructor(props) {
         super(props);
@@ -55,14 +51,126 @@ class ImageContainer extends Component {
             false
         );
 
+        console.log(favorited);
+
         const aspect = image.metadata.pixel_xd / image.metadata.pixel_yd;
         const vert = window.innerWidth / (window.innerHeight * aspect) * 100;
 
+        const firstColor = image.colors[0];
+        const color = firstColor ? firstColor.hex : "rgb(12, 12, 12)";
+        let cards = [
+            <Link
+                to={"/u/" + image.user.id}
+                key={image.user.id}
+                className="no-underline"
+            >
+                <UserTitleCard user={image.user} />
+            </Link>,
+            <UserStatsCard
+                key="downloads"
+                title="Downloads"
+                value={image.stats.downloads}
+                background="linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%)"
+            />,
+            <UserStatsCard
+                key="views"
+                title="Views"
+                value={image.stats.views}
+                background="linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%)"
+            />,
+            <UserStatsCard
+                key="favorites"
+                title="Favorites"
+                value={image.stats.favorites}
+                background="linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%)"
+            />,
+            <UserStatsCard
+                key="aperture"
+                title="Aperture"
+                value={"f/" + Math.round(image.metadata.aperture * 100) / 100}
+                background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+            />,
+            <UserStatsCard
+                key="iso"
+                title="ISO"
+                value={image.metadata.iso}
+                background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+            />,
+            <UserStatsCard
+                key="exposure_time"
+                title="Exposure Time"
+                value={image.metadata.exposure_time + "s"}
+                background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+            />,
+            <UserStatsCard
+                key="focal_length"
+                title="Focal Length"
+                value={image.metadata.focal_length + "mm"}
+                background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+            />,
+            <UserStatsCard
+                key="camera"
+                title="Camera"
+                value={image.metadata.make + " " + image.metadata.model}
+                background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+            />,
+            <UserStatsCard
+                key="capture_time"
+                title="Capture Time"
+                value={moment(image.metadata.capture_time).format("LL")}
+                background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+            />
+        ];
+
+        if (image.metadata.location) {
+            cards = cards.concat(
+                <UserStatsCard
+                    key="location"
+                    title="Location"
+                    value={
+                        image.metadata.location
+                            ? image.metadata.location.description
+                            : image.metadata.location.lng +
+                              ", " +
+                              image.metadata.location.lat
+                    }
+                    background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+                />
+            );
+        }
+
+        cards = cards.concat(
+            image.tags.map(t => (
+                <UserStatsCard
+                    key={t}
+                    title="#Tag"
+                    value={t}
+                    background="linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)"
+                />
+            ))
+        );
+
+        cards = cards.concat(
+            image.colors.map(c => (
+                <UserStatsCard
+                    key={c.hex}
+                    title="Color"
+                    value={c.hex}
+                    background={
+                        "linear-gradient(19deg, " +
+                        c.hex +
+                        " 30%, #ededed 100%)"
+                    }
+                />
+            ))
+        );
+
+        console.log(cards);
         return (
             <div>
                 <div
-                    className={"bg-near-black vw-100"}
-                    style={{ height: vert + "vh" }}
+                    className={"vw-100"}
+                    style={{ height: vert + "vh", backgroundColor: color }}
                 >
                     <ResponsiveImage
                         className="vw-100"
@@ -70,57 +178,8 @@ class ImageContainer extends Component {
                         url={image.src_links.raw}
                     />
                 </div>
-                <div className="ph4-l h3-ns h2 ph2 flex justify-between">
-                    <div className="w-50">
-                        <User
-                            name={image.user.name}
-                            username={image.user.id}
-                            avatarURL={image.user.avatar_links.small}
-                        />
-                    </div>
-
-                    <div className="dt h-100 pa2">
-                        <span className="dtc v-mid pr1">
-                            <Download
-                                id={image.id}
-                                imageURL={image.src_links.raw}
-                                count={image.stats.downloads}
-                            />
-                        </span>
-
-                        <span className="dtc v-mid pl1">
-                            <Favorite
-                                id={image.id}
-                                favorited={favorited}
-                                count={image.stats.favorites}
-                            />
-                        </span>
-                    </div>
-                </div>
-                <div className="bg-white pa2 ma3 mt4 w-80-l w-90 center">
-                    <Stats {...image.stats} />
-                    <hr className="w-90 near-black mv4" />
-                    {image.metadata.location ? (
-                        <span className="w-80 center flex justify-around">
-                            <Location {...image.metadata.location} />
-                        </span>
-                    ) : null}
-
-                    <Metadata {...image.metadata} />
-
-                    {image.tags.length !== 0 ? (
-                        <span>
-                            <hr className="w-90 near-black mv4" />
-                            <Tags tags={image.tags} />
-                        </span>
-                    ) : null}
-
-                    {image.colors.length !== 0 ? (
-                        <span>
-                            <hr className="w-90 near-black mv4" />
-                            <Colors colors={image.colors} />
-                        </span>
-                    ) : null}
+                <div className="sans-serif center ph3-ns ph1">
+                    <GridCollection cards={cards} />
                 </div>
             </div>
         );

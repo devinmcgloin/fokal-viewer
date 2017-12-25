@@ -5,7 +5,7 @@ import Masonry from "react-masonry-component";
 
 const LinearCollection = ({ images }) => {
     const rend = images.map((img, i) => (
-        <div key={img.id} className={"w-100 " + (i === 0 ? "mb4" : "mv4")}>
+        <div key={img.id} className={"w-100 " + (i === 0 ? "mb3" : "mv3")}>
             <ImageCard image={img} />
         </div>
     ));
@@ -19,7 +19,7 @@ LinearCollection.propTypes = {
 
 const GridCollection = ({ cards }) => {
     let opts = {
-        transitionDuration: 0,
+        //transitionDuration: 0,
         percentPosition: true,
         itemSelector: ".grid-item"
     };
@@ -37,11 +37,7 @@ const GridCollection = ({ cards }) => {
         ))
     );
 
-    return (
-        <Masonry options={opts} updateOnEachImageLoad={true}>
-            {titleBox}
-        </Masonry>
-    );
+    return <Masonry options={opts}> {titleBox}</Masonry>;
 };
 
 GridCollection.propTypes = {

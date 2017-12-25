@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import {
     FetchImages,
     FetchUser,
@@ -118,7 +118,7 @@ class UserContainer extends React.Component {
 
                 <div className="pv3">
                     <div className="ph3 ph4-ns">
-                        <switch>
+                        <Switch>
                             <Route
                                 exact
                                 path={this.props.match.url}
@@ -186,7 +186,7 @@ class UserContainer extends React.Component {
                                     />
                                 )}
                             />
-                        </switch>
+                        </Switch>
                     </div>
                 </div>
             </div>
