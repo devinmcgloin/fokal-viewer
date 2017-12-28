@@ -49,9 +49,6 @@ const ResponsiveImage = ({ url, imageProps, className }) => (
         src={url}
         className={className}
         type={"bg"}
-        faces={false}
-        entropy={true}
-        fit={"crop"}
         fluid={true}
         generateSrcSet={true}
         imgProps={imageProps}

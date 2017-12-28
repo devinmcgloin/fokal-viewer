@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Image } from "../image";
 import Measure from "react-measure";
-
 import LazyLoad from "react-lazyload";
+
 class ImageCard extends Component {
     constructor(props) {
         super(props);
