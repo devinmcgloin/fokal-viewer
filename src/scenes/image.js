@@ -187,7 +187,7 @@ class ImageContainer extends Component {
                         </div>
                     )}
                 </Measure>
-                <div className="sans-serif center ph3-ns ph1">
+                <div className="sans-serif center ph3-ns ph1 mt3">
                     <GridCollection cards={cards} />
                 </div>
             </div>
