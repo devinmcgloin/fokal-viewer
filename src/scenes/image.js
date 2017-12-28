@@ -7,10 +7,10 @@ import { FetchImage } from "../services/api/retrieval";
 import { Loading } from "../components/loading";
 import { ResponsiveImage } from "../components/image";
 import { GridCollection } from "../components/collection";
-import { UserStatsCard, UserTitleCard } from "../components/cards/user";
+import { UserStatsCard, UserCard } from "../components/cards/user";
 import Measure from "react-measure";
-
 import moment from "moment";
+
 class ImageContainer extends Component {
     constructor(props) {
         super(props);
@@ -57,76 +57,71 @@ class ImageContainer extends Component {
         const aspect = image.metadata.pixel_xd / image.metadata.pixel_yd;
         const vert =
             this.state.innerWidth / (this.state.innerHeight * aspect) * 100;
-        console.log(
-            vert,
-            this.state.innerWidth,
-            this.state.innerHeight,
-            aspect
-        );
 
         const firstColor = image.colors[0];
         const color = firstColor ? firstColor.hex : "rgb(12, 12, 12)";
+        const bg = "#7C8382";
         let cards = [
             <Link
                 to={"/u/" + image.user.id}
                 key={image.user.id}
                 className="no-underline"
             >
-                <UserTitleCard user={image.user} />
+                <UserCard user={image.user} />
             </Link>,
             <UserStatsCard
                 key="downloads"
                 title="Downloads"
                 value={image.stats.downloads}
-                background="linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%)"
+                background={bg}
             />,
             <UserStatsCard
                 key="views"
                 title="Views"
                 value={image.stats.views}
-                background="linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%)"
+                background={bg}
             />,
             <UserStatsCard
                 key="favorites"
                 title="Favorites"
                 value={image.stats.favorites}
-                background="linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%)"
+                background={bg}
             />,
             <UserStatsCard
                 key="aperture"
                 title="Aperture"
                 value={"f/" + Math.round(image.metadata.aperture * 100) / 100}
-                background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+                background={bg}
             />,
             <UserStatsCard
                 key="iso"
                 title="ISO"
                 value={image.metadata.iso}
-                background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+                background={bg}
             />,
             <UserStatsCard
                 key="exposure_time"
                 title="Exposure Time"
                 value={image.metadata.exposure_time + "s"}
-                background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+                background={bg}
             />,
             <UserStatsCard
                 key="focal_length"
                 title="Focal Length"
                 value={image.metadata.focal_length + "mm"}
-                background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+                background={bg}
             />,
             <UserStatsCard
                 key="camera"
                 title="Camera"
                 value={image.metadata.make + " " + image.metadata.model}
-                background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+                background={bg}
             />,
             <UserStatsCard
                 key="capture_time"
                 title="Capture Time"
                 value={moment(image.metadata.capture_time).format("LL")}
-                background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+                background={bg}
             />
         ];
 
@@ -142,19 +137,14 @@ class ImageContainer extends Component {
                               ", " +
                               image.metadata.location.point.lat
                     }
-                    background="linear-gradient(147deg, #FFE53B 0%, #FF2525 74%)"
+                    background={bg}
                 />
             );
         }
 
         cards = cards.concat(
             image.tags.map(t => (
-                <UserStatsCard
-                    key={t}
-                    title="#Tag"
-                    value={t}
-                    background="linear-gradient(19deg, #21D4FD 0%, #B721FF 100%)"
-                />
+                <UserStatsCard key={t} title="#Tag" value={t} background={bg} />
             ))
         );
 
@@ -164,11 +154,7 @@ class ImageContainer extends Component {
                     key={c.hex}
                     title="Color"
                     value={c.hex}
-                    background={
-                        "linear-gradient(19deg, " +
-                        c.hex +
-                        " 30%, #ededed 100%)"
-                    }
+                    background={c.hex}
                 />
             ))
         );
