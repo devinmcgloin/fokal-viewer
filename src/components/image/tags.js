@@ -14,7 +14,7 @@ const Tags = ({ tags }) => {
     ));
 
     return (
-        <div className="sans-serif center w-80 flex justify-center flex-wrap">
+        <div className="sans-serif center w-90 flex justify-center flex-wrap">
             {t}
         </div>
     );
