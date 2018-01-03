@@ -19,7 +19,7 @@ const Colors = ({ colors }) => {
     ));
 
     return (
-        <div className="sans-serif center w-80 flex justify-center flex-wrap">
+        <div className="sans-serif center flex justify-center flex-wrap">
             {c}
         </div>
     );
