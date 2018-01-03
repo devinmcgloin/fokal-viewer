@@ -21,6 +21,7 @@ import { Account } from "./scenes/manage/patch";
 import { ExploreScene } from "./scenes/explore";
 import { LogoutPage } from "./scenes/auth/logout";
 import ScrollToTop from "./components/scroll";
+import RecordPageView from "./components/scroll";
 import Raven from "raven-js";
 import JwtDecode from "jwt-decode";
 import { RefreshToken, CreateUser } from "./services/api/auth";
@@ -114,76 +115,93 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <HeaderContainer isLoggedIn={this.state.isLoggedIn} />
-                <ScrollToTop>
-                    <div>
-                        <Switch>
-                            <Route
-                                exact
-                                path="/:type(recent|trending|)"
-                                render={props => (
-                                    <div>
-                                        {!this.state.isLoggedIn ? (
-                                            <CallToAction
-                                                title="Join Fokal"
-                                                message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
-                                                call="Join for Free"
-                                            />
-                                        ) : null}
-                                        <ImageCollection {...props} />
-                                    </div>
-                                )}
-                            />
+                <RecordPageView>
+                    <HeaderContainer isLoggedIn={this.state.isLoggedIn} />
+                    <ScrollToTop>
+                        <div>
+                            <Switch>
+                                <Route
+                                    exact
+                                    path="/:type(recent|trending|)"
+                                    render={props => (
+                                        <div>
+                                            {!this.state.isLoggedIn ? (
+                                                <CallToAction
+                                                    title="Join Fokal"
+                                                    message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
+                                                    call="Join for Free"
+                                                />
+                                            ) : null}
+                                            <ImageCollection {...props} />
+                                        </div>
+                                    )}
+                                />
 
-                            <Route path="/i/:id" component={ImageContainer} />
-                            <Route path="/u/:id" component={UserContainer} />
-                            <Route path="/t/:id" component={TaggedImages} />
+                                <Route
+                                    path="/i/:id"
+                                    component={ImageContainer}
+                                />
+                                <Route
+                                    path="/u/:id"
+                                    component={UserContainer}
+                                />
+                                <Route path="/t/:id" component={TaggedImages} />
 
-                            <Route
-                                path="/search/:type"
-                                component={SearchContainer}
-                            />
+                                <Route
+                                    path="/search/:type"
+                                    component={SearchContainer}
+                                />
 
-                            <Route
-                                path="/join"
-                                render={() => (
-                                    <Join
-                                        onSuccess={this.onLogin}
-                                        isLoggedIn={this.state.isLoggedIn}
-                                    />
-                                )}
-                            />
-                            <Route
-                                path="/login"
-                                render={() => (
-                                    <Login
-                                        onSuccess={this.onLogin}
-                                        isLoggedIn={this.state.isLoggedIn}
-                                    />
-                                )}
-                            />
+                                <Route
+                                    path="/join"
+                                    render={() => (
+                                        <Join
+                                            onSuccess={this.onLogin}
+                                            isLoggedIn={this.state.isLoggedIn}
+                                        />
+                                    )}
+                                />
+                                <Route
+                                    path="/login"
+                                    render={() => (
+                                        <Login
+                                            onSuccess={this.onLogin}
+                                            isLoggedIn={this.state.isLoggedIn}
+                                        />
+                                    )}
+                                />
 
-                            <Route
-                                path="/logout"
-                                render={() => (
-                                    <LogoutPage onSuccess={this.onLogout} />
-                                )}
-                            />
-                            <Route path="/upload" component={ImageUpload} />
-                            <Route path="/manage/:id" component={ImageModify} />
-                            <Route
-                                path="/account/settings"
-                                component={Account}
-                            />
-                            <Route path="/explore" component={ExploreScene} />
+                                <Route
+                                    path="/logout"
+                                    render={() => (
+                                        <LogoutPage onSuccess={this.onLogout} />
+                                    )}
+                                />
+                                <Route path="/upload" component={ImageUpload} />
+                                <Route
+                                    path="/manage/:id"
+                                    component={ImageModify}
+                                />
+                                <Route
+                                    path="/account/settings"
+                                    component={Account}
+                                />
+                                <Route
+                                    path="/explore"
+                                    component={ExploreScene}
+                                />
 
-                            <Route path="/tos" component={TermsOfService} />
-                            <Route path="/privacy" component={PrivacyPolicy} />
-                            <Route path="/why" component={Why} />
-                            <Route path="/*" component={NotFound} />
-                        </Switch>
-                    </div>
-                </ScrollToTop>
+                                <Route path="/tos" component={TermsOfService} />
+                                <Route
+                                    path="/privacy"
+                                    component={PrivacyPolicy}
+                                />
+                                <Route path="/why" component={Why} />
+                                <Route path="/*" component={NotFound} />
+                            </Switch>
+                        </div>
+                    </ScrollToTop>
+                </RecordPageView>
             </div>
         );
     }
