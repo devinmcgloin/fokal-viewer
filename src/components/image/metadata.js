@@ -16,7 +16,9 @@ const Metadata = ({
     <article className="cf sans-serif center w-80">
         <div className="fl w-100 w-33-ns pa3 tc">
             <dd className="f6 fw4 ml0">Aperture</dd>
-            <dd className="f3 fw6 ml0">{aperture ? "f/" + aperture : "--"}</dd>
+            <dd className="f3 fw6 ml0">
+                {aperture ? "f/" + Math.round(aperture * 100) / 100 : "--"}
+            </dd>
         </div>
         <div className="fl w-100 w-33-ns pa3 tc">
             <dd className="f6 fw4 ml0">Expsure Time</dd>
