@@ -185,7 +185,6 @@ class Exif extends Component {
                         name="iso"
                         presentation_name={"ISO"}
                         val={this.state.iso}
-                        desc="Your location will appear on your profile and be available."
                         optional={true}
                     />
 
@@ -194,7 +193,6 @@ class Exif extends Component {
                         name="exposure_time"
                         presentation_name={"Exposure Time"}
                         val={this.state.exposure_time}
-                        desc="The portfolio link is present on your profile page."
                         optional={true}
                     />
 
@@ -203,7 +201,6 @@ class Exif extends Component {
                         name="focal_length"
                         presentation_name={"Focal Length"}
                         val={this.state.focal_length}
-                        desc="Adding your Instagram allows us to feature you on Instagram."
                         optional={true}
                     />
 
@@ -346,7 +343,7 @@ class Gear extends Component {
                         handleChange={this.handleChange}
                         name="make"
                         val={this.state.make}
-                        desc="Your name will be displayed alongside your username."
+                        desc="The make of the camera will appear on the image page and be avaliable for searching."
                         optional={true}
                     />
 
@@ -354,7 +351,7 @@ class Gear extends Component {
                         handleChange={this.handleChange}
                         name="model"
                         val={this.state.model}
-                        desc="Your location will appear on your profile and be available for searches."
+                        desc="The model of the camera will appear on the image page and be avaliable for searching."
                         optional={true}
                     />
 
@@ -363,7 +360,7 @@ class Gear extends Component {
                         name="lens_make"
                         presentation_name={"Lens Make"}
                         val={this.state.lens_make}
-                        desc="The portfolio link is present on your profile page."
+                        desc="The lens make of the camera will appear on the image page and be avaliable for searching."
                         optional={true}
                     />
 
@@ -372,7 +369,7 @@ class Gear extends Component {
                         name="lens_model"
                         presentation_name={"Lens Model"}
                         val={this.state.lens_model}
-                        desc="Adding your Instagram allows us to feature you on Instagram."
+                        desc="The lens model of the camera will appear on the image page and be avaliable for searching."
                         optional={true}
                     />
 
