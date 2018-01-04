@@ -8,10 +8,19 @@ import LazyLoad from "react-lazyload";
 class ImageCard extends Component {
     constructor(props) {
         super(props);
+        const windowWidth = window.innerWidth;
+        let cardWidth;
+        if (windowWidth > 960) {
+            cardWidth = (windowWidth - (64 + 16 * 3)) / 3;
+        } else if (windowWidth > 480) {
+            cardWidth = (windowWidth - (64 + 16 * 2)) / 2;
+        } else {
+            cardWidth = windowWidth - (32 + 16);
+        }
+
         this.state = {
             dimensions: {
-                width: -1,
-                height: -1
+                width: cardWidth
             }
         };
     }
@@ -20,23 +29,21 @@ class ImageCard extends Component {
         const { width } = this.state.dimensions,
             image = this.props.image,
             color = image.colors[0],
-            height =
-                width !== -1
-                    ? width *
-                      (image.metadata.pixel_yd / image.metadata.pixel_xd)
-                    : 300;
+            aspect = image.metadata.pixel_yd / image.metadata.pixel_xd,
+            height = width * aspect;
 
         return (
             <Measure
                 bounds
                 onResize={contentRect => {
-                    this.setState({ dimensions: contentRect.bounds });
+                    contentRect.bounds.width > 30 &&
+                        this.setState({ dimensions: contentRect.bounds });
                 }}
             >
                 {({ measureRef }) => (
                     <div
                         ref={measureRef}
-                        className="br2"
+                        className="db br2 w-100"
                         style={{
                             height: height,
                             backgroundColor: color ? color.hex : "#ededed"
@@ -46,7 +53,7 @@ class ImageCard extends Component {
                             <LazyLoad height={height}>
                                 <Image
                                     url={image.src_links.raw}
-                                    className={"bg-center cover br2 shadow-5 "}
+                                    className={"bg-center cover br2 shadow-5"}
                                 />
                             </LazyLoad>
                         </Link>
