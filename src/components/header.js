@@ -254,7 +254,7 @@ class SearchBox extends Component {
                     this.props.onSubmit(this.state.q);
                     this.props.onDismiss();
                 }}
-                className="w-80 bb flex"
+                className="w-60 flex"
             >
                 <input
                     type="text"
@@ -264,12 +264,14 @@ class SearchBox extends Component {
                     onBlur={() => this.props.onDismiss()}
                     onChange={this.handleTextChange}
                     value={this.state.q}
-                    className="dib pa2 fl bn"
+                    className="dib pa2 fl bn white bg-black-70 input-reset br2 br--left outline-0"
                     style={{ flexGrow: "100" }}
                 />
                 <FontAwesome
                     name={"times"}
-                    className={"dib link dim black hover pointer pa2 fr"}
+                    className={
+                        "dib link dim white hover pointer pv2 ph3 fr bg-animate bg-black-80 hover-bg-black br2 br--right"
+                    }
                     onClick={() => this.props.onDismiss()}
                 />
             </form>
