@@ -168,35 +168,33 @@ class TaggedImages extends Component {
 
     loadImageFromServer(tag) {
         let t = this;
-        FetchImages("/tags/" + tag)
-            .then(function(data) {
-                switch (data.ok) {
-                    case true:
-                        data.body.then(b =>
-                            t.setState({
-                                images: b.images,
-                                count: b.count,
-                                isLoading: false
-                            })
-                        );
-                        break;
-                    case false:
-                        data.status === 404
-                            ? t.setState({
-                                  isLoading: false,
-                                  not_found: true
-                              })
-                            : t.setState({
-                                  isLoading: false,
-                                  failed: true
-                              });
-                        Raven.captureException(
-                            new Error("Invalid Response code from server."),
-                            { code: data.code }
-                        );
-                }
-            })
-            .catch(err => console.log(err));
+        FetchImages("/tags/" + tag).then(function(data) {
+            switch (data.ok) {
+                case true:
+                    data.body.then(b =>
+                        t.setState({
+                            images: b.images,
+                            count: b.count,
+                            isLoading: false
+                        })
+                    );
+                    break;
+                case false:
+                    data.status === 404
+                        ? t.setState({
+                              isLoading: false,
+                              not_found: true
+                          })
+                        : t.setState({
+                              isLoading: false,
+                              failed: true
+                          });
+                    Raven.captureException(
+                        new Error("Invalid Response code from server."),
+                        { code: data.code }
+                    );
+            }
+        });
     }
 
     componentDidMount() {

@@ -498,7 +498,6 @@ class Geo extends Component {
                     }
                     onLoad={() => this.setState({ script: "success" })}
                     onError={err => {
-                        console.log(err);
                         this.setState({ script: "failure" });
                     }}
                 />
@@ -533,18 +532,16 @@ class ManageImages extends Component {
     }
 
     componentDidMount() {
-        FetchImages("/users/me/images")
-            .then(resp => {
-                if (resp.ok)
-                    resp.body.then(d =>
-                        this.setState({
-                            images: d,
-                            status: ""
-                        })
-                    );
-                else this.setState({ status: "failed" });
-            })
-            .catch(err => console.log(err));
+        FetchImages("/users/me/images").then(resp => {
+            if (resp.ok)
+                resp.body.then(d =>
+                    this.setState({
+                        images: d,
+                        status: ""
+                    })
+                );
+            else this.setState({ status: "failed" });
+        });
     }
 
     handleDelete(indx) {

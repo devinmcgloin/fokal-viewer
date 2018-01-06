@@ -5,6 +5,7 @@ import GoogleLogin from "react-google-login";
 import "./join.css";
 import { Redirect } from "react-router-dom";
 import glogo from "./g-normal.svg";
+import Raven from "raven-js";
 
 const Join = props => {
     if (props.isLoggedIn) {
@@ -27,7 +28,11 @@ const Join = props => {
                     clientId="927799575891-u91lp3oc5ceksbcrqnv6omvbml5cbe15.apps.googleusercontent.com"
                     buttonText="Join with Google"
                     onSuccess={props.onSuccess}
-                    onFailure={err => console.log(err)}
+                    onFailure={err =>
+                        Raven.captureException(
+                            new Error("unable to join with google oauth"),
+                            {}
+                        )}
                     style={{}}
                     tag="span"
                 >
@@ -76,7 +81,11 @@ const Login = props => {
                     clientId="927799575891-u91lp3oc5ceksbcrqnv6omvbml5cbe15.apps.googleusercontent.com"
                     buttonText="Join with Google"
                     onSuccess={props.onSuccess}
-                    onFailure={err => console.log(err)}
+                    onFailure={err =>
+                        Raven.captureException(
+                            new Error("unable to log in with google oauth"),
+                            {}
+                        )}
                     style={{}}
                     tag="span"
                 >
