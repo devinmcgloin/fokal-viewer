@@ -39,12 +39,21 @@ SearchImagesView.propTypes = {
     )
 };
 
-const SearchUsersView = ({ users }) => (
-    <ResultsView
-        title="Users"
-        cards={users.map(u => <UserCard key={u.id} user={u} />)}
-    />
-);
+const SearchUsersView = ({ users }) =>
+    users.length ? (
+        <div>
+            <h3 className="sans-serif fw6 f4">Users</h3>
+            <div className="nowrap overflow-x-auto">
+                {users.map(t => (
+                    <span key={t.id} className="dib w5 pa2">
+                        <UserCard user={t} />
+                    </span>
+                ))}
+            </div>
+        </div>
+    ) : (
+        <div />
+    );
 
 SearchUsersView.propTypes = {
     users: PropTypes.arrayOf(
@@ -54,12 +63,21 @@ SearchUsersView.propTypes = {
     )
 };
 
-const SearchTagsView = ({ tags }) => (
-    <ResultsView
-        title="Tags"
-        cards={tags.map(t => <TagCard key={t.id} {...t} />)}
-    />
-);
+const SearchTagsView = ({ tags }) =>
+    tags.length ? (
+        <div>
+            <h3 className="sans-serif fw6 f4">Tags</h3>
+            <div className="nowrap overflow-x-auto">
+                {tags.map(t => (
+                    <span key={t.id} className="dib w5 pa2">
+                        <TagCard {...t} />
+                    </span>
+                ))}
+            </div>
+        </div>
+    ) : (
+        <div />
+    );
 
 SearchTagsView.propTypes = {
     tags: PropTypes.arrayOf(
