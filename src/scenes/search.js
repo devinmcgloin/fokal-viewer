@@ -3,8 +3,6 @@ import { Search } from "../services/api/search";
 import { bindAll } from "lodash";
 import { Error } from "../components/error";
 import { Loading } from "../components/loading";
-import { Controls } from "../components/collectionControls";
-import { Route, Switch } from "react-router-dom";
 import {
     SearchImagesView,
     SearchTagsView,
@@ -168,20 +166,6 @@ class SearchContainer extends Component {
         else if (this.state.failed) content = <Error />;
 
         const results = this.state.results;
-        const controllerOptions = [
-            {
-                link: "/search/images",
-                tag: "images"
-            },
-            {
-                link: "/search/users",
-                tag: "users"
-            },
-            {
-                link: "/search/tags",
-                tag: "tags"
-            }
-        ];
 
         return (
             <div className="ph3 ph4-ns">
@@ -216,40 +200,15 @@ class SearchContainer extends Component {
                         <FontAwesome name={"search"} />
                     </button>
                 </form>
-                <Controls
-                    options={controllerOptions}
-                    selected={this.state.type}
-                    layout="grid"
-                    handleLayoutChange={() => {}}
-                    handleTypeChange={t =>
-                        this.setState({
-                            type: t
-                        })}
-                    query={"?q=" + encodeURIComponent(this.state.q)}
-                />
+
                 {content ? (
                     content
                 ) : (
-                    <Switch>
-                        <Route
-                            path={"/search/images"}
-                            render={() => (
-                                <SearchImagesView images={results.images} />
-                            )}
-                        />
-                        <Route
-                            path={"/search/users"}
-                            render={() => (
-                                <SearchUsersView users={results.users} />
-                            )}
-                        />
-                        <Route
-                            path={"/search/tags"}
-                            render={() => (
-                                <SearchTagsView tags={results.tags} />
-                            )}
-                        />
-                    </Switch>
+                    <div>
+                        <SearchTagsView tags={results.tags} />
+                        <SearchUsersView users={results.users} />
+                        <SearchImagesView images={results.images} />
+                    </div>
                 )}
             </div>
         );
