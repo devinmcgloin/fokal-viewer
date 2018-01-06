@@ -254,7 +254,7 @@ class SearchBox extends Component {
                     this.props.onSubmit(this.state.q);
                     this.props.onDismiss();
                 }}
-                className="w-60 flex"
+                className="w-80 w-60-ns flex"
             >
                 <input
                     type="text"
@@ -270,7 +270,7 @@ class SearchBox extends Component {
                 <FontAwesome
                     name={"times"}
                     className={
-                        "dib link dim white hover pointer pv2 ph3 fr bg-animate bg-black-80 hover-bg-black br2 br--right"
+                        "dib link dim white hover pointer pa2 fr bg-animate bg-black-80 hover-bg-black br2 br--right"
                     }
                     onClick={() => this.props.onDismiss()}
                 />
