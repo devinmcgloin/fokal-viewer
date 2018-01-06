@@ -18,7 +18,7 @@ class SearchDisplay extends Component {
     componentDidMount() {
         const t = this;
         Search("/search", {
-            required_terms: [t.props.search],
+            required_terms: t.props.search,
             document_types: ["image", "tag"]
         }).then(data => {
             if (data.ok)
@@ -97,7 +97,7 @@ class ExploreScene extends Component {
                     description={
                         "Explore images from iconic mountain ranges around the world."
                     }
-                    search={"mountains"}
+                    search={["mountains"]}
                 />
 
                 <SearchDisplay
@@ -105,13 +105,13 @@ class ExploreScene extends Component {
                     description={
                         "Find beautiful structures from all corners of the globe."
                     }
-                    search={"architecture"}
+                    search={["architecture"]}
                 />
 
                 <SearchDisplay
-                    title={"Skyline"}
-                    description={"View iconic skylines from different cities."}
-                    search={"skyline"}
+                    title={"Mountains in Canada"}
+                    description={"Mountains from the great country of Canada."}
+                    search={["mountains", "in", "canada"]}
                 />
             </div>
         );
