@@ -1,23 +1,29 @@
-import React from 'react'
+import React from "react";
 
-const NotFound = () =>
+const NotFound = () => (
     <div className="sans-serif pa5">
         <h1 className="f-headline-l f2 lh-solid tc">404</h1>
-    </div>;
+    </div>
+);
 
-const NoResults = () =>
+const NoResults = () => (
     <div className="sans-serif pa5">
         <h1 className="f-headline-l f2 lh-solid tc">No Results</h1>
-    </div>;
+    </div>
+);
 
-const NotImplemented = () =>
+const NotImplemented = () => (
     <div className="sans-serif pa5">
         <h1 className="f-headline-l f2 lh-solid tc">Not Implemented</h1>
-    </div>;
+    </div>
+);
 
-const Error = () =>
+const Error = () => (
     <div className="sans-serif pa5">
-        <h1 className="f-headline-l f2 lh-solid tc">Hmmm... Something went wrong...</h1>
-    </div>;
+        <h1 className="f-headline-l f2 lh-solid tc">
+            Hmmm... Something went wrong...
+        </h1>
+    </div>
+);
 
-export {NotFound, NoResults, NotImplemented, Error};
+export { NotFound, NoResults, NotImplemented, Error };
