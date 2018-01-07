@@ -11,8 +11,9 @@ const TagCard = ({ image, count, id }) => (
                     className="db bg-center cover br2 shadow-5"
                     style={{
                         backgroundImage:
-                            "linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0) 60%), url(" +
-                            image.src_links.medium +
+                            "linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0) 70%), url(" +
+                            image.src_links.raw +
+                            "?auto=format&dpr=1&q=0.6&crop=faces&fit=crop&w=0.3&h=0.3" +
                             ")"
                     }}
                 >
