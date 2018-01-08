@@ -41,11 +41,11 @@ class ColorCard extends React.Component {
                     <div className={"w-40 fl dib pa3"}>
                         <div>#{activeClr.hex}</div>
                         <div>
-                            rgb({activeClr.sRGB.r}, {activeClr.sRGB.g},{" "}
+                            rgb({activeClr.sRGB.r}, {activeClr.sRGB.g},
                             {activeClr.sRGB.b})
                         </div>
                         <div>
-                            hsv({activeClr.hsv.h}, {activeClr.hsv.s},{" "}
+                            hsv({activeClr.hsv.h}, {activeClr.hsv.s},
                             {activeClr.hsv.v})
                         </div>
                     </div>
