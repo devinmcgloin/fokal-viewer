@@ -18,6 +18,7 @@ class ImageContainer extends Component {
         super(props);
         this.state = {
             image: {},
+            stats: {},
             id: props.match.params.id,
             isLoading: true,
             failed: false,
@@ -34,6 +35,7 @@ class ImageContainer extends Component {
                 data.body.then(b => {
                     t.setState({
                         image: b,
+                        stats: b.stats,
                         isLoading: false
                     });
                 });
@@ -49,6 +51,7 @@ class ImageContainer extends Component {
         if (this.state.isLoading) return <Loading />;
 
         const image = this.state.image;
+        const stats = this.state.stats;
         const username = GetUser();
         const favorited = image.favorited_by.reduce(
             (acc, user) => (acc ? acc : user.includes(username)),
@@ -94,7 +97,14 @@ class ImageContainer extends Component {
                         <Download
                             id={image.id}
                             imageURL={image.src_links.raw}
-                            count={image.stats.downloads}
+                            count={stats.downloads}
+                            increment={() => {
+                                this.setState(prev => {
+                                    let stats = prev.image.stats;
+                                    stats["downloads"] += 1;
+                                    return { stats: stats };
+                                });
+                            }}
                         />
                     </span>
 
@@ -102,7 +112,7 @@ class ImageContainer extends Component {
                         <Favorite
                             id={image.id}
                             favorited={favorited}
-                            count={image.stats.favorites}
+                            count={stats.favorites}
                         />
                     </span>
                 </div>
@@ -110,7 +120,7 @@ class ImageContainer extends Component {
                     <UserCard user={image.user} />
 
                     <div className="bg-white br2 mt3 mb3 pa4 shadow-5">
-                        <Stats {...image.stats} />
+                        <Stats {...stats} />
                     </div>
 
                     <div className="bg-white br2 mt3 mb3 pa4 shadow-5">

@@ -74,6 +74,7 @@ class Download extends React.Component {
             <span
                 onClick={e => {
                     RedirectToDownload(this.props.id, this.props.imageURL);
+                    this.props.increment();
                     e.preventDefault();
                     this.setState(prev => {
                         return {
@@ -97,7 +98,8 @@ class Download extends React.Component {
 Download.propTypes = {
     id: PropTypes.string.isRequired,
     imageURL: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired
+    count: PropTypes.number.isRequired,
+    increment: PropTypes.func
 };
 
 export { Favorite, Download };
