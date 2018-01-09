@@ -30,7 +30,8 @@ const styles = {
     },
     bmItemList: {
         color: "#ededed",
-        padding: "0.8em"
+        padding: "0.8em",
+        height: "90%"
     },
     bmOverlay: {
         background: "rgba(0, 0, 0, 0.3)"
