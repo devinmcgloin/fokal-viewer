@@ -8,11 +8,13 @@ import LazyLoad from "react-lazyload";
 class ImageCard extends Component {
     constructor(props) {
         super(props);
-        const windowWidth = window.innerWidth;
+        const windowWidth = window.innerWidth,
+            fullWidth = this.props.fullWidth;
+
         let cardWidth;
-        if (windowWidth > 960) {
+        if (windowWidth > 960 && !fullWidth) {
             cardWidth = (windowWidth - (64 + 16 * 3)) / 3;
-        } else if (windowWidth > 480) {
+        } else if (windowWidth > 480 && !fullWidth) {
             cardWidth = (windowWidth - (64 + 16 * 2)) / 2;
         } else {
             cardWidth = windowWidth - (32 + 16);
@@ -28,6 +30,7 @@ class ImageCard extends Component {
     render() {
         const { width } = this.state.dimensions,
             image = this.props.image,
+            fullWidth = this.props.fullWidth,
             color = image.colors[0],
             aspect = image.metadata.pixel_yd / image.metadata.pixel_xd,
             height = width * aspect;
@@ -54,6 +57,8 @@ class ImageCard extends Component {
                                 <Image
                                     url={image.src_links.raw}
                                     className={"bg-center cover br2 shadow-5"}
+                                    width={fullWidth ? 0.8 : 0.3}
+                                    height={fullWidth ? 0.8 : 0.3}
                                 />
                             </LazyLoad>
                         </Link>
@@ -81,7 +86,12 @@ ImageCard.propTypes = {
             permalink: PropTypes.string.isRequired,
             name: PropTypes.string.isRequired
         })
-    }).isRequired
+    }).isRequired,
+    fullWidth: PropTypes.bool.isRequired
+};
+
+ImageCard.defaultProps = {
+    fullWidth: false
 };
 
 export { ImageCard };

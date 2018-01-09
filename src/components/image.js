@@ -22,8 +22,8 @@ class Image extends Component {
                 className={this.className}
                 customParams={customParams}
                 generateSrcSet={true}
-                width={0.3}
-                height={0.3}
+                width={this.props.width}
+                height={this.props.height}
             />
         );
     }
@@ -41,7 +41,9 @@ Image.propTypes = {
 Image.defaultProps = {
     className: "",
     style: {},
-    progressive: false
+    progressive: false,
+    width: 0.3,
+    height: 0.3
 };
 
 const ResponsiveImage = ({ url, imageProps, className }) => (

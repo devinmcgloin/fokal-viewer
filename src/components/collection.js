@@ -6,7 +6,7 @@ import Masonry from "react-masonry-component";
 const LinearCollection = ({ images }) => {
     const rend = images.map((img, i) => (
         <div key={img.id} className={"w-100 " + (i === 0 ? "mb3" : "mv3")}>
-            <ImageCard image={img} />
+            <ImageCard fullWidth image={img} />
         </div>
     ));
 
