@@ -1,31 +1,10 @@
 //import Language from "@google-cloud/language";
 //import googleMaps from "@google/maps";
 
+import geodist from "geodist";
+
 /* global process */
 const key = process.env.REACT_APP_GOOGLE_KEY;
-
-const DistanceBetween = (northeast, southwest) => {
-    const center = {
-        lat: (northeast.lat + southwest.lat) / 2,
-        lng: (northeast.lng + southwest.lng) / 2
-    };
-    const toRad = d => d * Math.PI / 180;
-
-    const R = 6371e3;
-    const dLat = toRad(northeast.lat - center.lat);
-    const dLong = toRad(northeast.lng - center.lng);
-
-    const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(toRad(center.lat)) *
-            Math.cos(toRad(northeast.lat)) *
-            Math.sin(dLong / 2) *
-            Math.sin(dLong / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const d = R * c;
-
-    return Math.round(d);
-};
 
 const tagEntities = (text, callback) => {
     // Instantiates a Document, representing the provided text
@@ -75,13 +54,14 @@ const tagEntities = (text, callback) => {
                     .then(resp => {
                         let geo = resp.results[0].geometry;
 
-                        let diameter = DistanceBetween(
+                        let diameter = geodist(
                             geo.bounds
                                 ? geo.bounds.northeast
                                 : geo.viewport.northeast,
                             geo.bounds
                                 ? geo.bounds.southwest
-                                : geo.viewport.southwest
+                                : geo.viewport.southwest,
+                            { exact: true, unit: "km" }
                         );
                         callback({
                             required_terms: terms,
@@ -106,4 +86,4 @@ const tagEntities = (text, callback) => {
         });
 };
 
-export { tagEntities, DistanceBetween };
+export { tagEntities };

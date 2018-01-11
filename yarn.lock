@@ -2996,6 +2996,10 @@ gauge@~2.7.3:
     strip-ansi "^3.0.1"
     wide-align "^1.1.0"
 
+geodist@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/geodist/-/geodist-0.2.1.tgz#9619a5d935529335716faafad32228c29dc0b920"
+
 geojson-vt@2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/geojson-vt/-/geojson-vt-2.4.0.tgz#3c1cf44493f35eb4d2c70c95da6550de66072c05"
