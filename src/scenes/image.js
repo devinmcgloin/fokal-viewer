@@ -60,7 +60,7 @@ class ImageContainer extends Component {
 
         const aspect = image.metadata.pixel_xd / image.metadata.pixel_yd;
         const vert =
-            this.state.innerWidth / (this.state.innerHeight * aspect) * 100;
+            this.state.innerWidth / (window.innerHeight * aspect) * 100;
         const firstColor = image.colors[0];
         const color = firstColor ? firstColor.hex : "rgb(12, 12, 12)";
 
@@ -71,7 +71,6 @@ class ImageContainer extends Component {
                     onResize={contentRect => {
                         this.setState({
                             innerWidth: contentRect.bounds.width
-                            //innerHeight: contentRect.bounds.height
                         });
                     }}
                 >
