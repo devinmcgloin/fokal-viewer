@@ -3,7 +3,6 @@ import { Patch } from "../../../services/api/patch";
 import { FetchImages } from "../../../services/api/retrieval";
 import { DeleteImage } from "../../../services/api/delete";
 import PropTypes from "prop-types";
-import { bindAll } from "lodash";
 import { TextField } from "../../../components/fields";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
@@ -27,18 +26,16 @@ class ManageImage extends Component {
 
             status: ""
         };
-
-        bindAll(this, "handleSubmit");
     }
 
-    handleSubmit(resp) {
+    handleSubmit = resp => {
         resp.ok
             ? this.setState({ status: "success" })
             : this.setState({ status: "failure" });
         setTimeout(() => this.setState({ status: "" }), 5000);
-    }
+    };
 
-    render() {
+    render = () => {
         let alert = null;
         if (this.state.status === "success")
             alert = (
@@ -126,7 +123,7 @@ class ManageImage extends Component {
                 </Tabs>
             </div>
         );
-    }
+    };
 }
 
 ManageImage.propTypes = {
@@ -146,19 +143,18 @@ class Exif extends Component {
             exposure_time: metadata.exposure_time,
             focal_length: metadata.focal_length
         };
-        bindAll(this, "handleChange", "submit");
     }
 
-    handleChange(e) {
+    handleChange = e => {
         const target = e.target;
         const name = target.name;
 
         this.setState({
             [name]: target.value
         });
-    }
+    };
 
-    submit(e) {
+    submit = e => {
         e.preventDefault();
         Patch(this.image_id, "images", {
             aperture: Number(this.state.aperture),
@@ -166,9 +162,9 @@ class Exif extends Component {
             exposure_time: this.state.exposure_time,
             focal_length: Number(this.state.focal_length)
         }).then(resp => this.props.onSubmit(resp));
-    }
+    };
 
-    render() {
+    render = () => {
         return (
             <div className="fl ph2 pr0-ns pl3-ns dib w-100">
                 <form onSubmit={this.submit}>
@@ -215,7 +211,7 @@ class Exif extends Component {
                 </form>
             </div>
         );
-    }
+    };
 }
 
 Exif.propTypes = {
@@ -240,17 +236,16 @@ class Tags extends Component {
                 return { label: v, value: v };
             })
         };
-        bindAll(this, "handleSubmit");
     }
 
-    handleSubmit(e) {
+    handleSubmit = e => {
         e.preventDefault();
         Patch(this.image_id, "images", {
             tags: this.state.tags.map(({ value }) => value)
         }).then(resp => this.props.onSubmit(resp));
-    }
+    };
 
-    render() {
+    render = () => {
         return (
             <div className="fl ph2 pr0-ns pl3-ns dib w-100">
                 <form onSubmit={this.handleSubmit}>
@@ -286,7 +281,7 @@ class Tags extends Component {
                 </form>
             </div>
         );
-    }
+    };
 }
 
 Tags.propTypes = {
@@ -313,19 +308,18 @@ class Gear extends Component {
             lens_model: props.image.metadata.lens_model,
             lens_make: props.image.metadata.lens_make
         };
-        bindAll(this, "handleChange", "handleSubmit");
     }
 
-    handleChange(e) {
+    handleChange = e => {
         const target = e.target;
         const name = target.name;
 
         this.setState({
             [name]: target.value
         });
-    }
+    };
 
-    handleSubmit(e) {
+    handleSubmit = e => {
         e.preventDefault();
         Patch(this.image_id, "images", {
             make: this.state.make,
@@ -333,7 +327,7 @@ class Gear extends Component {
             lens_make: this.state.lens_make,
             lens_model: this.state.lens_model
         }).then(resp => this.props.onSubmit(resp));
-    }
+    };
 
     render() {
         return (
@@ -411,10 +405,9 @@ class Geo extends Component {
             description: loc ? loc.description : "",
             script: "loading"
         };
-        bindAll(this, "handleSubmit");
     }
 
-    handleSubmit(e) {
+    handleSubmit = e => {
         e.preventDefault();
         Patch(this.image_id, "images", {
             geo: {
@@ -423,7 +416,7 @@ class Geo extends Component {
                 description: this.state.description
             }
         }).then(resp => this.props.onSubmit(resp));
-    }
+    };
     render() {
         let center;
         if (this.state.script === "loading") center = <Loading />;
@@ -528,7 +521,6 @@ class ManageImages extends Component {
             status: "loading",
             images: []
         };
-        bindAll(this, "handleDelete");
     }
 
     componentDidMount() {
@@ -544,7 +536,7 @@ class ManageImages extends Component {
         });
     }
 
-    handleDelete(indx) {
+    handleDelet = indx => {
         setTimeout(
             () =>
                 this.setState(prev => {
@@ -554,7 +546,7 @@ class ManageImages extends Component {
                 }),
             1000
         );
-    }
+    };
 
     render() {
         if (this.state.status === "loading") return <Loading />;

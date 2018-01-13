@@ -19,7 +19,7 @@ import { ImageUpload, ImageModify } from "./scenes/manage/upload";
 import PropTypes from "prop-types";
 import { Account } from "./scenes/manage/patch";
 import { FeaturedScene } from "./scenes/featured";
-import { ExploreScene } from "./scenes/explore";
+import { ExploreScene } from "./scenes/explore/explore";
 import { LogoutPage } from "./scenes/auth/logout";
 import ScrollToTop from "./components/scroll";
 import RecordPageView from "./components/scroll";

@@ -33,7 +33,7 @@ class ImageCollection extends Component {
                         t.setState({ [type]: b, isLoading: false })
                     );
                     break;
-                case false:
+                default:
                     t.setState({
                         isLoading: false,
                         failed: true
@@ -179,7 +179,7 @@ class TaggedImages extends Component {
                         })
                     );
                     break;
-                case false:
+                default:
                     data.status === 404
                         ? t.setState({
                               isLoading: false,
