@@ -53,7 +53,7 @@ class ExploreScene extends Component {
         return (
             popupInfo && (
                 <Popup
-                    tipSize={5}
+                    tipSize={6}
                     anchor="top"
                     longitude={point.lng}
                     latitude={point.lat}
@@ -118,6 +118,8 @@ class ExploreScene extends Component {
                                 });
                                 this.loadImages(this.map.getBounds());
                             }}
+                            minZoom={2.5}
+                            maxPitch={0.0}
                         >
                             <div
                                 style={{ position: "absolute" }}
