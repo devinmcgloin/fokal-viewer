@@ -255,7 +255,7 @@ class Tags extends Component {
             <div className="fl ph2 pr0-ns pl3-ns dib w-100">
                 <form onSubmit={this.handleSubmit}>
                     <div className="measure">
-                        <label htmlFor={name} className="f6 b db mb2 ttc">
+                        <label className="f6 b db mb2 ttc">
                             Tags
                             <span className="normal black-60">(optional)</span>
                         </label>

@@ -68,6 +68,16 @@ class HeaderContainer extends React.Component {
                         Explore
                     </Link>
                     <Link
+                        to={"/featured"}
+                        className={"sans-serif ttu link dim black b f3 f2-ns"}
+                        onClick={() =>
+                            this.setState(prev => {
+                                return { isOpen: !prev.isOpen };
+                            })}
+                    >
+                        Featured
+                    </Link>
+                    <Link
                         to={"/search/images"}
                         className={"sans-serif ttu link dim black b f3 f2-ns"}
                         onClick={() =>
@@ -104,7 +114,6 @@ class HeaderContainer extends React.Component {
                             Join
                         </Link>
                     )}
-
                     {this.props.isLoggedIn ? null : (
                         <Link
                             to={"/login"}
@@ -119,7 +128,6 @@ class HeaderContainer extends React.Component {
                             Login
                         </Link>
                     )}
-
                     {this.props.isLoggedIn ? (
                         <Link
                             to={"/account/settings"}
@@ -134,7 +142,6 @@ class HeaderContainer extends React.Component {
                             Account
                         </Link>
                     ) : null}
-
                     {this.props.isLoggedIn ? (
                         <Link
                             to={"/logout"}
@@ -149,9 +156,7 @@ class HeaderContainer extends React.Component {
                             Logout
                         </Link>
                     ) : null}
-
                     <hr />
-
                     <Link
                         to={"/why"}
                         className={"sans-serif ttu link dim black b f3 f2-ns"}
@@ -162,7 +167,6 @@ class HeaderContainer extends React.Component {
                     >
                         Why
                     </Link>
-
                     <a
                         target="_blank"
                         href={"https://github.com/fokal"}

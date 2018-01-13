@@ -1,5 +1,5 @@
 {
-  "name": "fokal-viewer",
+  "name": "fokal-clone",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -61,6 +61,7 @@
     "react-lazyload": "^2.3.0",
     "react-load-script": "^0.0.6",
     "react-loading": "^0.1.4",
+    "react-map-gl": "^3.2.0",
     "react-masonry-component": "^5.0.7",
     "react-masonry-infinite": "^1.2.1",
     "react-measure": "^2.0.2",
@@ -74,6 +75,7 @@
     "rsvp": "^4.0.1",
     "style-loader": "0.18.2",
     "sw-precache-webpack-plugin": "0.11.4",
+    "tachyons": "^4.7.4",
     "tangram": "^0.13.0",
     "urijs": "^1.18.12",
     "url-loader": "0.5.9",
@@ -84,52 +86,12 @@
     "whatwg-fetch": "2.0.3"
   },
   "devDependencies": {
-    "tachyons": "^4.7.4"
+    "react-scripts": "1.0.17"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
-  },
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx}"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.js?(x)",
-      "<rootDir>/src/**/?(*.)(spec|test).js?(x)"
-    ],
-    "testEnvironment": "node",
-    "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web"
-    },
-    "moduleFileExtensions": [
-      "web.js",
-      "js",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }

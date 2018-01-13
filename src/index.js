@@ -18,6 +18,7 @@ import "./assets/main.css";
 import { ImageUpload, ImageModify } from "./scenes/manage/upload";
 import PropTypes from "prop-types";
 import { Account } from "./scenes/manage/patch";
+import { FeaturedScene } from "./scenes/featured";
 import { ExploreScene } from "./scenes/explore";
 import { LogoutPage } from "./scenes/auth/logout";
 import ScrollToTop from "./components/scroll";
@@ -185,6 +186,10 @@ class App extends React.Component {
                                 <Route
                                     path="/account/settings"
                                     component={Account}
+                                />
+                                <Route
+                                    path="/featured"
+                                    component={FeaturedScene}
                                 />
                                 <Route
                                     path="/explore"
