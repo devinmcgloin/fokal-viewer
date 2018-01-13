@@ -194,7 +194,7 @@ class PhotoInfo extends Component {
         return (
             <div>
                 <div className="pa2">
-                    <Link to={`/images/${info.id}`}>
+                    <Link to={`/i/${info.id}`}>
                         <Imgix
                             width={0.1}
                             height={0.1}
