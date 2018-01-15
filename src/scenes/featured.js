@@ -70,12 +70,6 @@ SearchDisplay.propTypes = {
 };
 
 class FeaturedScene extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {}
-
     render() {
         return (
             <div className="pa3 pa4-ns sans-serif">

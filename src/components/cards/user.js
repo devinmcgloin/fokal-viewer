@@ -6,7 +6,11 @@ import FontAwesome from "react-fontawesome";
 const UserTitleCard = ({ user }) => (
     <article className="center bg-white br2 pa3 pa4-ns ba b--black-10">
         <div className="tc">
-            <img src={user.avatar_links.thumb} className="br-100 h4 w4 dib" />
+            <img
+                alt={`avatar-${user.id}`}
+                src={user.avatar_links.thumb}
+                className="br-100 h4 w4 dib"
+            />
             <h1 className="f4">{user.name}</h1>
             <h1 className="f7 pb2">
                 {user.location ? (
@@ -63,22 +67,23 @@ UserStatsCard.propTypes = {
     background: PropTypes.string.isRequired
 };
 
-const UserCard = props => {
+const UserCard = ({ user, images, horizontal }) => {
     let content;
-    if (props.horizontal) {
+    if (horizontal) {
         content = (
             <div className={"cf"}>
                 <div className={"fl w-40 ph3"}>
                     <img
-                        src={props.user.avatar_links.thumb}
+                        alt={`avatar-${user.id}`}
+                        src={user.avatar_links.thumb}
                         className="br-100 h4 w4 ba b--black-05"
                         title=""
                     />
                 </div>
                 <div className={"fl w-60 ph3"}>
-                    <h1 className="f3 mb2 black">{props.user.name}</h1>
+                    <h1 className="f3 mb2 black">{user.name}</h1>
                     <h2 className="f5 fw4 gray mt0 black">
-                        {props.user.location || props.user.id}
+                        {user.location || user.id}
                     </h2>
                 </div>
             </div>
@@ -88,23 +93,28 @@ const UserCard = props => {
             <div>
                 <div className="tc">
                     <img
-                        src={props.user.avatar_links.thumb}
+                        alt={`avatar-${user.id}`}
+                        src={user.avatar_links.thumb}
                         className="br-100 h4 w4 dib ba b--black-05"
                         title=""
                     />
-                    <h1 className="f3 mb2 black">{props.user.name}</h1>
+                    <h1 className="f3 mb2 black">{user.name}</h1>
                     <h2 className="f5 fw4 gray mt0 black">
-                        {props.user.location || props.user.id}
+                        {user.location || user.id}
                     </h2>
                 </div>
                 <div className="dib">
-                    {props.images.slice(0, 3).map(i => (
+                    {images.slice(0, 3).map(i => (
                         <Link
                             className="fl w-33 pa1"
                             key={i.id}
                             to={"/i/" + i.id}
                         >
-                            <img src={i.src_links.thumb} className="br2" />
+                            <img
+                                alt={i.id}
+                                src={i.src_links.thumb}
+                                className="br2"
+                            />
                         </Link>
                     ))}
                 </div>
@@ -114,7 +124,7 @@ const UserCard = props => {
     return (
         <article className="sans-serif bg-white br2 ba b--black-10 shadow-5">
             <div className={"center pa3 pa4-ns"}>
-                <Link to={"/u/" + props.user.id} className={"link hover dim"}>
+                <Link to={"/u/" + user.id} className={"link hover dim"}>
                     {content}
                 </Link>
             </div>

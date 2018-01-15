@@ -209,7 +209,10 @@ class ImageUpload extends Component {
                             {({ acceptedFiles }) => {
                                 return acceptedFiles.length ? (
                                     <div className={"dib v-mid center"}>
-                                        <img src={this.state.preview} />
+                                        <img
+                                            alt="upload preview"
+                                            src={this.state.preview}
+                                        />
                                         <p className={"mh3 tc measure-narrow"}>
                                             {this.state.filename}
                                         </p>

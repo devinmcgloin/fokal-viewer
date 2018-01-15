@@ -105,13 +105,6 @@ class ExploreScene extends Component {
                             })}
                             mapboxApiAccessToken={mapboxAPIKey}
                             onViewportChange={viewport => {
-                                const {
-                                    width,
-                                    height,
-                                    latitude,
-                                    longitude,
-                                    zoom
-                                } = viewport;
                                 this.setState({
                                     viewport: viewport,
                                     bounds: this.map.getBounds()
