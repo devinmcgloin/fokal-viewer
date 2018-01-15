@@ -29,7 +29,7 @@ class ExploreScene extends Component {
 
     componentDidMount() {
         this.map = this.mapRef.getMap();
-        this.loadImages(this.map.getBounds());
+        setTimeout(() => this.loadImages(this.map.getBounds()), 500);
     }
 
     loadImages = bounds => {
