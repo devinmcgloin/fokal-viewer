@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Search } from "../services/api/search";
-import { bindAll } from "lodash";
 import { Error } from "../components/error";
 import { Loading } from "../components/loading";
 import {
@@ -69,23 +68,15 @@ class SearchContainer extends Component {
             q: q.q || "",
             failed: false,
             loading: false,
-            type: props.match.params.type,
             history: props.history
         };
-        bindAll(
-            this,
-            "handleTextChange",
-            "handleSubmit",
-            "parseQuery",
-            "loadImages"
-        );
     }
 
     componentDidMount() {
         this.handleSubmit();
     }
 
-    parseQuery(str) {
+    parseQuery = str => {
         let query_body = {};
         let [q, color] = extractColor(str);
         if (color) {
@@ -105,16 +96,16 @@ class SearchContainer extends Component {
         query_body.required_terms = t.split(" ");
 
         this.loadImages(query_body);
-    }
+    };
 
-    handleTextChange(e) {
+    handleTextChange = e => {
         this.setState({
             q: e.target.value
             // results: {images: [], users: [], tags: []}
         });
-    }
+    };
 
-    loadImages(query) {
+    loadImages = query => {
         let t = this;
         Search("/search", query)
             .then(data => {
@@ -138,9 +129,9 @@ class SearchContainer extends Component {
                     loading: false
                 });
             });
-    }
+    };
 
-    handleSubmit() {
+    handleSubmit = () => {
         this.setState({
             loading: true
         });
@@ -158,9 +149,9 @@ class SearchContainer extends Component {
         });
 
         this.parseQuery(q);
-    }
+    };
 
-    render() {
+    render = () => {
         let content = null;
         if (this.state.loading) content = <Loading />;
         else if (this.state.failed) content = <Error />;
@@ -212,7 +203,7 @@ class SearchContainer extends Component {
                 )}
             </div>
         );
-    }
+    };
 }
 
 SearchContainer.propTypes = {

@@ -40,13 +40,13 @@ const Why = props => (
                         taken. You can search for{" "}
                         <Link
                             className="link dim"
-                            to="/search/images?q=mountains%20in%20California"
+                            to="/search?q=mountains%20in%20California"
                         >
                             Mountains in California
                         </Link>, or {" "}
                         <Link
                             className="link dim"
-                            to="/search/images?q=architecture%20in%20New%20York"
+                            to="/search?q=architecture%20in%20New%20York"
                         >
                             Architecture in New York
                         </Link>. If you&#39;re planning a road trip, or
@@ -67,7 +67,7 @@ const Why = props => (
                         possible to search based on color. For example{" "}
                         <Link
                             className="link dim"
-                            to="/search/images?q=cars%20rgb(200,200,0)"
+                            to="/search?q=cars%20rgb(200,200,0)"
                         >
                             Cars rgb(200, 200, 0)
                         </Link>{" "}

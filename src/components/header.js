@@ -78,7 +78,7 @@ class HeaderContainer extends React.Component {
                         Featured
                     </Link>
                     <Link
-                        to={"/search/images"}
+                        to={"/search"}
                         className={"sans-serif ttu link dim black b f3 f2-ns"}
                         onClick={() =>
                             this.setState(prev => {
@@ -220,7 +220,7 @@ class HeaderContainer extends React.Component {
                     <Redirect
                         push
                         to={{
-                            pathname: "/search/images",
+                            pathname: "/search",
                             search: "?q=" + encodeURIComponent(this.state.q)
                         }}
                     />

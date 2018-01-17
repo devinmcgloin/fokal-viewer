@@ -149,7 +149,7 @@ class App extends React.Component {
                                 <Route path="/t/:id" component={TaggedImages} />
 
                                 <Route
-                                    path="/search/:type"
+                                    path="/search"
                                     component={SearchContainer}
                                 />
 

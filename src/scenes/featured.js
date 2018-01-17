@@ -43,7 +43,7 @@ class SearchDisplay extends Component {
                 </p>
                 <p className={"measure-wide lh-copy"}>
                     <Link
-                        to={"/search/images?q=" + this.props.search}
+                        to={"/search?q=" + this.props.search}
                         className={"link dim hover black underline"}
                     >
                         Explore More

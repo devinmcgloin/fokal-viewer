@@ -16,7 +16,7 @@ const Location = ({ description, point }) => {
 
     return description ? (
         <Link
-            to={"/search/images?q=" + encodeURIComponent(description)}
+            to={"/search?q=" + encodeURIComponent(description)}
             className="link pointer dim br2 ba ph3 pv2 mb2 dib black"
         >
             {content}
