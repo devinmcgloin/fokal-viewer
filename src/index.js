@@ -29,6 +29,7 @@ import { bindAll } from "lodash";
 import { TermsOfService, PrivacyPolicy } from "./static/legal";
 import { Why } from "./static/why";
 import ReactGA from "react-ga";
+import RecordPageView from "./components/analytics";
 
 ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS);
 
@@ -121,6 +122,7 @@ class App extends React.Component {
                 <HeaderContainer isLoggedIn={this.state.isLoggedIn} />
                 <ScrollToTop>
                     <div>
+                        <Route path="/" component={RecordPageView} />
                         <Switch>
                             <Route
                                 exact
@@ -228,10 +230,8 @@ CallToAction.propTypes = {
     message: PropTypes.string.isRequired
 };
 
-const RecordPageView = () => ReactGA.pageview(window.location.hash);
-
 ReactDOM.render(
-    <Router onUpdate={RecordPageView}>
+    <Router>
         <App />
     </Router>,
     document.getElementById("root")

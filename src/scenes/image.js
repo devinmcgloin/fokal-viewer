@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { FetchImage } from "../services/api/retrieval";
 import { GetUser } from "../services/store/auth";
 import { Loading } from "../components/loading";
+import { NotFound } from "../components/error";
 import { Download, Favorite } from "../components/buttons/social";
 import { UserCard } from "../components/cards/user";
 import { Location } from "../components/image/location";
@@ -49,6 +50,7 @@ class ImageContainer extends Component {
 
     render() {
         if (this.state.isLoading) return <Loading />;
+        else if (this.state.failed) return <NotFound />;
 
         const image = this.state.image;
         const stats = this.state.stats;

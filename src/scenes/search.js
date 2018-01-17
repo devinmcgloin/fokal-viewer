@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Search } from "../services/api/search";
-import { Error } from "../components/error";
+import { Error, NoResults } from "../components/error";
 import { Loading } from "../components/loading";
 import {
     SearchImagesView,
@@ -10,7 +10,6 @@ import {
 import PropTypes from "prop-types";
 import FontAwesome from "react-fontawesome";
 import queryString from "query-string";
-
 import convert from "color-convert";
 
 const rgbRegex = /rgb\(\s*\d{1,3}\s*,\s*\d{1,3}\s*,\s*\d{1,3}\s*\)/,
@@ -152,11 +151,16 @@ class SearchContainer extends Component {
     };
 
     render = () => {
+        const results = this.state.results;
         let content = null;
         if (this.state.loading) content = <Loading />;
         else if (this.state.failed) content = <Error />;
-
-        const results = this.state.results;
+        else if (
+            results.images.length === 0 &&
+            results.users.length === 0 &&
+            results.tags.length === 0
+        )
+            content = <NoResults />;
 
         return (
             <div className="ph3 ph4-ns">
