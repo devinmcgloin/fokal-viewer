@@ -22,6 +22,7 @@ class ExploreScene extends Component {
                 bearing: 0,
                 pitch: 0
             },
+            changed: true,
             width: 500,
             height: window.innerHeight
         };
@@ -30,9 +31,12 @@ class ExploreScene extends Component {
     componentDidMount() {
         this.map = this.mapRef.getMap();
         setTimeout(() => this.loadImages(this.map.getBounds()), 500);
+        setInterval(() => this.loadImages(this.map.getBounds()), 5000);
     }
 
     loadImages = bounds => {
+        if (!this.state.changed) return;
+
         const q = {
             document_types: ["image"],
             limit: 500,
@@ -40,7 +44,9 @@ class ExploreScene extends Component {
         };
         Search("/search", q).then(data => {
             if (data.ok) {
-                data.body.then(d => this.setState({ images: d.images }));
+                data.body.then(d =>
+                    this.setState({ images: d.images, changed: false })
+                );
             }
         });
     };
@@ -107,9 +113,9 @@ class ExploreScene extends Component {
                             onViewportChange={viewport => {
                                 this.setState({
                                     viewport: viewport,
-                                    bounds: this.map.getBounds()
+                                    bounds: this.map.getBounds(),
+                                    changed: true
                                 });
-                                this.loadImages(this.map.getBounds());
                             }}
                             minZoom={2.5}
                             maxPitch={0.0}
