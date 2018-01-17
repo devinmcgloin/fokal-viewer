@@ -95,7 +95,8 @@ class ExploreScene extends Component {
                 bounds
                 onResize={contentRect => {
                     this.setState({
-                        width: contentRect.bounds.width
+                        width: contentRect.bounds.width,
+                        height: window.innerHeight
                     });
                 }}
             >
