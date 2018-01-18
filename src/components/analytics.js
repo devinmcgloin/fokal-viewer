@@ -1,5 +1,5 @@
 import ReactGA from "react-ga";
-import React, { Component } from "react";
+import { Component } from "react";
 import PropTypes from "prop-types";
 
 ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS, {
