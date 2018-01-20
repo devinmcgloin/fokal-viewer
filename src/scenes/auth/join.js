@@ -28,11 +28,12 @@ const Base = ({ isLoggedIn, onSuccess, title }) => {
                     clientId="927799575891-u91lp3oc5ceksbcrqnv6omvbml5cbe15.apps.googleusercontent.com"
                     buttonText="Join with Google"
                     onSuccess={onSuccess}
-                    onFailure={err =>
+                    onFailure={(err) =>
                         Raven.captureException(
                             new Error("unable to join with google oauth"),
                             {}
-                        )}
+                        )
+                    }
                     style={{}}
                     tag="span"
                 >
@@ -43,9 +44,11 @@ const Base = ({ isLoggedIn, onSuccess, title }) => {
                             alt="Google Logo"
                         />
                         {isLoggedIn ? (
-                            <span className={"dib"}>Joined in with Google</span>
+                            <span className={"dib"}>
+                                {title} in with Google
+                            </span>
                         ) : (
-                            <span className={"dib"}>Join with Google</span>
+                            <span className={"dib"}>{title} with Google</span>
                         )}
                     </span>
                 </GoogleLogin>
@@ -60,13 +63,13 @@ Base.propTypes = {
     title: PropTypes.string.isRequired
 };
 
-const Login = props => <Base {...props} title="Login" />;
+const Login = (props) => <Base {...props} title="Login" />;
 Login.propTypes = {
     onSuccess: PropTypes.func.isRequired,
     isLoggedIn: PropTypes.bool.isRequired
 };
 
-const Join = props => <Base {...props} title="Join" />;
+const Join = (props) => <Base {...props} title="Join" />;
 Join.propTypes = {
     onSuccess: PropTypes.func.isRequired,
     isLoggedIn: PropTypes.bool.isRequired
