@@ -1812,10 +1812,6 @@ circular-json@^0.3.1:
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/circular-json/-/circular-json-0.3.3.tgz#815c99ea84f6809529d2f45791bdf82711352d66"
 
-clamp@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/clamp/-/clamp-1.0.1.tgz#66a0e64011816e37196828fdc8c8c147312c8634"
-
 clap@^1.0.9:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/clap/-/clap-1.2.3.tgz#4f36745b32008492557f46412d66d50cb99bce51"
@@ -7145,10 +7141,6 @@ react-burger-menu@^2.1.6:
     prop-types "^15.5.8"
     snapsvg-cjs "0.0.6"
 
-react-clickdrag@^3.0.1:
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/react-clickdrag/-/react-clickdrag-3.0.2.tgz#54df5f3df6d695c54e9978a08253f83de7611bd2"
-
 react-color@^2.13.4:
   version "2.13.8"
   resolved "https://registry.yarnpkg.com/react-color/-/react-color-2.13.8.tgz#bcc58f79a722b9bfc37c402e68cd18f26970aee4"
@@ -7336,13 +7328,6 @@ react-notification@^6.8.0:
   resolved "https://registry.yarnpkg.com/react-notification/-/react-notification-6.8.2.tgz#5d9910cc2993bd51a234d3809e94a98dc490cfb0"
   dependencies:
     prop-types "^15.5.10"
-
-react-number-editor@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/react-number-editor/-/react-number-editor-4.0.2.tgz#59e035ec75ead056785eb58f10f0923265ab10dc"
-  dependencies:
-    clamp "^1.0.1"
-    react-clickdrag "^3.0.1"
 
 react-router-dom@^4.1.1:
   version "4.2.2"
