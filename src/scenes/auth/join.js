@@ -28,11 +28,9 @@ const Base = ({ isLoggedIn, onSuccess, title }) => {
                     clientId="927799575891-u91lp3oc5ceksbcrqnv6omvbml5cbe15.apps.googleusercontent.com"
                     buttonText="Join with Google"
                     onSuccess={onSuccess}
-                    onFailure={err =>
-                        Raven.captureException(
-                            new Error("unable to join with google oauth"),
-                            {}
-                        )}
+                    onFailure={err => {
+                        Raven.captureException(err, {});
+                    }}
                     className="input-reset"
                     tag="span"
                     type="none"
