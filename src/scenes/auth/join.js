@@ -31,24 +31,16 @@ const Base = ({ isLoggedIn, onSuccess, title }) => {
                     onFailure={err => {
                         Raven.captureException(err, {});
                     }}
-                    className="input-reset"
+                    className="dib sans-serif br2 shadow-5 f6 link dim ba ph5-ns ph3 pv3 dib dark-gray pointer inline-flex items-center bg-white"
                     tag="span"
                     type="none"
                 >
-                    <span className="sans-serif br2 shadow-5 f6 link dim ba ph5-ns ph3 pv3 dib dark-gray pointer inline-flex items-center bg-white">
-                        <img
-                            src={glogo}
-                            className="mh2 dib fl"
-                            alt="Google Logo"
-                        />
-                        {isLoggedIn ? (
-                            <span className={"dib"}>
-                                {title} in with Google
-                            </span>
-                        ) : (
-                            <span className={"dib"}>{title} with Google</span>
-                        )}
-                    </span>
+                    <img src={glogo} className="mh2 dib fl" alt="Google Logo" />
+                    {isLoggedIn ? (
+                        <span className={"dib"}>{title} in with Google</span>
+                    ) : (
+                        <span className={"dib"}>{title} with Google</span>
+                    )}
                 </GoogleLogin>
             </div>
         );
