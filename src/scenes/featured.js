@@ -74,7 +74,7 @@ class FeaturedScene extends Component {
         return (
             <div className="pa3 pa4-ns sans-serif">
                 <h1 className={" f3 f1-m f-headline-l measure lh-copy"}>
-                    Explore
+                    Featured
                 </h1>
                 <p className={"measure lh-copy"}>
                     View the popular searches and locations on Fokal and find

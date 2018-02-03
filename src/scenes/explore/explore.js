@@ -194,16 +194,14 @@ class PhotoInfo extends Component {
         const { info } = this.props;
 
         return (
-            <div>
-                <div className="pa2">
-                    <Link to={`/i/${info.id}`}>
-                        <Imgix
-                            width={0.1}
-                            height={0.1}
-                            src={`https://images.fok.al/content/${info.id}`}
-                        />
-                    </Link>
-                </div>
+            <div className="pa2 w5">
+                <Link to={`/i/${info.id}`}>
+                    <Imgix
+                        width={0.1}
+                        height={0.1}
+                        src={`https://images.fok.al/content/${info.id}`}
+                    />
+                </Link>
             </div>
         );
     };
