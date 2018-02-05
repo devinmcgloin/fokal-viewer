@@ -30,6 +30,7 @@ import { TermsOfService, PrivacyPolicy } from "./static/legal";
 import { Why } from "./static/why";
 import ReactGA from "react-ga";
 import RecordPageView from "./components/analytics";
+import IntercomUpdate from "./components/intercom";
 
 ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS);
 
@@ -267,5 +268,8 @@ if (process.env.NODE_ENV === "production") {
     ).install();
     Raven.setTagsContext({
         environment: process.env.NODE_ENV
+    });
+    window.Intercom("boot", {
+        app_id: "m8pwzybi"
     });
 }
