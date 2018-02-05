@@ -28,11 +28,8 @@ import { RefreshToken, CreateUser } from "./services/api/auth";
 import { bindAll } from "lodash";
 import { TermsOfService, PrivacyPolicy } from "./static/legal";
 import { Why } from "./static/why";
-import ReactGA from "react-ga";
 import RecordPageView from "./components/analytics";
 import IntercomUpdate from "./components/intercom";
-
-ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS);
 
 class App extends React.Component {
     constructor(props) {
@@ -124,90 +121,107 @@ class App extends React.Component {
                 <ScrollToTop>
                     <div>
                         <RecordPageView>
-                            <Switch>
-                                <Route
-                                    exact
-                                    path="/:type(recent|trending|)"
-                                    render={props => (
-                                        <div>
-                                            {!this.state.isLoggedIn ? (
-                                                <CallToAction
-                                                    title="Join Fokal"
-                                                    message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
-                                                    call="Join for Free"
-                                                />
-                                            ) : null}
-                                            <ImageCollection {...props} />
-                                        </div>
-                                    )}
-                                />
+                            <IntercomUpdate>
+                                <Switch>
+                                    <Route
+                                        exact
+                                        path="/:type(recent|trending|)"
+                                        render={props => (
+                                            <div>
+                                                {!this.state.isLoggedIn ? (
+                                                    <CallToAction
+                                                        title="Join Fokal"
+                                                        message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
+                                                        call="Join for Free"
+                                                    />
+                                                ) : null}
+                                                <ImageCollection {...props} />
+                                            </div>
+                                        )}
+                                    />
 
-                                <Route
-                                    path="/i/:id"
-                                    component={ImageContainer}
-                                />
-                                <Route
-                                    path="/u/:id"
-                                    component={UserContainer}
-                                />
-                                <Route path="/t/:id" component={TaggedImages} />
+                                    <Route
+                                        path="/i/:id"
+                                        component={ImageContainer}
+                                    />
+                                    <Route
+                                        path="/u/:id"
+                                        component={UserContainer}
+                                    />
+                                    <Route
+                                        path="/t/:id"
+                                        component={TaggedImages}
+                                    />
 
-                                <Route
-                                    path="/search"
-                                    component={SearchContainer}
-                                />
+                                    <Route
+                                        path="/search"
+                                        component={SearchContainer}
+                                    />
 
-                                <Route
-                                    path="/join"
-                                    render={() => (
-                                        <Join
-                                            onSuccess={this.onLogin}
-                                            isLoggedIn={this.state.isLoggedIn}
-                                        />
-                                    )}
-                                />
-                                <Route
-                                    path="/login"
-                                    render={() => (
-                                        <Login
-                                            onSuccess={this.onLogin}
-                                            isLoggedIn={this.state.isLoggedIn}
-                                        />
-                                    )}
-                                />
+                                    <Route
+                                        path="/join"
+                                        render={() => (
+                                            <Join
+                                                onSuccess={this.onLogin}
+                                                isLoggedIn={
+                                                    this.state.isLoggedIn
+                                                }
+                                            />
+                                        )}
+                                    />
+                                    <Route
+                                        path="/login"
+                                        render={() => (
+                                            <Login
+                                                onSuccess={this.onLogin}
+                                                isLoggedIn={
+                                                    this.state.isLoggedIn
+                                                }
+                                            />
+                                        )}
+                                    />
 
-                                <Route
-                                    path="/logout"
-                                    render={() => (
-                                        <LogoutPage onSuccess={this.onLogout} />
-                                    )}
-                                />
-                                <Route path="/upload" component={ImageUpload} />
-                                <Route
-                                    path="/manage/:id"
-                                    component={ImageModify}
-                                />
-                                <Route
-                                    path="/account/settings"
-                                    component={Account}
-                                />
-                                <Route
-                                    path="/featured"
-                                    component={FeaturedScene}
-                                />
-                                <Route
-                                    path="/explore"
-                                    component={ExploreScene}
-                                />
+                                    <Route
+                                        path="/logout"
+                                        render={() => (
+                                            <LogoutPage
+                                                onSuccess={this.onLogout}
+                                            />
+                                        )}
+                                    />
+                                    <Route
+                                        path="/upload"
+                                        component={ImageUpload}
+                                    />
+                                    <Route
+                                        path="/manage/:id"
+                                        component={ImageModify}
+                                    />
+                                    <Route
+                                        path="/account/settings"
+                                        component={Account}
+                                    />
+                                    <Route
+                                        path="/featured"
+                                        component={FeaturedScene}
+                                    />
+                                    <Route
+                                        path="/explore"
+                                        component={ExploreScene}
+                                    />
 
-                                <Route path="/tos" component={TermsOfService} />
-                                <Route
-                                    path="/privacy"
-                                    component={PrivacyPolicy}
-                                />
-                                <Route path="/why" component={Why} />
-                                <Route path="/*" component={NotFound} />
-                            </Switch>
+                                    <Route
+                                        path="/tos"
+                                        component={TermsOfService}
+                                    />
+                                    <Route
+                                        path="/privacy"
+                                        component={PrivacyPolicy}
+                                    />
+                                    <Route path="/why" component={Why} />
+                                    <Route path="/*" component={NotFound} />
+                                </Switch>
+                            </IntercomUpdate>
                         </RecordPageView>
                     </div>
                 </ScrollToTop>
@@ -253,14 +267,14 @@ CallToAction.propTypes = {
     message: PropTypes.string.isRequired
 };
 
+registerServiceWorker();
+
 ReactDOM.render(
     <Router>
         <App />
     </Router>,
     document.getElementById("root")
 );
-
-registerServiceWorker();
 
 if (process.env.NODE_ENV === "production") {
     Raven.config(
