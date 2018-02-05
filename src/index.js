@@ -266,9 +266,11 @@ if (process.env.NODE_ENV === "production") {
     Raven.config(
         "https://98f3dbb4874649db845e711d275f07da@sentry.io/211802"
     ).install();
+
     Raven.setTagsContext({
         environment: process.env.NODE_ENV
     });
+
     window.Intercom("boot", {
         app_id: "m8pwzybi"
     });
