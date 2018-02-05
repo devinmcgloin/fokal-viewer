@@ -8,10 +8,6 @@ const LogIn = jwt => {
     const tok = JwtDecode(jwt);
     if (tok.iss === "fokal") {
         localStorage.setItem("auth-user", tok.sub);
-        window.Intercom("boot", {
-            app_id: "m8pwzybi",
-            email: tok.email // Email address
-        });
     }
     localStorage.setItem("auth", jwt);
 };
