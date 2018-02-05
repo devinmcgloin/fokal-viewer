@@ -28,11 +28,8 @@ import { RefreshToken, CreateUser } from "./services/api/auth";
 import { bindAll } from "lodash";
 import { TermsOfService, PrivacyPolicy } from "./static/legal";
 import { Why } from "./static/why";
-import ReactGA from "react-ga";
 import RecordPageView from "./components/analytics";
 import IntercomUpdate from "./components/intercom";
-
-ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS);
 
 class App extends React.Component {
     constructor(props) {
@@ -270,14 +267,14 @@ CallToAction.propTypes = {
     message: PropTypes.string.isRequired
 };
 
+registerServiceWorker();
+
 ReactDOM.render(
     <Router>
         <App />
     </Router>,
     document.getElementById("root")
 );
-
-registerServiceWorker();
 
 if (process.env.NODE_ENV === "production") {
     Raven.config(
