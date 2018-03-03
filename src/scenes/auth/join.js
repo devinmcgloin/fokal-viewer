@@ -7,9 +7,9 @@ import { Redirect } from "react-router-dom";
 import glogo from "./g-normal.svg";
 import Raven from "raven-js";
 
-const Base = ({ isLoggedIn, onSuccess, title }) => {
+const Base = ({ isLoggedIn, onSuccess, title, redirect }) => {
     if (isLoggedIn) {
-        return <Redirect to="/why" />;
+        return <Redirect to={redirect} />;
     } else {
         return (
             <div className="sans-serif mw6 pa5 ma4 tc center">
@@ -50,16 +50,17 @@ const Base = ({ isLoggedIn, onSuccess, title }) => {
 Base.propTypes = {
     onSuccess: PropTypes.func.isRequired,
     isLoggedIn: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    redirect: PropTypes.string.isRequired
 };
 
-const Login = props => <Base {...props} title="Login" />;
+const Login = props => <Base {...props} title="Login" redirect="/" />;
 Login.propTypes = {
     onSuccess: PropTypes.func.isRequired,
     isLoggedIn: PropTypes.bool.isRequired
 };
 
-const Join = props => <Base {...props} title="Join" />;
+const Join = props => <Base {...props} title="Join" redirect="/why" />;
 Join.propTypes = {
     onSuccess: PropTypes.func.isRequired,
     isLoggedIn: PropTypes.bool.isRequired
