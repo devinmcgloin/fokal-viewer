@@ -51,6 +51,7 @@
         "react-dom": "^16.0.0",
         "react-dropzone": "^4.1.2",
         "react-error-overlay": "^4.0.0",
+        "react-exif-orientation-img": "^0.1.5",
         "react-fontawesome": "^1.6.1",
         "react-ga": "^2.4.0",
         "react-geosuggest": "^2.5.0",
