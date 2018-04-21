@@ -136,14 +136,14 @@ class ImageUpload extends Component {
 
         // send to server
         UploadImage(this.state.blob).then(data => {
-            if (data.ok)
-                data.body.then(d => {
+            data.body.then(d => {
+                if (data.ok)
                     this.setState({
                         status: "succeded",
                         id: d.id
                     });
-                });
-            else this.setState({ status: "failed" });
+                else this.setState({ status: "failed", error: d.err });
+            });
         });
     }
 
@@ -178,7 +178,7 @@ class ImageUpload extends Component {
 
                 {this.state.status === "failed" ? (
                     <ErrorAlert
-                        message="Upload failed."
+                        message={this.state.error}
                         active={this.state.action !== ""}
                     />
                 ) : null}
