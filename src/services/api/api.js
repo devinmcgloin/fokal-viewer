@@ -4,10 +4,10 @@ import { GetJWT, LoggedIn, Logout, LogIn } from '../store/auth';
 import { RefreshToken } from '../api/auth';
 import JwtDecode from 'jwt-decode';
 
-const endpoint = 'https://api.fok.al/v0';
-//process.env.NODE_ENV === "production"
-//? "https://api.fok.al/v0"
-//: "http://localhost:8000/v0";
+const endpoint =
+  process.env.NODE_ENV === 'production'
+    ? 'https://api.fok.al/v0'
+    : 'http://localhost:8000/v0';
 
 const getHeaders = method => {
   let headers = new Headers();
