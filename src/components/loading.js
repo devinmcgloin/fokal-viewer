@@ -1,14 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import { ScaleLoader } from "react-spinners";
+import { ScaleLoader } from 'react-spinners';
 
 const Loading = () => (
-    <div
-        className="center ma7 center"
-        style={{ height: "40px", width: "45px" }}
-    >
-        <ScaleLoader color="#000" size="150px" />
-    </div>
+  <div className="center ma7 center" style={{ height: '40px', width: '45px' }}>
+    <ScaleLoader color="#000" size="150px" />
+  </div>
 );
 
 export { Loading };
