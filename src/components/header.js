@@ -5,51 +5,93 @@ import FontAwesome from 'react-fontawesome';
 import logo from '../assets/logo.svg';
 
 const Header = () => (
-    <nav className="pa2 pa3-ns bb b--black-10 black-70 bg-white flex items-center justify-between">
-        <Link className="link dib mr3 tc" to="/" title="Home">
-            <img src={logo} style={{ width: '3rem', height: '3rem' }} />
-        </Link>
-        <HeaderSearchBox />
+    <nav className="sans-serif bg-white">
+        <div className="pa2 pa3-ns bb b--black-10 black-70 flex items-center justify-between">
+            <Link className="link dib mr3 tc" to="/" title="Home">
+                <img src={logo} style={{ width: '3rem', height: '3rem' }} />
+            </Link>
+            <HeaderSearchBox />
+        </div>
         <HeaderMenuItems />
     </nav>
 );
 
-const HeaderSearchBox = () => (
-    <div className="db" style={{ flexGrow: 2 }}>
-        <input className="dib h2 bn input-reset br2 bg-near-white w-100" />
-    </div>
-);
-
-class HeaderMenuItems extends React.Component {
+class HeaderSearchBox extends Component {
     state = {
-        isTooltipActive: false
+        q: '',
+        submitted: false,
+        submittedQuery: ''
     };
-    toolTipStyle = {
-        style: {
-            padding: 20
-        },
-        arrowStyle: {
-            color: 'rgba(0,0,0,.8)',
-            borderColor: false
-        }
+    onSubmit = e => {
+        e.preventDefault();
+        this.setState(prev => {
+            return { submitted: true, submittedQuery: prev.q, q: '' };
+        });
     };
-    showTooltip = () => this.setState({ isTooltipActive: true });
-    hideTooltip = () => this.setState({ isTooltipActive: false });
-    render = () => (
-        <div className="db w2 mr3" style={{ flexGrow: 1 }}>
-            <div className="flex justify-end">
-                <div
-                    ref={element => {
-                        this.element = element;
-                    }}
-                    onMouseEnter={this.showTooltip}
-                    onMouseLeave={this.hideTooltip}
-                >
-                    <FontAwesome name="ellipsis-v" />
-                </div>
-            </div>
-        </div>
-    );
+    handleTextChange = e =>
+        this.setState({
+            q: e.target.value
+        });
+    render = () => {
+        const redirect = this.state.submitted ? (
+            <Redirect
+                push
+                to={{
+                    pathname: '/search',
+                    search: '?q=' + encodeURIComponent(this.state.submittedQuery)
+                }}
+            />
+        ) : null;
+        return (
+            <React.Fragment>
+                {redirect}
+                <form onSubmit={this.onSubmit} className="db" style={{ flexGrow: 2 }}>
+                    <input
+                        type="text"
+                        id="query"
+                        name="query"
+                        onChange={this.handleTextChange}
+                        value={this.state.q}
+                        className="pa2 mr3 dib h2 bn input-reset br2 bg-near-white w-100"
+                    />
+                </form>
+            </React.Fragment>
+        );
+    };
 }
+
+const HeaderMenuItems = () => {
+    return (
+        <header className="ph3 ph5-ns pt3 bb b--black-10">
+            <div className="mw9 center">
+                <a
+                    className="f6 fw6 b dib mr3 mb3 pb1 link hover-blue black-70 ttc"
+                    href="/explore"
+                >
+                    Explore
+                </a>
+
+                <a
+                    className="f6 fw6 b dib mr3 mb3 pb1 link hover-blue black-70 ttc"
+                    href="/featured"
+                >
+                    Featured
+                </a>
+
+                <a className="f6 fw6 b dib mr3 mb3 pb1 link hover-blue black-70 ttc" href="/login">
+                    Login
+                </a>
+
+                <a className="f6 fw6 b dib mr3 mb3 pb1 link hover-blue black-70 ttc" href="/join">
+                    Join
+                </a>
+
+                <a className="f6 fw6 b dib mr3 mb3 pb1 link hover-blue black-70 ttc" href="/why">
+                    Why
+                </a>
+            </div>
+        </header>
+    );
+};
 
 export { Header };
