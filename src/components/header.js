@@ -1,286 +1,55 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { slide as Menu } from 'react-burger-menu';
 import FontAwesome from 'react-fontawesome';
-import { bindAll } from 'lodash';
+import logo from '../assets/logo.svg';
 
-const styles = {
-  bmBurgerButton: {
-    position: 'fixed',
-    width: '36px',
-    height: '30px',
-    left: '-100px',
-    top: '-100px',
-  },
-  bmBurgerBars: {
-    background: '#333333',
-  },
-  bmCrossButton: {
-    height: '24px',
-    width: '24px',
-  },
-  bmCross: {
-    background: '#333333',
-  },
-  bmMenu: {
-    background: '#ededed',
-    padding: '2.5em 1.5em 0',
-    fontSize: '1.15em',
-  },
-  bmItemList: {
-    color: '#ededed',
-    padding: '0.8em',
-    height: '90%',
-  },
-  bmOverlay: {
-    background: 'rgba(0, 0, 0, 0.3)',
-  },
-};
+const Header = () => (
+    <nav className="pa2 pa3-ns bb b--black-10 black-70 bg-white flex items-center justify-between">
+        <Link className="link dib mr3 tc" to="/" title="Home">
+            <img src={logo} style={{ width: '3rem', height: '3rem' }} />
+        </Link>
+        <HeaderSearchBox />
+        <HeaderMenuItems />
+    </nav>
+);
 
-class HeaderContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false,
-      searchActive: false,
-      q: '',
-      submitted: false,
+const HeaderSearchBox = () => (
+    <div className="db" style={{ flexGrow: 2 }}>
+        <input className="dib h2 bn input-reset br2 bg-near-white w-100" />
+    </div>
+);
+
+class HeaderMenuItems extends React.Component {
+    state = {
+        isTooltipActive: false
     };
-  }
-  render() {
-    return (
-      <div>
-        <Menu
-          styles={styles}
-          isOpen={this.state.isOpen}
-          onStateChange={state => this.setState({ isOpen: state.isOpen })}
-        >
-          <Link
-            to={'/explore'}
-            className={'sans-serif ttu link dim black b f3 f2-ns'}
-            onClick={() =>
-              this.setState(prev => {
-                return { isOpen: !prev.isOpen };
-              })
-            }
-          >
-            Explore
-          </Link>
-          <Link
-            to={'/featured'}
-            className={'sans-serif ttu link dim black b f3 f2-ns'}
-            onClick={() =>
-              this.setState(prev => {
-                return { isOpen: !prev.isOpen };
-              })
-            }
-          >
-            Featured
-          </Link>
-          <Link
-            to={'/search'}
-            className={'sans-serif ttu link dim black b f3 f2-ns'}
-            onClick={() =>
-              this.setState(prev => {
-                return { isOpen: !prev.isOpen };
-              })
-            }
-          >
-            search
-          </Link>
-          {this.props.isLoggedIn ? (
-            <Link
-              to={'/upload'}
-              className={'sans-serif ttu link dim black b f3 f2-ns'}
-              onClick={() =>
-                this.setState(prev => {
-                  return { isOpen: !prev.isOpen };
-                })
-              }
-            >
-              Upload
-            </Link>
-          ) : (
-            <Link
-              to={'/join'}
-              className={'sans-serif ttu link dim black b f3 f2-ns'}
-              onClick={() =>
-                this.setState(prev => {
-                  return { isOpen: !prev.isOpen };
-                })
-              }
-            >
-              Join
-            </Link>
-          )}
-          {this.props.isLoggedIn ? null : (
-            <Link
-              to={'/login'}
-              className={'sans-serif ttu link dim black b f3 f2-ns'}
-              onClick={() =>
-                this.setState(prev => {
-                  return { isOpen: !prev.isOpen };
-                })
-              }
-            >
-              Login
-            </Link>
-          )}
-          {this.props.isLoggedIn ? (
-            <Link
-              to={'/account/settings'}
-              className={'sans-serif ttu link dim black b f3 f2-ns'}
-              onClick={() =>
-                this.setState(prev => {
-                  return { isOpen: !prev.isOpen };
-                })
-              }
-            >
-              Account
-            </Link>
-          ) : null}
-          {this.props.isLoggedIn ? (
-            <Link
-              to={'/logout'}
-              className={'sans-serif ttu link dim black b f3 f2-ns'}
-              onClick={() =>
-                this.setState(prev => {
-                  return { isOpen: !prev.isOpen };
-                })
-              }
-            >
-              Logout
-            </Link>
-          ) : null}
-          <hr />
-          <Link
-            to={'/why'}
-            className={'sans-serif ttu link dim black b f3 f2-ns'}
-            onClick={() =>
-              this.setState(prev => {
-                return { isOpen: !prev.isOpen };
-              })
-            }
-          >
-            Why
-          </Link>
-          <a
-            target="_blank"
-            href={'https://github.com/fokal'}
-            className={'sans-serif ttu link dim black b f3 f2-ns'}
-          >
-            Source
-          </a>
-        </Menu>
-        <nav className="pa2 pa3-ns bb b--black-10 black-70 bg-white flex justify-between">
-          <FontAwesome
-            name={'bars'}
-            onClick={() =>
-              this.setState(prev => {
-                return { isOpen: !prev.isOpen };
-              })
-            }
-            className={'link dim black hover pointer pa2'}
-          />
-
-          {this.state.searchActive || (
-            <Link
-              className="sans-serif link dim black b f6 f5-ns dib mr3 tc pa2"
-              to="/"
-              title="Home"
-            >
-              Fokal
-            </Link>
-          )}
-
-          {this.state.searchActive ? (
-            <SearchBox
-              onDismiss={() => this.setState({ searchActive: false })}
-              onSubmit={q => {
-                this.setState({ submitted: true, q: q });
-                setTimeout(() => this.setState({ submitted: false }), 1000);
-              }}
-            />
-          ) : (
-            <FontAwesome
-              name={'search'}
-              className={'link dim black hover pointer pa2'}
-              onClick={() => this.setState({ searchActive: true })}
-            />
-          )}
-        </nav>
-        {this.state.submitted && (
-          <Redirect
-            push
-            to={{
-              pathname: '/search',
-              search: '?q=' + encodeURIComponent(this.state.q),
-            }}
-          />
-        )}
-      </div>
+    toolTipStyle = {
+        style: {
+            padding: 20
+        },
+        arrowStyle: {
+            color: 'rgba(0,0,0,.8)',
+            borderColor: false
+        }
+    };
+    showTooltip = () => this.setState({ isTooltipActive: true });
+    hideTooltip = () => this.setState({ isTooltipActive: false });
+    render = () => (
+        <div className="db w2 mr3" style={{ flexGrow: 1 }}>
+            <div className="flex justify-end">
+                <div
+                    ref={element => {
+                        this.element = element;
+                    }}
+                    onMouseEnter={this.showTooltip}
+                    onMouseLeave={this.hideTooltip}
+                >
+                    <FontAwesome name="ellipsis-v" />
+                </div>
+            </div>
+        </div>
     );
-  }
 }
 
-HeaderContainer.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-  currentUser: PropTypes.object,
-};
-
-class SearchBox extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      q: '',
-    };
-
-    bindAll(this, 'handleTextChange');
-  }
-
-  handleTextChange(e) {
-    this.setState({
-      q: e.target.value,
-    });
-  }
-
-  render() {
-    return (
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          this.props.onSubmit(this.state.q);
-          this.props.onDismiss();
-        }}
-        className="w-80 w-60-ns flex"
-      >
-        <input
-          type="text"
-          id="query"
-          name="query"
-          autoFocus
-          onBlur={() => this.props.onDismiss()}
-          onChange={this.handleTextChange}
-          value={this.state.q}
-          className="dib pa2 fl bn white bg-black-70 input-reset br2 br--left outline-0"
-          style={{ flexGrow: '100' }}
-        />
-        <FontAwesome
-          name={'times'}
-          className={
-            'dib link dim white hover pointer pv2 ph3 fr bg-animate bg-black-80 hover-bg-black br2 br--right'
-          }
-          onClick={() => this.props.onDismiss()}
-        />
-      </form>
-    );
-  }
-}
-
-SearchBox.propTypes = {
-  onDismiss: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-};
-
-export { HeaderContainer };
+export { Header };

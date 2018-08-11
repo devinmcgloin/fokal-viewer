@@ -4,13 +4,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const LogoutPage = ({ onSuccess }) => {
-  Logout();
-  onSuccess();
-  return <Redirect to="/" />;
+    Logout();
+    onSuccess();
+    return <Redirect to="/" />;
 };
 
 LogoutPage.propTypes = {
-  onSuccess: PropTypes.func.isRequired,
+    onSuccess: PropTypes.func.isRequired
 };
 
 export { LogoutPage };

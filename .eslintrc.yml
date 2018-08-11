@@ -1,16 +1,2 @@
-extends :
-  - google
-  - eslint:recommended
-  - plugin:react/recommended
-parserOptions:
-  ecmaVersion: 6
-  sourceType: module
-  ecmaFeatures:
-    jsx: true
-    modules: true
-plugins:
-  - react
-env:
-    browser: true
-rules:
-    no-console: warn
+extends:
+    - react-app
