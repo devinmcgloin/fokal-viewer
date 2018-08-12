@@ -57,7 +57,7 @@ class ImageContainer extends Component {
     return (
       <div>
         {/* <Header image={this.state.image} /> */}
-        <div className="ph3 ph5-ns mw9 center flex justify-between items-center pa2">
+        <div className="ph3 ph4-ns pv2 flex justify-between items-center pa2">
           <div>
             <User {...image.user} />
           </div>
@@ -78,7 +78,7 @@ class ImageContainer extends Component {
           </div>
         </div>
         <ContainedImage url={image.src_links.raw} dimensions={image.metadata} />
-        <div className="ph3 ph5-ns mw9 center flex justify-between pa2">
+        <div className="ph3 ph4-ns pv2 flex justify-between items-center pa2">
           <LocationButton />
           <MetadataButton />
         </div>

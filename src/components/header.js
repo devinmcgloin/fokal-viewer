@@ -61,30 +61,28 @@ class HeaderSearchBox extends Component {
 
 const HeaderMenuItems = () => {
   return (
-    <header className="ph3 ph5-ns pt3 bb b--black-10">
-      <div className="mw9 center">
-        <a className="f6 fw6 b dib mr3 mb3 pb1 link hover-blue black-70 ttc" href="/explore">
-          Explore
-        </a>
+    <header className="ph3 ph4-ns pv2 pv3-ns bb b--black-10">
+      <a className="f6 fw6 b dib mr3 pb1 link hover-blue black-70 ttc" href="/explore">
+        Explore
+      </a>
 
-        <a className="f6 fw6 b dib mr3 mb3 pb1 link hover-blue black-70 ttc" href="/featured">
-          Featured
-        </a>
+      <a className="f6 fw6 b dib mr3 pb1 link hover-blue black-70 ttc" href="/featured">
+        Featured
+      </a>
 
-        <a className="f6 fw6 b dib mr3 mb3 pb1 link hover-blue black-70 ttc" href="/upload">
-          Submit
-        </a>
+      <a className="f6 fw6 b dib mr3 pb1 link hover-blue black-70 ttc" href="/upload">
+        Submit
+      </a>
 
-        <a className="f6 fw6 b dib mr3 mb3 pb1 link hover-blue black-70 ttc" href="/login">
-          Login
-        </a>
+      <a className="f6 fw6 b dib mr3 pb1 link hover-blue black-70 ttc" href="/login">
+        Login
+      </a>
 
-        <a className="f6 fw6 b dib mr3 mb3 pb1 link hover-blue black-70 ttc" href="/join">
-          <button className="pointer no-underline f6 tc db bn w3 h2 bg-animate bg-green hover-bg-dark-green white br2 ">
-            Join
-          </button>
-        </a>
-      </div>
+      <a className="f6 fw6 b dib mr3 pb1 link hover-blue black-70 ttc" href="/join">
+        <button className="pointer no-underline f6 tc db bn w3 h2 bg-animate bg-green hover-bg-dark-green white br2 ">
+          Join
+        </button>
+      </a>
     </header>
   );
 };
