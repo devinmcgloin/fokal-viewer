@@ -4,23 +4,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import registerServiceWorker from './services/registerServiceWorker';
 import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-import { ImageCollection, TaggedImages } from './scenes/collection';
-import { SearchContainer } from './scenes/search';
+import { ImageCollection, TaggedImages } from './containers/collection';
+import { SearchContainer } from './containers/search';
 import { NotFound } from './components/error';
-import { ImageContainer } from './scenes/image';
+import { ImageContainer } from './containers/image';
 import { Header } from './components/header';
-import { Join, Login } from './scenes/auth/join';
-import { UserContainer } from './scenes/user';
+import { Join, Login } from './containers/auth/join';
+import { UserContainer } from './containers/user';
 import { GetJWT, LoggedIn, LogIn, Logout } from './services/store/auth';
 import 'tachyons/css/tachyons.css';
 import 'font-awesome/css/font-awesome.css';
 import './assets/main.css';
-import { ImageUpload, ImageModify } from './scenes/manage/upload';
+import { ImageUpload, ImageModify } from './containers/manage/upload';
 import CallToAction from './components/call-to-action';
-import { Account } from './scenes/manage/patch';
-import { FeaturedScene } from './scenes/featured';
-import { ExploreScene } from './scenes/explore/explore';
-import { LogoutPage } from './scenes/auth/logout';
+import { Account } from './containers/manage/patch';
+import { FeaturedScene } from './containers/featured';
+import { ExploreScene } from './containers/explore/explore';
+import { LogoutPage } from './containers/auth/logout';
 import ScrollToTop from './components/scroll';
 import Raven from 'raven-js';
 import JwtDecode from 'jwt-decode';
@@ -29,6 +29,12 @@ import { bindAll } from 'lodash';
 import { TermsOfService, PrivacyPolicy } from './static/legal';
 import { Why } from './static/why';
 import RecordPageView from './components/analytics';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import fokalReducer from './store/reducers';
+
+const store = createStore(fokalReducer);
 
 class App extends React.Component {
   constructor(props) {
@@ -181,7 +187,9 @@ registerServiceWorker();
 
 ReactDOM.render(
   <Router>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </Router>,
   document.getElementById('root')
 );
