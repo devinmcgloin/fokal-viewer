@@ -31,174 +31,165 @@ import { Why } from './static/why';
 import RecordPageView from './components/analytics';
 
 class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            isLoggedIn: false,
-            appToken: ''
-        };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false,
+      appToken: ''
+    };
 
-        bindAll(this, 'onLogout', 'onLogin', 'refreshAuthStatus');
+    bindAll(this, 'onLogout', 'onLogin', 'refreshAuthStatus');
+  }
+
+  componentDidMount() {
+    this.pollAuthStatus();
+  }
+
+  componentWillUnmount() {
+    if (this._timer) {
+      clearInterval(this._timer);
+      this._timer = null;
     }
+  }
 
-    componentDidMount() {
-        this.pollAuthStatus();
-    }
+  pollAuthStatus() {
+    var self = this;
+    setTimeout(function() {
+      self.refreshAuthStatus();
+      self._timer = setInterval(self.refreshAuthStatus, 10000);
+    }, 1000);
+  }
 
-    componentWillUnmount() {
-        if (this._timer) {
-            clearInterval(this._timer);
-            this._timer = null;
-        }
-    }
+  refreshAuthStatus() {
+    LoggedIn()
+      ? this.setState({ isLoggedIn: true, appToken: GetJWT() })
+      : this.setState({ isLoggedIn: false, appToken: '' });
+  }
 
-    pollAuthStatus() {
-        var self = this;
-        setTimeout(function() {
-            self.refreshAuthStatus();
-            self._timer = setInterval(self.refreshAuthStatus, 10000);
-        }, 1000);
-    }
+  onLogin(googleUser) {
+    const jwtToken = googleUser.getAuthResponse().id_token,
+      tok = JwtDecode(jwtToken);
+    this.setState({ isLoggedIn: true, appToken: jwtToken });
+    LogIn(jwtToken);
+    setTimeout(
+      () =>
+        RefreshToken(jwtToken).then(data => {
+          if (data.ok)
+            data.body.then(d => {
+              const token = d.token;
+              LogIn(token);
+              this.setState({
+                isLoggedIn: true,
+                appToken: token
+              });
+              Raven.setUserContext({
+                username: tok.sub
+              });
+            });
+          else {
+            CreateUser(jwtToken).then(data => {
+              if (data.ok)
+                data.body.then(d => {
+                  const token = d.token;
+                  LogIn(token);
+                  this.setState({
+                    isLoggedIn: true,
+                    appToken: token
+                  });
+                  Raven.setUserContext({
+                    username: tok.sub
+                  });
+                });
+            });
+          }
+        }),
+      1000
+    );
+  }
 
-    refreshAuthStatus() {
-        LoggedIn()
-            ? this.setState({ isLoggedIn: true, appToken: GetJWT() })
-            : this.setState({ isLoggedIn: false, appToken: '' });
-    }
+  onLogout() {
+    this.setState({ isLoggedIn: false, appToken: '' });
+    Raven.setUserContext();
+    Logout();
+  }
 
-    onLogin(googleUser) {
-        const jwtToken = googleUser.getAuthResponse().id_token,
-            tok = JwtDecode(jwtToken);
-        this.setState({ isLoggedIn: true, appToken: jwtToken });
-        LogIn(jwtToken);
-        setTimeout(
-            () =>
-                RefreshToken(jwtToken).then(data => {
-                    if (data.ok)
-                        data.body.then(d => {
-                            const token = d.token;
-                            LogIn(token);
-                            this.setState({
-                                isLoggedIn: true,
-                                appToken: token
-                            });
-                            Raven.setUserContext({
-                                username: tok.sub
-                            });
-                        });
-                    else {
-                        CreateUser(jwtToken).then(data => {
-                            if (data.ok)
-                                data.body.then(d => {
-                                    const token = d.token;
-                                    LogIn(token);
-                                    this.setState({
-                                        isLoggedIn: true,
-                                        appToken: token
-                                    });
-                                    Raven.setUserContext({
-                                        username: tok.sub
-                                    });
-                                });
-                        });
-                    }
-                }),
-            1000
-        );
-    }
-
-    onLogout() {
-        this.setState({ isLoggedIn: false, appToken: '' });
-        Raven.setUserContext();
-        Logout();
-    }
-
-    render() {
-        return (
-            <div>
-                <Header />
-                <ScrollToTop>
+  render() {
+    return (
+      <div>
+        <Header />
+        <ScrollToTop>
+          <div>
+            <RecordPageView>
+              <Switch>
+                <Route
+                  exact
+                  path="/:type(recent|trending|)"
+                  render={props => (
                     <div>
-                        <RecordPageView>
-                            <Switch>
-                                <Route
-                                    exact
-                                    path="/:type(recent|trending|)"
-                                    render={props => (
-                                        <div>
-                                            {!this.state.isLoggedIn ? (
-                                                <CallToAction
-                                                    title="Join Fokal"
-                                                    message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
-                                                    call="Join for Free"
-                                                />
-                                            ) : null}
-                                            <ImageCollection {...props} />
-                                        </div>
-                                    )}
-                                />
-
-                                <Route path="/i/:id" component={ImageContainer} />
-                                <Route path="/u/:id" component={UserContainer} />
-                                <Route path="/t/:id" component={TaggedImages} />
-
-                                <Route path="/search" component={SearchContainer} />
-
-                                <Route
-                                    path="/join"
-                                    render={() => (
-                                        <Join
-                                            onSuccess={this.onLogin}
-                                            isLoggedIn={this.state.isLoggedIn}
-                                        />
-                                    )}
-                                />
-                                <Route
-                                    path="/login"
-                                    render={() => (
-                                        <Login
-                                            onSuccess={this.onLogin}
-                                            isLoggedIn={this.state.isLoggedIn}
-                                        />
-                                    )}
-                                />
-
-                                <Route
-                                    path="/logout"
-                                    render={() => <LogoutPage onSuccess={this.onLogout} />}
-                                />
-                                <Route path="/upload" component={ImageUpload} />
-                                <Route path="/manage/:id" component={ImageModify} />
-                                <Route path="/account/settings" component={Account} />
-                                <Route path="/featured" component={FeaturedScene} />
-                                <Route path="/explore" component={ExploreScene} />
-
-                                <Route path="/tos" component={TermsOfService} />
-                                <Route path="/privacy" component={PrivacyPolicy} />
-                                <Route path="/why" component={Why} />
-                                <Route path="/*" component={NotFound} />
-                            </Switch>
-                        </RecordPageView>
+                      {!this.state.isLoggedIn ? (
+                        <CallToAction
+                          title="Join Fokal"
+                          message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
+                          call="Join for Free"
+                        />
+                      ) : null}
+                      <ImageCollection {...props} />
                     </div>
-                </ScrollToTop>
-            </div>
-        );
-    }
+                  )}
+                />
+
+                <Route path="/i/:id" component={ImageContainer} />
+                <Route path="/u/:id" component={UserContainer} />
+                <Route path="/t/:id" component={TaggedImages} />
+
+                <Route path="/search" component={SearchContainer} />
+
+                <Route
+                  path="/join"
+                  render={() => (
+                    <Join onSuccess={this.onLogin} isLoggedIn={this.state.isLoggedIn} />
+                  )}
+                />
+                <Route
+                  path="/login"
+                  render={() => (
+                    <Login onSuccess={this.onLogin} isLoggedIn={this.state.isLoggedIn} />
+                  )}
+                />
+
+                <Route path="/logout" render={() => <LogoutPage onSuccess={this.onLogout} />} />
+                <Route path="/upload" component={ImageUpload} />
+                <Route path="/manage/:id" component={ImageModify} />
+                <Route path="/account/settings" component={Account} />
+                <Route path="/featured" component={FeaturedScene} />
+                <Route path="/explore" component={ExploreScene} />
+
+                <Route path="/tos" component={TermsOfService} />
+                <Route path="/privacy" component={PrivacyPolicy} />
+                <Route path="/why" component={Why} />
+                <Route path="/*" component={NotFound} />
+              </Switch>
+            </RecordPageView>
+          </div>
+        </ScrollToTop>
+      </div>
+    );
+  }
 }
 
 registerServiceWorker();
 
 ReactDOM.render(
-    <Router>
-        <App />
-    </Router>,
-    document.getElementById('root')
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById('root')
 );
 
 if (process.env.NODE_ENV === 'production') {
-    Raven.config('https://98f3dbb4874649db845e711d275f07da@sentry.io/211802').install();
+  Raven.config('https://98f3dbb4874649db845e711d275f07da@sentry.io/211802').install();
 
-    Raven.setTagsContext({
-        environment: process.env.NODE_ENV
-    });
+  Raven.setTagsContext({
+    environment: process.env.NODE_ENV
+  });
 }
