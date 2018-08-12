@@ -48,9 +48,6 @@ const ResponsiveImage = ({ url, imageProps, className }) => (
     <Imgix
         src={url}
         className={className}
-        type={'bg'}
-        height={0.6}
-        width={0.6}
         generateSrcSet={true}
         imgProps={imageProps}
         customParams={{ fm: 'pjpg' }}
@@ -63,4 +60,32 @@ ResponsiveImage.propTypes = {
     imageProps: PropTypes.object
 };
 
-export { Image, ResponsiveImage };
+const ContainedImage = ({ url, dimensions, imageProps, className }) => {
+    const aspect = dimensions.pixel_xd / dimensions.pixel_yd;
+
+    return (
+        <div className="pa2 center" style={{ maxWidth: `calc((100vh - 175px) * ${aspect})` }}>
+            <Imgix
+                src={url}
+                className={className}
+                generateSrcSet={true}
+                height={0.7}
+                width={0.7}
+                imgProps={imageProps}
+                customParams={{ fm: 'pjpg' }}
+            />
+        </div>
+    );
+};
+
+ContainedImage.propTypes = {
+    url: PropTypes.string.isRequired,
+    dimensions: PropTypes.shape({
+        pixel_xd: PropTypes.number.isRequired,
+        pixel_yd: PropTypes.number.isRequired
+    }),
+    className: PropTypes.string,
+    imageProps: PropTypes.object
+};
+
+export { Image, ResponsiveImage, ContainedImage };

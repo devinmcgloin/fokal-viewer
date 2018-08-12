@@ -5,14 +5,8 @@ import { GetUser } from '../services/store/auth';
 import { Loading } from '../components/loading';
 import { NotFound } from '../components/error';
 import { Download, Favorite } from '../components/buttons/social';
-import { UserCard } from '../components/cards/user';
-import { Location } from '../components/image/location';
-import { Metadata } from '../components/image/metadata';
-import { Stats } from '../components/image/stats';
-import { Colors } from '../components/image/colors';
-import { Tags } from '../components/image/tags';
-import { Header } from '../components/image/header';
-import { ResponsiveImage } from '../components/image';
+import { User } from '../components/image/user';
+import { ContainedImage } from '../components/image';
 import MetadataButton from '../components/buttons/metadata';
 import LocationButton from '../components/buttons/location';
 
@@ -60,47 +54,33 @@ class ImageContainer extends Component {
             false
         );
 
-        const color = 'rgb(12, 12, 12)';
-
         return (
             <div>
                 {/* <Header image={this.state.image} /> */}
-                <div
-                    style={{
-                        backgroundColor: color
-                    }}
-                >
-                    <ResponsiveImage
-                        className="center"
-                        imageProps={{
-                            style: {
-                                backgroundColor: color,
-                                height: '90vh',
-                                width: '90vw',
-                                backgroundSize: 'contain',
-                                backgroundRepeat: 'no-repeat',
-                                backgroundPosition: 'center'
-                            }
-                        }}
-                        url={image.src_links.raw}
-                    />
+                <div className="center flex justify-between items-center pa2 w-80-l w-90">
+                    <div>
+                        <User {...image.user} />
+                    </div>
+                    <div>
+                        <Favorite id={image.id} favorited={favorited} count={stats.favorites} />
+                        <Download
+                            id={image.id}
+                            imageURL={image.src_links.raw}
+                            count={stats.downloads}
+                            increment={() => {
+                                this.setState(prev => {
+                                    let stats = prev.image.stats;
+                                    stats['downloads'] += 1;
+                                    return { stats: stats };
+                                });
+                            }}
+                        />
+                    </div>
                 </div>
-                <div className="center flex justify-between pa2 ma3 w-80-l w-90">
-                    <Download
-                        id={image.id}
-                        imageURL={image.src_links.raw}
-                        count={stats.downloads}
-                        increment={() => {
-                            this.setState(prev => {
-                                let stats = prev.image.stats;
-                                stats['downloads'] += 1;
-                                return { stats: stats };
-                            });
-                        }}
-                    />
-                    <Favorite id={image.id} favorited={favorited} count={stats.favorites} />
-                    <MetadataButton />
+                <ContainedImage url={image.src_links.raw} dimensions={image.metadata} />
+                <div className="center flex justify-between pa2 w-80-l w-90">
                     <LocationButton />
+                    <MetadataButton />
                 </div>
             </div>
         );

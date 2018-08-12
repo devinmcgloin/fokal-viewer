@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const User = ({ name, username, location, avatarURL }) => (
-    <Link to={'/u/' + username} className="no-underline">
-        <article className="sans-serif dt w-100 pb2 mt2 link hover dim">
-            <div className="dtc-ns w2 w3-ns v-mid dn">
-                <img src={avatarURL} className="ba b--black-10 db br-100 w3-ns h2 h3-ns" />
+const User = ({ id, name, location, avatar_links }) => (
+    <Link to={'/u/' + id} className="no-underline">
+        <article className="sans-serif flex items-center w-100 pb2 mt2 link hover dim">
+            <div className="">
+                <img src={avatar_links.small} className="ba b--black-10 db br2 h2 w2" />
             </div>
-            <div className="dtc v-mid pl3">
+            <div className="pl3">
                 <h1 className="f6 f5-ns fw6 lh-title black mv0 link no-underline">{name}</h1>
-                <h2 className="f6 fw4 mt0 mb0 black-60 link no-underline">@{username}</h2>
+                <h2 className="f6 fw4 mt0 mb0 black-60 link no-underline">@{id}</h2>
             </div>
         </article>
     </Link>
@@ -18,9 +18,11 @@ const User = ({ name, username, location, avatarURL }) => (
 
 User.propTypes = {
     name: PropTypes.string,
-    username: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
     location: PropTypes.string,
-    avatarURL: PropTypes.string.isRequired
+    avatar_links: PropTypes.shape({
+        small: PropTypes.string.isRequired
+    })
 };
 
 export { User };

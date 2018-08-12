@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import FontAwesome from 'react-fontawesome';
 import logo from '../assets/logo.svg';
 
 const Header = () => (
