@@ -87,7 +87,7 @@ const HeaderMenuItems = () => {
                 </a>
 
                 <a className="f6 fw6 b dib mr3 mb3 pb1 link hover-blue black-70 ttc" href="/join">
-                    <button className="pointer no-underline f6 tc db w3 h2 bg-animate bg-green hover-bg-dark-green white br2 ">
+                    <button className="pointer no-underline f6 tc db bn w3 h2 bg-animate bg-green hover-bg-dark-green white br2 ">
                         Join
                     </button>
                 </a>

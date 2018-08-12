@@ -5,7 +5,9 @@ import { RefreshToken } from '../api/auth';
 import JwtDecode from 'jwt-decode';
 
 const endpoint =
-    process.env.NODE_ENV === 'development' ? 'https://api.fok.al/v0' : 'http://localhost:8000/v0';
+    process.env.NODE_ENV === 'production' || process.env.REACT_APP_STANDALONE
+        ? 'https://api.fok.al/v0'
+        : 'http://localhost:8000/v0';
 
 const getHeaders = method => {
     let headers = new Headers();
