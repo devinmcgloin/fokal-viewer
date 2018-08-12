@@ -46,7 +46,7 @@ class ImageCard extends Component {
                 {({ measureRef }) => (
                     <div
                         ref={measureRef}
-                        className="db br2 w-100"
+                        className="db w-100"
                         style={{
                             height: height,
                             backgroundColor: color ? color.hex : '#ededed'
@@ -56,7 +56,7 @@ class ImageCard extends Component {
                             <LazyLoad height={height}>
                                 <Image
                                     url={image.src_links.raw}
-                                    className={'bg-center cover br2 shadow-5'}
+                                    className={'bg-center cover'}
                                     width={fullWidth ? 0.8 : 0.3}
                                     height={fullWidth ? 0.8 : 0.3}
                                 />
