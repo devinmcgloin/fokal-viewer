@@ -13,6 +13,8 @@ import { Colors } from '../components/image/colors';
 import { Tags } from '../components/image/tags';
 import { Header } from '../components/image/header';
 import { ResponsiveImage } from '../components/image';
+import MetadataButton from '../components/buttons/metadata';
+import LocationButton from '../components/buttons/location';
 
 class ImageContainer extends Component {
     constructor(props) {
@@ -84,57 +86,21 @@ class ImageContainer extends Component {
                     />
                 </div>
                 <div className="center flex justify-between pa2 ma3 w-80-l w-90">
-                    <span className="">
-                        <Download
-                            id={image.id}
-                            imageURL={image.src_links.raw}
-                            count={stats.downloads}
-                            increment={() => {
-                                this.setState(prev => {
-                                    let stats = prev.image.stats;
-                                    stats['downloads'] += 1;
-                                    return { stats: stats };
-                                });
-                            }}
-                        />
-                    </span>
-
-                    <span className="">
-                        <Favorite id={image.id} favorited={favorited} count={stats.favorites} />
-                    </span>
-                </div>
-                <div className="pa2 ma3 w-80-l w-90 center">
-                    <UserCard user={image.user} />
-
-                    <div className="bg-white br2 mt3 mb3 pa4 shadow-5">
-                        <Stats {...stats} />
-                    </div>
-
-                    <div className="bg-white br2 mt3 mb3 pa4 shadow-5">
-                        {image.metadata.location ? (
-                            <span className="w-80 center flex justify-around">
-                                <Location {...image.metadata.location} />
-                            </span>
-                        ) : null}
-
-                        <Metadata {...image.metadata} />
-                    </div>
-
-                    {image.tags.length !== 0 ? (
-                        <div className="bg-white br2 mt3 mb3 pa4 shadow-5">
-                            <span>
-                                <Tags tags={image.tags} />
-                            </span>
-                        </div>
-                    ) : null}
-
-                    {image.colors.length !== 0 ? (
-                        <div className="bg-white br2 mt3 mb3 pa4 shadow-5">
-                            <span>
-                                <Colors colors={image.colors} />
-                            </span>
-                        </div>
-                    ) : null}
+                    <Download
+                        id={image.id}
+                        imageURL={image.src_links.raw}
+                        count={stats.downloads}
+                        increment={() => {
+                            this.setState(prev => {
+                                let stats = prev.image.stats;
+                                stats['downloads'] += 1;
+                                return { stats: stats };
+                            });
+                        }}
+                    />
+                    <Favorite id={image.id} favorited={favorited} count={stats.favorites} />
+                    <MetadataButton />
+                    <LocationButton />
                 </div>
             </div>
         );

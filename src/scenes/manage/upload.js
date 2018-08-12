@@ -145,7 +145,7 @@ class ImageUpload extends Component {
     }
 
     render() {
-        if (!LoggedIn()) return <Redirect to="/" />;
+        if (!LoggedIn()) return <Redirect to="/login" />;
         return (
             <div className="sans-serif">
                 {this.state.id && <Redirect to={'/manage/' + this.state.id} />}

@@ -33,7 +33,7 @@ class Favorite extends React.Component {
                 }}
                 className={
                     'link pointer dim br2 ba ph3 pv2 dib ' +
-                    (this.state.favorited ? 'white bg-red b--white' : 'black')
+                    (this.state.favorited ? 'white bg-red b--white' : 'black-50')
                 }
             >
                 <span className="flex justify-between">
@@ -79,11 +79,11 @@ class Download extends React.Component {
                         };
                     });
                 }}
-                className="link pointer dim br2 ba ph3 pv2 dib black"
+                className="link pointer dim br2 ba ph3 pv2 dib black-50"
             >
                 <span className="flex justify-between">
                     <FontAwesome className="flex" name="download" />
-                    <span className="sans-serif pl3 f6">{this.state.count}</span>
+                    <span className="sans-serif pl3 f6">Download</span>
                 </span>
             </span>
         );
