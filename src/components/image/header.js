@@ -42,7 +42,7 @@ const TwitterProperties = ({ twitter, username, name, description, rawURL, locat
 };
 
 Header.propTypes = {
-  photographer: PropTypes.shape({
+  user: PropTypes.shape({
     name: PropTypes.string,
     username: PropTypes.string.isRequired,
     location: PropTypes.string,
