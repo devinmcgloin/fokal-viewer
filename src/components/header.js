@@ -3,17 +3,28 @@ import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import logo from '../assets/logo.svg';
 
-const Header = () => (
-  <nav className="sans-serif bg-white">
-    <div className="pa2 pa3-ns bb b--black-10 black-70 flex items-center justify-between">
-      <Link className="link dib mr3 tc" to="/" title="Home">
-        <img src={logo} style={{ width: '3rem', height: '3rem' }} />
-      </Link>
-      <HeaderSearchBox />
-    </div>
-    <HeaderMenuItems />
-  </nav>
-);
+class Header extends Component {
+  state = {
+    menuItems: [
+      { link: '/explore', title: 'Explore' },
+      { link: '/featured', title: 'Featured' },
+      { link: '/submit', title: 'Submit' },
+      { link: '/login', title: 'Login' },
+      { link: '/join', title: 'Join', button: { featured: true } }
+    ]
+  };
+  render = () => (
+    <nav className="sans-serif bg-white">
+      <div className="pa2 pa3-ns bb b--black-10 black-70 flex items-center justify-between">
+        <Link className="link dib mr3 tc" to="/" title="Home">
+          <img src={logo} style={{ width: '3rem', height: '3rem' }} />
+        </Link>
+        <HeaderSearchBox />
+      </div>
+      <HeaderMenuItems menuItems={this.state.menuItems} />
+    </nav>
+  );
+}
 
 class HeaderSearchBox extends Component {
   state = {
@@ -59,32 +70,56 @@ class HeaderSearchBox extends Component {
   };
 }
 
-const HeaderMenuItems = () => {
+const HeaderMenuItems = ({ menuItems }) => {
+  const nodes = menuItems.map(item => {
+    const internal = item.button ? (
+      <HeaderMenuButton
+        title={item.title}
+        link={item.link}
+        featured={item.button.featured || false}
+      />
+    ) : (
+      <HeaderMenuLink>{item.title}</HeaderMenuLink>
+    );
+    return (
+      <a className="f6 fw6 b dib mr3 link hover-blue black-70 ttc" href={item.link}>
+        {internal}
+      </a>
+    );
+  });
+  return <header className="pa2 pa3-ns bb b--black-10 flex items-center">{nodes}</header>;
+};
+
+HeaderMenuItems.propTypes = {
+  menuItems: PropTypes.arrayOf(
+    PropTypes.shape({
+      link: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      button: PropTypes.shape({
+        featured: PropTypes.bool
+      })
+    })
+  )
+};
+
+HeaderMenuItems.defaultProps = {
+  menuItems: []
+};
+
+const HeaderMenuButton = ({ link, featured, title }) => {
+  const buttonStyle = featured ? 'bg-green hover-bg-dark-green white' : 'ba b--black-50 black-50';
   return (
-    <header className="ph3 ph4-ns pv2 pv3-ns bb b--black-10">
-      <a className="f6 fw6 b dib mr3 pb1 link hover-blue black-70 ttc" href="/explore">
-        Explore
-      </a>
-
-      <a className="f6 fw6 b dib mr3 pb1 link hover-blue black-70 ttc" href="/featured">
-        Featured
-      </a>
-
-      <a className="f6 fw6 b dib mr3 pb1 link hover-blue black-70 ttc" href="/upload">
-        Submit
-      </a>
-
-      <a className="f6 fw6 b dib mr3 pb1 link hover-blue black-70 ttc" href="/login">
-        Login
-      </a>
-
-      <a className="f6 fw6 b dib mr3 pb1 link hover-blue black-70 ttc" href="/join">
-        <button className="pointer no-underline f6 tc db bn w3 h2 bg-animate bg-green hover-bg-dark-green white br2 ">
-          Join
-        </button>
-      </a>
-    </header>
+    <HeaderMenuLink link={link}>
+      <button className={`pointer no-underline f6 tc db bn w3 h2 bg-animate ${buttonStyle} br2`}>
+        {title}
+      </button>
+    </HeaderMenuLink>
   );
 };
 
+const HeaderMenuLink = ({ link, children }) => (
+  <a className="f6 fw6 b dib mr3 link hover-blue black-70 ttc" href={link}>
+    {children}
+  </a>
+);
 export { Header };
