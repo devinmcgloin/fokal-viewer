@@ -19,7 +19,7 @@ const Controls = ({ options, selected, layout, handleLayoutChange, handleTypeCha
   ));
 
   return (
-    <section className="pv1 w-100 h2 sans-serif">
+    <section className="pa2 w-100 h2 sans-serif">
       {control}
 
       <div className="dn di-ns">
