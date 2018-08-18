@@ -23,6 +23,7 @@
         "geodist": "^0.2.1",
         "history": "^4.6.3",
         "html-webpack-plugin": "2.30.1",
+        "immutable": "^3.8.2",
         "jest": "22.1.4",
         "jwt-decode": "^2.2.0",
         "lodash": "^4.17.4",

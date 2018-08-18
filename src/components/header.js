@@ -18,7 +18,9 @@ class Header extends Component {
 
   menuItems = () => {
     const { menuItems, loggedOutItems, loggedInItems } = this.state;
-    return this.props.loggedIn ? menuItems.concat(loggedInItems) : menuItems.concat(loggedOutItems);
+    return this.props.isLoggedIn
+      ? menuItems.concat(loggedInItems)
+      : menuItems.concat(loggedOutItems);
   };
 
   render = () => (
@@ -35,11 +37,11 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  loggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool
 };
 
 Header.defaultProps = {
-  loggedIn: false
+  isLoggedIn: false
 };
 
 class HeaderSearchBox extends Component {

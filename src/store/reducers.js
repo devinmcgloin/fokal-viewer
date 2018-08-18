@@ -1,21 +1,33 @@
 import { LOGIN, LOGOUT } from './action-types';
+import JwtDecode from 'jwt-decode';
 
 const initialState = {
-  loggedIn: false,
-  jwt: undefined
+  user: {
+    isLoggedIn: false,
+    jwt: undefined,
+    username: undefined
+  }
 };
 
 function fokalReducer(state = initialState, action) {
-  switch (action) {
+  switch (action.type) {
     case LOGIN:
+      console.log('LOGGING IN');
+      const tok = JwtDecode(action.jwt);
       return Object.assign({}, state, {
-        loggedIn: true,
-        jwt: action.jwt
+        user: {
+          isLoggedIn: true,
+          jwt: action.jwt,
+          username: tok.sub
+        }
       });
     case LOGOUT:
       return Object.assign({}, state, {
-        loggedIn: false,
-        jwt: undefined
+        user: {
+          isLoggedIn: false,
+          jwt: undefined,
+          username: undefined
+        }
       });
     default:
       return state;

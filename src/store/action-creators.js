@@ -1,14 +1,16 @@
 import { LOGIN, LOGOUT } from './action-types';
 
-function login(jwt) {
+function Login(jwt) {
   return {
     type: LOGIN,
     jwt
   };
 }
 
-function logout() {
+function Logout() {
   return {
     type: LOGOUT
   };
 }
+
+export { Login, Logout };
