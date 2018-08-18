@@ -5,14 +5,22 @@ import logo from '../assets/logo.svg';
 
 class Header extends Component {
   state = {
-    menuItems: [
-      { link: '/explore', title: 'Explore' },
-      { link: '/featured', title: 'Featured' },
-      { link: '/submit', title: 'Submit' },
+    menuItems: [{ link: '/explore', title: 'Explore' }, { link: '/featured', title: 'Featured' }],
+    loggedOutItems: [
       { link: '/login', title: 'Login' },
       { link: '/join', title: 'Join', button: { featured: true } }
+    ],
+    loggedInItems: [
+      { link: '/settings', title: 'Settings' },
+      { link: '/submit', title: 'Submit', button: { featured: true } }
     ]
   };
+
+  menuItems = () => {
+    const { menuItems, loggedOutItems, loggedInItems } = this.state;
+    return this.props.loggedIn ? menuItems.concat(loggedInItems) : menuItems.concat(loggedOutItems);
+  };
+
   render = () => (
     <nav className="sans-serif bg-white">
       <div className="pa2 pa3-ns bb b--black-10 black-70 flex items-center justify-between">
@@ -21,10 +29,18 @@ class Header extends Component {
         </Link>
         <HeaderSearchBox />
       </div>
-      <HeaderMenuItems menuItems={this.state.menuItems} />
+      <HeaderMenuItems menuItems={this.menuItems()} />
     </nav>
   );
 }
+
+Header.propTypes = {
+  loggedIn: PropTypes.bool
+};
+
+Header.defaultProps = {
+  loggedIn: false
+};
 
 class HeaderSearchBox extends Component {
   state = {
@@ -72,19 +88,17 @@ class HeaderSearchBox extends Component {
 
 const HeaderMenuItems = ({ menuItems }) => {
   const nodes = menuItems.map(item => {
-    const internal = item.button ? (
+    return item.button ? (
       <HeaderMenuButton
         title={item.title}
         link={item.link}
         featured={item.button.featured || false}
+        key={item.link}
       />
     ) : (
-      <HeaderMenuLink>{item.title}</HeaderMenuLink>
-    );
-    return (
-      <a className="f6 fw6 b dib mr3 link hover-blue black-70 ttc" href={item.link}>
-        {internal}
-      </a>
+      <HeaderMenuLink link={item.link} key={item.link}>
+        {item.title}
+      </HeaderMenuLink>
     );
   });
   return <header className="pa2 pa3-ns bb b--black-10 flex items-center">{nodes}</header>;
@@ -118,8 +132,8 @@ const HeaderMenuButton = ({ link, featured, title }) => {
 };
 
 const HeaderMenuLink = ({ link, children }) => (
-  <a className="f6 fw6 b dib mr3 link hover-blue black-70 ttc" href={link}>
+  <Link className="f6 fw6 b dib mr3 link hover-blue black-70 ttc" to={link}>
     {children}
-  </a>
+  </Link>
 );
 export { Header };
