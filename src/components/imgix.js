@@ -64,7 +64,7 @@ const ContainedImage = ({ url, dimensions, imageProps, className }) => {
   const aspect = dimensions.pixel_xd / dimensions.pixel_yd;
 
   return (
-    <div className="pa2 center" style={{ maxWidth: `calc((100vh - 175px) * ${aspect})` }}>
+    <div className="pa2 center" style={{ maxWidth: `calc((100vh - 150px) * ${aspect})` }}>
       <Imgix
         src={url}
         className={className}

@@ -215,17 +215,13 @@ ManageUser.propTypes = {
 
 const Account = ({ match }) => (
   <div className="sans-serif">
-    <nav className="ph3 ph4-ns pv2 pv3-ns bb b--black-10 black-70">
+    <nav className="pa2 pa3-ns bb b--black-10 black-70 flex items-center">
       <div className="nowrap overflow-x-auto">
-        <Link
-          className="sans-serif link dim gray    f6 f5-ns dib mr3"
-          title="Images"
-          to={match.url}
-        >
+        <Link className="sans-serif link dim gray f6 f5-ns dib mr3" title="Images" to={match.url}>
           Account
         </Link>
         <Link
-          className="sans-serif link dim gray    f6 f5-ns dib mr3"
+          className="sans-serif link dim gray f6 f5-ns dib mr3"
           title="Favorites"
           to={match.url + '/manage'}
         >

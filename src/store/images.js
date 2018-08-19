@@ -1,6 +1,5 @@
 import { FetchImage } from '../services/api/retrieval';
 import { loadImages } from './persistance';
-
 const REQUEST_IMAGE = 'REQUEST_IMAGE';
 const RECEIVE_IMAGE = 'RECEIVE_IMAGE';
 
@@ -18,7 +17,7 @@ function receiveImage(shortcode, json) {
     type: RECEIVE_IMAGE,
     shortcode,
     image: json,
-    receivedAt: Date.now(),
+    receivedAt: Date.UTC(),
     isLoading: false
   };
 }
@@ -31,10 +30,12 @@ function fetchImage(shortcode) {
 }
 
 function shouldFetchImage(state, shortcode) {
-  const posts = state.images[shortcode];
-  if (!posts) {
+  const image = state.images[shortcode];
+  if (!image) {
     return true;
-  } else if (posts.isLoading) {
+  } else if (Date.UTC() - image.receivedAt > 432000) {
+    return true;
+  } else if (image.isLoading) {
     return false;
   }
 }
@@ -64,7 +65,7 @@ function images(state = initialState, action) {
           shortcode: action.shortcode,
           isLoading: false,
           image: action.image,
-          lastUpdated: action.receivedAt
+          receivedAt: action.receivedAt
         }
       });
     default:

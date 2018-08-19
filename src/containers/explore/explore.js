@@ -43,10 +43,8 @@ class ExploreScene extends Component {
       limit: 500,
       geo: { sw: bounds._sw, ne: bounds._ne }
     };
-    Search('/search', q).then(data => {
-      if (data.ok) {
-        data.body.then(d => this.setState({ images: d.images, changed: false }));
-      }
+    Search('/search', q).then(req => {
+      this.setState({ images: req.body.images, changed: false });
     });
   };
 

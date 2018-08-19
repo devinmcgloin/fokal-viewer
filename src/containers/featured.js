@@ -20,17 +20,15 @@ class SearchDisplay extends Component {
     Search('/search', {
       required_terms: t.props.search,
       document_types: ['image', 'tag']
-    }).then(data => {
-      if (data.ok)
-        data.body.then(d =>
-          t.setState({
-            images: d.images,
-            tags: d.tags,
-            loading: false,
-            failed: false
-          })
-        );
-      else t.setState({ failed: true, loading: false });
+    }).then(resp => {
+      if (resp.ok) {
+        t.setState({
+          images: resp.body.images,
+          tags: resp.body.tags,
+          loading: false,
+          failed: false
+        });
+      } else t.setState({ failed: true, loading: false });
     });
   }
 

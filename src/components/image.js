@@ -41,7 +41,9 @@ const ImageComponent = ({ isLoading, isFailed, image, username }) => {
           />
         </div>
       </div>
-      <ContainedImage url={image.src_links.raw} dimensions={image.metadata} />
+      <div className="bg-black-80 pa3">
+        <ContainedImage url={image.src_links.raw} dimensions={image.metadata} />
+      </div>
       <div className="ph3 ph4-ns pv2 flex justify-between items-center pa2">
         <LocationButton />
         <MetadataButton />

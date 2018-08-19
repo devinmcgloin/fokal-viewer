@@ -14,7 +14,6 @@ class ImageCollection extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      images: [],
       type: this.props.match.params.type || 'featured',
       isGrid: true,
       failed: false,
@@ -26,20 +25,11 @@ class ImageCollection extends Component {
 
   loadImageFromServer(type) {
     let t = this;
-    FetchImages('/images/' + type).then(function(data) {
-      switch (data.ok) {
-        case true:
-          data.body.then(b => t.setState({ [type]: b, isLoading: false }));
-          break;
-        default:
-          t.setState({
-            isLoading: false,
-            failed: true
-          });
-          Raven.captureException(new Error('Invalid Response code from server.'), {
-            code: data.code
-          });
-      }
+    FetchImages('/images/' + type).then(data => {
+      t.setState({
+        [type]: data.body,
+        isLoading: false
+      });
     });
   }
 
@@ -154,26 +144,24 @@ class TaggedImages extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentDidMount(nextProps) {
     this.setState({ tag: nextProps.match.params.id, images: [] });
     this.loadImageFromServer(nextProps.match.params.id);
   }
 
   loadImageFromServer(tag) {
     let t = this;
-    FetchImages('/tags/' + tag).then(function(data) {
-      switch (data.ok) {
+    FetchImages('/tags/' + tag).then(resp => {
+      switch (resp.ok) {
         case true:
-          data.body.then(b =>
-            t.setState({
-              images: b.images,
-              count: b.count,
-              isLoading: false
-            })
-          );
+          t.setState({
+            images: resp.body.images,
+            count: resp.body.count,
+            isLoading: false
+          });
           break;
         default:
-          data.status === 404
+          resp.status === 404
             ? t.setState({
                 isLoading: false,
                 not_found: true
@@ -182,9 +170,6 @@ class TaggedImages extends Component {
                 isLoading: false,
                 failed: true
               });
-          Raven.captureException(new Error('Invalid Response code from server.'), {
-            code: data.code
-          });
       }
     });
   }
