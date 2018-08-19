@@ -1,16 +1,22 @@
-import { Logout } from '../../services/store/auth';
-import { Redirect } from 'react-router-dom';
 import React from 'react';
-import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
+import { Logout } from '../../store/action-creators';
+import { connect } from 'react-redux';
 
-const LogoutPage = ({ onSuccess }) => {
-  Logout();
-  onSuccess();
+const LogoutComponent = ({ onLogout }) => {
+  onLogout();
   return <Redirect to="/" />;
 };
 
-LogoutPage.propTypes = {
-  onSuccess: PropTypes.func.isRequired
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogout: () => dispatch(Logout())
+  };
 };
 
-export { LogoutPage };
+const LogoutContainer = connect(
+  () => {},
+  mapDispatchToProps
+)(LogoutComponent);
+
+export { LogoutContainer };

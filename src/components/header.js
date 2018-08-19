@@ -12,6 +12,7 @@ class Header extends Component {
     ],
     loggedInItems: [
       { link: '/account/settings', title: 'Settings' },
+      { link: '/logout', title: 'Logout' },
       { link: '/submit', title: 'Submit', button: { featured: true } }
     ]
   };

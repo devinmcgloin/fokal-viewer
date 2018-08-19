@@ -19,7 +19,7 @@ import CTARoute from './containers/call-to-action';
 import { Account } from './containers/manage/patch';
 import { FeaturedScene } from './containers/featured';
 import { ExploreScene } from './containers/explore/explore';
-import { LogoutPage } from './containers/auth/logout';
+import { LogoutContainer } from './containers/auth/logout';
 import ScrollToTop from './components/scroll';
 import Raven from 'raven-js';
 import { TermsOfService, PrivacyPolicy } from './static/legal';
@@ -28,7 +28,7 @@ import RecordPageView from './components/analytics';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { saveStore } from './store/persistance';
-import Authenticated from './containers/auth';
+import Authenticated from './containers/auth/routes';
 import fokalReducer from './store/reducers';
 
 const store = createStore(
@@ -72,7 +72,7 @@ class App extends React.Component {
                 <Route path="/privacy" component={PrivacyPolicy} />
                 <Route path="/why" component={Why} />
 
-                <Authenticated path="/logout" Container={LogoutPage} />
+                <Authenticated path="/logout" Container={LogoutContainer} />
                 <Authenticated path="/submit" Container={ImageSubmit} />
                 <Authenticated path="/manage/:id" Container={ImageModify} />
                 <Authenticated path="/account/settings" Container={Account} />
