@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Patch } from '../../services/api/patch';
 import { FetchMe } from '../../services/api/retrieval';
-import { LoggedIn } from '../../services/store/auth';
 import PropTypes from 'prop-types';
 import { bindAll } from 'lodash';
 import Raven from 'raven-js';
-import { Link, Route, Switch, Redirect } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import { Loading } from '../../components/loading';
 import { Error } from '../../components/error';
 import { TextArea, TextField } from '../../components/fields';
@@ -216,7 +215,6 @@ ManageUser.propTypes = {
 
 const Account = ({ match }) => (
   <div className="sans-serif">
-    {!LoggedIn() && <Redirect to="/" />}
     <nav className="ph3 ph4-ns pv2 pv3-ns bb b--black-10 black-70">
       <div className="nowrap overflow-x-auto">
         <Link

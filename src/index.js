@@ -15,7 +15,7 @@ import 'tachyons/css/tachyons.css';
 import 'font-awesome/css/font-awesome.css';
 import './assets/main.css';
 import { ImageSubmit, ImageModify } from './containers/manage/submit';
-import CallToAction from './components/call-to-action';
+import CTARoute from './containers/call-to-action';
 import { Account } from './containers/manage/patch';
 import { FeaturedScene } from './containers/featured';
 import { ExploreScene } from './containers/explore/explore';
@@ -28,7 +28,7 @@ import RecordPageView from './components/analytics';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { saveStore } from './store/persistance';
-
+import Authenticated from './containers/auth';
 import fokalReducer from './store/reducers';
 
 const store = createStore(
@@ -47,21 +47,13 @@ class App extends React.Component {
           <div>
             <RecordPageView>
               <Switch>
-                <Route
+                <CTARoute
                   exact
                   path="/:type(recent|trending|)"
-                  render={props => (
-                    <div>
-                      {/* {!this.state.isLoggedIn ? (
-                        <CallToAction
-                          title="Join Fokal"
-                          message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
-                          call="Join for Free"
-                        />
-                      ) : null} */}
-                      <ImageCollection {...props} />
-                    </div>
-                  )}
+                  title="Join Fokal"
+                  message="Fokal helps you find images you’ll love and get your own images seen. We use cutting edge machine intelligence in order to make sure your best images rise to the top and help you find the images that you’re looking for."
+                  call="Join for Free"
+                  Container={ImageCollection}
                 />
 
                 <Route path="/i/:id" component={ImageContainer} />
@@ -73,16 +65,18 @@ class App extends React.Component {
                 <Route path="/join" component={LoginContainer} />
                 <Route path="/login" component={LoginContainer} />
 
-                <Route path="/logout" render={() => <LogoutPage onSuccess={this.onLogout} />} />
-                <Route path="/submit" component={ImageSubmit} />
-                <Route path="/manage/:id" component={ImageModify} />
-                <Route path="/account/settings" component={Account} />
                 <Route path="/featured" component={FeaturedScene} />
                 <Route path="/explore" component={ExploreScene} />
 
                 <Route path="/tos" component={TermsOfService} />
                 <Route path="/privacy" component={PrivacyPolicy} />
                 <Route path="/why" component={Why} />
+
+                <Authenticated path="/logout" Container={LogoutPage} />
+                <Authenticated path="/submit" Container={ImageSubmit} />
+                <Authenticated path="/manage/:id" Container={ImageModify} />
+                <Authenticated path="/account/settings" Container={Account} />
+
                 <Route path="/*" component={NotFound} />
               </Switch>
             </RecordPageView>

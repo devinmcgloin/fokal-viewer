@@ -7,7 +7,6 @@ import { FetchImage } from '../../services/api/retrieval';
 import { ErrorAlert, InfoAlert, SuccessAlert } from '../../components/alerts';
 import { Loading } from '../../components/loading';
 import { Exif, Tags, Geo, Gear } from './images/patch';
-import { LoggedIn } from '../../services/store/auth';
 import { Image } from '../../components/image';
 import Dropzone from 'react-dropzone';
 import FontAwesome from 'react-fontawesome';
@@ -37,7 +36,6 @@ class ImageModify extends Component {
 
   render() {
     if (this.state.status === 'loading') return <Loading />;
-    if (!LoggedIn()) return <Redirect to="/" />;
 
     let stage;
     if (this.state.progress === 0)
