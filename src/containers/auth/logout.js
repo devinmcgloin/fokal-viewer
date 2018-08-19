@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import { Logout } from '../../store/action-creators';
+import { Logout } from '../../store/auth';
 import { connect } from 'react-redux';
 
 const LogoutComponent = ({ onLogout }) => {

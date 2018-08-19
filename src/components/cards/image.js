@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Image } from '../image';
+import { Image } from '../imgix';
 import Measure from 'react-measure';
 import LazyLoad from 'react-lazyload';
 

@@ -7,7 +7,7 @@ import { FetchImage } from '../../services/api/retrieval';
 import { ErrorAlert, InfoAlert, SuccessAlert } from '../../components/alerts';
 import { Loading } from '../../components/loading';
 import { Exif, Tags, Geo, Gear } from './images/patch';
-import { Image } from '../../components/image';
+import { Image } from '../../components/imgix';
 import Dropzone from 'react-dropzone';
 import FontAwesome from 'react-fontawesome';
 

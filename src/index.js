@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ImageCollection, TaggedImages } from './containers/collection';
 import { SearchContainer } from './containers/search';
 import { NotFound } from './components/error';
-import { ImageContainer } from './containers/image';
+import ImageContainer from './containers/image';
 import HeaderContainer from './containers/header';
 import { Join, LoginContainer } from './containers/auth/join';
 import { UserContainer } from './containers/user';
