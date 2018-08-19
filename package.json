@@ -67,6 +67,7 @@
         "react-tabs": "^2.0.0",
         "react-tag-input": "^4.7.2",
         "redux": "^4.0.0",
+        "redux-thunk": "^2.3.0",
         "rsvp": "^4.0.1",
         "style-loader": "0.19.1",
         "sw-precache-webpack-plugin": "0.11.4",

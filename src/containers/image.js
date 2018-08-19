@@ -1,7 +1,15 @@
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ImageComponent from '../components/image';
 import { fetchImageIfNeeded } from '../store/images';
 
+class Image extends Component {
+  componentDidMount = () => {
+    const { dispatch, shortcode } = this.props;
+    dispatch(fetchImageIfNeeded(shortcode));
+  };
+  render = () => <ImageComponent {...this.props} />;
+}
 const mapStateToProps = (state, props) => {
   const shortcode = props.match.params.id;
   const { isLoading, isFailed, image } = state.images[shortcode] || {
@@ -19,16 +27,6 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, props) => {
-  const { shortcode } = props;
-  return {
-    requestImage: () => dispatch(fetchImageIfNeeded(shortcode))
-  };
-};
-
-const ImageContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ImageComponent);
+const ImageContainer = connect(mapStateToProps)(Image);
 
 export default ImageContainer;

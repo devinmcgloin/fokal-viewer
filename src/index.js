@@ -25,16 +25,15 @@ import Raven from 'raven-js';
 import { TermsOfService, PrivacyPolicy } from './static/legal';
 import { Why } from './static/why';
 import RecordPageView from './components/analytics';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import { saveStore } from './store/persistance';
 import Authenticated from './containers/auth/routes';
 import fokalReducer from './store/reducers';
+import thunkMiddleware from 'redux-thunk';
 
-const store = createStore(
-  fokalReducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(fokalReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 store.subscribe(() => saveStore(store.getState()));
 

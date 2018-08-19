@@ -18,14 +18,15 @@ function receiveImage(shortcode, json) {
     type: RECEIVE_IMAGE,
     shortcode,
     image: json,
-    receivedAt: Date.now()
+    receivedAt: Date.now(),
+    isLoading: false
   };
 }
 
 function fetchImage(shortcode) {
   return dispatch => {
     dispatch(requestImage(shortcode));
-    return FetchImage(shortcode).then(json => dispatch(receiveImage(shortcode, json)));
+    return FetchImage(shortcode).then(json => dispatch(receiveImage(shortcode, json.body)));
   };
 }
 
@@ -33,7 +34,7 @@ function shouldFetchImage(state, shortcode) {
   const posts = state.images[shortcode];
   if (!posts) {
     return true;
-  } else if (posts.isFetching) {
+  } else if (posts.isLoading) {
     return false;
   }
 }
@@ -41,7 +42,6 @@ function shouldFetchImage(state, shortcode) {
 function fetchImageIfNeeded(shortcode) {
   return (dispatch, getState) => {
     if (shouldFetchImage(getState(), shortcode)) {
-      dispatch(requestImage(shortcode));
       return dispatch(fetchImage(shortcode));
     } else {
       // Let the calling code know there's nothing to wait for.
@@ -55,14 +55,14 @@ function images(state = initialState, action) {
     case REQUEST_IMAGE:
       return Object.assign({}, state, {
         [action.shortcode]: {
-          isFetching: true
+          isLoading: true
         }
       });
     case RECEIVE_IMAGE:
       return Object.assign({}, state, {
         [action.shortcode]: {
           shortcode: action.shortcode,
-          isFetching: false,
+          isLoading: false,
           image: action.image,
           lastUpdated: action.receivedAt
         }
