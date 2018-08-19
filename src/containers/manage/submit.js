@@ -88,7 +88,7 @@ ImageModify.propTypes = {
   onContinue: PropTypes.func.isRequired
 };
 
-class ImageUpload extends Component {
+class ImageSubmit extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -137,7 +137,7 @@ class ImageUpload extends Component {
   }
 
   render() {
-    if (!LoggedIn()) return <Redirect to="/login" />;
+    // if (!LoggedIn()) return <Redirect to="/login" />;
     return (
       <div className="sans-serif">
         {this.state.id && <Redirect to={'/manage/' + this.state.id} />}
@@ -190,4 +190,4 @@ class ImageUpload extends Component {
     );
   }
 }
-export { ImageUpload, ImageModify };
+export { ImageSubmit, ImageModify };

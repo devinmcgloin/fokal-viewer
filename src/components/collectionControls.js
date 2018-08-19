@@ -19,10 +19,10 @@ const Controls = ({ options, selected, layout, handleLayoutChange, handleTypeCha
   ));
 
   return (
-    <section className="pa2 w-100 h2 sans-serif">
-      {control}
+    <section className="pa2 pv3 w-100 h2 sans-serif flex items-center justify-between">
+      <div>{control}</div>
 
-      <div className="dn di-ns">
+      <div>
         <FontAwesome
           className={
             'fr f5 link b no-underline black-50 dib pl2 pl3-ns pointer ' +

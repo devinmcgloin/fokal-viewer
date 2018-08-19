@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
   return {
-    isLoggedIn: state.user.isLoggedIn,
+    isLoggedIn: state.auth.isLoggedIn,
     title: 'Login',
     redirect: '/'
   };

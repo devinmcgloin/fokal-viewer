@@ -1,8 +1,9 @@
 import { LOGIN, LOGOUT } from './action-types';
 import JwtDecode from 'jwt-decode';
+import { loadStore } from './persistance';
 
-const initialState = {
-  user: {
+const initialState = loadStore() || {
+  auth: {
     isLoggedIn: false,
     jwt: undefined,
     username: undefined
@@ -15,7 +16,7 @@ function fokalReducer(state = initialState, action) {
       console.log('LOGGING IN');
       const tok = JwtDecode(action.jwt);
       return Object.assign({}, state, {
-        user: {
+        auth: {
           isLoggedIn: true,
           jwt: action.jwt,
           username: tok.sub
@@ -23,7 +24,7 @@ function fokalReducer(state = initialState, action) {
       });
     case LOGOUT:
       return Object.assign({}, state, {
-        user: {
+        auth: {
           isLoggedIn: false,
           jwt: undefined,
           username: undefined

@@ -11,7 +11,7 @@ class Header extends Component {
       { link: '/join', title: 'Join', button: { featured: true } }
     ],
     loggedInItems: [
-      { link: '/settings', title: 'Settings' },
+      { link: '/account/settings', title: 'Settings' },
       { link: '/submit', title: 'Submit', button: { featured: true } }
     ]
   };
@@ -27,7 +27,7 @@ class Header extends Component {
     <nav className="sans-serif bg-white">
       <div className="pa2 pa3-ns bb b--black-10 black-70 flex items-center justify-between">
         <Link className="link dib mr3 tc" to="/" title="Home">
-          <img src={logo} style={{ width: '3rem', height: '3rem' }} />
+          <img src={logo} style={{ width: '3rem', height: '3rem' }} alt="fokal logo" />
         </Link>
         <HeaderSearchBox />
       </div>

@@ -14,7 +14,7 @@ import { UserContainer } from './containers/user';
 import 'tachyons/css/tachyons.css';
 import 'font-awesome/css/font-awesome.css';
 import './assets/main.css';
-import { ImageUpload, ImageModify } from './containers/manage/upload';
+import { ImageSubmit, ImageModify } from './containers/manage/submit';
 import CallToAction from './components/call-to-action';
 import { Account } from './containers/manage/patch';
 import { FeaturedScene } from './containers/featured';
@@ -27,6 +27,7 @@ import { Why } from './static/why';
 import RecordPageView from './components/analytics';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { saveStore } from './store/persistance';
 
 import fokalReducer from './store/reducers';
 
@@ -34,6 +35,8 @@ const store = createStore(
   fokalReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
+
+store.subscribe(() => saveStore(store.getState()));
 
 class App extends React.Component {
   render() {
@@ -71,7 +74,7 @@ class App extends React.Component {
                 <Route path="/login" component={LoginContainer} />
 
                 <Route path="/logout" render={() => <LogoutPage onSuccess={this.onLogout} />} />
-                <Route path="/upload" component={ImageUpload} />
+                <Route path="/submit" component={ImageSubmit} />
                 <Route path="/manage/:id" component={ImageModify} />
                 <Route path="/account/settings" component={Account} />
                 <Route path="/featured" component={FeaturedScene} />
