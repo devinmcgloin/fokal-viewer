@@ -136,7 +136,7 @@ class TaggedImages extends Component {
     super(props);
     this.state = {
       images: [],
-      tag: props.match.params.id,
+      tag: props.match.params.id.split('-').join(' '),
       isLoading: true,
       failed: false,
       not_found: false,

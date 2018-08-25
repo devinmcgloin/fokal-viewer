@@ -152,4 +152,12 @@ function search(state = initialState, action) {
   }
 }
 
-export { recieveQuery, requestQuery, setQuery, search, fetchResultsIfNeeded };
+export {
+  extractColor,
+  extractTags,
+  recieveQuery,
+  requestQuery,
+  setQuery,
+  search,
+  fetchResultsIfNeeded
+};

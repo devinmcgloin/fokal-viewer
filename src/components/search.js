@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import FontAwesome from 'react-fontawesome';
 import { UserCard } from './cards/user';
 import { TagCard } from './cards/tags';
 import { Loading } from '../components/loading';

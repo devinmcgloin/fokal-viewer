@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const TagCard = ({ image, count, id }) => (
   <div className={'sans-serif'}>
-    <Link to={'/t/' + id} className="link hover dim">
+    <Link to={'/t/' + id.split(' ').join('-')} className="link hover dim">
       <div className={''}>
         <div
           alt=""
