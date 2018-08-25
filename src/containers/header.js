@@ -1,13 +1,24 @@
 import { connect } from 'react-redux';
 import { Header } from '../components/header';
+import { fetchResultsIfNeeded, setQuery } from '../store/search';
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
+    query: state.search.current_query
   };
 };
 
-const HeaderContainer = connect(mapStateToProps)(Header);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchResults: query => dispatch(fetchResultsIfNeeded(query)),
+    setQuery: query => dispatch(setQuery(query))
+  };
+};
+
+const HeaderContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);
 
 export default HeaderContainer;

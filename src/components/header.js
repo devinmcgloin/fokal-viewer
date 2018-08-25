@@ -30,7 +30,11 @@ class Header extends Component {
         <Link className="link dib mr3 tc" to="/" title="Home">
           <img src={logo} style={{ width: '3rem', height: '3rem' }} alt="fokal logo" />
         </Link>
-        <HeaderSearchBox />
+        <HeaderSearchBox
+          query={this.props.query}
+          setQuery={this.props.setQuery}
+          fetchResults={this.props.fetchResults}
+        />
       </div>
       <HeaderMenuItems menuItems={this.menuItems()} />
     </nav>
@@ -38,7 +42,10 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  isLoggedIn: PropTypes.bool
+  isLoggedIn: PropTypes.bool,
+  setQuery: PropTypes.func.isRequired,
+  fetchResults: PropTypes.func.isRequired,
+  query: PropTypes.string
 };
 
 Header.defaultProps = {
@@ -46,41 +53,35 @@ Header.defaultProps = {
 };
 
 class HeaderSearchBox extends Component {
-  state = {
-    q: '',
-    submitted: false,
-    submittedQuery: ''
-  };
-  onSubmit = e => {
-    e.preventDefault();
-    this.setState(prev => {
-      return { submitted: true, submittedQuery: prev.q, q: '' };
-    });
-  };
-  handleTextChange = e =>
-    this.setState({
-      q: e.target.value
-    });
   render = () => {
-    const redirect = this.state.submitted ? (
+    const redirect = this.props.query !== '' && (
       <Redirect
         push
         to={{
-          pathname: '/search',
-          search: '?q=' + encodeURIComponent(this.state.submittedQuery)
+          pathname: `/search/${this.props.query.split(' ').join('-')}`
         }}
       />
-    ) : null;
+    );
     return (
       <React.Fragment>
         {redirect}
-        <form onSubmit={this.onSubmit} className="db" style={{ flexGrow: 2 }}>
+        <form
+          onSubmit={e => {
+            e.preventDefault();
+            this.props.fetchResults(this.props.query);
+          }}
+          className="db"
+          style={{ flexGrow: 2 }}
+        >
           <input
             type="text"
             id="query"
             name="query"
-            onChange={this.handleTextChange}
-            value={this.state.q}
+            onChange={e => {
+              e.preventDefault();
+              this.props.setQuery(e.target.value);
+            }}
+            value={this.props.query}
             className="pa2 mr3 dib h2 bn input-reset br2 bg-near-white w-100"
           />
         </form>
@@ -88,6 +89,12 @@ class HeaderSearchBox extends Component {
     );
   };
 }
+
+HeaderSearchBox.propTypes = {
+  query: PropTypes.string,
+  fetchResults: PropTypes.func.isRequired,
+  setQuery: PropTypes.func.isRequired
+};
 
 const HeaderMenuItems = ({ menuItems }) => {
   const nodes = menuItems.map(item => {

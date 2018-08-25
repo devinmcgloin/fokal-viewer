@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import registerServiceWorker from './services/registerServiceWorker';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ImageCollection, TaggedImages } from './containers/collection';
-import { SearchContainer } from './containers/search';
+import SearchContainer from './containers/search';
 import { NotFound } from './components/error';
 import ImageContainer from './containers/image';
 import HeaderContainer from './containers/header';
@@ -59,7 +59,7 @@ class App extends React.Component {
                 <Route path="/u/:id" component={UserContainer} />
                 <Route path="/t/:id" component={TaggedImages} />
 
-                <Route path="/search" component={SearchContainer} />
+                <Route path="/search/:query" component={SearchContainer} />
 
                 <Route path="/join" component={LoginContainer} />
                 <Route path="/login" component={LoginContainer} />

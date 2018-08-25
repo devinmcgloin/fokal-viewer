@@ -1,9 +1,41 @@
 import React from 'react';
-import { GridCollection } from './collection';
-import { ImageCard } from './cards/image';
+import PropTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome';
 import { UserCard } from './cards/user';
 import { TagCard } from './cards/tags';
-import PropTypes from 'prop-types';
+import { Loading } from '../components/loading';
+import { ImageCard } from './cards/image';
+import { GridCollection } from './collection';
+import { Error, NoResults } from '../components/error';
+
+const SearchComponent = ({ query, isLoading, isFailed, results, fetchResults, updateQuery }) => {
+  let content = null;
+  if (isLoading) content = <Loading />;
+  else if (isFailed) content = <Error />;
+  else if (results.images.length === 0 && results.users.length === 0 && results.tags.length === 0)
+    content = <NoResults />;
+
+  return (
+    <div className="ph3 ph4-ns">
+      {content ? (
+        content
+      ) : (
+        <div>
+          <SearchTagsView tags={results.tags} />
+          <SearchUsersView users={results.users} />
+          <SearchImagesView images={results.images} />
+        </div>
+      )}
+    </div>
+  );
+};
+
+SearchComponent.propTypes = {
+  query: PropTypes.string.isRequired,
+  results: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  isFailed: PropTypes.bool.isRequired
+};
 
 const ResultsView = ({ title, cards }) =>
   cards.length ? (
@@ -89,4 +121,4 @@ SearchTagsView.propTypes = {
   )
 };
 
-export { SearchImagesView, SearchTagsView, SearchUsersView };
+export { SearchComponent, SearchImagesView, SearchTagsView, SearchUsersView };
