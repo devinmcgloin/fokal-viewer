@@ -27,35 +27,29 @@ class UserContainer extends React.Component {
     let t = this;
     FetchUser(this.state.username).then(function(data) {
       if (data.ok)
-        data.body.then(b =>
-          t.setState({
-            user: b,
-            isLoadingUser: false,
-            failed: false
-          })
-        );
+        t.setState({
+          user: data.body,
+          isLoadingUser: false,
+          failed: false
+        });
       else t.setState({ failed: true });
     });
 
     FetchUserImages(this.state.username).then(data => {
       if (data.ok)
-        data.body.then(b =>
-          t.setState(prev => ({
-            images: b,
-            isLoadingImages: prev.isLoadingImages + 1
-          }))
-        );
+        t.setState(prev => ({
+          images: data.body,
+          isLoadingImages: prev.isLoadingImages + 1
+        }));
       else t.setState({ failed: true });
     });
 
     FetchImages('/users/' + this.state.username + '/favorites').then(data => {
       if (data.ok)
-        data.body.then(b =>
-          t.setState(prev => ({
-            favorites: b,
-            isLoadingImages: prev.isLoadingImages + 1
-          }))
-        );
+        t.setState(prev => ({
+          favorites: data.body,
+          isLoadingImages: prev.isLoadingImages + 1
+        }));
       else t.setState({ failed: true });
     });
   }
@@ -139,29 +133,21 @@ class UserContainer extends React.Component {
                   <GridCollection
                     cards={[
                       userTitle,
-                      <UserStatsCard
-                        key="views"
-                        title="Views"
-                        value={s.views.toLocaleString()}
-                        background="linear-gradient(62deg, #FBAB7E 0%, #F7CE68 100%)"
-                      />,
+                      <UserStatsCard key="views" title="Views" value={s.views.toLocaleString()} />,
                       <UserStatsCard
                         key="downloads"
                         title="Downloads"
                         value={s.downloads.toLocaleString()}
-                        background="linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)"
                       />,
                       <UserStatsCard
                         key="favorites"
                         title="Favorites"
                         value={s.favorites.toLocaleString()}
-                        background="linear-gradient(19deg, #3EECAC 0%, #EE74E1 100%)"
                       />,
                       <UserStatsCard
                         key="joined"
                         title="Joined"
                         value={moment(usr.created_at).fromNow()}
-                        background="linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%)"
                       />
                     ]}
                   />

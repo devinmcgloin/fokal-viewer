@@ -41,16 +41,11 @@ UserTitleCard.propTypes = {
 
 const UserStatsCard = ({ title, value, background }) => (
   <div className="sans-serif">
-    <div
-      className="br2"
-      style={{
-        background: background
-      }}
-    >
+    <div className="bg-white br2 ba b--black-10">
       <div className="fw1 pa3">
         <div>
-          <p className="f7 ttu tracked white-50">{title}</p>
-          <span className="tc f2 fw2 white">{value}</span>
+          <p className="f6 fw4 ttu tracked black-50">{title}</p>
+          <span className="tc f3 fw6 black">{value}</span>
         </div>
       </div>
     </div>
@@ -59,8 +54,7 @@ const UserStatsCard = ({ title, value, background }) => (
 
 UserStatsCard.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  background: PropTypes.string.isRequired
+  value: PropTypes.string.isRequired
 };
 
 const UserCard = ({ user, images, horizontal }) => {
