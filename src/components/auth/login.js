@@ -29,7 +29,7 @@ const LoginComponent = ({ isLoggedIn, onSuccess, title, redirect }) => {
           onFailure={err => {
             Raven.captureException(err, {});
           }}
-          className="dib sans-serif br2 shadow-5 f6 link dim ba ph5-ns ph3 pv3 dib dark-gray pointer inline-flex items-center bg-white"
+          className="dib sans-serif br2 f6 link dim ba ph5-ns ph3 pv3 dib dark-gray pointer inline-flex items-center bg-white"
           tag="span"
           type="none"
         >

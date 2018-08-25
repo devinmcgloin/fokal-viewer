@@ -17,7 +17,6 @@ import './assets/main.css';
 import { ImageSubmit, ImageModify } from './containers/manage/submit';
 import CTARoute from './containers/call-to-action';
 import { Account } from './containers/manage/patch';
-import { FeaturedScene } from './containers/featured';
 import { ExploreScene } from './containers/explore/explore';
 import { LogoutContainer } from './containers/auth/logout';
 import ScrollToTop from './components/scroll';
@@ -64,7 +63,6 @@ class App extends React.Component {
                 <Route path="/join" component={LoginContainer} />
                 <Route path="/login" component={LoginContainer} />
 
-                <Route path="/featured" component={FeaturedScene} />
                 <Route path="/explore" component={ExploreScene} />
 
                 <Route path="/tos" component={TermsOfService} />

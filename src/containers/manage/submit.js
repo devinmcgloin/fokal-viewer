@@ -55,13 +55,13 @@ class ImageModify extends Component {
           <div className="fl">
             <Link
               to="/upload"
-              className="f6 br2 ph5-l ph4 pv3 mb2 mr3 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white no-underline"
+              className="f6 br2 ph5-l ph4 pv3 mb2 mr3 dib  bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white no-underline"
             >
               Upload
             </Link>
             <Link
               to="/"
-              className="f6 br2 ph5-l ph4 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white no-underline"
+              className="f6 br2 ph5-l ph4 pv3 mb2 dib  bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white no-underline"
             >
               Browse
             </Link>
@@ -177,7 +177,7 @@ class ImageSubmit extends Component {
               }}
             </Dropzone>
             <input
-              className="f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white"
+              className="f6 br2 ph5 pv3 mb2 dib  bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white"
               type="Submit"
               value="Upload"
               readOnly

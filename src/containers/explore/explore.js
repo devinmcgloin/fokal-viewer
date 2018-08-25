@@ -29,7 +29,6 @@ class ExploreScene extends Component {
   }
 
   componentDidMount() {
-    console.log('COMPONENT DID MOUNT');
     this.map = this.mapRef.getMap();
     setTimeout(() => this.loadImages(this.map.getBounds()), 500);
     setInterval(() => this.loadImages(this.map.getBounds()), 5000);
@@ -43,7 +42,7 @@ class ExploreScene extends Component {
       limit: 500,
       geo: { sw: bounds._sw, ne: bounds._ne }
     };
-    Search('/search', q).then(req => {
+    Search(q).then(req => {
       this.setState({ images: req.body.images, changed: false });
     });
   };

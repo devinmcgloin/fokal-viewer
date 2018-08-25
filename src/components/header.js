@@ -5,7 +5,7 @@ import logo from '../assets/logo.svg';
 
 class Header extends Component {
   state = {
-    menuItems: [{ link: '/explore', title: 'Explore' }, { link: '/featured', title: 'Featured' }],
+    menuItems: [{ link: '/explore', title: 'Explore' }],
     loggedOutItems: [
       { link: '/login', title: 'Login' },
       { link: '/join', title: 'Join', button: { featured: true } }

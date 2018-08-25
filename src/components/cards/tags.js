@@ -8,7 +8,7 @@ const TagCard = ({ image, count, id }) => (
       <div className={''}>
         <div
           alt=""
-          className="db bg-center cover br2 shadow-5"
+          className="db bg-center cover br2"
           style={{
             backgroundImage:
               'linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0) 70%), url(' +

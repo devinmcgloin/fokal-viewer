@@ -42,7 +42,7 @@ UserTitleCard.propTypes = {
 const UserStatsCard = ({ title, value, background }) => (
   <div className="sans-serif">
     <div
-      className="br2 shadow-5"
+      className="br2"
       style={{
         background: background
       }}
@@ -106,7 +106,7 @@ const UserCard = ({ user, images, horizontal }) => {
     );
   }
   return (
-    <article className="sans-serif bg-white br2 ba b--black-10 shadow-5">
+    <article className="sans-serif bg-white br2 ba b--black-10 ">
       <div className={'center pa3 pa4-ns'}>
         <Link to={'/u/' + user.id} className={'link hover dim'}>
           {content}

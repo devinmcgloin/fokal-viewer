@@ -11,7 +11,7 @@ const MetadataCard = ({
   lens_make,
   lens_model
 }) => (
-  <article className="sans-serif bg-white br2 ba b--black-10 shadow-5">
+  <article className="sans-serif bg-white br2 ba b--black-10 ">
     <div className={'pa3 pa4-ns mv3 cf'}>
       <div className={'fl w-50 tc pa2 fw3 f3'}>
         ISO <span className={'b'}>{iso ? iso : '--'}</span>

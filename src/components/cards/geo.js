@@ -3,7 +3,7 @@ import { MapPointView } from '../map';
 import PropTypes from 'prop-types';
 
 const MapCard = ({ lat, lng, description }) => (
-  <article className="sans-serif bg-white br2 ba b--black-10 shadow-5">
+  <article className="sans-serif bg-white br2 ba b--black-10 ">
     <div className={'pa3 pa4-ns cf'}>
       <div className={'w-60 fl br b--black-10 dib pr3 h5'}>
         <MapPointView lng={lng} lat={lat} />

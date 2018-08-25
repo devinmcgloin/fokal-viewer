@@ -119,7 +119,7 @@ const Why = props => (
           Join to collect images, post your own or find your next travel destination.
         </p>
         <Link to="/join" className="no-underline">
-          <button className="relative z-1 f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white no-underline">
+          <button className="relative z-1 f6 br2 ph5 pv3 mb2 dib  bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white no-underline">
             Join
           </button>
         </Link>
@@ -155,7 +155,7 @@ const Feature = ({ icon_id, background, last, left, title, subtitle, body }) => 
   >
     <div
       key={'copy'}
-      className={(left ? 'fl' : 'fr') + ' w-80 h-100 w-40-l pa5-ns pa3 bg-dark-gray br2 shadow-5'}
+      className={(left ? 'fl' : 'fr') + ' w-80 h-100 w-40-l pa5-ns pa3 bg-dark-gray br2 '}
     >
       <h3 className="f2 lh-title bb">{title}</h3>
       {subtitle && <h4 className="f3 lh-copy measure-narrow">{subtitle}</h4>}

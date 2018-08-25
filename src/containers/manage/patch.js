@@ -197,7 +197,7 @@ class ManageUser extends Component {
 
             <div className="mt3">
               <input
-                className="f6 br2 ph5 pv3 mb2 dib shadow-5 bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white"
+                className="f6 br2 ph5 pv3 mb2 dib  bn glow pointer inline-flex items-center bg-animate bg-blue hover-bg-dark-blue white"
                 type="Submit"
                 value="Submit"
               />

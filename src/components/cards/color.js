@@ -35,7 +35,7 @@ class ColorCard extends React.Component {
     const activeClr = colors[active];
 
     return (
-      <article className="sans-serif bg-white br2 ba b--black-10 shadow-5">
+      <article className="sans-serif bg-white br2 ba b--black-10">
         <div className={'pa3 pa4-ns cf'}>
           <div className={'w-60 fl br b--black-10 dib'}>{clrs}</div>
           <div className={'w-40 fl dib pa3'}>
