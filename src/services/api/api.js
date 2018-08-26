@@ -3,7 +3,6 @@
 import { GetJWT, LoggedIn, Logout, LogIn } from '../store/auth';
 import { RefreshToken } from '../api/auth';
 import JwtDecode from 'jwt-decode';
-import Raven from 'raven-js';
 
 const endpoint =
   process.env.NODE_ENV === 'production' || process.env.REACT_APP_STANDALONE
