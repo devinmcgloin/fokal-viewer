@@ -4,7 +4,6 @@ import { GridCollection, LinearCollection } from '../components/collection';
 import { bindAll } from 'lodash';
 import { Loading } from '../components/loading';
 import PropTypes from 'prop-types';
-import Raven from 'raven-js';
 import { Error } from '../components/error';
 import { ImageCard } from '../components/cards/image';
 import { Controls } from '../components/collectionControls';
@@ -172,10 +171,6 @@ class TaggedImages extends Component {
               });
       }
     });
-  }
-
-  componentDidMount() {
-    this.loadImageFromServer(this.state.tag);
   }
 
   render() {
