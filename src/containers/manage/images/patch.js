@@ -9,7 +9,7 @@ import 'react-tabs/style/react-tabs.css';
 import './collapse.css';
 import { ErrorAlert, SuccessAlert } from '../../../components/alerts';
 import { Creatable } from 'react-select';
-import 'react-select/dist/react-select.css';
+import 'react-select/dist/react-select.js';
 import Geosuggest from 'react-geosuggest';
 import Script from 'react-load-script';
 import { Error } from '../../../components/error';
